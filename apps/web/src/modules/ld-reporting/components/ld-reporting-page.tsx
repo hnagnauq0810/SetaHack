@@ -16,6 +16,7 @@ import {
   reportStatusLabel,
   reportTone,
 } from './display-utils';
+import { ReportDownloadActions } from './report-download-actions';
 import { StatusBadge } from './status-badge';
 
 export function LdReportingPage() {
@@ -71,13 +72,13 @@ export function LdReportingPage() {
         `status=${selectedReport.status}; evidence=${selectedReport.evidence.status}; ` +
         `classification=${selectedReport.governance.classification}.`;
       if (role === 'BOD') {
-        return `${base} BOD chat must answer only from this selected finalized report. Always use reportId=${selectedReport.reportId} for report Q&A and do not switch to draft, generated, or other report artifacts unless the user selects another finalized report in the workspace.`;
+        return `${base} BOD can read, download, and ask questions only from this selected finalized report. Always use reportId=${selectedReport.reportId} for report Q&A and do not switch to draft, generated, or other report artifacts unless the user selects another finalized report in the workspace.`;
       }
       return `${base} L&D Manager can review this report, request manual edits already saved in the report artifact, ask for export, or finalize through human review. Prefer reportId=${selectedReport.reportId} for report-specific actions.`;
     }
     return role === 'LND_MANAGER'
       ? 'Chat-first L&D Manager workspace. Use chat to check evidence, generate draft reports, request exports, and finalize through human review. Draft edits made in the report panel update the report artifact before finalization.'
-      : 'Chat-first BOD workspace. Only finalized L&D reports are visible and available for Q&A. Draft and revision-requested reports are excluded.';
+      : 'Chat-first BOD workspace. Only finalized L&D reports are visible and available for reading, downloads, and Q&A. Draft and revision-requested reports are excluded.';
   }, [role, selectedReport]);
 
   useAgentContext({
@@ -338,6 +339,8 @@ function ReportDetail({
           </p>
         </div>
       </section>
+
+      <ReportDownloadActions report={report} viewerRole={role} />
 
       <section className="grid grid-cols-2 gap-2">
         <MetricTile label="Attendance" value={formatPct(metrics.attendanceRate)} />

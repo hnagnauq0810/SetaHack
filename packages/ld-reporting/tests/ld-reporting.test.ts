@@ -89,6 +89,9 @@ describe('ld-reporting pipeline', () => {
     expect(draft.status).toBe('DRAFT');
     await expect(agent.listReports({ role: 'LND_MANAGER' })).resolves.toHaveLength(1);
     await expect(agent.listReports({ role: 'BOD' })).resolves.toHaveLength(0);
+    await expect(
+      agent.writeArtifactForRole(draft.reportId, 'docx', { role: 'BOD' }),
+    ).resolves.toBeNull();
 
     const edited = await agent.updateDraftReport({
       reportId: draft.reportId,
@@ -125,6 +128,11 @@ describe('ld-reporting pipeline', () => {
       'Manual executive summary approved by the L&D manager.',
     );
     expect(bodReports[0]?.governance.masked).toBe(true);
+
+    const bodArtifact = await agent.writeArtifactForRole(final.reportId, 'docx', { role: 'BOD' });
+    expect(bodArtifact).not.toBeNull();
+    const bodArtifactStats = await stat(bodArtifact?.path ?? '');
+    expect(bodArtifactStats.isFile()).toBe(true);
 
     const answer = await agent.ld_answerQuestion({
       role: 'BOD',

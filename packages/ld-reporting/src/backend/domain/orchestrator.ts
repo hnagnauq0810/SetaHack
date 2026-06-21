@@ -259,11 +259,14 @@ export class LdReportingSpecialistAgent {
     return applyReportAccessView(report, access);
   }
 
-  async writeArtifactForView(
-    report: ReportJson,
+  async writeArtifactForRole(
+    reportId: string,
     kind: 'pptx' | 'docx',
-  ): Promise<{ path: string; filename: string; mediaType: string }> {
-    return writeReportArtifact(report, this.store.rootDir, kind);
+    access: LdReportAccessContext,
+  ): Promise<{ path: string; filename: string; mediaType: string } | null> {
+    const report = await this.store.getReport(reportId);
+    if (!report || !canUseReportForRole(report, access.role)) return null;
+    return writeReportArtifact(this.viewReport(report, access), this.store.rootDir, kind);
   }
 
   private async saveAnswer(input: Omit<QnaAnswer, 'answerId' | 'generatedAt'>): Promise<QnaAnswer> {

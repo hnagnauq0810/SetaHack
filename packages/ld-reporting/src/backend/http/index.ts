@@ -134,19 +134,18 @@ export function buildLdReportingRoutes(_deps: RouteBuildDeps): Hono<SessionEnv> 
       requirePermission(c.get('user'), 'ld-reporting.report.read');
       const access = resolveAccess(c.get('user'));
       const { id } = reportIdParamSchema.parse(c.req.param());
-      const report = await agent.getReport(id);
-      if (!report) return c.json({ error: 'NOT_FOUND', message: `Report not found: ${id}` }, 404);
-      if (!canReadReport(report, access)) {
+      const artifact = await agent.writeArtifactForRole(id, kind, access);
+      if (!artifact) {
         return c.json({ error: 'NOT_FOUND', message: `Report not found: ${id}` }, 404);
       }
-      const view = agent.viewReport(report, access);
-      const artifact = await agent.writeArtifactForView(view, kind);
       const file = await readFile(artifact.path);
       return new Response(new Uint8Array(file), {
         status: 200,
         headers: {
           'content-type': artifact.mediaType,
           'content-disposition': `attachment; filename="${artifact.filename}"`,
+          'cache-control': 'private, no-store',
+          'x-content-type-options': 'nosniff',
         },
       });
     } catch (err) {
