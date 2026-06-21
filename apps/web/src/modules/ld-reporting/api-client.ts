@@ -1,6 +1,6 @@
 type Json = Record<string, unknown>;
 
-export type LdRole = 'BOD' | 'LND_MANAGER' | 'TEAM_MANAGER' | 'TRAINER';
+export type LdRole = 'BOD' | 'LND_MANAGER';
 
 export interface LdScope {
   courseId?: string;
@@ -21,6 +21,7 @@ export interface LdReport {
   scope: LdScope;
   status: 'DRAFT' | 'FINAL' | 'REVISION_REQUESTED';
   generatedAt: string;
+  lastEditedAt?: string;
   finalizedAt?: string;
   approval?: {
     decision: 'approve' | 'revise' | 'regenerate';
@@ -105,6 +106,14 @@ export interface LdReport {
   };
 }
 
+export interface LdReportDraftPatch {
+  title?: string;
+  executiveSummary?: string;
+  insights?: string[];
+  recommendations?: string[];
+  warnings?: string[];
+}
+
 export interface ReadinessResult {
   datasetId: string;
   evidence: LdReport['evidence'];
@@ -143,6 +152,9 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
 }
 
 export const ldReportingClient = {
+  listReports(): Promise<{ reports: LdReport[] }> {
+    return request('/api/ld-reporting/reports');
+  },
   checkReadiness(payload: LdRequestPayload): Promise<ReadinessResult> {
     return request('/api/ld-reporting/readiness', {
       method: 'POST',
@@ -160,6 +172,12 @@ export const ldReportingClient = {
     return request(`/api/ld-reporting/reports/${reportId}/finalize`, {
       method: 'POST',
       body: JSON.stringify({ decision, note }),
+    });
+  },
+  updateDraft(reportId: string, patch: LdReportDraftPatch): Promise<LdReport> {
+    return request(`/api/ld-reporting/reports/${reportId}/draft`, {
+      method: 'PATCH',
+      body: JSON.stringify(patch),
     });
   },
   ask(reportId: string | undefined, question: string): Promise<QnaAnswer> {

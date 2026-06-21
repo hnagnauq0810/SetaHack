@@ -1,0 +1,45 @@
+{
+  "evidenceId": "ev_65c036ab-f5aa-469a-946d-4901b0380f42",
+  "datasetId": "ds_5e3393b29a0066ca",
+  "status": "PASS",
+  "generatedAt": "2026-06-21T18:37:50.339Z",
+  "missingEvidence": [],
+  "checklist": [
+    {
+      "check": "Source availability and required columns",
+      "status": "PASS",
+      "detail": "Required sheets and columns were mapped from Teams, OneDrive, Forms, KPI, Rules and Template sources."
+    },
+    {
+      "check": "Course status",
+      "status": "PASS",
+      "detail": "All selected courses are completed."
+    },
+    {
+      "check": "Attendance completeness",
+      "status": "PASS",
+      "detail": "Expected attendance rows are trainee count x total sessions. Late is retained for metrics as partial attendance."
+    },
+    {
+      "check": "Assessment completeness",
+      "status": "PASS",
+      "detail": "Completed courses require one valid assessment and pass-status row per trainee."
+    },
+    {
+      "check": "Feedback completeness",
+      "status": "PASS",
+      "detail": "NORM-14 requires at least 60% feedback response rate for valid analysis."
+    },
+    {
+      "check": "Row-level data quality",
+      "status": "PASS",
+      "detail": "Duplicate rows and numeric ranges were checked before metric generation."
+    },
+    {
+      "check": "Consistency: course ID and pass-status logic",
+      "status": "PASS",
+      "detail": "Cross-source course IDs and pass-status logic were checked against the selected course catalog."
+    }
+  ],
+  "canGenerateFinalConclusion": true
+}

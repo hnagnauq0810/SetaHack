@@ -1,6 +1,7 @@
 import type {
   LdFinalizeRequest,
   LdPipelineRequest,
+  LdReportDraftPatch,
   LdRequest,
   LdRole,
   QnaAnswer,
@@ -97,8 +98,55 @@ export class LdReportingSpecialistAgent {
     reportId?: string;
     question: string;
     role?: LdRole;
-    trainerId?: string;
   }): Promise<QnaAnswer> {
+    const requestedRole = input.role ?? 'BOD';
+    if (!input.reportId) {
+      const finalizedReports = (await this.store.listReports()).filter(
+        (report) => report.status === 'FINAL',
+      );
+      if (finalizedReports.length === 0) {
+        return this.saveAnswer({
+          reportId: undefined,
+          answer:
+            'Chua co finalized report nao duoc publish cho BOD. Q&A cho BOD chi dung du lieu da duoc L&D Manager finalize, khong dung draft.',
+          confidence: 0.98,
+          limitations: ['No finalized report artifact is available. Draft reports are excluded.'],
+          citations: [],
+        });
+      }
+      if (isPortfolioQuestion(input.question) || finalizedReports.length > 1) {
+        return this.saveAnswer({
+          reportId: undefined,
+          ...groundedPortfolioAnswer(
+            finalizedReports.map((report) => this.viewReport(report, { role: requestedRole })),
+            requestedRole,
+          ),
+        });
+      }
+      const report = finalizedReports[0];
+      if (!report) {
+        return this.saveAnswer({
+          reportId: undefined,
+          answer: 'No finalized report artifact is available.',
+          confidence: 0.98,
+          limitations: ['No finalized report artifact is available.'],
+          citations: [],
+        });
+      }
+      const reportView = this.viewReport(report, { role: requestedRole });
+      const deterministicAnswer = groundedAnswer(
+        reportView,
+        input.question.toLowerCase(),
+        requestedRole,
+      );
+      const answer = await answerQuestionWithLlm({
+        report: reportView,
+        question: input.question,
+        role: requestedRole,
+        deterministicAnswer,
+      });
+      return this.saveAnswer({ reportId: report.reportId, ...answer });
+    }
     if (!input.reportId) {
       return this.saveAnswer({
         reportId: undefined,
@@ -121,7 +169,17 @@ export class LdReportingSpecialistAgent {
     }
 
     const role = input.role ?? report.governance.role;
-    const reportView = applyReportAccessView(report, { role, trainerId: input.trainerId });
+    if (!canUseReportForRole(report, role)) {
+      return this.saveAnswer({
+        reportId: input.reportId,
+        answer:
+          'Report nay chua duoc finalized nen khong kha dung cho BOD Q&A. BOD chi duoc hoi tren finalized reports da duoc L&D Manager approve.',
+        confidence: 0.97,
+        limitations: ['Draft and revision-requested reports are excluded for BOD access.'],
+        citations: ['report.status'],
+      });
+    }
+    const reportView = applyReportAccessView(report, { role });
     const question = input.question.toLowerCase();
     const deterministicAnswer = groundedAnswer(reportView, question, role);
     const answer = await answerQuestionWithLlm({
@@ -159,8 +217,42 @@ export class LdReportingSpecialistAgent {
     return report;
   }
 
+  async updateDraftReport(input: {
+    reportId: string;
+    patch: LdReportDraftPatch;
+    actorUserId?: string;
+  }): Promise<ReportJson> {
+    const report = await this.store.getReport(input.reportId);
+    if (!report) throw new Error(`Report not found: ${input.reportId}`);
+    if (report.status === 'FINAL') {
+      throw Object.assign(new Error('Finalized reports cannot be edited.'), {
+        code: 'REPORT_FINALIZED',
+      });
+    }
+    if (input.patch.title !== undefined) report.title = input.patch.title;
+    if (input.patch.executiveSummary !== undefined) {
+      report.executiveSummary = input.patch.executiveSummary;
+    }
+    if (input.patch.insights !== undefined) report.insights = input.patch.insights;
+    if (input.patch.recommendations !== undefined) {
+      report.recommendations = input.patch.recommendations;
+    }
+    if (input.patch.warnings !== undefined) report.warnings = input.patch.warnings;
+    report.lastEditedAt = new Date().toISOString();
+    await this.store.saveReport(report);
+    return report;
+  }
+
   async getReport(reportId: string): Promise<ReportJson | null> {
     return this.store.getReport(reportId);
+  }
+
+  async listReports(access?: LdReportAccessContext): Promise<ReportJson[]> {
+    const reports = await this.store.listReports();
+    if (!access) return reports;
+    return reports
+      .filter((report) => canUseReportForRole(report, access.role))
+      .map((report) => this.viewReport(report, access));
   }
 
   viewReport(report: ReportJson, access: LdReportAccessContext): ReportJson {
@@ -183,6 +275,67 @@ export class LdReportingSpecialistAgent {
     await this.store.saveQna(answer);
     return answer;
   }
+}
+
+function canUseReportForRole(report: ReportJson, role: LdRole): boolean {
+  return role === 'LND_MANAGER' || report.status === 'FINAL';
+}
+
+function isPortfolioQuestion(question: string): boolean {
+  const normalized = question.toLowerCase();
+  return [
+    'all report',
+    'all reports',
+    'previous',
+    'history',
+    'portfolio',
+    'overall',
+    'tong quat',
+    'tổng quát',
+    'truoc do',
+    'trước đó',
+  ].some((token) => normalized.includes(token));
+}
+
+function groundedPortfolioAnswer(
+  reports: ReportJson[],
+  role: LdRole,
+): Omit<QnaAnswer, 'answerId' | 'generatedAt' | 'reportId'> {
+  const totalReports = reports.length;
+  const latest = reports[0];
+  const averageEffectiveness = averageNumber(
+    reports.map((report) => report.metrics.overall.effectivenessScore),
+  );
+  const averageCompletion = averageNumber(
+    reports.map((report) => report.metrics.overall.completionRate),
+  );
+  const averagePassRate = averageNumber(reports.map((report) => report.metrics.overall.passRate));
+  const riskCount = reports.filter((report) => report.governance.classification === 'Risk').length;
+  const effectiveCount = reports.filter(
+    (report) => report.governance.classification === 'Effective',
+  ).length;
+  const latestLabel = latest ? `${latest.title} (${latest.reportId})` : 'N/A';
+  return {
+    answer:
+      `Across ${totalReports} finalized L&D report(s), latest report is ${latestLabel}. ` +
+      `Average effectiveness score is ${formatNumber(averageEffectiveness, 2)}, ` +
+      `completion is ${formatPct(averageCompletion)}, and pass rate is ${formatPct(averagePassRate)}. ` +
+      `${effectiveCount} report(s) are Effective and ${riskCount} report(s) are Risk. ` +
+      'Draft reports and revision-requested reports are excluded from this BOD knowledge base.',
+    confidence: 0.9,
+    limitations: [
+      role === 'BOD'
+        ? 'BOD view uses masked finalized reports only.'
+        : 'Portfolio answer uses finalized reports only unless a specific draft reportId is provided.',
+    ],
+    citations: reports.map((report) => report.reportId),
+  };
+}
+
+function averageNumber(values: Array<number | null | undefined>): number | null {
+  const present = values.filter((value): value is number => typeof value === 'number');
+  if (present.length === 0) return null;
+  return present.reduce((sum, value) => sum + value, 0) / present.length;
 }
 
 function groundedAnswer(

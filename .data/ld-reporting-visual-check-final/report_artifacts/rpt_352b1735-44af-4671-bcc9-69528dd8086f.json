@@ -1,0 +1,182 @@
+{
+  "reportId": "rpt_352b1735-44af-4671-bcc9-69528dd8086f",
+  "datasetId": "ds_7f1a54d05f2c00f5",
+  "metricsId": "mx_64861c3c-f87b-41e7-a334-aba3b2c2f3a3",
+  "evidenceId": "ev_66e3f898-9b88-412f-a97a-db2cd283ee15",
+  "governanceId": "gv_e390c68b-01c7-432d-9cb3-38b416d3ac2b",
+  "title": "L&D Training Effectiveness Report - AI Agent & LLM Application Development",
+  "scope": {
+    "courseId": "AIAgent_05_2026"
+  },
+  "status": "DRAFT",
+  "generatedAt": "2026-06-21T18:12:32.166Z",
+  "executiveSummary": "The selected scope contains 1 course(s), 1 completed course(s), and 13 trainee-course records. Overall attendance is 90.4%, completion is 100%, pass rate is 92.3%, and average score is 7.88/10. Total training hours are 188 and scaled cost is 9.6. Overall effectiveness classification is Risk. Management interpretation: The training course 'AI Agent & LLM Application Development' has achieved a high completion rate of 100% and an attendance rate of 90.4%. However, the overall effectiveness classification is marked as Risk due to the pass rate of 92.3%, which is close to the threshold for concern, and the average score of 7.88/10, which, while above the minimum, suggests room for improvement. Additionally, feedback ratings are strong at 4.73/5, indicating trainee satisfaction.",
+  "insights": [
+    "AI Agent & LLM Application Development has an effectiveness score of 89.47 in the selected scope.",
+    "2 outstanding trainees met the star learner rule: score >= 9.0 and full attendance.",
+    "1 high-priority L&D NORM flag was triggered.",
+    "There is at least one trainee identified as needing additional support, which may impact overall course effectiveness.",
+    "The ROI proxy of 0.042 suggests that the financial return on this training investment is low, warranting further analysis."
+  ],
+  "recommendations": [
+    "Assign a coaching owner, buddy support, and targeted practice resources for the flagged learner.",
+    "Additionally, a review of the course delivery methods may be beneficial to improve engagement and understanding, potentially increasing the average score and overall effectiveness."
+  ],
+  "warnings": [],
+  "evidence": {
+    "evidenceId": "ev_66e3f898-9b88-412f-a97a-db2cd283ee15",
+    "datasetId": "ds_7f1a54d05f2c00f5",
+    "status": "PASS",
+    "generatedAt": "2026-06-21T18:12:32.140Z",
+    "missingEvidence": [],
+    "checklist": [
+      {
+        "check": "Source availability and required columns",
+        "status": "PASS",
+        "detail": "Required sheets and columns were mapped from Teams, OneDrive, Forms, KPI, Rules and Template sources."
+      },
+      {
+        "check": "Course status",
+        "status": "PASS",
+        "detail": "All selected courses are completed."
+      },
+      {
+        "check": "Attendance completeness",
+        "status": "PASS",
+        "detail": "Expected attendance rows are trainee count x total sessions. Late is retained for metrics as partial attendance."
+      },
+      {
+        "check": "Assessment completeness",
+        "status": "PASS",
+        "detail": "Completed courses require one valid assessment and pass-status row per trainee."
+      },
+      {
+        "check": "Feedback completeness",
+        "status": "PASS",
+        "detail": "NORM-14 requires at least 60% feedback response rate for valid analysis."
+      },
+      {
+        "check": "Row-level data quality",
+        "status": "PASS",
+        "detail": "Duplicate rows and numeric ranges were checked before metric generation."
+      },
+      {
+        "check": "Consistency: course ID and pass-status logic",
+        "status": "PASS",
+        "detail": "Cross-source course IDs and pass-status logic were checked against the selected course catalog."
+      }
+    ],
+    "canGenerateFinalConclusion": true
+  },
+  "metrics": {
+    "metricsId": "mx_64861c3c-f87b-41e7-a334-aba3b2c2f3a3",
+    "datasetId": "ds_7f1a54d05f2c00f5",
+    "generatedAt": "2026-06-21T18:12:32.142Z",
+    "overall": {
+      "totalCourses": 1,
+      "completedCourses": 1,
+      "traineeCount": 13,
+      "attendanceRate": 0.9038,
+      "completionRate": 1,
+      "passRate": 0.9231,
+      "averageScore": 7.88,
+      "feedbackRating": 4.73,
+      "trainingHours": 188,
+      "totalCostScaled": 9.6,
+      "roiProxy": 0.042,
+      "effectivenessScore": 89.47
+    },
+    "courses": [
+      {
+        "courseId": "AIAgent_05_2026",
+        "courseName": "AI Agent & LLM Application Development",
+        "trainerId": "TRN-007",
+        "status": "Completed",
+        "traineeCount": 13,
+        "attendanceRate": 0.9038,
+        "completionRate": 1,
+        "passRate": 0.9231,
+        "averageScore": 7.88,
+        "feedbackRating": 4.73,
+        "trainerRatingAvg": 4.77,
+        "contentRatingAvg": 4.69,
+        "feedbackResponseRate": 1,
+        "trainingHours": 188,
+        "totalCostScaled": 9.6,
+        "costPerCompletedTrainee": 0.74,
+        "postTrainingPerfDelta": 0.031,
+        "roiProxy": 0.042,
+        "effectivenessScore": 89.47
+      }
+    ]
+  },
+  "governance": {
+    "governanceId": "gv_e390c68b-01c7-432d-9cb3-38b416d3ac2b",
+    "role": "LND_MANAGER",
+    "classification": "Risk",
+    "generatedAt": "2026-06-21T18:12:32.142Z",
+    "normFlags": [
+      {
+        "ruleId": "NORM-07",
+        "priority": "High",
+        "category": "Individual",
+        "courseId": "AIAgent_05_2026",
+        "employeeId": "EMP-076",
+        "message": "Trainee needs 1:1 support.",
+        "action": "Flag for coaching; assign buddy or practice resources"
+      }
+    ],
+    "outstandingTrainees": [
+      {
+        "courseId": "AIAgent_05_2026",
+        "employeeId": "EMP-005",
+        "score": 9.4,
+        "attendanceRate": 1,
+        "reason": "Score >= 9.0 and full attendance"
+      },
+      {
+        "courseId": "AIAgent_05_2026",
+        "employeeId": "EMP-119",
+        "score": 9.4,
+        "attendanceRate": 1,
+        "reason": "Score >= 9.0 and full attendance"
+      }
+    ],
+    "supportNeededTrainees": [
+      {
+        "courseId": "AIAgent_05_2026",
+        "employeeId": "EMP-076",
+        "score": 3.9,
+        "attendanceRate": 0.875,
+        "reason": "Below pass threshold or attendance below 70%"
+      }
+    ],
+    "supportNeededGroups": [
+      {
+        "courseId": "AIAgent_05_2026",
+        "count": 1,
+        "reason": "At least one learner is below pass threshold or attendance policy."
+      }
+    ],
+    "masked": false
+  },
+  "llm": {
+    "enabled": true,
+    "model": "gpt-4o-mini",
+    "usedFor": [
+      "report_narrative",
+      "pptx_content"
+    ],
+    "generatedAt": "2026-06-21T18:12:37.484Z"
+  },
+  "quality": {
+    "qualityId": "qc_500e29ee-7b46-4007-88ec-c7c9c2d88555",
+    "status": "PASS",
+    "generatedAt": "2026-06-21T18:12:37.484Z",
+    "issues": []
+  },
+  "artifacts": {
+    "pptxPath": "..\\..\\.data\\ld-reporting-visual-check-final\\artifacts\\rpt_352b1735-44af-4671-bcc9-69528dd8086f\\rpt_352b1735-44af-4671-bcc9-69528dd8086f.pptx",
+    "docxPath": "..\\..\\.data\\ld-reporting-visual-check-final\\artifacts\\rpt_352b1735-44af-4671-bcc9-69528dd8086f\\rpt_352b1735-44af-4671-bcc9-69528dd8086f.docx"
+  }
+}

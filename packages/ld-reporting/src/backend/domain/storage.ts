@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import type {
   EvidenceDecision,
@@ -41,6 +41,25 @@ export class LdReportingStore {
     return this.readJson<ReportJson>('report_artifacts', reportId);
   }
 
+  async listReports(): Promise<ReportJson[]> {
+    const dir = join(this.rootDir, 'report_artifacts');
+    let files: string[];
+    try {
+      files = await readdir(dir);
+    } catch (err) {
+      if ((err as { code?: string }).code === 'ENOENT') return [];
+      throw err;
+    }
+    const reports = await Promise.all(
+      files
+        .filter((file) => file.endsWith('.json'))
+        .map((file) => this.readJson<ReportJson>('report_artifacts', file.slice(0, -5))),
+    );
+    return reports
+      .filter((report): report is ReportJson => report !== null)
+      .sort((a, b) => reportTimestamp(b).localeCompare(reportTimestamp(a)));
+  }
+
   async saveQna(answer: QnaAnswer): Promise<void> {
     await this.writeJson('qna_logs', answer.answerId, answer);
   }
@@ -60,4 +79,8 @@ export class LdReportingStore {
       throw err;
     }
   }
+}
+
+function reportTimestamp(report: ReportJson): string {
+  return report.finalizedAt ?? report.lastEditedAt ?? report.approval?.at ?? report.generatedAt;
 }

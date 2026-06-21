@@ -4,3 +4,11 @@ pnpm -F @seta/web dev
 node --env-file=.env test-openai.mjs
 
 pnpm dev
+
+L&D Manager
+manager@hackathon.com
+ChangeMe@2026
+ChangeMe@2026
+BOD
+bod@hackathon.com
+ChangeMe@2026

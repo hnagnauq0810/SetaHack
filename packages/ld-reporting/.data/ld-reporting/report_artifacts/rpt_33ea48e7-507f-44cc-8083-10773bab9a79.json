@@ -1,0 +1,374 @@
+{
+  "reportId": "rpt_33ea48e7-507f-44cc-8083-10773bab9a79",
+  "datasetId": "ds_fe1370740e10aa94",
+  "metricsId": "mx_c8b82a00-c9f5-4882-9eca-d7848d5f97fc",
+  "evidenceId": "ev_c491949b-5b44-40f2-9dba-69ea08476d0d",
+  "governanceId": "gv_63861c91-8724-4a34-89ca-a42704727888",
+  "title": "L&D Training Effectiveness Report - 2026-Q1",
+  "scope": {
+    "period": "2026-Q1"
+  },
+  "status": "DRAFT",
+  "generatedAt": "2026-06-21T18:37:53.543Z",
+  "executiveSummary": "The selected scope contains 3 course(s), 3 completed course(s), and 59 trainee-course records. Overall attendance is 92.9%, completion is 98.3%, pass rate is 89.8%, and average score is 7.59/10. Total training hours are 848 and scaled cost is 32. Overall effectiveness classification is Risk.",
+  "insights": [
+    "DevOps Fundamentals: CI/CD, K8s, Monitoring has the strongest effectiveness score (92.28) in the selected scope.",
+    "AWS Cloud Architecture & Services needs attention with effectiveness score 85.76, attendance 93.3%, and pass rate 83.3%.",
+    "8 outstanding trainees met the star learner rule: score >= 9.0 and full attendance.",
+    "2 course groups contained learners who need support based on score or attendance policy.",
+    "7 high-priority L&D NORM flags were triggered."
+  ],
+  "recommendations": [
+    "Assign a coaching owner, buddy support, and targeted practice resources for the flagged learner.",
+    "Mark incomplete learner records for review and schedule re-enrollment in the next suitable cohort.",
+    "Assign a coaching owner for support-needed learners and review attendance issues with direct managers."
+  ],
+  "warnings": [],
+  "evidence": {
+    "evidenceId": "ev_c491949b-5b44-40f2-9dba-69ea08476d0d",
+    "datasetId": "ds_fe1370740e10aa94",
+    "status": "PASS",
+    "generatedAt": "2026-06-21T18:37:53.542Z",
+    "missingEvidence": [],
+    "checklist": [
+      {
+        "check": "Source availability and required columns",
+        "status": "PASS",
+        "detail": "Required sheets and columns were mapped from Teams, OneDrive, Forms, KPI, Rules and Template sources."
+      },
+      {
+        "check": "Course status",
+        "status": "PASS",
+        "detail": "All selected courses are completed."
+      },
+      {
+        "check": "Attendance completeness",
+        "status": "PASS",
+        "detail": "Expected attendance rows are trainee count x total sessions. Late is retained for metrics as partial attendance."
+      },
+      {
+        "check": "Assessment completeness",
+        "status": "PASS",
+        "detail": "Completed courses require one valid assessment and pass-status row per trainee."
+      },
+      {
+        "check": "Feedback completeness",
+        "status": "PASS",
+        "detail": "NORM-14 requires at least 60% feedback response rate for valid analysis."
+      },
+      {
+        "check": "Row-level data quality",
+        "status": "PASS",
+        "detail": "Duplicate rows and numeric ranges were checked before metric generation."
+      },
+      {
+        "check": "Consistency: course ID and pass-status logic",
+        "status": "PASS",
+        "detail": "Cross-source course IDs and pass-status logic were checked against the selected course catalog."
+      }
+    ],
+    "canGenerateFinalConclusion": true
+  },
+  "metrics": {
+    "metricsId": "mx_c8b82a00-c9f5-4882-9eca-d7848d5f97fc",
+    "datasetId": "ds_fe1370740e10aa94",
+    "generatedAt": "2026-06-21T18:37:53.542Z",
+    "overall": {
+      "totalCourses": 3,
+      "completedCourses": 3,
+      "traineeCount": 59,
+      "attendanceRate": 0.9288,
+      "completionRate": 0.9831,
+      "passRate": 0.8983,
+      "averageScore": 7.59,
+      "feedbackRating": 4.48,
+      "trainingHours": 848,
+      "totalCostScaled": 32,
+      "roiProxy": 0.0683,
+      "effectivenessScore": 88.23
+    },
+    "courses": [
+      {
+        "courseId": "Automation_testing_01_2026",
+        "courseName": "Automation Testing with Playwright",
+        "trainerId": "TRN-004",
+        "status": "Completed",
+        "traineeCount": 37,
+        "attendanceRate": 0.9189,
+        "completionRate": 0.973,
+        "passRate": 0.8919,
+        "averageScore": 7.59,
+        "feedbackRating": 4.37,
+        "trainerRatingAvg": 4.49,
+        "contentRatingAvg": 4.24,
+        "feedbackResponseRate": 1,
+        "trainingHours": 408,
+        "totalCostScaled": 6,
+        "costPerCompletedTrainee": 0.17,
+        "postTrainingPerfDelta": 0.026,
+        "roiProxy": 0.1603,
+        "effectivenessScore": 86.66
+      },
+      {
+        "courseId": "DevOps_02_2026",
+        "courseName": "DevOps Fundamentals: CI/CD, K8s, Monitoring",
+        "trainerId": "TRN-004",
+        "status": "Completed",
+        "traineeCount": 10,
+        "attendanceRate": 0.96,
+        "completionRate": 1,
+        "passRate": 1,
+        "averageScore": 7.89,
+        "feedbackRating": 4.6,
+        "trainerRatingAvg": 4.6,
+        "contentRatingAvg": 4.6,
+        "feedbackResponseRate": 1,
+        "trainingHours": 216,
+        "totalCostScaled": 15,
+        "costPerCompletedTrainee": 1.5,
+        "postTrainingPerfDelta": 0.031,
+        "roiProxy": 0.0207,
+        "effectivenessScore": 92.28
+      },
+      {
+        "courseId": "CloudAWS_03_2026",
+        "courseName": "AWS Cloud Architecture & Services",
+        "trainerId": "TRN-004",
+        "status": "Completed",
+        "traineeCount": 12,
+        "attendanceRate": 0.9333,
+        "completionRate": 1,
+        "passRate": 0.8333,
+        "averageScore": 7.32,
+        "feedbackRating": 4.71,
+        "trainerRatingAvg": 4.83,
+        "contentRatingAvg": 4.58,
+        "feedbackResponseRate": 1,
+        "trainingHours": 224,
+        "totalCostScaled": 11,
+        "costPerCompletedTrainee": 0.92,
+        "postTrainingPerfDelta": 0.022,
+        "roiProxy": 0.024,
+        "effectivenessScore": 85.76
+      }
+    ]
+  },
+  "governance": {
+    "governanceId": "gv_63861c91-8724-4a34-89ca-a42704727888",
+    "role": "LND_MANAGER",
+    "classification": "Risk",
+    "generatedAt": "2026-06-21T18:37:53.542Z",
+    "normFlags": [
+      {
+        "ruleId": "NORM-07",
+        "priority": "High",
+        "category": "Individual",
+        "courseId": "Automation_testing_01_2026",
+        "employeeId": "EMP-018",
+        "message": "Trainee needs 1:1 support.",
+        "action": "Flag for coaching; assign buddy or practice resources"
+      },
+      {
+        "ruleId": "NORM-07",
+        "priority": "High",
+        "category": "Individual",
+        "courseId": "Automation_testing_01_2026",
+        "employeeId": "EMP-190",
+        "message": "Trainee needs 1:1 support.",
+        "action": "Flag for coaching; assign buddy or practice resources"
+      },
+      {
+        "ruleId": "NORM-05",
+        "priority": "High",
+        "category": "Individual",
+        "courseId": "Automation_testing_01_2026",
+        "employeeId": "EMP-006",
+        "message": "Trainee has zero score or missing assessment.",
+        "action": "Mark as Incomplete; recommend re-enrollment in next cohort"
+      },
+      {
+        "ruleId": "NORM-07",
+        "priority": "High",
+        "category": "Individual",
+        "courseId": "Automation_testing_01_2026",
+        "employeeId": "EMP-006",
+        "message": "Trainee needs 1:1 support.",
+        "action": "Flag for coaching; assign buddy or practice resources"
+      },
+      {
+        "ruleId": "NORM-04",
+        "priority": "Medium",
+        "category": "Individual",
+        "courseId": "Automation_testing_01_2026",
+        "employeeId": "EMP-192",
+        "message": "Trainee passed with low attendance.",
+        "action": "Flag for L&D review; verify with manager"
+      },
+      {
+        "ruleId": "NORM-07",
+        "priority": "High",
+        "category": "Individual",
+        "courseId": "Automation_testing_01_2026",
+        "employeeId": "EMP-196",
+        "message": "Trainee needs 1:1 support.",
+        "action": "Flag for coaching; assign buddy or practice resources"
+      },
+      {
+        "ruleId": "NORM-07",
+        "priority": "High",
+        "category": "Individual",
+        "courseId": "CloudAWS_03_2026",
+        "employeeId": "EMP-140",
+        "message": "Trainee needs 1:1 support.",
+        "action": "Flag for coaching; assign buddy or practice resources"
+      },
+      {
+        "ruleId": "NORM-07",
+        "priority": "High",
+        "category": "Individual",
+        "courseId": "CloudAWS_03_2026",
+        "employeeId": "EMP-061",
+        "message": "Trainee needs 1:1 support.",
+        "action": "Flag for coaching; assign buddy or practice resources"
+      }
+    ],
+    "outstandingTrainees": [
+      {
+        "courseId": "Automation_testing_01_2026",
+        "employeeId": "EMP-198",
+        "score": 9.8,
+        "attendanceRate": 1,
+        "reason": "Score >= 9.0 and full attendance"
+      },
+      {
+        "courseId": "Automation_testing_01_2026",
+        "employeeId": "EMP-067",
+        "score": 9.7,
+        "attendanceRate": 1,
+        "reason": "Score >= 9.0 and full attendance"
+      },
+      {
+        "courseId": "CloudAWS_03_2026",
+        "employeeId": "EMP-048",
+        "score": 9.6,
+        "attendanceRate": 1,
+        "reason": "Score >= 9.0 and full attendance"
+      },
+      {
+        "courseId": "CloudAWS_03_2026",
+        "employeeId": "EMP-101",
+        "score": 9.5,
+        "attendanceRate": 1,
+        "reason": "Score >= 9.0 and full attendance"
+      },
+      {
+        "courseId": "Automation_testing_01_2026",
+        "employeeId": "EMP-183",
+        "score": 9.4,
+        "attendanceRate": 1,
+        "reason": "Score >= 9.0 and full attendance"
+      },
+      {
+        "courseId": "Automation_testing_01_2026",
+        "employeeId": "EMP-204",
+        "score": 9.3,
+        "attendanceRate": 1,
+        "reason": "Score >= 9.0 and full attendance"
+      },
+      {
+        "courseId": "Automation_testing_01_2026",
+        "employeeId": "EMP-186",
+        "score": 9.2,
+        "attendanceRate": 1,
+        "reason": "Score >= 9.0 and full attendance"
+      },
+      {
+        "courseId": "Automation_testing_01_2026",
+        "employeeId": "EMP-013",
+        "score": 9,
+        "attendanceRate": 1,
+        "reason": "Score >= 9.0 and full attendance"
+      }
+    ],
+    "supportNeededTrainees": [
+      {
+        "courseId": "Automation_testing_01_2026",
+        "employeeId": "EMP-018",
+        "score": 2.7,
+        "attendanceRate": 1,
+        "reason": "Below pass threshold or attendance below 70%"
+      },
+      {
+        "courseId": "Automation_testing_01_2026",
+        "employeeId": "EMP-190",
+        "score": 2.1,
+        "attendanceRate": 1,
+        "reason": "Below pass threshold or attendance below 70%"
+      },
+      {
+        "courseId": "Automation_testing_01_2026",
+        "employeeId": "EMP-006",
+        "score": 0,
+        "attendanceRate": 1,
+        "reason": "Below pass threshold or attendance below 70%"
+      },
+      {
+        "courseId": "Automation_testing_01_2026",
+        "employeeId": "EMP-192",
+        "score": 7,
+        "attendanceRate": 0.6666666666666666,
+        "reason": "Below pass threshold or attendance below 70%"
+      },
+      {
+        "courseId": "Automation_testing_01_2026",
+        "employeeId": "EMP-196",
+        "score": 3.1,
+        "attendanceRate": 0.8333333333333334,
+        "reason": "Below pass threshold or attendance below 70%"
+      },
+      {
+        "courseId": "CloudAWS_03_2026",
+        "employeeId": "EMP-140",
+        "score": 4.8,
+        "attendanceRate": 0.9,
+        "reason": "Below pass threshold or attendance below 70%"
+      },
+      {
+        "courseId": "CloudAWS_03_2026",
+        "employeeId": "EMP-061",
+        "score": 2.9,
+        "attendanceRate": 0.8,
+        "reason": "Below pass threshold or attendance below 70%"
+      }
+    ],
+    "supportNeededGroups": [
+      {
+        "courseId": "Automation_testing_01_2026",
+        "count": 5,
+        "reason": "At least one learner is below pass threshold or attendance policy."
+      },
+      {
+        "courseId": "CloudAWS_03_2026",
+        "count": 2,
+        "reason": "At least one learner is below pass threshold or attendance policy."
+      }
+    ],
+    "masked": false
+  },
+  "llm": {
+    "enabled": false,
+    "model": "gpt-4o-mini",
+    "usedFor": [],
+    "fallbackReason": "OPENAI_API_KEY is not configured or LD_REPORTING_USE_LLM=false."
+  },
+  "quality": {
+    "qualityId": "qc_568adc87-9274-4951-8e9b-f6f9a474a415",
+    "status": "PASS",
+    "generatedAt": "2026-06-21T18:37:53.543Z",
+    "issues": []
+  },
+  "artifacts": {
+    "pptxPath": "F:\\FPT Software\\SETA\\agent-platform-main\\packages\\ld-reporting\\.data\\ld-reporting\\artifacts\\rpt_33ea48e7-507f-44cc-8083-10773bab9a79\\rpt_33ea48e7-507f-44cc-8083-10773bab9a79.pptx",
+    "docxPath": "F:\\FPT Software\\SETA\\agent-platform-main\\packages\\ld-reporting\\.data\\ld-reporting\\artifacts\\rpt_33ea48e7-507f-44cc-8083-10773bab9a79\\rpt_33ea48e7-507f-44cc-8083-10773bab9a79.docx"
+  }
+}

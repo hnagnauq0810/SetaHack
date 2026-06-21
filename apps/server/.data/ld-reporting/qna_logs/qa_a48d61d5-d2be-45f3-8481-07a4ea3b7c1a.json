@@ -1,0 +1,16 @@
+{
+  "answerId": "qa_a48d61d5-d2be-45f3-8481-07a4ea3b7c1a",
+  "generatedAt": "2026-06-21T18:58:39.509Z",
+  "reportId": "rpt_913a2be1-595c-4cde-86bc-ac47fb90eafc",
+  "answer": "Evidence status là BLOCKED. Có 2 missing/warning item(s). Không được kết luận final cho đến khi xử lý blocker.",
+  "confidence": 0.95,
+  "limitations": [
+    "Evidence status is BLOCKED; final conclusions are limited.",
+    "LLM Q&A fallback was used because the model call failed."
+  ],
+  "citations": [
+    "evidence.status",
+    "evidence.missingEvidence",
+    "evidence.canGenerateFinalConclusion"
+  ]
+}

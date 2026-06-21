@@ -1,6 +1,9 @@
-import { readFile, stat } from 'node:fs/promises';
+import { mkdtemp, readFile, stat } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { LdReportingSpecialistAgent } from '../src/backend/domain/orchestrator.ts';
+import { LdReportingStore } from '../src/backend/domain/storage.ts';
 
 describe('ld-reporting pipeline', () => {
   it('generates a report for completed Q1 courses', async () => {
@@ -15,14 +18,32 @@ describe('ld-reporting pipeline', () => {
     const pptxStats = await stat(report.artifacts?.pptxPath ?? '');
     expect(docxStats.isFile()).toBe(true);
     expect(pptxStats.isFile()).toBe(true);
-    expect(docxStats.size).toBeGreaterThan(8_000);
+    expect(docxStats.size).toBeGreaterThan(50_000);
     expect(pptxStats.size).toBeGreaterThan(100_000);
     await expect(
       countZipEntries(report.artifacts?.docxPath ?? '', 'word/document.xml'),
     ).resolves.toBe(1);
     await expect(
       countZipEntries(report.artifacts?.pptxPath ?? '', String.raw`ppt/slides/slide\d+\.xml`),
-    ).resolves.toBeGreaterThanOrEqual(11);
+    ).resolves.toBeGreaterThanOrEqual(13);
+    await expect(
+      countZipEntries(report.artifacts?.docxPath ?? '', String.raw`word/media/.*\.svg`),
+    ).resolves.toBe(0);
+    await expect(
+      countZipEntries(report.artifacts?.docxPath ?? '', String.raw`word/media/.*\.png`),
+    ).resolves.toBeGreaterThanOrEqual(3);
+    await expect(zipContains(report.artifacts?.pptxPath ?? '', 'Visual analytics')).resolves.toBe(
+      true,
+    );
+    await expect(
+      zipContains(report.artifacts?.pptxPath ?? '', 'Distribution and risk signals'),
+    ).resolves.toBe(true);
+    await expect(
+      countZipEntries(report.artifacts?.pptxPath ?? '', String.raw`ppt/media/.*\.svg`),
+    ).resolves.toBe(0);
+    await expect(
+      countZipEntries(report.artifacts?.pptxPath ?? '', String.raw`ppt/charts/chart\d+\.xml`),
+    ).resolves.toBeGreaterThanOrEqual(1);
   });
 
   it('blocks final conclusion for in-progress courses', async () => {
@@ -47,6 +68,9 @@ describe('ld-reporting pipeline', () => {
     });
     expect(report.metrics.overall.totalCourses).toBe(1);
     expect(report.metrics.courses[0]?.courseId).toBe('AIAgent_05_2026');
+    await expect(
+      zipContains(report.artifacts?.pptxPath ?? '', 'Course performance profile'),
+    ).resolves.toBe(true);
   });
 
   it('masks learner-level view for BOD', async () => {
@@ -58,24 +82,77 @@ describe('ld-reporting pipeline', () => {
     expect(view.artifacts).toBeUndefined();
   });
 
-  it('scopes trainer views to courses taught by the current trainer', async () => {
-    const agent = new LdReportingSpecialistAgent();
-    const report = await agent.ld_generateReport({ scope: { period: '2026-Q1' } });
-    const trainerId = report.metrics.courses.find((course) => course.trainerId)?.trainerId;
-    expect(trainerId).toBeTruthy();
-    if (!trainerId) return;
+  it('keeps BOD on finalized reports while L&D Manager can review drafts', async () => {
+    const agent = await isolatedAgent();
+    const draft = await agent.ld_generateReport({ scope: { period: '2026-Q1' } });
 
-    const view = agent.viewReport(report, { role: 'TRAINER', trainerId });
+    expect(draft.status).toBe('DRAFT');
+    await expect(agent.listReports({ role: 'LND_MANAGER' })).resolves.toHaveLength(1);
+    await expect(agent.listReports({ role: 'BOD' })).resolves.toHaveLength(0);
 
-    expect(view.governance.role).toBe('TRAINER');
-    expect(view.governance.masked).toBe(true);
-    expect(view.scope.trainerId).toBe(trainerId);
-    expect(view.metrics.courses.length).toBeGreaterThan(0);
-    expect(view.metrics.courses.every((course) => course.trainerId === trainerId)).toBe(true);
+    const edited = await agent.updateDraftReport({
+      reportId: draft.reportId,
+      patch: {
+        executiveSummary: 'Manual executive summary approved by the L&D manager.',
+        insights: ['Manual insight 1', 'Manual insight 2'],
+        recommendations: ['Manual recommendation 1'],
+      },
+      actorUserId: 'ldm001',
+    });
+    expect(edited.executiveSummary).toBe('Manual executive summary approved by the L&D manager.');
+    expect(edited.insights).toEqual(['Manual insight 1', 'Manual insight 2']);
+    expect(edited.lastEditedAt).toBeTruthy();
+
+    const blocked = await agent.ld_answerQuestion({
+      reportId: draft.reportId,
+      role: 'BOD',
+      question: 'What is the completion rate?',
+    });
+    expect(blocked.answer).toContain('chua duoc finalized');
+
+    const final = await agent.ld_finalizeReport({
+      reportId: draft.reportId,
+      body: { decision: 'approve', note: 'Approved for BOD review' },
+      actorUserId: 'ldm001',
+    });
+    expect(final.status).toBe('FINAL');
+    expect(final.executiveSummary).toBe('Manual executive summary approved by the L&D manager.');
+
+    const bodReports = await agent.listReports({ role: 'BOD' });
+    expect(bodReports).toHaveLength(1);
+    expect(bodReports[0]?.status).toBe('FINAL');
+    expect(bodReports[0]?.executiveSummary).toBe(
+      'Manual executive summary approved by the L&D manager.',
+    );
+    expect(bodReports[0]?.governance.masked).toBe(true);
+
+    const answer = await agent.ld_answerQuestion({
+      role: 'BOD',
+      question: 'Give me an overall view from previous finalized reports',
+    });
+    expect(answer.citations).toContain(final.reportId);
+    expect(answer.answer).toContain('finalized L&D report');
+
+    await expect(
+      agent.updateDraftReport({
+        reportId: final.reportId,
+        patch: { executiveSummary: 'Should be rejected.' },
+      }),
+    ).rejects.toThrow('Finalized reports cannot be edited.');
   });
 });
+
+async function isolatedAgent(): Promise<LdReportingSpecialistAgent> {
+  const root = await mkdtemp(join(tmpdir(), 'ld-reporting-test-'));
+  return new LdReportingSpecialistAgent({ store: new LdReportingStore(root) });
+}
 
 async function countZipEntries(path: string, pattern: string): Promise<number> {
   const text = await readFile(path, 'latin1');
   return new Set([...text.matchAll(new RegExp(pattern, 'g'))].map(([match]) => match)).size;
+}
+
+async function zipContains(path: string, value: string): Promise<boolean> {
+  const text = await readFile(path, 'latin1');
+  return text.includes(value);
 }

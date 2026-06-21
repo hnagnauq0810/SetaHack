@@ -16,7 +16,7 @@ This module implements the SETA HackAIthon Track 7 POC as a single specialist ag
 4. Evidence Gate returns `PASS`, `PARTIAL_PASS`, or `BLOCKED`.
 5. Metrics Service calculates trainee count, attendance, completion, pass rate, average score, feedback, hours, scaled cost, ROI proxy, effectiveness score.
 6. Governance/RBAC applies L&D NORM rules and masks sensitive learner-level data for BOD/Team Manager views.
-7. Report Builder creates validated report JSON plus minimal PPTX and DOCX artifacts.
+7. Report Builder creates validated report JSON plus presentation-ready PPTX and DOCX artifacts with data-driven charts.
 8. Q&A answers only from saved report artifacts.
 9. Human review finalizes or requests revision/regeneration.
 
@@ -57,7 +57,7 @@ Blocked course example:
 
 Dashboard route: `/ld-reporting`
 
-The page includes scope inputs, Check Readiness, Generate Report, Evidence panel, metrics cards, NORM/RBAC flags, report preview, artifact downloads, Q&A box, and human review buttons.
+The chat-first page includes conversation history, a finalized-report inbox for BOD, a draft editor and human-review workflow for L&D Manager, artifact downloads, and report-grounded Q&A.
 
 ## Install / migrate / run
 
@@ -83,7 +83,7 @@ The L&D module now uses OpenAI when `OPENAI_API_KEY` is configured and `LD_REPOR
 
 - `ld_generateReport()` still calculates Evidence Gate, Metrics and Governance deterministically, then calls the LLM only to improve executive narrative, insights and recommendations from validated metrics.
 - `ld_answerQuestion()` first creates a deterministic grounded fallback, then asks the LLM to answer from the validated report artifact only. RBAC masking is enforced in the prompt/context and individual learner details are removed for BOD/Team Manager roles.
-- PPTX/DOCX generation remains deterministic for file structure, but its narrative content is populated from the LLM-enhanced report artifact. If the LLM call fails, the module falls back to deterministic content and records the fallback reason in `report.llm`.
+- PPTX/DOCX generation remains deterministic for file structure and chart selection. PPTX uses PowerPoint-native charts and shapes; DOCX rasterizes charts to high-resolution PNG for broad Office compatibility. Narrative content comes from the LLM-enhanced report artifact, with deterministic fallback recorded in `report.llm`.
 
 Recommended local env:
 

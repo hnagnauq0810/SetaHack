@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const LdRoleSchema = z.enum(['BOD', 'LND_MANAGER', 'TEAM_MANAGER', 'TRAINER']);
+export const LdRoleSchema = z.enum(['BOD', 'LND_MANAGER']);
 export type LdRole = z.infer<typeof LdRoleSchema>;
 
 export const EvidenceStatusSchema = z.enum(['PASS', 'PARTIAL_PASS', 'BLOCKED']);
@@ -45,6 +45,17 @@ export const LdFinalizeRequestSchema = z.object({
   note: z.string().optional(),
 });
 export type LdFinalizeRequest = z.infer<typeof LdFinalizeRequestSchema>;
+
+export const LdReportDraftPatchSchema = z
+  .object({
+    title: z.string().trim().min(1).optional(),
+    executiveSummary: z.string().trim().min(1).optional(),
+    insights: z.array(z.string().trim().min(1)).max(20).optional(),
+    recommendations: z.array(z.string().trim().min(1)).max(20).optional(),
+    warnings: z.array(z.string().trim().min(1)).max(20).optional(),
+  })
+  .strict();
+export type LdReportDraftPatch = z.infer<typeof LdReportDraftPatchSchema>;
 
 export interface SourceMetadata {
   source: 'Teams' | 'OneDrive' | 'Forms' | 'KPI' | 'Rules' | 'Template';
@@ -283,6 +294,7 @@ export interface ReportJson {
   scope: LdScopeInput;
   status: 'DRAFT' | 'FINAL' | 'REVISION_REQUESTED';
   generatedAt: string;
+  lastEditedAt?: string;
   finalizedAt?: string;
   approval?: {
     decision: 'approve' | 'revise' | 'regenerate';

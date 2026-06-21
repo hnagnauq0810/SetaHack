@@ -53,7 +53,6 @@ export const ldAnswerQuestionTool = defineAgentTool({
     return agent.ld_answerQuestion({
       ...input,
       role: access.role,
-      trainerId: access.trainerId,
     });
   },
 });
@@ -107,7 +106,7 @@ async function requireToolPermission(
 async function resolveToolAccess(
   ctx: Parameters<typeof actorFromContext>[0],
   permission: string,
-): Promise<{ role: LdRole; trainerId?: string }> {
+): Promise<{ role: LdRole }> {
   const session = await requireToolPermission(ctx, permission);
   if (!session.effectivePermissions.has('ld-reporting.read')) {
     throw Object.assign(new Error('ld-reporting.read required'), { code: 'FORBIDDEN' });
@@ -121,7 +120,6 @@ async function resolveToolAccess(
   ) {
     return { role: 'LND_MANAGER' };
   }
-  if (roles.has('ld-reporting.trainer')) return { role: 'TRAINER', trainerId: session.userId };
   if (roles.has('ld-reporting.bod')) return { role: 'BOD' };
-  return { role: 'TEAM_MANAGER' };
+  return { role: 'BOD' };
 }

@@ -79,6 +79,10 @@ const ExportInputSchema = z.object({
   format: z.enum(['pptx', 'docx', 'both']).default('both'),
 });
 
+const ListReportsInputSchema = z.object({
+  status: z.enum(['FINAL', 'DRAFT', 'REVISION_REQUESTED', 'all']).default('FINAL').optional(),
+});
+
 const SuspendSchema = z.object({ card: ApprovalCardSchema });
 
 export function buildLdReportingChatRuntime(deps: LdReportingChatRuntimeDeps): {
@@ -271,8 +275,35 @@ function makeLdChatTools(input: {
         return agent.ld_answerQuestion({
           ...payload,
           role: access.role,
-          trainerId: access.trainerId,
         });
+      },
+    }),
+    ld_listReports: defineAgentTool({
+      id: 'ld_listReports',
+      name: 'List L&D Reports',
+      description:
+        'List report artifacts visible to the current user. BOD sees finalized reports only; L&D Manager can see drafts and finalized reports.',
+      input: ListReportsInputSchema,
+      output: z.unknown(),
+      rbac: 'ld-reporting.report.read',
+      execute: async (payload, ctx) => {
+        const access = await resolveToolAccess(ctx, 'ld-reporting.report.read');
+        const reports = await agent.listReports(access);
+        const status = payload.status ?? 'FINAL';
+        return {
+          reports: reports
+            .filter((report) => status === 'all' || report.status === status)
+            .map((report) => ({
+              reportId: report.reportId,
+              title: report.title,
+              status: report.status,
+              generatedAt: report.generatedAt,
+              finalizedAt: report.finalizedAt ?? null,
+              scope: report.scope,
+              classification: report.governance.classification,
+              evidenceStatus: report.evidence.status,
+            })),
+        };
       },
     }),
     ld_prepareExport: defineAgentTool({
@@ -290,6 +321,13 @@ function makeLdChatTools(input: {
           throw Object.assign(new Error(`Report not found: ${payload.reportId}`), {
             code: 'NOT_FOUND',
           });
+        }
+        if (!canReadReport(report, access.role)) {
+          return {
+            status: 'REPORT_NOT_PUBLISHED',
+            message: 'This report is not finalized. BOD can only export finalized reports.',
+            reportId: payload.reportId,
+          };
         }
         const view = agent.viewReport(report, access);
         const formats =
@@ -364,6 +402,7 @@ function instructionsText(defaultScope: LdRequest['scope']): string {
     'Use tools for every operational action: readiness checks, draft generation, report Q&A, and final review.',
     'Never answer L&D course questions from general knowledge. If the user asks about a course, learner, metric, report, PPTX, DOCX, or "it" in this L&D thread, ground the answer in L&D tools and validated artifacts.',
     'If the conversation already contains a Report ID, use the latest Report ID for export, Q&A, or finalization. Do not create a new report only to export PPTX/DOCX for an existing draft.',
+    'BOD users are read-only. For BOD report reading, Q&A, history, or exports, call ld_listReports and ld_answerQuestion against finalized reports only. Never generate a draft for BOD.',
     'Evidence Gate is mandatory. For any generate, draft, export-from-scope, approval, or final conclusion request, call ld_checkReadiness first for the exact same scope.',
     'Only call ld_generateReport after ld_checkReadiness returned PASS and canGenerateFinalConclusion=true for that exact scope in the same turn.',
     'If the user asks to export PPTX/DOCX but provides only a course, period, or team instead of a reportId, run ld_checkReadiness first, then generate the draft, then call ld_prepareExport.',
@@ -371,7 +410,7 @@ function instructionsText(defaultScope: LdRequest['scope']): string {
     'When the user asks for PPTX, DOCX, PowerPoint, Word, slide deck, or export, call ld_prepareExport and return the download links.',
     'Never invent metrics, course names, learner identities, NORM flags, or evidence status.',
     'If the Evidence Gate is BLOCKED, describe the blocker and avoid final effectiveness conclusions.',
-    'Report Q&A must be grounded only in validated report artifacts. If reportId is missing, ask for a report or generate one if the user has permission.',
+    'Report Q&A must be grounded only in report artifacts. If reportId is missing, use finalized reports via ld_listReports or ld_answerQuestion without reportId; generate a new draft only when an L&D Manager explicitly asks for a draft.',
     'RBAC is server-enforced. Do not ask the user to choose a role and do not reveal masked learner details.',
     `When a scope is omitted, use this default scope: ${JSON.stringify(defaultScope)}.`,
     'Keep answers concise and business-readable.',
@@ -421,7 +460,7 @@ async function requireToolPermission(
 async function resolveToolAccess(
   ctx: Parameters<typeof actorFromContext>[0],
   permission: string,
-): Promise<{ role: LdRole; trainerId?: string; tenantId: string }> {
+): Promise<{ role: LdRole; tenantId: string }> {
   const session = await requireToolPermission(ctx, permission);
   if (!session.effectivePermissions.has('ld-reporting.read')) {
     throw Object.assign(new Error('ld-reporting.read required'), { code: 'FORBIDDEN' });
@@ -435,11 +474,12 @@ async function resolveToolAccess(
   ) {
     return { role: 'LND_MANAGER', tenantId: session.tenantId };
   }
-  if (roles.has('ld-reporting.trainer')) {
-    return { role: 'TRAINER', trainerId: session.userId, tenantId: session.tenantId };
-  }
   if (roles.has('ld-reporting.bod')) return { role: 'BOD', tenantId: session.tenantId };
-  return { role: 'TEAM_MANAGER', tenantId: session.tenantId };
+  return { role: 'BOD', tenantId: session.tenantId };
+}
+
+function canReadReport(report: ReportJson, role: LdRole): boolean {
+  return role === 'LND_MANAGER' || report.status === 'FINAL';
 }
 
 function buildFinalizeApprovalCard(
@@ -552,6 +592,8 @@ function assembleLdResult(res: ToolSignals): unknown {
   if (qna) return qna;
   const exportLinks = lastNamedResult(res, 'ld_prepareExport');
   if (exportLinks) return exportLinks;
+  const reports = lastNamedResult(res, 'ld_listReports');
+  if (reports) return reports;
   const readiness = lastNamedResult(res, 'ld_checkReadiness');
   if (readiness) return readiness;
   const text = res.text?.trim();

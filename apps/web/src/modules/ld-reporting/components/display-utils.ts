@@ -4,9 +4,7 @@ export type BadgeTone = 'success' | 'warning' | 'danger' | 'neutral' | 'info';
 
 export function roleLabel(role: LdRole | undefined): string {
   if (role === 'LND_MANAGER') return 'L&D Manager';
-  if (role === 'TEAM_MANAGER') return 'Team Manager';
   if (role === 'BOD') return 'Board of Directors';
-  if (role === 'TRAINER') return 'Trainer';
   return 'L&D Manager';
 }
 

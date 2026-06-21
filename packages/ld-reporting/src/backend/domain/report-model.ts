@@ -36,6 +36,35 @@ export interface ReportCourseRow {
   effectiveness: string;
 }
 
+export type ReportChartKind = 'bullet' | 'bar' | 'groupedBar' | 'donut';
+
+export interface ReportChartSeries {
+  label: string;
+  value: number;
+  valueLabel: string;
+  tone: ReportStatusTone;
+}
+
+export interface ReportChartPoint {
+  label: string;
+  value: number;
+  valueLabel: string;
+  target?: number;
+  targetLabel?: string;
+  tone: ReportStatusTone;
+  series?: ReportChartSeries[];
+}
+
+export interface ReportChart {
+  id: string;
+  kind: ReportChartKind;
+  title: string;
+  subtitle: string;
+  unit: 'percent' | 'score100' | 'count';
+  maxValue: number;
+  points: ReportChartPoint[];
+}
+
 export interface ReportModel {
   title: string;
   scope: string;
@@ -51,6 +80,7 @@ export interface ReportModel {
   findings: ReportFinding[];
   recommendations: ReportRecommendation[];
   courseRows: ReportCourseRow[];
+  charts: ReportChart[];
   evidence: {
     finalConclusion: string;
     missingCount: number;
@@ -171,6 +201,7 @@ export function buildReportModel(report: ReportJson): ReportModel {
     findings: buildFindings(report),
     recommendations: buildRecommendations(report),
     courseRows,
+    charts: buildCharts(report),
     evidence: {
       finalConclusion: report.evidence.canGenerateFinalConclusion ? 'Allowed' : 'Blocked',
       missingCount,
@@ -205,6 +236,216 @@ export function buildReportModel(report: ReportJson): ReportModel {
       ? `OpenAI ${report.llm.model ?? 'model'} enriched narrative fields. Numeric metrics remain deterministic.`
       : `Deterministic fallback used. ${report.llm?.fallbackReason ?? 'LLM enrichment was not available.'}`,
   };
+}
+
+function buildCharts(report: ReportJson): ReportChart[] {
+  const overall = report.metrics.overall;
+  const charts: ReportChart[] = [];
+  const kpiPoints = [
+    metricPoint(
+      'Attendance',
+      percentValue(overall.attendanceRate),
+      'percent',
+      85,
+      rateTone(overall.attendanceRate, 0.85, 0.75),
+    ),
+    metricPoint(
+      'Completion',
+      percentValue(overall.completionRate),
+      'percent',
+      90,
+      rateTone(overall.completionRate, 0.9, 0.8),
+    ),
+    metricPoint(
+      'Pass rate',
+      percentValue(overall.passRate),
+      'percent',
+      80,
+      rateTone(overall.passRate, 0.8, 0.7),
+    ),
+    metricPoint(
+      'Effectiveness',
+      numberValue(overall.effectivenessScore),
+      'score100',
+      85,
+      classificationTone(report.governance.classification),
+    ),
+  ].filter((point): point is ReportChartPoint => point !== null);
+
+  if (kpiPoints.length >= 3) {
+    charts.push({
+      id: 'overall-kpis',
+      kind: 'bullet',
+      title: 'Overall KPI vs target',
+      subtitle: 'Validated performance metrics compared with L&D operating thresholds.',
+      unit: 'percent',
+      maxValue: 100,
+      points: kpiPoints,
+    });
+  }
+
+  const courseRatePoints = report.metrics.courses
+    .slice(0, 5)
+    .map((course): ReportChartPoint | null => {
+      const series = [
+        chartSeries(
+          'Attendance',
+          percentValue(course.attendanceRate),
+          'percent',
+          rateTone(course.attendanceRate, 0.85, 0.75),
+        ),
+        chartSeries(
+          'Completion',
+          percentValue(course.completionRate),
+          'percent',
+          rateTone(course.completionRate, 0.9, 0.8),
+        ),
+        chartSeries(
+          'Pass rate',
+          percentValue(course.passRate),
+          'percent',
+          rateTone(course.passRate, 0.8, 0.7),
+        ),
+      ].filter((item): item is ReportChartSeries => item !== null);
+      if (series.length < 2) return null;
+      return {
+        label: cleanText(course.courseName),
+        value: Math.max(...series.map((item) => item.value)),
+        valueLabel: '',
+        tone: 'neutral' as const,
+        series,
+      };
+    })
+    .filter((point): point is ReportChartPoint => point !== null);
+
+  if (courseRatePoints.length >= 2) {
+    charts.push({
+      id: 'course-rate-mix',
+      kind: 'groupedBar',
+      title: 'Course rate mix',
+      subtitle: 'Attendance, completion, and pass rate by course.',
+      unit: 'percent',
+      maxValue: 100,
+      points: courseRatePoints,
+    });
+  }
+
+  const coursePoints = report.metrics.courses
+    .filter((course) => typeof course.effectivenessScore === 'number')
+    .slice(0, 8)
+    .map((course) =>
+      metricPoint(
+        course.courseName,
+        numberValue(course.effectivenessScore),
+        'score100',
+        85,
+        classificationTone(
+          (course.effectivenessScore ?? 0) >= 85
+            ? 'Effective'
+            : (course.effectivenessScore ?? 0) >= 70
+              ? 'Needs improvement'
+              : 'Risk',
+        ),
+      ),
+    )
+    .filter((point): point is ReportChartPoint => point !== null);
+
+  if (coursePoints.length >= 2) {
+    charts.push({
+      id: 'course-effectiveness',
+      kind: 'bar',
+      title: 'Course effectiveness comparison',
+      subtitle: 'Effectiveness score by course, using the validated L&D scoring model.',
+      unit: 'score100',
+      maxValue: 100,
+      points: coursePoints,
+    });
+  }
+
+  const priorityCounts = countFlagsByPriority(report);
+  const flagPoints = (['High', 'Medium', 'Low'] as const)
+    .map((priority) => {
+      const value = priorityCounts[priority] ?? 0;
+      if (value <= 0) return null;
+      return metricPoint(
+        priority,
+        value,
+        'count',
+        undefined,
+        priority === 'High' ? 'risk' : priority === 'Medium' ? 'monitor' : 'good',
+      );
+    })
+    .filter((point): point is ReportChartPoint => point !== null);
+
+  if (flagPoints.length > 0) {
+    charts.push({
+      id: 'norm-flags',
+      kind: 'donut',
+      title: 'Governance flags by priority',
+      subtitle: 'NORM rule triggers grouped by business priority.',
+      unit: 'count',
+      maxValue: flagPoints.reduce((sum, point) => sum + point.value, 0),
+      points: flagPoints,
+    });
+  }
+
+  return charts;
+}
+
+function metricPoint(
+  label: string,
+  value: number | null,
+  unit: ReportChart['unit'],
+  target: number | undefined,
+  tone: ReportStatusTone,
+): ReportChartPoint | null {
+  if (value === null || Number.isNaN(value)) return null;
+  return {
+    label: cleanText(label),
+    value,
+    valueLabel: formatChartValue(value, unit),
+    target,
+    targetLabel: target === undefined ? undefined : formatChartValue(target, unit),
+    tone,
+  };
+}
+
+function chartSeries(
+  label: string,
+  value: number | null,
+  unit: ReportChart['unit'],
+  tone: ReportStatusTone,
+): ReportChartSeries | null {
+  if (value === null || Number.isNaN(value)) return null;
+  return {
+    label,
+    value,
+    valueLabel: formatChartValue(value, unit),
+    tone,
+  };
+}
+
+function percentValue(value: number | null | undefined): number | null {
+  if (value === null || value === undefined) return null;
+  return Math.round(value * 1000) / 10;
+}
+
+function numberValue(value: number | null | undefined): number | null {
+  if (value === null || value === undefined) return null;
+  return Math.round(value * 100) / 100;
+}
+
+function formatChartValue(value: number, unit: ReportChart['unit']): string {
+  if (unit === 'percent') return `${formatNumber(value, 1)}%`;
+  if (unit === 'score100') return `${formatNumber(value, 1)}/100`;
+  return formatNumber(value, 0);
+}
+
+function countFlagsByPriority(report: ReportJson): Record<string, number> {
+  return report.governance.normFlags.reduce<Record<string, number>>((acc, flag) => {
+    acc[flag.priority] = (acc[flag.priority] ?? 0) + 1;
+    return acc;
+  }, {});
 }
 
 function kpi(
@@ -305,9 +546,7 @@ function scopeLine(report: ReportJson): string {
 
 function roleLabel(role: string): string {
   if (role === 'LND_MANAGER') return 'L&D Manager';
-  if (role === 'TEAM_MANAGER') return 'Team Manager';
   if (role === 'BOD') return 'Board of Directors';
-  if (role === 'TRAINER') return 'Trainer';
   return role;
 }
 

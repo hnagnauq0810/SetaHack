@@ -1,0 +1,15 @@
+{
+  "answerId": "qa_7de88dfa-8341-4ba0-84a2-88a527673596",
+  "generatedAt": "2026-06-21T17:05:18.364Z",
+  "reportId": "rpt_3279611b-3b62-4eb5-a18e-12bc9b67f1ee",
+  "answer": "Bạn không có quyền xem điểm cá nhân trong role BOD. Có thể xem aggregate: average score tổng là 7.88/10.",
+  "confidence": 0.96,
+  "limitations": [
+    "RBAC masking applied: individual trainee details are hidden or aggregated.",
+    "LLM Q&A fallback was used because the model call failed."
+  ],
+  "citations": [
+    "governance.role",
+    "metrics.overall.averageScore"
+  ]
+}

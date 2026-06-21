@@ -1,0 +1,5390 @@
+{
+  "datasetId": "ds_5d5816e114ca3d73",
+  "scope": {
+    "period": "2026-Q1"
+  },
+  "importedAt": "2026-06-21T17:24:17.944Z",
+  "sources": [
+    {
+      "source": "OneDrive",
+      "sheetName": "DS06_Course_Catalog",
+      "rowCount": 6,
+      "required": true,
+      "present": true,
+      "missingColumns": [],
+      "loadedAt": "2026-06-21T17:24:17.944Z"
+    },
+    {
+      "source": "Teams",
+      "sheetName": "DS07_Attendance_Log",
+      "rowCount": 722,
+      "required": true,
+      "present": true,
+      "missingColumns": [],
+      "loadedAt": "2026-06-21T17:24:17.944Z"
+    },
+    {
+      "source": "OneDrive",
+      "sheetName": "DS08_Assessment_Score",
+      "rowCount": 89,
+      "required": true,
+      "present": true,
+      "missingColumns": [],
+      "loadedAt": "2026-06-21T17:24:17.944Z"
+    },
+    {
+      "source": "Forms",
+      "sheetName": "DS09_Feedback_Survey",
+      "rowCount": 94,
+      "required": true,
+      "present": true,
+      "missingColumns": [],
+      "loadedAt": "2026-06-21T17:24:17.944Z"
+    },
+    {
+      "source": "KPI",
+      "sheetName": "DS10_Training_Cost_ROI",
+      "rowCount": 6,
+      "required": true,
+      "present": true,
+      "missingColumns": [],
+      "loadedAt": "2026-06-21T17:24:17.944Z"
+    },
+    {
+      "source": "Rules",
+      "sheetName": "DS11_LnD_Training_NORM",
+      "rowCount": 15,
+      "required": true,
+      "present": true,
+      "missingColumns": [],
+      "loadedAt": "2026-06-21T17:24:17.944Z"
+    },
+    {
+      "source": "Template",
+      "sheetName": "DS12_Report_Template_Structure",
+      "rowCount": 10,
+      "required": true,
+      "present": true,
+      "missingColumns": [],
+      "loadedAt": "2026-06-21T17:24:17.944Z"
+    }
+  ],
+  "courses": [
+    {
+      "courseId": "Automation_testing_01_2026",
+      "courseName": "Automation Testing with Playwright",
+      "topicCategory": "QA & Testing",
+      "trainerId": "TRN-004",
+      "totalSessions": 6,
+      "hoursPerSession": 2,
+      "totalHours": 12,
+      "passThresholdScore": 6,
+      "startDate": "2026-01-06",
+      "endDate": "2026-01-31",
+      "status": "Completed"
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "courseName": "DevOps Fundamentals: CI/CD, K8s, Monitoring",
+      "topicCategory": "DevOps & Infrastructure",
+      "trainerId": "TRN-004",
+      "totalSessions": 15,
+      "hoursPerSession": 1.5,
+      "totalHours": 22.5,
+      "passThresholdScore": 6,
+      "startDate": "2026-02-03",
+      "endDate": "2026-02-28",
+      "status": "Completed"
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "courseName": "AWS Cloud Architecture & Services",
+      "topicCategory": "Cloud",
+      "trainerId": "TRN-004",
+      "totalSessions": 10,
+      "hoursPerSession": 2,
+      "totalHours": 20,
+      "passThresholdScore": 6.5,
+      "startDate": "2026-03-03",
+      "endDate": "2026-03-28",
+      "status": "Completed"
+    }
+  ],
+  "attendance": [
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-121",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-121",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-121",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-121",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-121",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-121",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-017",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-017",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-017",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-017",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-017",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-017",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-138",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-138",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-138",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-138",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-138",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-138",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-181",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-181",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-181",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-181",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-181",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-181",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-182",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-182",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-182",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-182",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-182",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-182",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-183",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-183",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-183",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-183",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-183",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-183",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-184",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-184",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-184",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-184",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-184",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-184",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-185",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-185",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-185",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-185",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-185",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-185",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-067",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-067",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-067",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-067",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-067",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-067",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-013",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-013",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-013",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-013",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-013",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-013",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-186",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-186",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-186",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-186",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-186",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-186",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-130",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-130",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-130",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-130",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-130",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-130",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-012",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-012",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-012",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-012",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-012",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-012",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-018",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-018",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-018",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-018",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-018",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-018",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-187",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-187",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-187",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-187",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-187",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-187",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-188",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-188",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-188",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-188",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-188",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-188",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-189",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-189",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-189",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-189",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-189",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-189",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-190",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-190",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-190",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-190",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-190",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-190",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-191",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-191",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-191",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-191",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-191",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-191",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-006",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-006",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-006",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-006",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-006",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-006",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-033",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-033",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-033",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-033",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-033",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-033",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-192",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-192",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-192",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-192",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-192",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-192",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-063",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-063",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-063",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-063",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-063",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-063",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-193",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-193",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-193",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-193",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-193",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-193",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-194",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-194",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-194",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-194",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-194",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-194",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-195",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-195",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-195",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-195",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-195",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-195",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-196",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-196",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-196",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-196",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-196",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-196",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-007",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-007",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-007",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-007",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-007",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-007",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-197",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-197",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-197",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-197",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-197",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-197",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-198",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-198",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-198",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-198",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-198",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-198",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-199",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-199",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-199",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-199",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-199",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-199",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-200",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-200",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-200",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-200",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-200",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-200",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-201",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-201",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-201",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-201",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-201",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-201",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-202",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-202",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-202",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-202",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-202",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-202",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-203",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-203",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-203",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-203",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-203",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-203",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-204",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-204",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-204",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-204",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-204",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-204",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S1",
+      "employeeId": "EMP-205",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S2",
+      "employeeId": "EMP-205",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S3",
+      "employeeId": "EMP-205",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S4",
+      "employeeId": "EMP-205",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S5",
+      "employeeId": "EMP-205",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "sessionId": "Automation_testing_01_2026_S6",
+      "employeeId": "EMP-205",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S1",
+      "employeeId": "EMP-177",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S2",
+      "employeeId": "EMP-177",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S3",
+      "employeeId": "EMP-177",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S4",
+      "employeeId": "EMP-177",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S5",
+      "employeeId": "EMP-177",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S6",
+      "employeeId": "EMP-177",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S7",
+      "employeeId": "EMP-177",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S8",
+      "employeeId": "EMP-177",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S9",
+      "employeeId": "EMP-177",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S10",
+      "employeeId": "EMP-177",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S11",
+      "employeeId": "EMP-177",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S12",
+      "employeeId": "EMP-177",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S13",
+      "employeeId": "EMP-177",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S14",
+      "employeeId": "EMP-177",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S15",
+      "employeeId": "EMP-177",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S1",
+      "employeeId": "EMP-178",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S2",
+      "employeeId": "EMP-178",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S3",
+      "employeeId": "EMP-178",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S4",
+      "employeeId": "EMP-178",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S5",
+      "employeeId": "EMP-178",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S6",
+      "employeeId": "EMP-178",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S7",
+      "employeeId": "EMP-178",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S8",
+      "employeeId": "EMP-178",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S9",
+      "employeeId": "EMP-178",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S10",
+      "employeeId": "EMP-178",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S11",
+      "employeeId": "EMP-178",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S12",
+      "employeeId": "EMP-178",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S13",
+      "employeeId": "EMP-178",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S14",
+      "employeeId": "EMP-178",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S15",
+      "employeeId": "EMP-178",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S1",
+      "employeeId": "EMP-179",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S2",
+      "employeeId": "EMP-179",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S3",
+      "employeeId": "EMP-179",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S4",
+      "employeeId": "EMP-179",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S5",
+      "employeeId": "EMP-179",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S6",
+      "employeeId": "EMP-179",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S7",
+      "employeeId": "EMP-179",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S8",
+      "employeeId": "EMP-179",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S9",
+      "employeeId": "EMP-179",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S10",
+      "employeeId": "EMP-179",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S11",
+      "employeeId": "EMP-179",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S12",
+      "employeeId": "EMP-179",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S13",
+      "employeeId": "EMP-179",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S14",
+      "employeeId": "EMP-179",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S15",
+      "employeeId": "EMP-179",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S1",
+      "employeeId": "EMP-180",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S2",
+      "employeeId": "EMP-180",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S3",
+      "employeeId": "EMP-180",
+      "attendanceStatus": "Absent",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S4",
+      "employeeId": "EMP-180",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S5",
+      "employeeId": "EMP-180",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S6",
+      "employeeId": "EMP-180",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S7",
+      "employeeId": "EMP-180",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S8",
+      "employeeId": "EMP-180",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S9",
+      "employeeId": "EMP-180",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S10",
+      "employeeId": "EMP-180",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S11",
+      "employeeId": "EMP-180",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S12",
+      "employeeId": "EMP-180",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S13",
+      "employeeId": "EMP-180",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S14",
+      "employeeId": "EMP-180",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S15",
+      "employeeId": "EMP-180",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S1",
+      "employeeId": "EMP-036",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S2",
+      "employeeId": "EMP-036",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S3",
+      "employeeId": "EMP-036",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S4",
+      "employeeId": "EMP-036",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S5",
+      "employeeId": "EMP-036",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S6",
+      "employeeId": "EMP-036",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S7",
+      "employeeId": "EMP-036",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S8",
+      "employeeId": "EMP-036",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S9",
+      "employeeId": "EMP-036",
+      "attendanceStatus": "Absent",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S10",
+      "employeeId": "EMP-036",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S11",
+      "employeeId": "EMP-036",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S12",
+      "employeeId": "EMP-036",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S13",
+      "employeeId": "EMP-036",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S14",
+      "employeeId": "EMP-036",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S15",
+      "employeeId": "EMP-036",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S1",
+      "employeeId": "EMP-037",
+      "attendanceStatus": "Absent",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S2",
+      "employeeId": "EMP-037",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S3",
+      "employeeId": "EMP-037",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S4",
+      "employeeId": "EMP-037",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S5",
+      "employeeId": "EMP-037",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S6",
+      "employeeId": "EMP-037",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S7",
+      "employeeId": "EMP-037",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S8",
+      "employeeId": "EMP-037",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S9",
+      "employeeId": "EMP-037",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S10",
+      "employeeId": "EMP-037",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S11",
+      "employeeId": "EMP-037",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S12",
+      "employeeId": "EMP-037",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S13",
+      "employeeId": "EMP-037",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S14",
+      "employeeId": "EMP-037",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S15",
+      "employeeId": "EMP-037",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S1",
+      "employeeId": "EMP-117",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S2",
+      "employeeId": "EMP-117",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S3",
+      "employeeId": "EMP-117",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S4",
+      "employeeId": "EMP-117",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S5",
+      "employeeId": "EMP-117",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S6",
+      "employeeId": "EMP-117",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S7",
+      "employeeId": "EMP-117",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S8",
+      "employeeId": "EMP-117",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S9",
+      "employeeId": "EMP-117",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S10",
+      "employeeId": "EMP-117",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S11",
+      "employeeId": "EMP-117",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S12",
+      "employeeId": "EMP-117",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S13",
+      "employeeId": "EMP-117",
+      "attendanceStatus": "Absent",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S14",
+      "employeeId": "EMP-117",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S15",
+      "employeeId": "EMP-117",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S1",
+      "employeeId": "EMP-024",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S2",
+      "employeeId": "EMP-024",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S3",
+      "employeeId": "EMP-024",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S4",
+      "employeeId": "EMP-024",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S5",
+      "employeeId": "EMP-024",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S6",
+      "employeeId": "EMP-024",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S7",
+      "employeeId": "EMP-024",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S8",
+      "employeeId": "EMP-024",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S9",
+      "employeeId": "EMP-024",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S10",
+      "employeeId": "EMP-024",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S11",
+      "employeeId": "EMP-024",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S12",
+      "employeeId": "EMP-024",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S13",
+      "employeeId": "EMP-024",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S14",
+      "employeeId": "EMP-024",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S15",
+      "employeeId": "EMP-024",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S1",
+      "employeeId": "EMP-028",
+      "attendanceStatus": "Absent",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S2",
+      "employeeId": "EMP-028",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S3",
+      "employeeId": "EMP-028",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S4",
+      "employeeId": "EMP-028",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S5",
+      "employeeId": "EMP-028",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S6",
+      "employeeId": "EMP-028",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S7",
+      "employeeId": "EMP-028",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S8",
+      "employeeId": "EMP-028",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S9",
+      "employeeId": "EMP-028",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S10",
+      "employeeId": "EMP-028",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S11",
+      "employeeId": "EMP-028",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S12",
+      "employeeId": "EMP-028",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S13",
+      "employeeId": "EMP-028",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S14",
+      "employeeId": "EMP-028",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S15",
+      "employeeId": "EMP-028",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S1",
+      "employeeId": "EMP-094",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S2",
+      "employeeId": "EMP-094",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S3",
+      "employeeId": "EMP-094",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S4",
+      "employeeId": "EMP-094",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S5",
+      "employeeId": "EMP-094",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S6",
+      "employeeId": "EMP-094",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S7",
+      "employeeId": "EMP-094",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S8",
+      "employeeId": "EMP-094",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S9",
+      "employeeId": "EMP-094",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S10",
+      "employeeId": "EMP-094",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S11",
+      "employeeId": "EMP-094",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S12",
+      "employeeId": "EMP-094",
+      "attendanceStatus": "Absent",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S13",
+      "employeeId": "EMP-094",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S14",
+      "employeeId": "EMP-094",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "sessionId": "DevOps_02_2026_S15",
+      "employeeId": "EMP-094",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S1",
+      "employeeId": "EMP-048",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S2",
+      "employeeId": "EMP-048",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S3",
+      "employeeId": "EMP-048",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S4",
+      "employeeId": "EMP-048",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S5",
+      "employeeId": "EMP-048",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S6",
+      "employeeId": "EMP-048",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S7",
+      "employeeId": "EMP-048",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S8",
+      "employeeId": "EMP-048",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S9",
+      "employeeId": "EMP-048",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S10",
+      "employeeId": "EMP-048",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S1",
+      "employeeId": "EMP-092",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S2",
+      "employeeId": "EMP-092",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S3",
+      "employeeId": "EMP-092",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S4",
+      "employeeId": "EMP-092",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S5",
+      "employeeId": "EMP-092",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S6",
+      "employeeId": "EMP-092",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S7",
+      "employeeId": "EMP-092",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S8",
+      "employeeId": "EMP-092",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S9",
+      "employeeId": "EMP-092",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S10",
+      "employeeId": "EMP-092",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S1",
+      "employeeId": "EMP-031",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S2",
+      "employeeId": "EMP-031",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S3",
+      "employeeId": "EMP-031",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S4",
+      "employeeId": "EMP-031",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S5",
+      "employeeId": "EMP-031",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S6",
+      "employeeId": "EMP-031",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S7",
+      "employeeId": "EMP-031",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S8",
+      "employeeId": "EMP-031",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S9",
+      "employeeId": "EMP-031",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S10",
+      "employeeId": "EMP-031",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S1",
+      "employeeId": "EMP-066",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S2",
+      "employeeId": "EMP-066",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S3",
+      "employeeId": "EMP-066",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S4",
+      "employeeId": "EMP-066",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S5",
+      "employeeId": "EMP-066",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S6",
+      "employeeId": "EMP-066",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S7",
+      "employeeId": "EMP-066",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S8",
+      "employeeId": "EMP-066",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S9",
+      "employeeId": "EMP-066",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S10",
+      "employeeId": "EMP-066",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S1",
+      "employeeId": "EMP-133",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S2",
+      "employeeId": "EMP-133",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S3",
+      "employeeId": "EMP-133",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S4",
+      "employeeId": "EMP-133",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S5",
+      "employeeId": "EMP-133",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S6",
+      "employeeId": "EMP-133",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S7",
+      "employeeId": "EMP-133",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S8",
+      "employeeId": "EMP-133",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S9",
+      "employeeId": "EMP-133",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S10",
+      "employeeId": "EMP-133",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S1",
+      "employeeId": "EMP-140",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S2",
+      "employeeId": "EMP-140",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S3",
+      "employeeId": "EMP-140",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S4",
+      "employeeId": "EMP-140",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S5",
+      "employeeId": "EMP-140",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S6",
+      "employeeId": "EMP-140",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S7",
+      "employeeId": "EMP-140",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S8",
+      "employeeId": "EMP-140",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S9",
+      "employeeId": "EMP-140",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S10",
+      "employeeId": "EMP-140",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S1",
+      "employeeId": "EMP-101",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S2",
+      "employeeId": "EMP-101",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S3",
+      "employeeId": "EMP-101",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S4",
+      "employeeId": "EMP-101",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S5",
+      "employeeId": "EMP-101",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S6",
+      "employeeId": "EMP-101",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S7",
+      "employeeId": "EMP-101",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S8",
+      "employeeId": "EMP-101",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S9",
+      "employeeId": "EMP-101",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S10",
+      "employeeId": "EMP-101",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S1",
+      "employeeId": "EMP-061",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S2",
+      "employeeId": "EMP-061",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S3",
+      "employeeId": "EMP-061",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S4",
+      "employeeId": "EMP-061",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S5",
+      "employeeId": "EMP-061",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S6",
+      "employeeId": "EMP-061",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S7",
+      "employeeId": "EMP-061",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S8",
+      "employeeId": "EMP-061",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S9",
+      "employeeId": "EMP-061",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S10",
+      "employeeId": "EMP-061",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S1",
+      "employeeId": "EMP-081",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S2",
+      "employeeId": "EMP-081",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S3",
+      "employeeId": "EMP-081",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S4",
+      "employeeId": "EMP-081",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S5",
+      "employeeId": "EMP-081",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S6",
+      "employeeId": "EMP-081",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S7",
+      "employeeId": "EMP-081",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S8",
+      "employeeId": "EMP-081",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S9",
+      "employeeId": "EMP-081",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S10",
+      "employeeId": "EMP-081",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S1",
+      "employeeId": "EMP-024",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S2",
+      "employeeId": "EMP-024",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S3",
+      "employeeId": "EMP-024",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S4",
+      "employeeId": "EMP-024",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S5",
+      "employeeId": "EMP-024",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S6",
+      "employeeId": "EMP-024",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S7",
+      "employeeId": "EMP-024",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S8",
+      "employeeId": "EMP-024",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S9",
+      "employeeId": "EMP-024",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S10",
+      "employeeId": "EMP-024",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S1",
+      "employeeId": "EMP-094",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S2",
+      "employeeId": "EMP-094",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S3",
+      "employeeId": "EMP-094",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S4",
+      "employeeId": "EMP-094",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S5",
+      "employeeId": "EMP-094",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S6",
+      "employeeId": "EMP-094",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S7",
+      "employeeId": "EMP-094",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S8",
+      "employeeId": "EMP-094",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S9",
+      "employeeId": "EMP-094",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S10",
+      "employeeId": "EMP-094",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S1",
+      "employeeId": "EMP-145",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S2",
+      "employeeId": "EMP-145",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S3",
+      "employeeId": "EMP-145",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S4",
+      "employeeId": "EMP-145",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S5",
+      "employeeId": "EMP-145",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S6",
+      "employeeId": "EMP-145",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S7",
+      "employeeId": "EMP-145",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S8",
+      "employeeId": "EMP-145",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S9",
+      "employeeId": "EMP-145",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "sessionId": "CloudAWS_03_2026_S10",
+      "employeeId": "EMP-145",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    }
+  ],
+  "assessments": [
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-121",
+      "score": 9.5,
+      "passStatus": true,
+      "generalizedFeedback": "Good practical exposure in live project; needs to strengthen scripting skills. Reduce AI over-reliance."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-017",
+      "score": 8.7,
+      "passStatus": true,
+      "generalizedFeedback": "Solid grasp of Playwright basics with exposure to multiple frameworks. Coding discipline needs improvement."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-138",
+      "score": 9,
+      "passStatus": true,
+      "generalizedFeedback": "Playwright knowledge needs reinforcement; potential to transition to automation role with further coaching."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-181",
+      "score": 6.6,
+      "passStatus": true,
+      "generalizedFeedback": "Completed all assignments; needs more hands-on project practice."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-182",
+      "score": 7,
+      "passStatus": true,
+      "generalizedFeedback": "Good theoretical knowledge; practical application skills need strengthening."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-183",
+      "score": 9.4,
+      "passStatus": true,
+      "generalizedFeedback": "Good theoretical knowledge; practical application skills need strengthening."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-184",
+      "score": 9.2,
+      "passStatus": true,
+      "generalizedFeedback": null
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-185",
+      "score": 9.4,
+      "passStatus": true,
+      "generalizedFeedback": "Has QA experience; coding remains a challenge. Needs project with automation practice to progress."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-067",
+      "score": 9.7,
+      "passStatus": true,
+      "generalizedFeedback": "Developer background makes automation transition smooth. Role-switch motivation not yet confirmed."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-013",
+      "score": 9,
+      "passStatus": true,
+      "generalizedFeedback": "Good Playwright grasp with development background. Long-term commitment to automation role not yet confirmed."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-186",
+      "score": 9.2,
+      "passStatus": true,
+      "generalizedFeedback": null
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-130",
+      "score": 8,
+      "passStatus": true,
+      "generalizedFeedback": null
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-012",
+      "score": 8,
+      "passStatus": true,
+      "generalizedFeedback": "Basic Playwright knowledge understood; coding skills need improvement. Reduce AI dependency on exercises."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-018",
+      "score": 2.7,
+      "passStatus": false,
+      "generalizedFeedback": "Did not complete required assignments and final assessment."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-187",
+      "score": 6.6,
+      "passStatus": true,
+      "generalizedFeedback": "Good theoretical knowledge; practical application skills need strengthening."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-188",
+      "score": 8.2,
+      "passStatus": true,
+      "generalizedFeedback": "Strong overall performance; needs to improve error handling and edge case coverage."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-189",
+      "score": 8.9,
+      "passStatus": true,
+      "generalizedFeedback": "Steady performance; should improve debugging and troubleshooting skills."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-190",
+      "score": 2.1,
+      "passStatus": false,
+      "generalizedFeedback": "Did not complete required assignments and final assessment."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-191",
+      "score": 8.4,
+      "passStatus": true,
+      "generalizedFeedback": "Strong overall performance; needs to improve error handling and edge case coverage."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-006",
+      "score": 0,
+      "passStatus": false,
+      "generalizedFeedback": "Did not complete required assignments and final assessment."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-033",
+      "score": 7,
+      "passStatus": true,
+      "generalizedFeedback": "Steady performance; should improve debugging and troubleshooting skills."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-192",
+      "score": 7,
+      "passStatus": true,
+      "generalizedFeedback": "Good understanding of core concepts; performance tuning skills needed."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-063",
+      "score": 8.9,
+      "passStatus": true,
+      "generalizedFeedback": "Basic Playwright knowledge acquired; coding needs improvement. Currently on manual testing; needs practice opportunity."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-193",
+      "score": 7.8,
+      "passStatus": true,
+      "generalizedFeedback": "Good understanding of core concepts; performance tuning skills needed."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-194",
+      "score": 8.5,
+      "passStatus": true,
+      "generalizedFeedback": "Strong overall performance; needs to improve error handling and edge case coverage."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-195",
+      "score": 8.3,
+      "passStatus": true,
+      "generalizedFeedback": "Steady performance; should improve debugging and troubleshooting skills."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-196",
+      "score": 3.1,
+      "passStatus": false,
+      "generalizedFeedback": "Attendance gaps impacted learning outcomes; recommend re-enrollment."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-007",
+      "score": 9.3,
+      "passStatus": true,
+      "generalizedFeedback": "Shows good progress; code quality and testing discipline need improvement."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-197",
+      "score": 6.7,
+      "passStatus": true,
+      "generalizedFeedback": "Shows good progress; code quality and testing discipline need improvement."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-198",
+      "score": 9.8,
+      "passStatus": true,
+      "generalizedFeedback": "Shows good progress; code quality and testing discipline need improvement."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-199",
+      "score": 7.8,
+      "passStatus": true,
+      "generalizedFeedback": null
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-200",
+      "score": 7.7,
+      "passStatus": true,
+      "generalizedFeedback": "Good understanding of core concepts; performance tuning skills needed."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-201",
+      "score": 8.7,
+      "passStatus": true,
+      "generalizedFeedback": "Good theoretical knowledge; practical application skills need strengthening."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-202",
+      "score": 7.1,
+      "passStatus": true,
+      "generalizedFeedback": "Shows good progress; code quality and testing discipline need improvement."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-203",
+      "score": 7.8,
+      "passStatus": true,
+      "generalizedFeedback": "Shows good progress; code quality and testing discipline need improvement."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-204",
+      "score": 9.3,
+      "passStatus": true,
+      "generalizedFeedback": "Strong overall performance; needs to improve error handling and edge case coverage."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-205",
+      "score": 6.6,
+      "passStatus": true,
+      "generalizedFeedback": "Good understanding of core concepts; performance tuning skills needed."
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "employeeId": "EMP-177",
+      "score": 8.6,
+      "passStatus": true,
+      "generalizedFeedback": "Proactive with assignments; good K8s practical skills. Needs to connect deployment steps more coherently."
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "employeeId": "EMP-178",
+      "score": 8.3,
+      "passStatus": true,
+      "generalizedFeedback": "Good theoretical understanding of Performance Testing. Needs improvement in practical config and production implications."
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "employeeId": "EMP-179",
+      "score": 8.1,
+      "passStatus": true,
+      "generalizedFeedback": "Good theoretical understanding; needs clarity on configuration intent and system behavior in real environments."
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "employeeId": "EMP-180",
+      "score": 7.6,
+      "passStatus": true,
+      "generalizedFeedback": "Proactive learner; theoretical knowledge solid. Practical debugging and configuration skills need development."
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "employeeId": "EMP-036",
+      "score": 6.7,
+      "passStatus": true,
+      "generalizedFeedback": "Good understanding of core concepts; performance tuning skills needed."
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "employeeId": "EMP-037",
+      "score": 8.1,
+      "passStatus": true,
+      "generalizedFeedback": null
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "employeeId": "EMP-117",
+      "score": 7,
+      "passStatus": true,
+      "generalizedFeedback": "Completed all assignments; needs more hands-on project practice."
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "employeeId": "EMP-024",
+      "score": 7.9,
+      "passStatus": true,
+      "generalizedFeedback": "Steady performance; should improve debugging and troubleshooting skills."
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "employeeId": "EMP-028",
+      "score": 9.8,
+      "passStatus": true,
+      "generalizedFeedback": "Demonstrates solid foundational understanding; should reduce over-reliance on AI tools."
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "employeeId": "EMP-094",
+      "score": 6.8,
+      "passStatus": true,
+      "generalizedFeedback": "Strong overall performance; needs to improve error handling and edge case coverage."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-048",
+      "score": 9.6,
+      "passStatus": true,
+      "generalizedFeedback": "Shows good progress; code quality and testing discipline need improvement."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-092",
+      "score": 7.8,
+      "passStatus": true,
+      "generalizedFeedback": "Good understanding of core concepts; performance tuning skills needed."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-031",
+      "score": 8.2,
+      "passStatus": true,
+      "generalizedFeedback": "Good theoretical knowledge; practical application skills need strengthening."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-066",
+      "score": 6.7,
+      "passStatus": true,
+      "generalizedFeedback": "Strong overall performance; needs to improve error handling and edge case coverage."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-133",
+      "score": 7.3,
+      "passStatus": true,
+      "generalizedFeedback": "Shows good progress; code quality and testing discipline need improvement."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-140",
+      "score": 4.8,
+      "passStatus": false,
+      "generalizedFeedback": "Did not complete required assignments and final assessment."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-101",
+      "score": 9.5,
+      "passStatus": true,
+      "generalizedFeedback": "Good understanding of core concepts; performance tuning skills needed."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-061",
+      "score": 2.9,
+      "passStatus": false,
+      "generalizedFeedback": "Attendance gaps impacted learning outcomes; recommend re-enrollment."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-081",
+      "score": 8.3,
+      "passStatus": true,
+      "generalizedFeedback": null
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-024",
+      "score": 8.1,
+      "passStatus": true,
+      "generalizedFeedback": "Steady performance; should improve debugging and troubleshooting skills."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-094",
+      "score": 6.8,
+      "passStatus": true,
+      "generalizedFeedback": "Steady performance; should improve debugging and troubleshooting skills."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-145",
+      "score": 7.9,
+      "passStatus": true,
+      "generalizedFeedback": "Strong overall performance; needs to improve error handling and edge case coverage."
+    }
+  ],
+  "feedback": [
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-121",
+      "trainerRating": 4,
+      "contentRating": 4,
+      "comment": "Practical focus was appreciated; theory-practice balance was good."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-017",
+      "trainerRating": 5,
+      "contentRating": 4,
+      "comment": "Interactive sessions; good knowledge transfer overall."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-138",
+      "trainerRating": 5,
+      "contentRating": 4,
+      "comment": "Content was relevant and immediately applicable to work."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-181",
+      "trainerRating": 5,
+      "contentRating": 5,
+      "comment": "Trainer shared valuable real-world experience throughout."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-182",
+      "trainerRating": 5,
+      "contentRating": 5,
+      "comment": "Interactive sessions; good knowledge transfer overall."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-183",
+      "trainerRating": 4,
+      "contentRating": 5,
+      "comment": "Good pacing; more hands-on lab time would be beneficial."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-184",
+      "trainerRating": 4,
+      "contentRating": 4,
+      "comment": "Excellent trainer support; Q&A sessions were particularly helpful."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-185",
+      "trainerRating": 5,
+      "contentRating": 4,
+      "comment": "High-quality training; hope company continues this series."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-067",
+      "trainerRating": 5,
+      "contentRating": 5,
+      "comment": "Solid course; material can be applied immediately to current work."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-013",
+      "trainerRating": 5,
+      "contentRating": 4,
+      "comment": "Trainer shared valuable real-world experience throughout."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-186",
+      "trainerRating": 5,
+      "contentRating": 4,
+      "comment": "Practical focus was appreciated; theory-practice balance was good."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-130",
+      "trainerRating": 5,
+      "contentRating": 5,
+      "comment": "Would like more practice mini-projects in future sessions."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-012",
+      "trainerRating": 5,
+      "contentRating": 5,
+      "comment": "Content well-structured; would appreciate more advanced follow-up topics."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-018",
+      "trainerRating": 3,
+      "contentRating": 3,
+      "comment": "Content was good but pacing was too fast; some participants struggled to keep up."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-187",
+      "trainerRating": 5,
+      "contentRating": 5,
+      "comment": "Solid course; material can be applied immediately to current work."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-188",
+      "trainerRating": 4,
+      "contentRating": 4,
+      "comment": "Useful content; recommend more advanced courses in this area."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-189",
+      "trainerRating": 4,
+      "contentRating": 4,
+      "comment": "No additional comments; overall satisfied with the course."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-190",
+      "trainerRating": 4,
+      "contentRating": 3,
+      "comment": "Trainer was excellent but the course content felt outdated in some sections."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-191",
+      "trainerRating": 5,
+      "contentRating": 4,
+      "comment": "Looking forward to more courses at this level."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-006",
+      "trainerRating": 3,
+      "contentRating": 3,
+      "comment": "Trainer knowledge is strong but explanation style needs improvement for mixed-level groups."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-033",
+      "trainerRating": 4,
+      "contentRating": 4,
+      "comment": "Excellent trainer support; Q&A sessions were particularly helpful."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-192",
+      "trainerRating": 4,
+      "contentRating": 4,
+      "comment": "Practical focus was appreciated; theory-practice balance was good."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-063",
+      "trainerRating": 4,
+      "contentRating": 4,
+      "comment": "Very practical course; content aligned well with real project needs."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-193",
+      "trainerRating": 4,
+      "contentRating": 5,
+      "comment": "Looking forward to more courses at this level."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-194",
+      "trainerRating": 5,
+      "contentRating": 5,
+      "comment": "Solid course; material can be applied immediately to current work."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-195",
+      "trainerRating": 5,
+      "contentRating": 4,
+      "comment": "Very satisfied with training quality and delivery approach."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-196",
+      "trainerRating": 5,
+      "contentRating": 4,
+      "comment": "Would like more practice mini-projects in future sessions."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-007",
+      "trainerRating": 5,
+      "contentRating": 5,
+      "comment": "Excellent trainer support; Q&A sessions were particularly helpful."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-197",
+      "trainerRating": 4,
+      "contentRating": 5,
+      "comment": "Good pacing; more hands-on lab time would be beneficial."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-198",
+      "trainerRating": 4,
+      "contentRating": 4,
+      "comment": "Looking forward to more courses at this level."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-199",
+      "trainerRating": 5,
+      "contentRating": 4,
+      "comment": "Trainer was supportive and knowledgeable; good learning environment."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-200",
+      "trainerRating": 4,
+      "contentRating": 4,
+      "comment": "Trainer was supportive and knowledgeable; good learning environment."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-201",
+      "trainerRating": 5,
+      "contentRating": 4,
+      "comment": "Content was relevant and immediately applicable to work."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-202",
+      "trainerRating": 5,
+      "contentRating": 4,
+      "comment": "Would like more practice mini-projects in future sessions."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-203",
+      "trainerRating": 4,
+      "contentRating": 4,
+      "comment": "Very satisfied with training quality and delivery approach."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-204",
+      "trainerRating": 4,
+      "contentRating": 4,
+      "comment": "Content well-structured; would appreciate more advanced follow-up topics."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-205",
+      "trainerRating": 5,
+      "contentRating": 5,
+      "comment": "Solid course; material can be applied immediately to current work."
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "employeeId": "EMP-177",
+      "trainerRating": 5,
+      "contentRating": 4,
+      "comment": "Very satisfied with training quality and delivery approach."
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "employeeId": "EMP-178",
+      "trainerRating": 5,
+      "contentRating": 5,
+      "comment": "Very practical course; content aligned well with real project needs."
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "employeeId": "EMP-179",
+      "trainerRating": 4,
+      "contentRating": 5,
+      "comment": "Very satisfied with training quality and delivery approach."
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "employeeId": "EMP-180",
+      "trainerRating": 4,
+      "contentRating": 4,
+      "comment": "Useful content; recommend more advanced courses in this area."
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "employeeId": "EMP-036",
+      "trainerRating": 5,
+      "contentRating": 5,
+      "comment": "Trainer shared valuable real-world experience throughout."
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "employeeId": "EMP-037",
+      "trainerRating": 5,
+      "contentRating": 5,
+      "comment": "Trainer was clear and easy to follow; some advanced topics moved too quickly."
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "employeeId": "EMP-117",
+      "trainerRating": 4,
+      "contentRating": 4,
+      "comment": "Content well-structured; would appreciate more advanced follow-up topics."
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "employeeId": "EMP-024",
+      "trainerRating": 4,
+      "contentRating": 5,
+      "comment": "Content well-structured; would appreciate more advanced follow-up topics."
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "employeeId": "EMP-028",
+      "trainerRating": 5,
+      "contentRating": 4,
+      "comment": "Very practical course; content aligned well with real project needs."
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "employeeId": "EMP-094",
+      "trainerRating": 5,
+      "contentRating": 5,
+      "comment": "Very practical course; content aligned well with real project needs."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-048",
+      "trainerRating": 4,
+      "contentRating": 5,
+      "comment": "Looking forward to more courses at this level."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-092",
+      "trainerRating": 5,
+      "contentRating": 4,
+      "comment": "Interactive sessions; good knowledge transfer overall."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-031",
+      "trainerRating": 5,
+      "contentRating": 4,
+      "comment": "Solid course; material can be applied immediately to current work."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-066",
+      "trainerRating": 5,
+      "contentRating": 4,
+      "comment": "Very practical course; content aligned well with real project needs."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-133",
+      "trainerRating": 5,
+      "contentRating": 5,
+      "comment": "Excellent trainer support; Q&A sessions were particularly helpful."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-140",
+      "trainerRating": 5,
+      "contentRating": 5,
+      "comment": "Solid course; material can be applied immediately to current work."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-101",
+      "trainerRating": 5,
+      "contentRating": 5,
+      "comment": "Practical focus was appreciated; theory-practice balance was good."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-061",
+      "trainerRating": 5,
+      "contentRating": 4,
+      "comment": "Trainer was clear and easy to follow; some advanced topics moved too quickly."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-081",
+      "trainerRating": 4,
+      "contentRating": 5,
+      "comment": "Interactive sessions; good knowledge transfer overall."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-024",
+      "trainerRating": 5,
+      "contentRating": 5,
+      "comment": "Very practical course; content aligned well with real project needs."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-094",
+      "trainerRating": 5,
+      "contentRating": 4,
+      "comment": "Content was relevant and immediately applicable to work."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-145",
+      "trainerRating": 5,
+      "contentRating": 5,
+      "comment": "Looking forward to more courses at this level."
+    }
+  ],
+  "costs": [
+    {
+      "courseId": "Automation_testing_01_2026",
+      "costPerSessionScaled": 1,
+      "totalSessions": 6,
+      "totalCostScaled": 6,
+      "traineeCount": 37,
+      "completionRate": 0.97,
+      "avgScore": 7.59,
+      "passRate": 0.89,
+      "postTrainingPerfDelta": 0.026,
+      "notes": null
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "costPerSessionScaled": 1,
+      "totalSessions": 15,
+      "totalCostScaled": 15,
+      "traineeCount": 10,
+      "completionRate": 1,
+      "avgScore": 7.89,
+      "passRate": 1,
+      "postTrainingPerfDelta": 0.031,
+      "notes": null
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "costPerSessionScaled": 1.1,
+      "totalSessions": 10,
+      "totalCostScaled": 11,
+      "traineeCount": 12,
+      "completionRate": 1,
+      "avgScore": 7.33,
+      "passRate": 0.83,
+      "postTrainingPerfDelta": 0.022,
+      "notes": null
+    }
+  ],
+  "normRules": [
+    {
+      "ruleId": "NORM-01",
+      "category": "Effectiveness",
+      "ruleDescription": "Pass rate per course below threshold",
+      "threshold": "Pass_Rate < 0.70",
+      "actionIfTriggered": "Flag course for content review; notify L&D manager",
+      "priority": "High"
+    },
+    {
+      "ruleId": "NORM-02",
+      "category": "Effectiveness",
+      "ruleDescription": "Average score below minimum acceptable level",
+      "threshold": "Avg_Score < 6.5",
+      "actionIfTriggered": "Trigger course redesign review; consider re-delivery",
+      "priority": "High"
+    },
+    {
+      "ruleId": "NORM-03",
+      "category": "Attendance",
+      "ruleDescription": "Attendance rate per course below target",
+      "threshold": "Attendance_Rate < 0.75",
+      "actionIfTriggered": "Send reminder to absentees; flag to direct manager",
+      "priority": "Medium"
+    },
+    {
+      "ruleId": "NORM-04",
+      "category": "Individual",
+      "ruleDescription": "Trainee passes with low attendance (possible policy violation)",
+      "threshold": "Score >= Pass_Threshold AND Attendance_Rate < 0.70",
+      "actionIfTriggered": "Flag for L&D review; verify with manager",
+      "priority": "Medium"
+    },
+    {
+      "ruleId": "NORM-05",
+      "category": "Individual",
+      "ruleDescription": "Trainee score = 0 or did not submit assessment",
+      "threshold": "Score = 0 OR assessment not submitted",
+      "actionIfTriggered": "Mark as Incomplete; recommend re-enrollment in next cohort",
+      "priority": "High"
+    },
+    {
+      "ruleId": "NORM-06",
+      "category": "Individual",
+      "ruleDescription": "Outstanding trainee highlight",
+      "threshold": "Score >= 9.0 AND Attendance_Rate = 1.0",
+      "actionIfTriggered": "Add to \"Star Learner\" report section; recommend for mentorship role",
+      "priority": "Low"
+    },
+    {
+      "ruleId": "NORM-07",
+      "category": "Individual",
+      "ruleDescription": "At-risk trainee — needs support",
+      "threshold": "Score < Pass_Threshold AND Attendance_Rate >= 0.70",
+      "actionIfTriggered": "Flag for 1:1 coaching; assign buddy or additional practice resource",
+      "priority": "High"
+    },
+    {
+      "ruleId": "NORM-08",
+      "category": "Trainer",
+      "ruleDescription": "Trainer rating below acceptable standard",
+      "threshold": "Trainer_Rating_Avg < 3.5",
+      "actionIfTriggered": "Escalate to L&D Manager; schedule trainer coaching session",
+      "priority": "High"
+    },
+    {
+      "ruleId": "NORM-09",
+      "category": "ROI",
+      "ruleDescription": "Low completion rate despite high cost",
+      "threshold": "Completion_Rate < 0.80 AND Total_Cost_Scaled > 8.0",
+      "actionIfTriggered": "Review course necessity; consider split delivery or self-paced format",
+      "priority": "Medium"
+    },
+    {
+      "ruleId": "NORM-10",
+      "category": "ROI",
+      "ruleDescription": "Negative or zero post-training performance delta",
+      "threshold": "Post_Training_Perf_Delta <= 0",
+      "actionIfTriggered": "Audit course design and on-the-job application support",
+      "priority": "High"
+    },
+    {
+      "ruleId": "NORM-11",
+      "category": "Reporting",
+      "ruleDescription": "Course with missing data cannot be reported",
+      "threshold": "Any required field is NULL for Completed course status",
+      "actionIfTriggered": "Block course from effectiveness report; flag as data incomplete",
+      "priority": "High"
+    },
+    {
+      "ruleId": "NORM-12",
+      "category": "Attendance",
+      "ruleDescription": "Trainee marked Late treated as partial attendance",
+      "threshold": "Attendance_Status = Late",
+      "actionIfTriggered": "Count as 0.5 session for attendance rate calculation",
+      "priority": "Low"
+    },
+    {
+      "ruleId": "NORM-13",
+      "category": "Effectiveness",
+      "ruleDescription": "Course completion rate calculation basis",
+      "threshold": "Completion defined as >= 70% sessions attended",
+      "actionIfTriggered": "Apply consistently across all courses; document in report footnote",
+      "priority": "Medium"
+    },
+    {
+      "ruleId": "NORM-14",
+      "category": "Feedback",
+      "ruleDescription": "Minimum feedback response rate for valid analysis",
+      "threshold": "Feedback_Response_Rate < 0.60",
+      "actionIfTriggered": "Mark feedback analysis as statistically insufficient; note in report",
+      "priority": "Medium"
+    },
+    {
+      "ruleId": "NORM-15",
+      "category": "Individual",
+      "ruleDescription": "Score inconsistency detection",
+      "threshold": "Pass_Status = True AND Score < Pass_Threshold, OR Pass_Status = False AND Score >= Pass_Threshold",
+      "actionIfTriggered": "Flag as data integrity issue; verify with trainer before report generation",
+      "priority": "High"
+    }
+  ],
+  "templateSections": [
+    {
+      "sectionId": "SEC-01",
+      "sectionName": "Executive Summary",
+      "contentDescription": "Total courses, total trainees, overall pass rate, overall completion rate, total training hours, total cost (scaled)",
+      "dataSource": "DS07+DS08+DS10",
+      "required": true
+    },
+    {
+      "sectionId": "SEC-02",
+      "sectionName": "Course-Level Metrics",
+      "contentDescription": "Per-course: trainee count, attendance rate, avg score, pass rate, completion rate, cost, perf delta",
+      "dataSource": "DS07+DS08+DS10",
+      "required": true
+    },
+    {
+      "sectionId": "SEC-03",
+      "sectionName": "Trainee Highlights",
+      "contentDescription": "Outstanding trainees (score ≥ 9.0, full attendance); At-risk trainees (score < pass threshold); Trainees who passed with low attendance",
+      "dataSource": "DS08",
+      "required": true
+    },
+    {
+      "sectionId": "SEC-04",
+      "sectionName": "Trainer Evaluation",
+      "contentDescription": "Avg trainer rating per course; avg content rating per course; notable feedback themes",
+      "dataSource": "DS09",
+      "required": true
+    },
+    {
+      "sectionId": "SEC-05",
+      "sectionName": "Attendance Analysis",
+      "contentDescription": "Per-course attendance heatmap by session; full-absent cases; late patterns",
+      "dataSource": "DS07",
+      "required": true
+    },
+    {
+      "sectionId": "SEC-06",
+      "sectionName": "Effectiveness Analysis",
+      "contentDescription": "Comparison of avg score vs pass threshold; courses below NORM-01/NORM-02; ROI analysis",
+      "dataSource": "DS08+DS10+DS11",
+      "required": true
+    },
+    {
+      "sectionId": "SEC-07",
+      "sectionName": "Trend Comparison",
+      "contentDescription": "Quarter-over-quarter comparison (if prior quarter data available)",
+      "dataSource": "DS07+DS08 historical",
+      "required": false
+    },
+    {
+      "sectionId": "SEC-08",
+      "sectionName": "Data Quality Flags",
+      "contentDescription": "List of NORM violations: score inconsistencies, missing data, incomplete courses",
+      "dataSource": "DS11",
+      "required": true
+    },
+    {
+      "sectionId": "SEC-09",
+      "sectionName": "Recommendations",
+      "contentDescription": "L&D-generated recommendations based on effectiveness analysis and NORM triggers",
+      "dataSource": "All",
+      "required": true
+    },
+    {
+      "sectionId": "SEC-10",
+      "sectionName": "Appendix — Raw Data",
+      "contentDescription": "Full attendance log, score list, feedback list (anonymized, for L&D internal use only)",
+      "dataSource": "All",
+      "required": false
+    }
+  ],
+  "trainees": [
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-121",
+      "attendedUnits": 5,
+      "expectedUnits": 6,
+      "attendanceRate": 0.8333333333333334,
+      "score": 9.5,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 4,
+      "contentRating": 4,
+      "feedbackComment": "Practical focus was appreciated; theory-practice balance was good."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-017",
+      "attendedUnits": 5,
+      "expectedUnits": 6,
+      "attendanceRate": 0.8333333333333334,
+      "score": 8.7,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 4,
+      "feedbackComment": "Interactive sessions; good knowledge transfer overall."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-138",
+      "attendedUnits": 5,
+      "expectedUnits": 6,
+      "attendanceRate": 0.8333333333333334,
+      "score": 9,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 4,
+      "feedbackComment": "Content was relevant and immediately applicable to work."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-181",
+      "attendedUnits": 5,
+      "expectedUnits": 6,
+      "attendanceRate": 0.8333333333333334,
+      "score": 6.6,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 5,
+      "feedbackComment": "Trainer shared valuable real-world experience throughout."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-182",
+      "attendedUnits": 6,
+      "expectedUnits": 6,
+      "attendanceRate": 1,
+      "score": 7,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 5,
+      "feedbackComment": "Interactive sessions; good knowledge transfer overall."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-183",
+      "attendedUnits": 6,
+      "expectedUnits": 6,
+      "attendanceRate": 1,
+      "score": 9.4,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 4,
+      "contentRating": 5,
+      "feedbackComment": "Good pacing; more hands-on lab time would be beneficial."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-184",
+      "attendedUnits": 5,
+      "expectedUnits": 6,
+      "attendanceRate": 0.8333333333333334,
+      "score": 9.2,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 4,
+      "contentRating": 4,
+      "feedbackComment": "Excellent trainer support; Q&A sessions were particularly helpful."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-185",
+      "attendedUnits": 5,
+      "expectedUnits": 6,
+      "attendanceRate": 0.8333333333333334,
+      "score": 9.4,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 4,
+      "feedbackComment": "High-quality training; hope company continues this series."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-067",
+      "attendedUnits": 6,
+      "expectedUnits": 6,
+      "attendanceRate": 1,
+      "score": 9.7,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 5,
+      "feedbackComment": "Solid course; material can be applied immediately to current work."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-013",
+      "attendedUnits": 6,
+      "expectedUnits": 6,
+      "attendanceRate": 1,
+      "score": 9,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 4,
+      "feedbackComment": "Trainer shared valuable real-world experience throughout."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-186",
+      "attendedUnits": 6,
+      "expectedUnits": 6,
+      "attendanceRate": 1,
+      "score": 9.2,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 4,
+      "feedbackComment": "Practical focus was appreciated; theory-practice balance was good."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-130",
+      "attendedUnits": 5,
+      "expectedUnits": 6,
+      "attendanceRate": 0.8333333333333334,
+      "score": 8,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 5,
+      "feedbackComment": "Would like more practice mini-projects in future sessions."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-012",
+      "attendedUnits": 6,
+      "expectedUnits": 6,
+      "attendanceRate": 1,
+      "score": 8,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 5,
+      "feedbackComment": "Content well-structured; would appreciate more advanced follow-up topics."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-018",
+      "attendedUnits": 6,
+      "expectedUnits": 6,
+      "attendanceRate": 1,
+      "score": 2.7,
+      "passStatus": false,
+      "completed": true,
+      "trainerRating": 3,
+      "contentRating": 3,
+      "feedbackComment": "Content was good but pacing was too fast; some participants struggled to keep up."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-187",
+      "attendedUnits": 5,
+      "expectedUnits": 6,
+      "attendanceRate": 0.8333333333333334,
+      "score": 6.6,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 5,
+      "feedbackComment": "Solid course; material can be applied immediately to current work."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-188",
+      "attendedUnits": 5,
+      "expectedUnits": 6,
+      "attendanceRate": 0.8333333333333334,
+      "score": 8.2,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 4,
+      "contentRating": 4,
+      "feedbackComment": "Useful content; recommend more advanced courses in this area."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-189",
+      "attendedUnits": 5,
+      "expectedUnits": 6,
+      "attendanceRate": 0.8333333333333334,
+      "score": 8.9,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 4,
+      "contentRating": 4,
+      "feedbackComment": "No additional comments; overall satisfied with the course."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-190",
+      "attendedUnits": 6,
+      "expectedUnits": 6,
+      "attendanceRate": 1,
+      "score": 2.1,
+      "passStatus": false,
+      "completed": true,
+      "trainerRating": 4,
+      "contentRating": 3,
+      "feedbackComment": "Trainer was excellent but the course content felt outdated in some sections."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-191",
+      "attendedUnits": 6,
+      "expectedUnits": 6,
+      "attendanceRate": 1,
+      "score": 8.4,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 4,
+      "feedbackComment": "Looking forward to more courses at this level."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-006",
+      "attendedUnits": 6,
+      "expectedUnits": 6,
+      "attendanceRate": 1,
+      "score": 0,
+      "passStatus": false,
+      "completed": true,
+      "trainerRating": 3,
+      "contentRating": 3,
+      "feedbackComment": "Trainer knowledge is strong but explanation style needs improvement for mixed-level groups."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-033",
+      "attendedUnits": 5,
+      "expectedUnits": 6,
+      "attendanceRate": 0.8333333333333334,
+      "score": 7,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 4,
+      "contentRating": 4,
+      "feedbackComment": "Excellent trainer support; Q&A sessions were particularly helpful."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-192",
+      "attendedUnits": 4,
+      "expectedUnits": 6,
+      "attendanceRate": 0.6666666666666666,
+      "score": 7,
+      "passStatus": true,
+      "completed": false,
+      "trainerRating": 4,
+      "contentRating": 4,
+      "feedbackComment": "Practical focus was appreciated; theory-practice balance was good."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-063",
+      "attendedUnits": 5,
+      "expectedUnits": 6,
+      "attendanceRate": 0.8333333333333334,
+      "score": 8.9,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 4,
+      "contentRating": 4,
+      "feedbackComment": "Very practical course; content aligned well with real project needs."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-193",
+      "attendedUnits": 6,
+      "expectedUnits": 6,
+      "attendanceRate": 1,
+      "score": 7.8,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 4,
+      "contentRating": 5,
+      "feedbackComment": "Looking forward to more courses at this level."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-194",
+      "attendedUnits": 6,
+      "expectedUnits": 6,
+      "attendanceRate": 1,
+      "score": 8.5,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 5,
+      "feedbackComment": "Solid course; material can be applied immediately to current work."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-195",
+      "attendedUnits": 6,
+      "expectedUnits": 6,
+      "attendanceRate": 1,
+      "score": 8.3,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 4,
+      "feedbackComment": "Very satisfied with training quality and delivery approach."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-196",
+      "attendedUnits": 5,
+      "expectedUnits": 6,
+      "attendanceRate": 0.8333333333333334,
+      "score": 3.1,
+      "passStatus": false,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 4,
+      "feedbackComment": "Would like more practice mini-projects in future sessions."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-007",
+      "attendedUnits": 5,
+      "expectedUnits": 6,
+      "attendanceRate": 0.8333333333333334,
+      "score": 9.3,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 5,
+      "feedbackComment": "Excellent trainer support; Q&A sessions were particularly helpful."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-197",
+      "attendedUnits": 6,
+      "expectedUnits": 6,
+      "attendanceRate": 1,
+      "score": 6.7,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 4,
+      "contentRating": 5,
+      "feedbackComment": "Good pacing; more hands-on lab time would be beneficial."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-198",
+      "attendedUnits": 6,
+      "expectedUnits": 6,
+      "attendanceRate": 1,
+      "score": 9.8,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 4,
+      "contentRating": 4,
+      "feedbackComment": "Looking forward to more courses at this level."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-199",
+      "attendedUnits": 6,
+      "expectedUnits": 6,
+      "attendanceRate": 1,
+      "score": 7.8,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 4,
+      "feedbackComment": "Trainer was supportive and knowledgeable; good learning environment."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-200",
+      "attendedUnits": 6,
+      "expectedUnits": 6,
+      "attendanceRate": 1,
+      "score": 7.7,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 4,
+      "contentRating": 4,
+      "feedbackComment": "Trainer was supportive and knowledgeable; good learning environment."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-201",
+      "attendedUnits": 5,
+      "expectedUnits": 6,
+      "attendanceRate": 0.8333333333333334,
+      "score": 8.7,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 4,
+      "feedbackComment": "Content was relevant and immediately applicable to work."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-202",
+      "attendedUnits": 6,
+      "expectedUnits": 6,
+      "attendanceRate": 1,
+      "score": 7.1,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 4,
+      "feedbackComment": "Would like more practice mini-projects in future sessions."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-203",
+      "attendedUnits": 5,
+      "expectedUnits": 6,
+      "attendanceRate": 0.8333333333333334,
+      "score": 7.8,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 4,
+      "contentRating": 4,
+      "feedbackComment": "Very satisfied with training quality and delivery approach."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-204",
+      "attendedUnits": 6,
+      "expectedUnits": 6,
+      "attendanceRate": 1,
+      "score": 9.3,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 4,
+      "contentRating": 4,
+      "feedbackComment": "Content well-structured; would appreciate more advanced follow-up topics."
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-205",
+      "attendedUnits": 6,
+      "expectedUnits": 6,
+      "attendanceRate": 1,
+      "score": 6.6,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 5,
+      "feedbackComment": "Solid course; material can be applied immediately to current work."
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "employeeId": "EMP-177",
+      "attendedUnits": 15,
+      "expectedUnits": 15,
+      "attendanceRate": 1,
+      "score": 8.6,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 4,
+      "feedbackComment": "Very satisfied with training quality and delivery approach."
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "employeeId": "EMP-178",
+      "attendedUnits": 15,
+      "expectedUnits": 15,
+      "attendanceRate": 1,
+      "score": 8.3,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 5,
+      "feedbackComment": "Very practical course; content aligned well with real project needs."
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "employeeId": "EMP-179",
+      "attendedUnits": 15,
+      "expectedUnits": 15,
+      "attendanceRate": 1,
+      "score": 8.1,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 4,
+      "contentRating": 5,
+      "feedbackComment": "Very satisfied with training quality and delivery approach."
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "employeeId": "EMP-180",
+      "attendedUnits": 14,
+      "expectedUnits": 15,
+      "attendanceRate": 0.9333333333333333,
+      "score": 7.6,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 4,
+      "contentRating": 4,
+      "feedbackComment": "Useful content; recommend more advanced courses in this area."
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "employeeId": "EMP-036",
+      "attendedUnits": 14,
+      "expectedUnits": 15,
+      "attendanceRate": 0.9333333333333333,
+      "score": 6.7,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 5,
+      "feedbackComment": "Trainer shared valuable real-world experience throughout."
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "employeeId": "EMP-037",
+      "attendedUnits": 14,
+      "expectedUnits": 15,
+      "attendanceRate": 0.9333333333333333,
+      "score": 8.1,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 5,
+      "feedbackComment": "Trainer was clear and easy to follow; some advanced topics moved too quickly."
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "employeeId": "EMP-117",
+      "attendedUnits": 14,
+      "expectedUnits": 15,
+      "attendanceRate": 0.9333333333333333,
+      "score": 7,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 4,
+      "contentRating": 4,
+      "feedbackComment": "Content well-structured; would appreciate more advanced follow-up topics."
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "employeeId": "EMP-024",
+      "attendedUnits": 15,
+      "expectedUnits": 15,
+      "attendanceRate": 1,
+      "score": 7.9,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 4,
+      "contentRating": 5,
+      "feedbackComment": "Content well-structured; would appreciate more advanced follow-up topics."
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "employeeId": "EMP-028",
+      "attendedUnits": 14,
+      "expectedUnits": 15,
+      "attendanceRate": 0.9333333333333333,
+      "score": 9.8,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 4,
+      "feedbackComment": "Very practical course; content aligned well with real project needs."
+    },
+    {
+      "courseId": "DevOps_02_2026",
+      "employeeId": "EMP-094",
+      "attendedUnits": 14,
+      "expectedUnits": 15,
+      "attendanceRate": 0.9333333333333333,
+      "score": 6.8,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 5,
+      "feedbackComment": "Very practical course; content aligned well with real project needs."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-048",
+      "attendedUnits": 10,
+      "expectedUnits": 10,
+      "attendanceRate": 1,
+      "score": 9.6,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 4,
+      "contentRating": 5,
+      "feedbackComment": "Looking forward to more courses at this level."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-092",
+      "attendedUnits": 9,
+      "expectedUnits": 10,
+      "attendanceRate": 0.9,
+      "score": 7.8,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 4,
+      "feedbackComment": "Interactive sessions; good knowledge transfer overall."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-031",
+      "attendedUnits": 9,
+      "expectedUnits": 10,
+      "attendanceRate": 0.9,
+      "score": 8.2,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 4,
+      "feedbackComment": "Solid course; material can be applied immediately to current work."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-066",
+      "attendedUnits": 10,
+      "expectedUnits": 10,
+      "attendanceRate": 1,
+      "score": 6.7,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 4,
+      "feedbackComment": "Very practical course; content aligned well with real project needs."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-133",
+      "attendedUnits": 10,
+      "expectedUnits": 10,
+      "attendanceRate": 1,
+      "score": 7.3,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 5,
+      "feedbackComment": "Excellent trainer support; Q&A sessions were particularly helpful."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-140",
+      "attendedUnits": 9,
+      "expectedUnits": 10,
+      "attendanceRate": 0.9,
+      "score": 4.8,
+      "passStatus": false,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 5,
+      "feedbackComment": "Solid course; material can be applied immediately to current work."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-101",
+      "attendedUnits": 10,
+      "expectedUnits": 10,
+      "attendanceRate": 1,
+      "score": 9.5,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 5,
+      "feedbackComment": "Practical focus was appreciated; theory-practice balance was good."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-061",
+      "attendedUnits": 8,
+      "expectedUnits": 10,
+      "attendanceRate": 0.8,
+      "score": 2.9,
+      "passStatus": false,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 4,
+      "feedbackComment": "Trainer was clear and easy to follow; some advanced topics moved too quickly."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-081",
+      "attendedUnits": 9,
+      "expectedUnits": 10,
+      "attendanceRate": 0.9,
+      "score": 8.3,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 4,
+      "contentRating": 5,
+      "feedbackComment": "Interactive sessions; good knowledge transfer overall."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-024",
+      "attendedUnits": 10,
+      "expectedUnits": 10,
+      "attendanceRate": 1,
+      "score": 8.1,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 5,
+      "feedbackComment": "Very practical course; content aligned well with real project needs."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-094",
+      "attendedUnits": 8,
+      "expectedUnits": 10,
+      "attendanceRate": 0.8,
+      "score": 6.8,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 4,
+      "feedbackComment": "Content was relevant and immediately applicable to work."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-145",
+      "attendedUnits": 10,
+      "expectedUnits": 10,
+      "attendanceRate": 1,
+      "score": 7.9,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 5,
+      "feedbackComment": "Looking forward to more courses at this level."
+    }
+  ]
+}

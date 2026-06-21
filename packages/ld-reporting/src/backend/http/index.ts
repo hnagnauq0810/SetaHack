@@ -5,6 +5,7 @@ import { z } from 'zod';
 import {
   LdFinalizeRequestSchema,
   LdQnaRequestSchema,
+  LdReportDraftPatchSchema,
   LdRequestSchema,
   type LdRole,
 } from '../../models.ts';
@@ -43,6 +44,17 @@ export function buildLdReportingRoutes(_deps: RouteBuildDeps): Hono<SessionEnv> 
     }
   });
 
+  app.get('/api/ld-reporting/reports', async (c) => {
+    try {
+      requirePermission(c.get('user'), 'ld-reporting.report.read');
+      const access = resolveAccess(c.get('user'));
+      const reports = await agent.listReports(access);
+      return c.json({ reports });
+    } catch (err) {
+      return handleLdError(c, err);
+    }
+  });
+
   app.get('/api/ld-reporting/reports/:id', async (c) => {
     try {
       requirePermission(c.get('user'), 'ld-reporting.report.read');
@@ -50,6 +62,9 @@ export function buildLdReportingRoutes(_deps: RouteBuildDeps): Hono<SessionEnv> 
       const { id } = reportIdParamSchema.parse(c.req.param());
       const report = await agent.getReport(id);
       if (!report) return c.json({ error: 'NOT_FOUND', message: `Report not found: ${id}` }, 404);
+      if (!canReadReport(report, access)) {
+        return c.json({ error: 'NOT_FOUND', message: `Report not found: ${id}` }, 404);
+      }
       return c.json(agent.viewReport(report, access));
     } catch (err) {
       return handleLdError(c, err);
@@ -73,6 +88,29 @@ export function buildLdReportingRoutes(_deps: RouteBuildDeps): Hono<SessionEnv> 
     }
   });
 
+  app.patch('/api/ld-reporting/reports/:id/draft', async (c) => {
+    try {
+      requirePermission(c.get('user'), 'ld-reporting.report.generate');
+      const access = resolveAccess(c.get('user'));
+      const { id } = reportIdParamSchema.parse(c.req.param());
+      const patch = LdReportDraftPatchSchema.parse(await c.req.json().catch(() => ({})));
+      const report = await agent.updateDraftReport({
+        reportId: id,
+        patch,
+        actorUserId: c.get('user').user_id,
+      });
+      return c.json(agent.viewReport(report, access));
+    } catch (err) {
+      if (err instanceof Error && 'code' in err && err.code === 'REPORT_FINALIZED') {
+        return handleLdError(
+          c,
+          new LdHttpError(409, 'REPORT_FINALIZED', 'Finalized reports cannot be edited.'),
+        );
+      }
+      return handleLdError(c, err);
+    }
+  });
+
   app.post('/api/ld-reporting/qna', async (c) => {
     try {
       requirePermission(c.get('user'), 'ld-reporting.qna.ask');
@@ -81,7 +119,6 @@ export function buildLdReportingRoutes(_deps: RouteBuildDeps): Hono<SessionEnv> 
       const answer = await agent.ld_answerQuestion({
         ...body,
         role: access.role,
-        trainerId: access.trainerId,
       });
       return c.json(answer);
     } catch (err) {
@@ -99,6 +136,9 @@ export function buildLdReportingRoutes(_deps: RouteBuildDeps): Hono<SessionEnv> 
       const { id } = reportIdParamSchema.parse(c.req.param());
       const report = await agent.getReport(id);
       if (!report) return c.json({ error: 'NOT_FOUND', message: `Report not found: ${id}` }, 404);
+      if (!canReadReport(report, access)) {
+        return c.json({ error: 'NOT_FOUND', message: `Report not found: ${id}` }, 404);
+      }
       const view = agent.viewReport(report, access);
       const artifact = await agent.writeArtifactForView(view, kind);
       const file = await readFile(artifact.path);
@@ -121,20 +161,14 @@ function applyScopeAccess<T extends { scope: Record<string, unknown> }>(
   body: T,
   access: LdReportAccessContext,
 ): T {
-  if (access.role !== 'TRAINER' || !access.trainerId) return body;
-  return {
-    ...body,
-    scope: {
-      ...body.scope,
-      trainerId: access.trainerId,
-    },
-  };
+  void access;
+  return body;
 }
 
 function resolveAccess(session: SessionEnv['Variables']['user']): LdReportAccessContext {
   requirePermission(session, 'ld-reporting.read');
   const role = resolveRole(session);
-  return role === 'TRAINER' ? { role, trainerId: session.user_id } : { role };
+  return { role };
 }
 
 function resolveRole(session: SessionEnv['Variables']['user']): LdRole {
@@ -148,10 +182,12 @@ function resolveRole(session: SessionEnv['Variables']['user']): LdRole {
   ) {
     return 'LND_MANAGER';
   }
-  if (roles.has('ld-reporting.trainer')) return 'TRAINER';
   if (roles.has('ld-reporting.bod')) return 'BOD';
-  if (roles.has('ld-reporting.team_manager')) return 'TEAM_MANAGER';
-  return 'TEAM_MANAGER';
+  return 'BOD';
+}
+
+function canReadReport(report: { status: string }, access: LdReportAccessContext): boolean {
+  return access.role === 'LND_MANAGER' || report.status === 'FINAL';
 }
 
 function requirePermission(session: SessionEnv['Variables']['user'], permission: string): void {
@@ -172,7 +208,10 @@ class LdHttpError extends Error {
 
 function handleLdError(c: Context<SessionEnv>, err: unknown): Response {
   if (err instanceof LdHttpError) {
-    return c.json({ error: err.code, message: err.message }, 403);
+    return c.json(
+      { error: err.code, message: err.message },
+      err.status as 400 | 401 | 403 | 404 | 409,
+    );
   }
   throw err;
 }
