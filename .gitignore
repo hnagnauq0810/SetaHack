@@ -1,0 +1,74 @@
+# Private design & planning docs — kept locally for Claude to reference,
+# not published to the shared repo. CLAUDE.md stays tracked.
+docs/superpowers
+.superpowers/
+
+# Local Claude Code config (per-machine, not shared)
+.claude/settings.local.json
+.claude/worktrees/
+.claude/*.lock
+
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Local env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Testing
+coverage
+
+# Turbo
+.turbo
+
+# Vercel
+.vercel
+
+# Build Outputs
+.next/
+out/
+build
+dist
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# TanStack Router generated files
+apps/web/src/routeTree.gen.ts
+
+# Misc
+.DS_Store
+*.pem
+
+# Compose smoke-test scratch (rendered from .env.example at test time)
+.env.smoke
+
+# Traefik ACME storage (per-deploy state, never committed)
+infra/traefik/acme.json
+# Traefik BasicAuth credentials (generated locally, never committed)
+infra/traefik/jaeger-auth
+
+# OpenTofu / Terraform
+**/.terraform/
+**/.terraform.lock.hcl
+**/terraform.tfstate
+**/terraform.tfstate.backup
+**/terraform.tfstate.d/
+**/*.tfvars
+!**/*.tfvars.example
+**/.tofu/
+**/crash.log
+**/crash.*.log
+.playwright-mcp/
+docs/design/
+.worktrees/
+
+# App NDJSON logs (dev log persistence)
+logs/

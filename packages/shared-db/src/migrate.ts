@@ -1,0 +1,123 @@
+import { createHash } from 'node:crypto';
+import { readdirSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import type { Pool, PoolClient } from 'pg';
+
+export interface ModuleMigration {
+  name: string;
+  dir: string;
+}
+
+export class MigrationChecksumMismatch extends Error {
+  readonly module: string;
+  readonly filename: string;
+  readonly expected: string;
+  readonly actual: string;
+
+  constructor(module: string, filename: string, expected: string, actual: string) {
+    super(
+      `Migration checksum mismatch for ${module}/${filename}: expected ${expected}, found ${actual}. Don't hand-edit committed migrations — add a new numbered file instead.`,
+    );
+    this.name = 'MigrationChecksumMismatch';
+    this.module = module;
+    this.filename = filename;
+    this.expected = expected;
+    this.actual = actual;
+  }
+}
+
+export interface MigrationLagRow {
+  module: string;
+  filename: string;
+}
+
+export async function runMigrations(opts: {
+  pool: Pool;
+  modules: ModuleMigration[];
+  ledgerSchema?: string;
+  /**
+   * When true, diff schema_migrations against expected files and return the lag rows
+   * without applying anything. Used by apps/server and apps/worker on boot to fail
+   * fast when schema_migrations is behind.
+   */
+  assertCaughtUpOnly?: boolean;
+}): Promise<MigrationLagRow[]> {
+  const ledgerSchema = opts.ledgerSchema ?? 'core';
+  const assertOnly = opts.assertCaughtUpOnly ?? false;
+  const client = await opts.pool.connect();
+  const lag: MigrationLagRow[] = [];
+  try {
+    await client.query('BEGIN');
+    await client.query('SELECT pg_advisory_xact_lock($1)', [hashLockKey('seta:migrate')]);
+    await ensureLedger(client, ledgerSchema);
+
+    for (const mod of opts.modules) {
+      const entries = listSqlFiles(mod.dir);
+      for (const file of entries) {
+        const fullPath = join(mod.dir, file);
+        const body = readFileSync(fullPath, 'utf-8');
+        const checksum = sha256(body);
+        const prior = await client.query<{ checksum: string }>(
+          `SELECT checksum FROM ${ledgerSchema}.__platform_migrations WHERE module=$1 AND filename=$2`,
+          [mod.name, file],
+        );
+        if (prior.rows[0]) {
+          if (prior.rows[0].checksum !== checksum) {
+            throw new MigrationChecksumMismatch(mod.name, file, prior.rows[0].checksum, checksum);
+          }
+          continue;
+        }
+        if (assertOnly) {
+          lag.push({ module: mod.name, filename: file });
+          continue;
+        }
+        await client.query(body);
+        await client.query(
+          `INSERT INTO ${ledgerSchema}.__platform_migrations (module, filename, checksum) VALUES ($1, $2, $3)`,
+          [mod.name, file, checksum],
+        );
+      }
+    }
+
+    await client.query('COMMIT');
+    return lag;
+  } catch (err) {
+    await client.query('ROLLBACK').catch(() => {});
+    throw err;
+  } finally {
+    client.release();
+  }
+}
+
+async function ensureLedger(client: PoolClient, schema: string): Promise<void> {
+  await client.query(`CREATE SCHEMA IF NOT EXISTS ${schema}`);
+  await client.query(`
+    CREATE TABLE IF NOT EXISTS ${schema}.__platform_migrations (
+      module     text NOT NULL,
+      filename   text NOT NULL,
+      checksum   text NOT NULL,
+      applied_at timestamptz NOT NULL DEFAULT clock_timestamp(),
+      PRIMARY KEY (module, filename)
+    )
+  `);
+}
+
+function listSqlFiles(dir: string): string[] {
+  try {
+    return readdirSync(dir)
+      .filter((f) => f.endsWith('.sql'))
+      .sort();
+  } catch (err) {
+    if ((err as { code?: string }).code === 'ENOENT') return [];
+    throw err;
+  }
+}
+
+function sha256(s: string): string {
+  return createHash('sha256').update(s).digest('hex');
+}
+
+function hashLockKey(s: string): number {
+  const h = createHash('sha256').update(s).digest();
+  return h.readInt32BE(0);
+}

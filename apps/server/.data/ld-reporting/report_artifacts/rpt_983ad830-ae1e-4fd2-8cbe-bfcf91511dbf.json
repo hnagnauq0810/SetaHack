@@ -1,0 +1,191 @@
+{
+  "reportId": "rpt_983ad830-ae1e-4fd2-8cbe-bfcf91511dbf",
+  "datasetId": "ds_40b5b3f4ff72ee81",
+  "metricsId": "mx_bd708ad9-8d02-473d-b137-c21cfd05c187",
+  "evidenceId": "ev_96a55b95-b463-466b-ae0a-dcf6e23dc838",
+  "governanceId": "gv_4192b29a-9843-43a2-8961-2c4a86bff4f5",
+  "title": "L&D Training Effectiveness Report — AIAgent_05_2026",
+  "scope": {
+    "courseId": "AIAgent_05_2026",
+    "period": "2026-Q2",
+    "reportType": "full"
+  },
+  "status": "FINAL",
+  "generatedAt": "2026-06-17T07:04:13.467Z",
+  "executiveSummary": "The selected scope contains 1 course(s), 1 completed course(s), and 13 trainee-course records. Overall attendance is 90.4%, completion is 100%, pass rate is 92.3%, and average score is 7.88/10. Total training hours are 188 and scaled cost is 9.6. Overall effectiveness classification is Risk. Management interpretation: The training program for the course 'AI Agent & LLM Application Development' has shown strong metrics with a 100% completion rate and a 92.3% pass rate among 13 trainees. However, the overall effectiveness classification is marked as Risk, indicating potential areas for improvement despite high attendance and average scores.",
+  "insights": [
+    "AI Agent & LLM Application Development has the strongest effectiveness score (89.47) in the selected scope.",
+    "2 outstanding trainee(s) meet the star learner rule: score >= 9.0 and full attendance.",
+    "1 course group(s) contain learners who need support based on score or attendance policy.",
+    "1 high-priority L&D NORM flag(s) were triggered.",
+    "%",
+    "/10",
+    "/5",
+    "AIAgent_05_2026 1 At least one learner is below pass threshold or attendance policy."
+  ],
+  "recommendations": [
+    "Flag for coaching; assign buddy or practice resources",
+    "Create a coaching plan for support-needed learners and review attendance issues with direct managers.",
+    "Implement 1:1 coaching for the identified trainee who requires additional support to meet the pass threshold.",
+    "Consider enhancing course content or delivery methods to address the effectiveness classification marked as Risk.",
+    "Monitor feedback responses closely to ensure continued engagement and satisfaction with the training program."
+  ],
+  "warnings": [],
+  "evidence": {
+    "evidenceId": "ev_96a55b95-b463-466b-ae0a-dcf6e23dc838",
+    "datasetId": "ds_40b5b3f4ff72ee81",
+    "status": "PASS",
+    "generatedAt": "2026-06-17T07:04:13.451Z",
+    "missingEvidence": [],
+    "checklist": [
+      {
+        "check": "Source availability and required columns",
+        "status": "PASS",
+        "detail": "Teams, OneDrive, Forms, KPI, Rules and Template sheets were mapped to simulated sources."
+      },
+      {
+        "check": "Course status",
+        "status": "PASS",
+        "detail": "All selected courses are completed."
+      },
+      {
+        "check": "Attendance completeness",
+        "status": "PASS",
+        "detail": "Expected attendance rows are trainee count × total sessions. Late is retained for metrics as partial attendance."
+      },
+      {
+        "check": "Assessment completeness",
+        "status": "PASS",
+        "detail": "Completed courses require one assessment/pass-status row per trainee."
+      },
+      {
+        "check": "Feedback completeness",
+        "status": "PASS",
+        "detail": "NORM-14 requires at least 60% feedback response rate for valid analysis."
+      },
+      {
+        "check": "Consistency: course ID, trainee ID, period",
+        "status": "PASS",
+        "detail": "Cross-source course IDs and pass-status logic were checked against the catalog."
+      }
+    ],
+    "canGenerateFinalConclusion": true
+  },
+  "metrics": {
+    "metricsId": "mx_bd708ad9-8d02-473d-b137-c21cfd05c187",
+    "datasetId": "ds_40b5b3f4ff72ee81",
+    "generatedAt": "2026-06-17T07:04:13.451Z",
+    "overall": {
+      "totalCourses": 1,
+      "completedCourses": 1,
+      "traineeCount": 13,
+      "attendanceRate": 0.9038,
+      "completionRate": 1,
+      "passRate": 0.9231,
+      "averageScore": 7.88,
+      "feedbackRating": 4.73,
+      "trainingHours": 188,
+      "totalCostScaled": 9.6,
+      "roiProxy": 0.042,
+      "effectivenessScore": 89.47
+    },
+    "courses": [
+      {
+        "courseId": "AIAgent_05_2026",
+        "courseName": "AI Agent & LLM Application Development",
+        "status": "Completed",
+        "traineeCount": 13,
+        "attendanceRate": 0.9038,
+        "completionRate": 1,
+        "passRate": 0.9231,
+        "averageScore": 7.88,
+        "feedbackRating": 4.73,
+        "trainerRatingAvg": 4.77,
+        "contentRatingAvg": 4.69,
+        "feedbackResponseRate": 1,
+        "trainingHours": 188,
+        "totalCostScaled": 9.6,
+        "costPerCompletedTrainee": 0.74,
+        "postTrainingPerfDelta": 0.031,
+        "roiProxy": 0.042,
+        "effectivenessScore": 89.47
+      }
+    ]
+  },
+  "governance": {
+    "governanceId": "gv_4192b29a-9843-43a2-8961-2c4a86bff4f5",
+    "role": "LND_MANAGER",
+    "classification": "Risk",
+    "generatedAt": "2026-06-17T07:04:13.452Z",
+    "normFlags": [
+      {
+        "ruleId": "NORM-07",
+        "priority": "High",
+        "category": "Individual",
+        "courseId": "AIAgent_05_2026",
+        "employeeId": "EMP-076",
+        "message": "Trainee needs 1:1 support.",
+        "action": "Flag for coaching; assign buddy or practice resources"
+      }
+    ],
+    "outstandingTrainees": [
+      {
+        "courseId": "AIAgent_05_2026",
+        "employeeId": "EMP-005",
+        "score": 9.4,
+        "attendanceRate": 1,
+        "reason": "Score >= 9.0 and full attendance"
+      },
+      {
+        "courseId": "AIAgent_05_2026",
+        "employeeId": "EMP-119",
+        "score": 9.4,
+        "attendanceRate": 1,
+        "reason": "Score >= 9.0 and full attendance"
+      }
+    ],
+    "supportNeededTrainees": [
+      {
+        "courseId": "AIAgent_05_2026",
+        "employeeId": "EMP-076",
+        "score": 3.9,
+        "attendanceRate": 0.875,
+        "reason": "Below pass threshold or attendance below 70%"
+      }
+    ],
+    "supportNeededGroups": [
+      {
+        "courseId": "AIAgent_05_2026",
+        "count": 1,
+        "reason": "At least one learner is below pass threshold or attendance policy."
+      }
+    ],
+    "masked": false
+  },
+  "llm": {
+    "enabled": true,
+    "model": "gpt-4o-mini",
+    "usedFor": [
+      "report_narrative",
+      "pptx_content"
+    ],
+    "generatedAt": "2026-06-17T07:04:19.361Z"
+  },
+  "quality": {
+    "qualityId": "qc_91e1dc74-90c8-4aa6-ada9-e6c7dccd0bbb",
+    "status": "PASS",
+    "generatedAt": "2026-06-17T07:04:19.362Z",
+    "issues": []
+  },
+  "artifacts": {
+    "pptxPath": "F:\\FPT Software\\SETA\\agent-platform-main\\apps\\server\\.data\\ld-reporting\\artifacts\\rpt_983ad830-ae1e-4fd2-8cbe-bfcf91511dbf\\rpt_983ad830-ae1e-4fd2-8cbe-bfcf91511dbf.pptx",
+    "docxPath": "F:\\FPT Software\\SETA\\agent-platform-main\\apps\\server\\.data\\ld-reporting\\artifacts\\rpt_983ad830-ae1e-4fd2-8cbe-bfcf91511dbf\\rpt_983ad830-ae1e-4fd2-8cbe-bfcf91511dbf.docx"
+  },
+  "finalizedAt": "2026-06-17T07:04:40.312Z",
+  "approval": {
+    "decision": "approve",
+    "note": "Human selected approve from the L&D reporting workspace.",
+    "actorUserId": "9eb08fa9-5aeb-410e-8bf1-d11778eb74a9",
+    "at": "2026-06-17T07:04:40.312Z"
+  }
+}

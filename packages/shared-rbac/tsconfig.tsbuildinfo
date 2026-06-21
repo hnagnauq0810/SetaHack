@@ -1,0 +1,1 @@
+{"root":["./src/index.ts","./src/inventory.ts","./src/manifest.ts","./src/registry.ts","./src/resolve.ts","./src/types.ts","./src/visibility.ts","./src/generated/permission-keys.ts"],"version":"6.0.3"}

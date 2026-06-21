@@ -1,0 +1,6 @@
+pnpm -F @seta/server dev
+pnpm -F @seta/web dev
+
+node --env-file=.env test-openai.mjs
+
+pnpm dev

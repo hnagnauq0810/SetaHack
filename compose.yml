@@ -1,0 +1,265 @@
+# Seta self-host production stack.
+#
+# Usage:
+#   cp .env.example .env && $EDITOR .env    # fill in required secrets
+#   docker compose up -d
+#   docker compose logs -f server
+#
+# Architecture:
+#   - proxy (Traefik v3) owns port 443 (and 80 for ACME redirect).
+#   - web serves the React bundle.
+#   - server runs the Hono API + workers (PLATFORM_MODULES=* = all-in-one).
+#   - postgres is pgvector/pg17.
+#   - migrator is a one-shot that runs Drizzle migrations and exits.
+#
+# Boundary: only `proxy` is publicly exposed. All other services are reachable
+# only via the `seta-edge` and `seta-internal` networks.
+#
+# Observability (jaeger / prometheus / grafana) is commented out below to keep
+# the hackathon EC2 host (4GB RAM) within budget. Uncomment those blocks +
+# the matching `traces` / `metrics` routers in infra/traefik/dynamic/routes.yml
+# when running on a host with memory to spare.
+
+name: seta
+
+networks:
+  seta-edge:
+    driver: bridge
+  seta-internal:
+    driver: bridge
+    internal: true
+
+volumes:
+  postgres-data:
+  traefik-acme:
+  # jaeger-data:
+  # prometheus-data:
+  # grafana-data:
+
+services:
+  # ── Observability — disabled on the 4GB hackathon host ─────────────────────
+  # jaeger:
+  #   image: jaegertracing/jaeger:2.6.0
+  #   restart: unless-stopped
+  #   user: "0"
+  #   command: ["--config", "/etc/jaeger/config.yml"]
+  #   volumes:
+  #     - ./infra/jaeger/config.yml:/etc/jaeger/config.yml:ro
+  #     - jaeger-data:/badger
+  #   networks:
+  #     - seta-internal
+  #     - seta-edge
+
+  # prometheus:
+  #   image: prom/prometheus:v3.4.0
+  #   restart: unless-stopped
+  #   command:
+  #     - --config.file=/etc/prometheus/prometheus.yml
+  #     - --storage.tsdb.path=/prometheus
+  #     - --storage.tsdb.retention.time=15d
+  #     - --web.console.libraries=/usr/share/prometheus/console_libraries
+  #     - --web.console.templates=/usr/share/prometheus/consoles
+  #   volumes:
+  #     - ./infra/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+  #     - prometheus-data:/prometheus
+  #   networks:
+  #     - seta-internal
+
+  # grafana:
+  #   image: grafana/grafana:12.0.1
+  #   restart: unless-stopped
+  #   environment:
+  #     GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-admin}
+  #     GF_USERS_ALLOW_SIGN_UP: "false"
+  #     GF_SERVER_ROOT_URL: ${GRAFANA_ROOT_URL:-}
+  #   volumes:
+  #     - ./infra/grafana/provisioning:/etc/grafana/provisioning:ro
+  #     - grafana-data:/var/lib/grafana
+  #   networks:
+  #     - seta-internal
+  #     - seta-edge
+  #   depends_on:
+  #     - prometheus
+
+  proxy:
+    image: traefik:v3.1
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "5173:5173"  # local smoke-test HTTP (blocked by EC2 security group on prod)
+    volumes:
+      - ./infra/traefik/traefik.yml:/etc/traefik/traefik.yml:ro
+      - ./infra/traefik/dynamic:/etc/traefik/dynamic:ro
+      # - ./infra/traefik/jaeger-auth:/etc/traefik/jaeger-auth:ro
+      - traefik-acme:/letsencrypt
+    environment:
+      PLATFORM_ACME_EMAIL: ${PLATFORM_ACME_EMAIL}
+    networks:
+      - seta-edge
+
+  web:
+    image: ${PLATFORM_IMAGE_WEB:-${ECR_REGISTRY}/${ECR_REPOSITORY}:web-${PLATFORM_VERSION:-latest}}
+    restart: unless-stopped
+    networks:
+      - seta-edge
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /var/cache/nginx
+      - /var/run
+
+  server:
+    image: ${PLATFORM_IMAGE_SERVER:-${ECR_REGISTRY}/${ECR_REPOSITORY}:server-${PLATFORM_VERSION:-latest}}
+    restart: unless-stopped
+    command: ["serve"]
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
+      PORT: ${PORT:-3000}
+      DATABASE_URL: ${DATABASE_URL}
+      PUBLIC_URL: ${PUBLIC_URL}
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET}
+      EVENTS_RETENTION_DAYS: ${EVENTS_RETENTION_DAYS:-30}
+      PLATFORM_MODULES: ${PLATFORM_MODULES:-*}
+      MICROSOFT_CLIENT_ID: ${MICROSOFT_CLIENT_ID:-}
+      MICROSOFT_CLIENT_SECRET: ${MICROSOFT_CLIENT_SECRET:-}
+      OTEL_EXPORTER_OTLP_ENDPOINT: ${OTEL_EXPORTER_OTLP_ENDPOINT:-}
+      CORS_ORIGINS: ${CORS_ORIGINS:-}
+      SESSION_COOKIE_SAMESITE: ${SESSION_COOKIE_SAMESITE:-strict}
+      CLAMAV_HOST: ${CLAMAV_HOST:-clamav}
+      CLAMAV_PORT: ${CLAMAV_PORT:-3310}
+      KNOWLEDGE_AV_REQUIRED: ${KNOWLEDGE_AV_REQUIRED:-false}
+      CRYPTO_KEY_PROVIDER: ${CRYPTO_KEY_PROVIDER:-env}
+      CRYPTO_KMS_KEY_ARN: ${CRYPTO_KMS_KEY_ARN:-}
+      CRYPTO_LOCAL_MASTER_KEY: ${CRYPTO_LOCAL_MASTER_KEY:-}
+      CRYPTO_LOCAL_KEYS: ${CRYPTO_LOCAL_KEYS:-}
+      CRYPTO_LOCAL_PRIMARY_KID: ${CRYPTO_LOCAL_PRIMARY_KID:-}
+      AWS_REGION: ${AWS_REGION:-}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+    expose:
+      - "9464"  # Prometheus metrics scrape port
+    networks:
+      - seta-edge
+      - seta-internal
+    depends_on:
+      postgres:
+        condition: service_healthy
+      migrator:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://127.0.0.1:'+(process.env.PORT||3000)+'/health/live',r=>process.exit(r.statusCode===200?0:1)).on('error',()=>process.exit(1))"]
+      interval: 10s
+      timeout: 3s
+      retries: 6
+      start_period: 20s
+    read_only: true
+    tmpfs:
+      - /tmp
+
+  worker:
+    image: ${PLATFORM_IMAGE_SERVER:-${ECR_REGISTRY}/${ECR_REPOSITORY}:server-${PLATFORM_VERSION:-latest}}
+    restart: unless-stopped
+    command: ["worker"]
+    expose:
+      - "9464"  # Prometheus metrics scrape port
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
+      DATABASE_URL: ${DATABASE_URL}
+      EVENTS_RETENTION_DAYS: ${EVENTS_RETENTION_DAYS:-30}
+      PLATFORM_MODULES: ${PLATFORM_MODULES:-*}
+      MICROSOFT_CLIENT_ID: ${MICROSOFT_CLIENT_ID:-}
+      MICROSOFT_CLIENT_SECRET: ${MICROSOFT_CLIENT_SECRET:-}
+      OTEL_EXPORTER_OTLP_ENDPOINT: ${OTEL_EXPORTER_OTLP_ENDPOINT:-}
+      CLAMAV_HOST: ${CLAMAV_HOST:-clamav}
+      CLAMAV_PORT: ${CLAMAV_PORT:-3310}
+      KNOWLEDGE_AV_REQUIRED: ${KNOWLEDGE_AV_REQUIRED:-false}
+      CRYPTO_KEY_PROVIDER: ${CRYPTO_KEY_PROVIDER:-env}
+      CRYPTO_KMS_KEY_ARN: ${CRYPTO_KMS_KEY_ARN:-}
+      CRYPTO_LOCAL_MASTER_KEY: ${CRYPTO_LOCAL_MASTER_KEY:-}
+      CRYPTO_LOCAL_KEYS: ${CRYPTO_LOCAL_KEYS:-}
+      CRYPTO_LOCAL_PRIMARY_KID: ${CRYPTO_LOCAL_PRIMARY_KID:-}
+      AWS_REGION: ${AWS_REGION:-}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+    networks:
+      - seta-internal
+      - seta-edge  # egress for OpenAI / external embedding APIs
+    depends_on:
+      postgres:
+        condition: service_healthy
+      migrator:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD-SHELL", "/entrypoint.sh health || exit 1"]
+      interval: 30s
+      timeout: 20s
+      start_period: 30s
+      retries: 3
+    read_only: true
+    tmpfs:
+      - /tmp
+
+  postgres:
+    image: pgvector/pgvector:pg17-trixie
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - seta-internal
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  migrator:
+    image: ${PLATFORM_IMAGE_SERVER:-${ECR_REGISTRY}/${ECR_REPOSITORY}:server-${PLATFORM_VERSION:-latest}}
+    command: ["migrate"]
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      EVENTS_RETENTION_DAYS: ${EVENTS_RETENTION_DAYS:-30}
+      PLATFORM_MODULES: ${PLATFORM_MODULES:-*}
+      CRYPTO_KEY_PROVIDER: ${CRYPTO_KEY_PROVIDER:-env}
+      CRYPTO_KMS_KEY_ARN: ${CRYPTO_KMS_KEY_ARN:-}
+      CRYPTO_LOCAL_MASTER_KEY: ${CRYPTO_LOCAL_MASTER_KEY:-}
+      CRYPTO_LOCAL_KEYS: ${CRYPTO_LOCAL_KEYS:-}
+      CRYPTO_LOCAL_PRIMARY_KID: ${CRYPTO_LOCAL_PRIMARY_KID:-}
+      AWS_REGION: ${AWS_REGION:-}
+    networks:
+      - seta-internal
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: "no"
+    read_only: true
+    tmpfs:
+      - /tmp
+
+  seeder:
+    image: ${PLATFORM_IMAGE_SERVER:-${ECR_REGISTRY}/${ECR_REPOSITORY}:server-${PLATFORM_VERSION:-latest}}
+    command: ["seed"]
+    # Gated behind the "seed" profile so `docker compose up -d` (no args) skips
+    # it. `docker compose run --rm seeder` still works — `compose run` auto-
+    # enables the profile of the named service.
+    profiles: ["seed"]
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      PLATFORM_MODULES: ${PLATFORM_MODULES:-*}
+      CRYPTO_KEY_PROVIDER: ${CRYPTO_KEY_PROVIDER:-env}
+      CRYPTO_KMS_KEY_ARN: ${CRYPTO_KMS_KEY_ARN:-}
+      CRYPTO_LOCAL_MASTER_KEY: ${CRYPTO_LOCAL_MASTER_KEY:-}
+      CRYPTO_LOCAL_KEYS: ${CRYPTO_LOCAL_KEYS:-}
+      CRYPTO_LOCAL_PRIMARY_KID: ${CRYPTO_LOCAL_PRIMARY_KID:-}
+      AWS_REGION: ${AWS_REGION:-}
+    networks:
+      - seta-internal
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: "no"
+    read_only: true
+    tmpfs:
+      - /tmp

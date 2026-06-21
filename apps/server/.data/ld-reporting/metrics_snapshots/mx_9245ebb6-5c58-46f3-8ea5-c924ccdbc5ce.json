@@ -1,0 +1,20 @@
+{
+  "metricsId": "mx_9245ebb6-5c58-46f3-8ea5-c924ccdbc5ce",
+  "datasetId": "ds_57cc845e50d9ff3b",
+  "generatedAt": "2026-06-21T10:03:08.517Z",
+  "overall": {
+    "totalCourses": 0,
+    "completedCourses": 0,
+    "traineeCount": 0,
+    "attendanceRate": null,
+    "completionRate": null,
+    "passRate": null,
+    "averageScore": null,
+    "feedbackRating": null,
+    "trainingHours": 0,
+    "totalCostScaled": 0,
+    "roiProxy": null,
+    "effectivenessScore": null
+  },
+  "courses": []
+}

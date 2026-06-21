@@ -1,0 +1,24 @@
+{
+  "name": "@seta/shared-embeddings",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@seta/shared-config": "workspace:^",
+    "@types/node": "^25.9.3",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.8"
+  },
+  "dependencies": {
+    "@mastra/core": "^1.42.0",
+    "ai": "^6.0.200",
+    "tiktoken": "^1.0.22"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "evidenceId": "ev_d217f631-ff05-4cb3-835b-ebf35465f027",
+  "datasetId": "ds_7c0e1fc69bfb6f56",
+  "status": "BLOCKED",
+  "generatedAt": "2026-06-17T07:15:04.752Z",
+  "missingEvidence": [
+    {
+      "type": "IN_PROGRESS_COURSE",
+      "severity": "blocker",
+      "courseId": "Leadership_06_2026",
+      "message": "Course Leadership_06_2026 is In Progress; final effectiveness conclusion is blocked until completion."
+    },
+    {
+      "type": "MISSING_ATTENDANCE",
+      "severity": "warning",
+      "courseId": "Leadership_06_2026",
+      "affectedCount": 24,
+      "message": "Attendance has 24/48 expected rows for Leadership_06_2026."
+    }
+  ],
+  "checklist": [
+    {
+      "check": "Source availability and required columns",
+      "status": "PASS",
+      "detail": "Teams, OneDrive, Forms, KPI, Rules and Template sheets were mapped to simulated sources."
+    },
+    {
+      "check": "Course status",
+      "status": "FAIL",
+      "detail": "1 course(s) are not completed."
+    },
+    {
+      "check": "Attendance completeness",
+      "status": "WARN",
+      "detail": "Expected attendance rows are trainee count × total sessions. Late is retained for metrics as partial attendance."
+    },
+    {
+      "check": "Assessment completeness",
+      "status": "PASS",
+      "detail": "Completed courses require one assessment/pass-status row per trainee."
+    },
+    {
+      "check": "Feedback completeness",
+      "status": "PASS",
+      "detail": "NORM-14 requires at least 60% feedback response rate for valid analysis."
+    },
+    {
+      "check": "Consistency: course ID, trainee ID, period",
+      "status": "PASS",
+      "detail": "Cross-source course IDs and pass-status logic were checked against the catalog."
+    }
+  ],
+  "canGenerateFinalConclusion": false
+}

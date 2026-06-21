@@ -1,0 +1,27 @@
+{
+  "name": "@seta/shared-db",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Shared Postgres + Drizzle ORM primitives — pool factory, schema-scoped client helpers, and migration runner.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@seta/shared-config": "workspace:^",
+    "@seta/shared-testing": "workspace:^",
+    "@types/pg": "^8.20.0",
+    "drizzle-kit": "^0.31.10",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.8"
+  },
+  "dependencies": {
+    "@opentelemetry/api": "^1.9.1",
+    "drizzle-orm": "^0.45.2",
+    "pg": "^8.21.0"
+  }
+}

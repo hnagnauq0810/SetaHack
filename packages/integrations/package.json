@@ -1,0 +1,52 @@
+{
+  "name": "@seta/integrations",
+  "version": "0.0.1",
+  "private": true,
+  "description": "External integrations module — credential storage, mail transport config, and Microsoft Graph connectors.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./backend": "./src/backend/index.ts",
+    "./events": "./src/events/index.ts",
+    "./http": "./src/backend/http/index.ts",
+    "./rbac": "./src/rbac.ts",
+    "./register": "./src/register.ts",
+    "./db/schema": "./src/backend/db/schema/index.ts",
+    "./db": "./src/backend/db/client.ts",
+    "./m365": "./src/backend/m365/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "db:generate": "drizzle-kit generate"
+  },
+  "devDependencies": {
+    "@seta/shared-config": "workspace:^",
+    "@seta/shared-testing": "workspace:^",
+    "@types/pg": "^8.20.0",
+    "drizzle-kit": "^0.31.10",
+    "graphile-worker": "^0.16.6",
+    "msw": "^2.14.6",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.8"
+  },
+  "dependencies": {
+    "@azure/identity": "^4.13.1",
+    "@microsoft/microsoft-graph-client": "^3.0.7",
+    "@microsoft/microsoft-graph-types": "^2.43.1",
+    "@opentelemetry/api": "^1.9.1",
+    "@seta/core": "workspace:^",
+    "@seta/identity": "workspace:^",
+    "@seta/planner": "workspace:^",
+    "@seta/shared-crypto": "workspace:^",
+    "@seta/shared-db": "workspace:^",
+    "@seta/shared-mailer": "workspace:^",
+    "@seta/shared-rbac": "workspace:^",
+    "@seta/shared-types": "workspace:^",
+    "drizzle-orm": "^0.45.2",
+    "hono": "^4.12.25",
+    "pg": "^8.21.0",
+    "pino": "^10.3.1",
+    "zod": "^4.4.3"
+  }
+}

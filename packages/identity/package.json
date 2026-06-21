@@ -1,0 +1,61 @@
+{
+  "name": "@seta/identity",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Identity module — users, organizations, sessions, SSO (Entra OIDC), and RBAC bindings. Built on better-auth + argon2id.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./agent-tools": "./src/agent-tools.ts",
+    "./auth": "./src/backend/auth.ts",
+    "./http": "./src/backend/http/index.ts",
+    "./events": "./src/events/index.ts",
+    "./internal/activity-subject-paths": "./src/backend/domain/activity-subject-paths.ts",
+    "./agent-tools/register": {
+      "types": "./src/backend/agent-tools/register.ts",
+      "default": "./src/backend/agent-tools/register.ts"
+    },
+    "./rbac": "./src/rbac.ts",
+    "./register": "./src/register.ts",
+    "./testing": "./src/testing/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint . --no-error-on-unmatched-pattern",
+    "typecheck": "tsc -b --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "db:generate": "drizzle-kit generate",
+    "db:auth-generate": "better-auth generate --config src/backend/auth.ts --output drizzle/0001_auth.sql"
+  },
+  "devDependencies": {
+    "@better-auth/cli": "^1.4.21",
+    "@seta/core": "workspace:^",
+    "@seta/shared-config": "workspace:^",
+    "@seta/shared-db": "workspace:^",
+    "@seta/shared-rbac": "workspace:^",
+    "@seta/shared-testing": "workspace:^",
+    "@seta/shared-types": "workspace:^",
+    "@types/node": "^25.9.3",
+    "@types/pg": "^8.20.0",
+    "@vitejs/plugin-react": "^6.0.2",
+    "drizzle-kit": "^0.31.10",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.8"
+  },
+  "dependencies": {
+    "@mastra/core": "^1.42.0",
+    "@mastra/pg": "^1.13.0",
+    "@node-rs/argon2": "^2.0.2",
+    "@seta/agent-sdk": "workspace:^",
+    "@seta/shared-embeddings": "workspace:^",
+    "@seta/shared-mailer": "workspace:^",
+    "@seta/shared-retrieval": "workspace:^",
+    "better-auth": "^1.6.16",
+    "drizzle-orm": "^0.45.2",
+    "graphile-worker": "^0.16.6",
+    "hono": "^4.12.25",
+    "pg": "^8.21.0",
+    "pino": "^10.3.1",
+    "zod": "^4.4.3"
+  }
+}

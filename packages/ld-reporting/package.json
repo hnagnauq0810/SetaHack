@@ -1,0 +1,43 @@
+{
+  "name": "@seta/ld-reporting",
+  "version": "0.0.1",
+  "private": true,
+  "description": "L&D Training Effectiveness Reporting module — single specialist agent, evidence gate, metrics, RBAC, report artifacts.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./register": "./src/register.ts",
+    "./agent-tools": "./src/agent-tools.ts",
+    "./rbac": "./src/rbac.ts"
+  },
+  "scripts": {
+    "lint": "eslint . --no-error-on-unmatched-pattern",
+    "typecheck": "tsc -b --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "db:generate": "drizzle-kit generate"
+  },
+  "dependencies": {
+    "@mastra/core": "^1.42.0",
+    "@mastra/observability": "^1.14.1",
+    "@seta/agent-sdk": "workspace:^",
+    "@seta/core": "workspace:^",
+    "@seta/shared-orchestration": "workspace:^",
+    "@seta/shared-rbac": "workspace:^",
+    "docx": "^9.7.1",
+    "drizzle-orm": "^0.45.2",
+    "exceljs": "^4.4.0",
+    "hono": "^4.12.25",
+    "pptxgenjs": "^4.0.1",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@seta/shared-config": "workspace:^",
+    "@seta/shared-testing": "workspace:^",
+    "@types/node": "^25.9.3",
+    "@types/pg": "^8.20.0",
+    "drizzle-kit": "^0.31.10",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.8"
+  }
+}

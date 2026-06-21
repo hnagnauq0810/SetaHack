@@ -1,0 +1,15 @@
+{
+  "answerId": "qa_651671a6-1a48-476f-a61a-ed5d7c0d91b6",
+  "generatedAt": "2026-06-21T10:17:42.492Z",
+  "reportId": "rpt_f2b1c961-9750-4dc7-a193-7cbc67f6d3cf",
+  "answer": "Evidence status là BLOCKED. Có 2 missing/warning item(s). Không được kết luận final cho đến khi xử lý blocker.",
+  "confidence": 0.95,
+  "citations": [
+    "evidence.status",
+    "evidence.missingEvidence",
+    "evidence.canGenerateFinalConclusion"
+  ],
+  "limitations": [
+    "Evidence status is BLOCKED; final conclusions are limited."
+  ]
+}

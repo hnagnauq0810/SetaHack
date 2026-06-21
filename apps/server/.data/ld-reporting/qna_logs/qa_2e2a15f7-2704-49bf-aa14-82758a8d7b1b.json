@@ -1,0 +1,14 @@
+{
+  "answerId": "qa_2e2a15f7-2704-49bf-aa14-82758a8d7b1b",
+  "generatedAt": "2026-06-18T07:01:55.346Z",
+  "reportId": "rpt_1c86ae63-f223-4f62-81aa-76e067001af9",
+  "answer": "Classification hiện tại là Risk. Có 8 NORM flag(s), trong đó 7 high-priority flag(s).",
+  "confidence": 0.92,
+  "limitations": [
+    "LLM Q&A fallback was used because the model call failed."
+  ],
+  "citations": [
+    "governance.classification",
+    "governance.normFlags"
+  ]
+}

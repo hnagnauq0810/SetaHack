@@ -1,0 +1,13 @@
+{
+  "answerId": "qa_65a13013-5056-430b-8b29-336f2fb5fe52",
+  "generatedAt": "2026-06-17T07:26:27.502Z",
+  "reportId": "rpt_03b332d6-0099-4f46-83ff-f185db857a87",
+  "answer": "Khóa học có rủi ro cao nhất là 'Technical Leadership & Communication' với điểm hiệu quả 25.58, tỷ lệ tham gia 47.9% và tỷ lệ đỗ 0%.",
+  "confidence": 0.95,
+  "citations": [
+    "report.insights"
+  ],
+  "limitations": [
+    "Evidence status is BLOCKED; final conclusions are limited."
+  ]
+}

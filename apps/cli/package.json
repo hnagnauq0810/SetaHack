@@ -1,0 +1,41 @@
+{
+  "name": "@seta/cli",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Operational CLI — database migrations, seed data, tenant/user provisioning, and integration management.",
+  "type": "module",
+  "bin": {
+    "seta-cli": "./dist/index.js"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@seta/shared-config": "workspace:^",
+    "@seta/shared-testing": "workspace:^",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.8"
+  },
+  "dependencies": {
+    "@seta/agent": "workspace:^",
+    "@seta/core": "workspace:^",
+    "@seta/identity": "workspace:^",
+    "@seta/integrations": "workspace:^",
+    "@seta/knowledge": "workspace:^",
+    "@seta/notifications": "workspace:^",
+    "@seta/planner": "workspace:^",
+    "@seta/shared-crypto": "workspace:^",
+    "@seta/shared-db": "workspace:^",
+    "@seta/shared-mailer": "workspace:^",
+    "@seta/shared-rbac": "workspace:^",
+    "@seta/staffing": "workspace:^",
+    "commander": "^15.0.0",
+    "csv-parse": "^6.2.1",
+    "drizzle-orm": "^0.45.2",
+    "pino": "^10.3.1",
+    "tsx": "^4.22.4",
+    "zod": "^4.4.3",
+    "@seta/ld-reporting": "workspace:^"
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "reportId": "rpt_7d1c48e3-a453-4ae3-ba37-d07725f25177",
+  "datasetId": "ds_fe83213fabea6c3c",
+  "metricsId": "mx_a7caf039-2be0-4f1c-b26c-c1255f3b3b25",
+  "evidenceId": "ev_f653458e-a8d5-44e6-ad5d-5e4f532ca18b",
+  "governanceId": "gv_d3d54cca-52c8-442f-a1e2-a315bd837c9a",
+  "title": "L&D Training Effectiveness Report - Leadership_06_2026",
+  "scope": {
+    "courseId": "Leadership_06_2026",
+    "period": "2026-Q1",
+    "reportType": "full"
+  },
+  "status": "DRAFT",
+  "generatedAt": "2026-06-21T09:52:51.989Z",
+  "executiveSummary": "The selected scope contains 0 course(s), 0 completed course(s), and 0 trainee-course records. Overall attendance is N/A, completion is N/A, pass rate is N/A, and average score is N/A/10. Total training hours are 0 and scaled cost is 0. Overall effectiveness classification is Risk. Management interpretation: The report indicates that there were no courses, completed courses, or trainee-course records within the selected scope for the specified period. Consequently, all key metrics related to attendance, completion, pass rates, and scores are not applicable, leading to an overall effectiveness classification of Risk.",
+  "insights": [
+    "The absence of courses and trainee engagement in this reporting period highlights a significant gap in training delivery.",
+    "This situation may indicate potential issues in course scheduling, trainee enrollment, or resource allocation that need to be addressed to ensure effective learning opportunities."
+  ],
+  "recommendations": [
+    "Maintain the current delivery model and reuse top-performing materials for future cohorts.",
+    "It is recommended to conduct a thorough review of the training program's scheduling and enrollment processes to identify barriers to participation.",
+    "Additionally, consider implementing proactive measures to engage trainees and ensure that courses are available and accessible, thereby improving future training effectiveness."
+  ],
+  "warnings": [],
+  "evidence": {
+    "evidenceId": "ev_f653458e-a8d5-44e6-ad5d-5e4f532ca18b",
+    "datasetId": "ds_fe83213fabea6c3c",
+    "status": "PASS",
+    "generatedAt": "2026-06-21T09:52:51.988Z",
+    "missingEvidence": [],
+    "checklist": [
+      {
+        "check": "Source availability and required columns",
+        "status": "PASS",
+        "detail": "Teams, OneDrive, Forms, KPI, Rules and Template sheets were mapped to simulated sources."
+      },
+      {
+        "check": "Course status",
+        "status": "PASS",
+        "detail": "All selected courses are completed."
+      },
+      {
+        "check": "Attendance completeness",
+        "status": "PASS",
+        "detail": "Expected attendance rows are trainee count × total sessions. Late is retained for metrics as partial attendance."
+      },
+      {
+        "check": "Assessment completeness",
+        "status": "PASS",
+        "detail": "Completed courses require one assessment/pass-status row per trainee."
+      },
+      {
+        "check": "Feedback completeness",
+        "status": "PASS",
+        "detail": "NORM-14 requires at least 60% feedback response rate for valid analysis."
+      },
+      {
+        "check": "Consistency: course ID, trainee ID, period",
+        "status": "PASS",
+        "detail": "Cross-source course IDs and pass-status logic were checked against the catalog."
+      }
+    ],
+    "canGenerateFinalConclusion": true
+  },
+  "metrics": {
+    "metricsId": "mx_a7caf039-2be0-4f1c-b26c-c1255f3b3b25",
+    "datasetId": "ds_fe83213fabea6c3c",
+    "generatedAt": "2026-06-21T09:52:51.988Z",
+    "overall": {
+      "totalCourses": 0,
+      "completedCourses": 0,
+      "traineeCount": 0,
+      "attendanceRate": null,
+      "completionRate": null,
+      "passRate": null,
+      "averageScore": null,
+      "feedbackRating": null,
+      "trainingHours": 0,
+      "totalCostScaled": 0,
+      "roiProxy": null,
+      "effectivenessScore": null
+    },
+    "courses": []
+  },
+  "governance": {
+    "governanceId": "gv_d3d54cca-52c8-442f-a1e2-a315bd837c9a",
+    "role": "LND_MANAGER",
+    "classification": "Risk",
+    "generatedAt": "2026-06-21T09:52:51.989Z",
+    "normFlags": [],
+    "outstandingTrainees": [],
+    "supportNeededTrainees": [],
+    "supportNeededGroups": [],
+    "masked": false
+  },
+  "llm": {
+    "enabled": true,
+    "model": "gpt-4o-mini",
+    "usedFor": [
+      "report_narrative",
+      "pptx_content"
+    ],
+    "generatedAt": "2026-06-21T09:52:54.950Z"
+  },
+  "quality": {
+    "qualityId": "qc_fcb2da30-745f-4452-b458-ab3dbbf3b66b",
+    "status": "PASS",
+    "generatedAt": "2026-06-21T09:52:54.950Z",
+    "issues": []
+  },
+  "artifacts": {
+    "pptxPath": "F:\\FPT Software\\SETA\\agent-platform-main\\apps\\server\\.data\\ld-reporting\\artifacts\\rpt_7d1c48e3-a453-4ae3-ba37-d07725f25177\\rpt_7d1c48e3-a453-4ae3-ba37-d07725f25177.pptx",
+    "docxPath": "F:\\FPT Software\\SETA\\agent-platform-main\\apps\\server\\.data\\ld-reporting\\artifacts\\rpt_7d1c48e3-a453-4ae3-ba37-d07725f25177\\rpt_7d1c48e3-a453-4ae3-ba37-d07725f25177.docx"
+  }
+}

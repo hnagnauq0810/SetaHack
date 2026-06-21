@@ -1,0 +1,339 @@
+import './otel.ts'; // MUST be first; see otel.ts header comment.
+import { resolveModel } from '@seta/agent';
+import { createAgentMastraStorage, registerAgent } from '@seta/agent/register';
+import { SpecializedAgentRegistry } from '@seta/agent-sdk';
+import { createContributionRegistry, createOverlayStore, requestIdStorage } from '@seta/core';
+import { coreDb } from '@seta/core/db';
+import { emit, withEmit } from '@seta/core/events';
+import { createOutboxStore } from '@seta/core/outbox';
+import { registerCoreContributions } from '@seta/core/register';
+import { buildRuntime, runMigrations, type WorkerHandle } from '@seta/core/runtime';
+import { buildActorSession, getIdentityVectorStore, listTenantRoleOverlays } from '@seta/identity';
+import { registerIdentityContributions } from '@seta/identity/register';
+import { registerIntegrationsContributions } from '@seta/integrations/register';
+import {
+  ContextOverflowError,
+  consumeThreadAttachmentsAsText,
+  markAttachmentsConsumed,
+  markAttachmentsFailed,
+} from '@seta/knowledge';
+import { registerKnowledgeContributions } from '@seta/knowledge/register';
+import { buildLdReportingChatRuntime } from '@seta/ld-reporting';
+import { registerLdReportingContributions } from '@seta/ld-reporting/register';
+import { registerNotificationsContributions } from '@seta/notifications/register';
+import { assignTask } from '@seta/planner';
+import { registerPlannerContributions } from '@seta/planner/register';
+import { createCrypto, createKeyProviderFromEnv, parseCryptoEnv } from '@seta/shared-crypto';
+import { closePools, getPool, initPools } from '@seta/shared-db';
+import { resolveEmbeddingProvider } from '@seta/shared-embeddings';
+import { createMailer } from '@seta/shared-mailer';
+import { OrchestrationRegistry } from '@seta/shared-orchestration';
+import {
+  buildStaffingOrchestrationRuntime,
+  makeAvailability,
+  makeSkillSearch,
+  makeTaskReader,
+  makeTaskSearch,
+  makeUserProfileLookup,
+  StaffingRunStateRepository,
+} from '@seta/staffing';
+import { registerStaffingContributions } from '@seta/staffing/register';
+// MODULE_IMPORTS_END — generator inserts new register*Contributions imports above this comment.
+import pino from 'pino';
+import { buildServerApp, registerAppContributions } from './build.ts';
+import { parseEnv } from './env.ts';
+import { logStreams } from './log-streams.ts';
+import { failedLoginAlertSubscriber } from './subscribers/failed-login-alert.ts';
+import { refreshRoleOverlaySubscriber } from './subscribers/refresh-role-overlay.ts';
+import { revokeSessionsOnDeactivationSubscriber } from './subscribers/revoke-sessions-on-deactivation.ts';
+
+const log = pino(
+  {
+    name: 'apps/server',
+    mixin() {
+      const requestId = requestIdStorage.getStore()?.requestId;
+      return requestId ? { request_id: requestId } : {};
+    },
+  },
+  pino.multistream(logStreams('server')),
+);
+const env = parseEnv(process.env);
+
+initPools({ databaseUrl: env.DATABASE_URL, log: log.child({ subsystem: 'shared-db' }) });
+
+const cryptoEnv = parseCryptoEnv(process.env);
+const keyProvider = await createKeyProviderFromEnv(cryptoEnv);
+const cryptoSvc = createCrypto({ keyProvider, log: log.child({ component: 'crypto' }) });
+log.info({ provider: keyProvider.kind }, 'crypto wired');
+
+// Forward reference for the WorkerHandle so m365 boot (constructed at register
+// time, before workers start) can enqueue from its closures once workers are
+// running. onServerStart sets this just before HTTP boot completes.
+let workerHandleRef: WorkerHandle | undefined;
+const getWorkers = (): WorkerHandle => {
+  if (!workerHandleRef) throw new Error('worker handle not yet initialised');
+  return workerHandleRef;
+};
+
+const reg = createContributionRegistry();
+registerCoreContributions(reg);
+registerIdentityContributions(reg);
+registerIntegrationsContributions(reg, {
+  cryptoSvc,
+  mailerEnv: env,
+  webhookSecret: env.M365_WEBHOOK_SECRET,
+  getWorkers,
+});
+registerKnowledgeContributions(reg);
+registerLdReportingContributions(reg);
+registerNotificationsContributions(reg);
+registerPlannerContributions(reg);
+registerStaffingContributions(reg);
+// MODULE_REGISTRATIONS_END — generator inserts new register*Contributions(reg) calls above this comment.
+registerAppContributions(reg);
+
+// Single per-tenant role-permission overlay projection shared by the HTTP
+// permission resolver (buildServerApp) and the RolePermissionsChanged
+// subscriber that refreshes it, so admin edits take effect process-wide.
+const overlayStore = createOverlayStore({ load: listTenantRoleOverlays });
+
+const lag = await runMigrations(reg, { pool: getPool('worker'), assertCaughtUpOnly: true });
+if (lag.length > 0) {
+  log.error({ lag }, 'schema_migrations behind — run apps/cli migrate before booting server');
+  process.exit(1);
+}
+
+// Forward reference: the mailer is wired after workers start so its addJob target
+// (the WorkerHandle) exists. The reference is set inside onServerStart before any
+// route handler can pull from the mailer.
+let mailerRef: import('@seta/shared-mailer').Mailer | undefined;
+const getMailer = (): import('@seta/shared-mailer').Mailer => {
+  if (!mailerRef) throw new Error('mailer not yet initialised');
+  return mailerRef;
+};
+
+const outboxStore = createOutboxStore({ db: coreDb() });
+
+// Build the staffing orchestration runtime (specialized agents + DAG) and freeze
+// the kernel registries. apps/server is the only layer allowed to bind staffing
+// adapters (planner/identity reads + the agent model) to the engine surface.
+const identityEmbeddingProvider: ReturnType<typeof resolveEmbeddingProvider> = {
+  // Lazy proxy: defer the OPENAI_API_KEY check to the first embed call (runtime)
+  // so the server still boots without a key, matching identity's own lazy use.
+  get modelId() {
+    return resolveEmbeddingProvider().modelId;
+  },
+  get dimensions() {
+    return resolveEmbeddingProvider().dimensions;
+  },
+  embed: (...args) => resolveEmbeddingProvider().embed(...args),
+};
+// ONE shared Mastra store for both the engine runtime and the staffing
+// orchestrator's per-turn Mastra. Cross-Mastra-instance native-suspend resume
+// requires both wrap the SAME physical store; the engine's Mastra is built from
+// getPool('worker'), so the orchestrator must share that exact pool.
+const mastraStorage = createAgentMastraStorage({ pool: getPool('worker') });
+
+const staffingOrchestration = buildStaffingOrchestrationRuntime({
+  repo: new StaffingRunStateRepository(),
+  mastraStorage,
+  resolveModel: () => resolveModel('auto', { tierHint: 'fast' }).model,
+  ports: {
+    taskReader: makeTaskReader(),
+    taskSearch: makeTaskSearch(),
+    skillSearch: makeSkillSearch({
+      provider: identityEmbeddingProvider,
+      pgVector: getIdentityVectorStore(env.DATABASE_URL),
+    }),
+    availability: makeAvailability(),
+    userProfileLookup: makeUserProfileLookup(),
+    // Binds the staffing assign port to planner's public assignTask surface.
+    // RBAC is re-checked inside assignTask at the planner callee.
+    assign: {
+      async assign({ taskId, assigneeUserIds, actorUserId }) {
+        const session = await buildActorSession({ user_id: actorUserId });
+        for (const userId of assigneeUserIds) {
+          await assignTask({ task_id: taskId, user_id: userId, session });
+        }
+      },
+    },
+  },
+});
+
+const ldReportingChat = buildLdReportingChatRuntime({
+  mastraStorage,
+  resolveModel: () => resolveModel('auto', { tierHint: 'fast' }).model,
+});
+SpecializedAgentRegistry.freeze();
+OrchestrationRegistry.freeze();
+
+function isLdReportingChatTurn(input: { userText: string }): boolean {
+  const normalized = input.userText.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  return (
+    /\[Context:\s*ld-reporting#/i.test(input.userText) ||
+    /\b(l&d|ld reporting|training effectiveness|evidence gate|readiness|ds12|completion rate|pass rate|attendance|trainee|learner|training hours|norm|pptx|docx|powerpoint|slide deck|slide export)\b/i.test(
+      input.userText,
+    ) ||
+    (/\b(course|training|report)\b/i.test(input.userText) &&
+      /\b(ai agent|llm|devops|aws cloud|leadership|attendance|assessment|feedback|pptx|docx|slide|powerpoint)\b/i.test(
+        input.userText,
+      )) ||
+    /(bao cao dao tao|khoa hoc|hoc vien|dao tao|hieu qua dao tao)/i.test(normalized)
+  );
+}
+
+const chatOrchestration = {
+  runStream: (
+    input: { userText: string; taskId: string | null },
+    ctx: import('@seta/shared-orchestration').RunCtx,
+  ) =>
+    isLdReportingChatTurn(input)
+      ? ldReportingChat.runStream(input, ctx)
+      : staffingOrchestration.runStream(input, ctx),
+  runResume: (
+    resume: {
+      decision: 'approve' | 'reject' | 'modify';
+      overrideUserIds?: string[];
+      alternateIndices?: number[];
+      note?: string;
+      [key: string]: unknown;
+    },
+    ctx: import('@seta/shared-orchestration').RunCtx & {
+      mastraRunId: string;
+      toolCallId?: string;
+      workflowId?: string;
+      toolId?: string;
+    },
+  ) =>
+    ctx.workflowId === 'ld-reporting.chat' || ctx.toolId === 'ld-reporting_finalizeReport'
+      ? ldReportingChat.runResume(resume, ctx)
+      : staffingOrchestration.runResume(resume, ctx),
+};
+
+// Build the agent engine up front so subscriberBuilders contributed by
+// orchestrator modules (e.g. staffing) can be constructed against the live
+// Mastra instance before the dispatcher starts.
+const agent = registerAgent({
+  pool: getPool('worker'),
+  databaseUrl: env.DATABASE_URL,
+  reg,
+  // Reuse the SAME store instance the staffing orchestrator wraps so the engine
+  // Mastra and the per-turn orchestrator Mastra share one physical store.
+  mastraStorage,
+  log: log.child({ subsystem: 'agent' }),
+  // The chat runtime: every chat turn streams through the staffing
+  // orchestration's streaming entrypoint. apps/server is the only layer that
+  // can bind the staffing runtime to the engine surface.
+  chatOrchestration: chatOrchestration.runStream,
+  // Native-suspend HITL resume: POST /chat/resume re-enters the suspended
+  // proposeAssignment composite via resumeStream. Same composition-root binding.
+  resumeOrchestration: chatOrchestration.runResume,
+  // Chat attachments: apps/server is the only layer that can import the
+  // @seta/knowledge consume/mark functions into the engine surface.
+  consumeThreadAttachments: async ({ tenantId, threadId, query }) => {
+    try {
+      const r = await consumeThreadAttachmentsAsText({
+        tenant_id: tenantId,
+        thread_id: threadId,
+        query,
+        contextWindowTokens: Number(process.env.CHAT_ATTACHMENT_CONTEXT_WINDOW_TOKENS ?? 128_000),
+        reservedOutputTokens: Number(
+          process.env.CHAT_ATTACHMENT_CONTEXT_RESERVED_OUTPUT_TOKENS ?? 4_096,
+        ),
+        safetyRatio: Number(process.env.CHAT_ATTACHMENT_CONTEXT_SAFETY_RATIO ?? 0.9),
+      });
+      return {
+        kind: 'ok' as const,
+        contextBlock: r.contextBlock,
+        consumedFileIds: r.consumedFileIds,
+        failedFileIds: r.failedFileIds,
+      };
+    } catch (e) {
+      if (e instanceof ContextOverflowError) {
+        return {
+          kind: 'overflow' as const,
+          requiredTokens: e.requiredTokens,
+          budgetTokens: e.budgetTokens,
+        };
+      }
+      return {
+        kind: 'error' as const,
+        message: e instanceof Error ? e.message : 'attachment failed',
+      };
+    }
+  },
+  markAttachmentsConsumed: (ids) => markAttachmentsConsumed(ids),
+  markAttachmentsFailed: (ids) => markAttachmentsFailed(ids),
+});
+const agentSubscribers = reg.collected.subscriberBuilders.map(({ builder }) =>
+  builder({ mastra: agent.mastra }),
+);
+
+const rt = buildRuntime(env, {
+  reg,
+  pool: getPool('worker'),
+  log: log.child({ subsystem: 'core.runtime' }),
+  // The orchestration kernel's queued runner (production async path). The chat
+  // harness uses staffingOrchestration.runStream instead; same registries.
+  extraJobs: {
+    ...staffingOrchestration.taskList,
+  },
+  extraSubscribers: [
+    failedLoginAlertSubscriber({
+      getMailer,
+    }) as import('@seta/shared-types').SubscriberDef,
+    revokeSessionsOnDeactivationSubscriber() as import('@seta/shared-types').SubscriberDef,
+    refreshRoleOverlaySubscriber({ overlayStore }) as import('@seta/shared-types').SubscriberDef,
+    ...agentSubscribers,
+  ],
+  onServerStart: async ({ workers }) => {
+    workerHandleRef = workers;
+    const mailer = createMailer({
+      env,
+      outboxStore,
+      queue: {
+        addJob: (taskName, payload, opts) => workers.addJob(taskName, payload, opts),
+      },
+      emit: (event) =>
+        withEmit(undefined, async () => {
+          await emit(event);
+        }),
+      log: log.child({ component: 'mailer' }),
+    });
+    mailerRef = mailer;
+    log.info('mailer wired');
+  },
+  buildServerApp: ({ workers, pool, dispatcher, streams }) => {
+    const { app } = buildServerApp(reg, {
+      pool,
+      databaseUrl: env.DATABASE_URL,
+      workers,
+      readinessSnapshot: () => dispatcher.health(),
+      streams,
+      corsOrigins: env.CORS_ORIGINS,
+      agent,
+      overlayStore,
+      log: log.child({ subsystem: 'server' }),
+    });
+    return app;
+  },
+});
+
+const { server, shutdown } = await rt.startServerRuntime();
+server.on('listening', () => {
+  const addr = server.address();
+  if (addr && typeof addr === 'object') log.info({ port: addr.port }, 'server listening');
+});
+
+let shuttingDown = false;
+const handle = async (signal: string): Promise<void> => {
+  if (shuttingDown) return;
+  shuttingDown = true;
+  log.info({ signal }, 'shutdown begin');
+  await shutdown(signal);
+  await closePools();
+  log.info('shutdown complete');
+  process.exit(0);
+};
+process.on('SIGTERM', () => void handle('SIGTERM'));
+process.on('SIGINT', () => void handle('SIGINT'));

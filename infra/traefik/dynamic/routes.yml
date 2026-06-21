@@ -1,0 +1,86 @@
+# Seta routes — static, file-provider config.
+# Web (React bundle) is served at the apex. API (Hono) is served at /api/* and /health/*.
+#
+# TLS: the websecure entrypoint has `tls: {}` so any router on it serves HTTPS.
+# When ACME is configured (PLATFORM_TLS_MODE=letsencrypt), Traefik issues real certs
+# via the letsencrypt resolver. In self-signed mode (smoke / local), Traefik
+# auto-generates a default self-signed cert at startup — no resolver needed.
+#
+# To force ACME for a router add `tls.certResolver: letsencrypt` here once a
+# domain is configured. The smoke test omits the resolver so Traefik falls back
+# to its default self-signed cert.
+
+http:
+  # ── Observability — disabled on the hackathon host ──────────────────────────
+  # The jaeger-auth middleware and traces/metrics routers below depend on the
+  # jaeger / prometheus / grafana services in compose.yml, which are currently
+  # commented out to fit the 4GB EC2 host. Re-enable both sides together.
+  #
+  # middlewares:
+  #   jaeger-auth:
+  #     basicAuth:
+  #       usersFile: /etc/traefik/jaeger-auth
+  #       realm: "Seta Traces"
+
+  routers:
+    # ── Local HTTP (no TLS) — for Docker smoke tests on port 7080 ────────────
+    local-api:
+      rule: "PathPrefix(`/api`) || PathPrefix(`/health`)"
+      entryPoints:
+        - localhttp
+      service: api
+      priority: 100
+    local-web:
+      rule: "PathPrefix(`/`)"
+      entryPoints:
+        - localhttp
+      service: web
+
+    # ── Production HTTPS routers ──────────────────────────────────────────────
+    # traces:
+    #   rule: "Host(`traces.DOMAIN_PLACEHOLDER`)"
+    #   entryPoints:
+    #     - websecure
+    #   service: traces
+    #   middlewares:
+    #     - jaeger-auth
+    #   tls:
+    #     certResolver: letsencrypt
+    # metrics:
+    #   rule: "Host(`metrics.DOMAIN_PLACEHOLDER`)"
+    #   entryPoints:
+    #     - websecure
+    #   service: metrics
+    #   tls:
+    #     certResolver: letsencrypt
+    api:
+      rule: "PathPrefix(`/api`) || PathPrefix(`/health`)"
+      entryPoints:
+        - websecure
+      service: api
+      priority: 100  # match before the catch-all web route
+      tls: {}
+    web:
+      rule: "PathPrefix(`/`)"
+      entryPoints:
+        - websecure
+      service: web
+      tls: {}
+
+  services:
+    # traces:
+    #   loadBalancer:
+    #     servers:
+    #       - url: "http://jaeger:16686"
+    # metrics:
+    #   loadBalancer:
+    #     servers:
+    #       - url: "http://grafana:3000"
+    api:
+      loadBalancer:
+        servers:
+          - url: "http://server:3000"
+    web:
+      loadBalancer:
+        servers:
+          - url: "http://web:8080"

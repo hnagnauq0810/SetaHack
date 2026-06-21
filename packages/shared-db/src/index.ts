@@ -1,0 +1,27 @@
+import type { NodePgDatabase } from 'drizzle-orm/node-postgres';
+import type { Pool, PoolClient } from 'pg';
+
+export type { NodePgDatabase, Pool, PoolClient };
+export type PoolName = 'web' | 'worker' | 'mastraState';
+
+export { createDb } from './db.ts';
+export { halfvec } from './halfvec.ts';
+export {
+  MigrationChecksumMismatch,
+  type MigrationLagRow,
+  type ModuleMigration,
+  runMigrations,
+} from './migrate.ts';
+export {
+  type EnsureTenantPartitionOptions,
+  ensureTenantPartition,
+} from './partition-provisioner.ts';
+export {
+  closePools,
+  getPool,
+  getPoolStats,
+  initPools,
+  type Pools,
+  type PoolsConfig,
+} from './pools.ts';
+export { type NodeTx, withRetry, withTx } from './tx.ts';

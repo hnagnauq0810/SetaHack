@@ -1,0 +1,68 @@
+{
+  "evidenceId": "ev_71ef2553-bae9-4a89-bd5f-59edf6276160",
+  "datasetId": "ds_47b71e828a6d7a8d",
+  "status": "BLOCKED",
+  "generatedAt": "2026-06-17T07:25:55.533Z",
+  "missingEvidence": [
+    {
+      "type": "IN_PROGRESS_COURSE",
+      "severity": "blocker",
+      "courseId": "Leadership_06_2026",
+      "message": "Course Leadership_06_2026 is In Progress; final effectiveness conclusion is blocked until completion."
+    },
+    {
+      "type": "MISSING_ATTENDANCE",
+      "severity": "warning",
+      "courseId": "Leadership_06_2026",
+      "affectedCount": 24,
+      "message": "Attendance has 24/48 expected rows for Leadership_06_2026."
+    },
+    {
+      "type": "SCORE_INCONSISTENCY",
+      "severity": "blocker",
+      "courseId": "Golang_04_2026",
+      "employeeId": "EMP-171",
+      "message": "Pass_Status conflicts with score/threshold for EMP-171 in Golang_04_2026."
+    },
+    {
+      "type": "SCORE_INCONSISTENCY",
+      "severity": "blocker",
+      "courseId": "Golang_04_2026",
+      "employeeId": "EMP-174",
+      "message": "Pass_Status conflicts with score/threshold for EMP-174 in Golang_04_2026."
+    }
+  ],
+  "checklist": [
+    {
+      "check": "Source availability and required columns",
+      "status": "PASS",
+      "detail": "Teams, OneDrive, Forms, KPI, Rules and Template sheets were mapped to simulated sources."
+    },
+    {
+      "check": "Course status",
+      "status": "FAIL",
+      "detail": "1 course(s) are not completed."
+    },
+    {
+      "check": "Attendance completeness",
+      "status": "WARN",
+      "detail": "Expected attendance rows are trainee count × total sessions. Late is retained for metrics as partial attendance."
+    },
+    {
+      "check": "Assessment completeness",
+      "status": "PASS",
+      "detail": "Completed courses require one assessment/pass-status row per trainee."
+    },
+    {
+      "check": "Feedback completeness",
+      "status": "PASS",
+      "detail": "NORM-14 requires at least 60% feedback response rate for valid analysis."
+    },
+    {
+      "check": "Consistency: course ID, trainee ID, period",
+      "status": "FAIL",
+      "detail": "Cross-source course IDs and pass-status logic were checked against the catalog."
+    }
+  ],
+  "canGenerateFinalConclusion": false
+}

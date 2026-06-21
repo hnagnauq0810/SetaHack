@@ -1,0 +1,50 @@
+{
+  "governanceId": "gv_2496f5dd-ecf6-422c-a289-28423affab43",
+  "role": "LND_MANAGER",
+  "classification": "Risk",
+  "generatedAt": "2026-06-21T12:04:51.439Z",
+  "normFlags": [
+    {
+      "ruleId": "NORM-07",
+      "priority": "High",
+      "category": "Individual",
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-076",
+      "message": "Trainee needs 1:1 support.",
+      "action": "Flag for coaching; assign buddy or practice resources"
+    }
+  ],
+  "outstandingTrainees": [
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-005",
+      "score": 9.4,
+      "attendanceRate": 1,
+      "reason": "Score >= 9.0 and full attendance"
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-119",
+      "score": 9.4,
+      "attendanceRate": 1,
+      "reason": "Score >= 9.0 and full attendance"
+    }
+  ],
+  "supportNeededTrainees": [
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-076",
+      "score": 3.9,
+      "attendanceRate": 0.875,
+      "reason": "Below pass threshold or attendance below 70%"
+    }
+  ],
+  "supportNeededGroups": [
+    {
+      "courseId": "AIAgent_05_2026",
+      "count": 1,
+      "reason": "At least one learner is below pass threshold or attendance policy."
+    }
+  ],
+  "masked": false
+}

@@ -1,0 +1,47 @@
+import { z } from 'zod';
+
+const Env = z.object({
+  NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
+  DATABASE_URL: z.string().url(),
+  PORT: z.coerce.number().default(3000),
+  EVENTS_RETENTION_DAYS: z.coerce.number().default(30),
+  PUBLIC_URL: z.string().url().default('http://localhost:5173'),
+  BETTER_AUTH_SECRET: z.string().min(32),
+  CRYPTO_KEY_PROVIDER: z.enum(['kms', 'env']).default('env'),
+  CRYPTO_KMS_KEY_ARN: z.string().optional(),
+  AWS_REGION: z.string().optional(),
+  CRYPTO_LOCAL_KEYS: z.string().optional(),
+  CRYPTO_LOCAL_PRIMARY_KID: z.string().optional(),
+  CRYPTO_LOCAL_MASTER_KEY: z.string().optional(),
+  MAILER_DEFAULT_TRANSPORT: z.enum(['smtp', 'dev-stub']).default('dev-stub'),
+  MAILER_DEFAULT_SENDER: z.string().email().default('noreply@seta.example'),
+  MAILER_DEFAULT_SENDER_DISPLAY_NAME: z.string().optional(),
+  MAILER_DEFAULT_SMTP_URL: z.string().url().optional(),
+  MAILER_GRAPH_CLIENT_ID: z.string().optional(),
+  MAILER_GRAPH_CLIENT_SECRET: z.string().optional(),
+  // 32+ char secret used to derive clientState HMACs for Microsoft Graph
+  // webhook subscriptions. When absent, the m365 jobs and webhook are not
+  // registered — startup proceeds normally without M365 features.
+  M365_WEBHOOK_SECRET: z.string().min(32).optional(),
+  CORS_ORIGINS: z
+    .string()
+    .default('http://localhost:5173')
+    .transform((s) =>
+      s
+        .split(',')
+        .map((o) => o.trim())
+        .filter(Boolean),
+    ),
+  SESSION_COOKIE_SAMESITE: z.enum(['strict', 'lax']).default('strict'),
+  CLAMAV_HOST: z.string().default('localhost'),
+  CLAMAV_PORT: z.coerce.number().int().positive().default(3310),
+  KNOWLEDGE_AV_REQUIRED: z
+    .enum(['true', 'false'])
+    .default('true')
+    .transform((s) => s === 'true'),
+});
+
+export function parseEnv(raw: NodeJS.ProcessEnv) {
+  return Env.parse(raw);
+}
+export type ServerEnv = z.infer<typeof Env>;

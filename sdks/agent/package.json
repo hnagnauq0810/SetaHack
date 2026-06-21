@@ -1,0 +1,33 @@
+{
+  "name": "@seta/agent-sdk",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Agent-tool contract — Mastra tool types, request-context schema, and permission registry. Modules build agent tools against this contract without depending on the @seta/agent runtime.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./testing": "./src/testing.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@seta/shared-config": "workspace:^",
+    "@types/pg": "^8.20.0",
+    "ai": "^6.0.200",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.8"
+  },
+  "dependencies": {
+    "@mastra/core": "^1.42.0",
+    "@mastra/memory": "^1.20.3",
+    "@seta/shared-embeddings": "workspace:^",
+    "@seta/shared-rbac": "workspace:^",
+    "@seta/shared-retrieval": "workspace:^",
+    "@seta/shared-types": "workspace:^",
+    "async-mutex": "^0.5.0",
+    "pg": "^8.21.0",
+    "zod": "^4.4.3"
+  }
+}
