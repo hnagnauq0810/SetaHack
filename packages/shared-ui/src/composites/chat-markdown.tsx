@@ -51,13 +51,11 @@ const COMPONENTS: Components = {
   ),
   h1: ({ children }) => <h1 className="mb-xs mt-md text-section-title text-ink">{children}</h1>,
   h2: ({ children }) => <h2 className="mb-xs mt-md text-section-title text-ink">{children}</h2>,
-  h3: ({ children }) => (
-    <h3 className="mb-xs mt-md text-body-sm font-semibold text-ink">{children}</h3>
-  ),
+  h3: ({ children }) => <h3 className="mb-xs mt-md text-sm font-semibold text-ink">{children}</h3>,
   hr: () => <hr className="my-md border-hairline" />,
   table: ({ children }) => (
     <div className="my-xs overflow-auto first:mt-0 last:mb-0">
-      <table className="w-full border-collapse text-body-sm">{children}</table>
+      <table className="w-full border-collapse text-sm">{children}</table>
     </div>
   ),
   th: ({ children }) => (
@@ -72,7 +70,7 @@ const COMPONENTS: Components = {
 
 export function ChatMarkdown({ text, className }: ChatMarkdownProps) {
   return (
-    <div className={cn('text-body-sm leading-[1.55] text-ink', className)}>
+    <div className={cn('text-sm leading-[1.6] text-ink', className)}>
       <ReactMarkdown remarkPlugins={[remarkGfm]} components={COMPONENTS}>
         {text}
       </ReactMarkdown>

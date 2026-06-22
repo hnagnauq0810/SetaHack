@@ -1,0 +1,63 @@
+{
+  "measuredAt": "2026-06-22T15:32:25.757Z",
+  "rule": "Completion rate independently recalculated as learners with attendanceRate >= 0.7 divided by learner count. Pass rate independently recalculated from assessment passStatus and compared separately.",
+  "checks": [
+    {
+      "metric": "totalCourses",
+      "expected": 3,
+      "actual": 3,
+      "pass": true
+    },
+    {
+      "metric": "traineeCount",
+      "expected": 59,
+      "actual": 59,
+      "pass": true
+    },
+    {
+      "metric": "attendanceRate",
+      "expected": 0.9288,
+      "actual": 0.9288,
+      "pass": true
+    },
+    {
+      "metric": "completionRate",
+      "expected": 0.9831,
+      "actual": 0.9831,
+      "pass": true
+    },
+    {
+      "metric": "passRate",
+      "expected": 0.8983,
+      "actual": 0.8983,
+      "pass": true
+    },
+    {
+      "metric": "averageScore",
+      "expected": 7.59,
+      "actual": 7.59,
+      "pass": true
+    },
+    {
+      "metric": "feedbackRating",
+      "expected": 4.48,
+      "actual": 4.48,
+      "pass": true
+    },
+    {
+      "metric": "trainingHours",
+      "expected": 848,
+      "actual": 848,
+      "pass": true
+    },
+    {
+      "metric": "effectivenessScore",
+      "expected": 88.23,
+      "actual": 88.23,
+      "pass": true
+    }
+  ],
+  "passed": 9,
+  "total": 9,
+  "accuracy": 1
+}

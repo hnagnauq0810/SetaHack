@@ -18,6 +18,7 @@ import {
   reportTone,
 } from './display-utils';
 import { ReportDownloadActions } from './report-download-actions';
+import { ReviewApprovalCard } from './review-approval-card';
 import { StatusBadge } from './status-badge';
 
 export function LdReportingPage() {
@@ -26,6 +27,7 @@ export function LdReportingPage() {
   const canRead = permissions.has('ld-reporting.read');
   const role = deriveSessionRole(session.role_summary.roles, permissions);
   const canEditDraft = permissions.has('ld-reporting.report.generate');
+  const canFinalizeReport = permissions.has('ld-reporting.report.finalize');
   const { selection } = useAgentSelection();
   const { setPanelOpen } = usePanelUI();
   const queryClient = useQueryClient();
@@ -161,6 +163,7 @@ export function LdReportingPage() {
           <ReportWorkspacePanel
             role={role}
             canEditDraft={canEditDraft}
+            canFinalizeReport={canFinalizeReport}
             reports={reports}
             selectedReport={selectedReport}
             loading={reportsLoading}
@@ -179,6 +182,7 @@ export function LdReportingPage() {
 function ReportWorkspacePanel({
   role,
   canEditDraft,
+  canFinalizeReport,
   reports,
   selectedReport,
   loading,
@@ -190,6 +194,7 @@ function ReportWorkspacePanel({
 }: {
   role: LdRole;
   canEditDraft: boolean;
+  canFinalizeReport: boolean;
   reports: LdReport[];
   selectedReport: LdReport | null;
   loading: boolean;
@@ -308,6 +313,7 @@ function ReportWorkspacePanel({
               report={selectedReport}
               role={role}
               canEditDraft={canEditDraft}
+              canFinalizeReport={canFinalizeReport}
               onReportSaved={onReportSaved}
               onReportDeleted={onReportDeleted}
             />
@@ -391,18 +397,22 @@ function ReportDetail({
   report,
   role,
   canEditDraft,
+  canFinalizeReport,
   onReportSaved,
   onReportDeleted,
 }: {
   report: LdReport;
   role: LdRole;
   canEditDraft: boolean;
+  canFinalizeReport: boolean;
   onReportSaved: (report: LdReport) => void;
   onReportDeleted: (reportId: string) => void;
 }) {
   const metrics = report.metrics.overall;
   const canEdit = role === 'LND_MANAGER' && canEditDraft && report.status !== 'FINAL';
   const [deleting, setDeleting] = useState(false);
+  const [finalizing, setFinalizing] = useState<string | null>(null);
+  const [finalizeError, setFinalizeError] = useState<string | null>(null);
 
   const handleDelete = async () => {
     if (
@@ -418,6 +428,19 @@ function ReportDetail({
       alert(err instanceof Error ? err.message : 'Failed to delete report');
     } finally {
       setDeleting(false);
+    }
+  };
+
+  const handleFinalize = async (decision: 'approve' | 'revise' | 'regenerate') => {
+    setFinalizing(decision);
+    setFinalizeError(null);
+    try {
+      const updated = await ldReportingClient.finalize(report.reportId, decision);
+      onReportSaved(updated);
+    } catch (err) {
+      setFinalizeError(err instanceof Error ? err.message : 'Unable to update report approval.');
+    } finally {
+      setFinalizing(null);
     }
   };
 
@@ -491,6 +514,15 @@ function ReportDetail({
 
       {canEdit ? (
         <DraftEditor key={report.reportId} report={report} onReportSaved={onReportSaved} />
+      ) : null}
+
+      {role === 'LND_MANAGER' && canFinalizeReport ? (
+        <ReviewApprovalCard
+          report={report}
+          loading={finalizing}
+          error={finalizeError}
+          onFinalize={(decision) => void handleFinalize(decision)}
+        />
       ) : null}
     </div>
   );

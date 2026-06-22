@@ -1,0 +1,7 @@
+PPTX exists: true
+PPTX size bytes: 412172
+DOCX exists: true
+DOCX size bytes: 180207
+Report JSON exists: true
+Report JSON size bytes: 13134
+Source report ID: rpt_20e6f8cc-c357-4a4d-8744-8c5cb556b73f

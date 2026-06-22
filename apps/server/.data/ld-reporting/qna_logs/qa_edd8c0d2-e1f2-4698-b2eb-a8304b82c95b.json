@@ -1,0 +1,15 @@
+{
+  "answerId": "qa_edd8c0d2-e1f2-4698-b2eb-a8304b82c95b",
+  "generatedAt": "2026-06-22T16:59:12.945Z",
+  "reportId": "rpt_6b88eb81-539e-4f83-9a4b-b897ae0710c4",
+  "answer": "Completion rate tổng là 100%. Theo NORM-13, completion được tính khi học viên tham gia >= 70% sessions; pass rate được tính riêng theo điểm đạt chuẩn.",
+  "confidence": 0.92,
+  "limitations": [
+    "RBAC masking applied: individual trainee details are hidden or aggregated.",
+    "LLM Q&A fallback was used because the model call failed."
+  ],
+  "citations": [
+    "metrics.overall.completionRate",
+    "NORM-13"
+  ]
+}

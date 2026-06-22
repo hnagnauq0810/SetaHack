@@ -1,0 +1,7 @@
+PASS | Manager sees draft | true
+PASS | BOD cannot see draft | false
+PASS | Manager finalizes valid report | FINAL
+PASS | BOD sees finalized report | 5
+PASS | BOD view masks raw employee IDs | 15 raw IDs checked
+PASS | BOD view omits internal artifact paths | false
+PASS | BOD Q&A rejects draft | Report nay chua duoc finalized nen khong kha dung cho BOD Q&A. BOD chi duoc hoi tren finalized reports da duoc L&D Manager approve.

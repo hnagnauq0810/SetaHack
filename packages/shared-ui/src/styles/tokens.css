@@ -64,8 +64,8 @@
   --max-width-6xl: 72rem;
   --max-width-7xl: 80rem;
 
-  --max-width-conversation: 45rem;
-  --max-width-message-bubble: 33.75rem;
+  --max-width-conversation: 72rem;
+  --max-width-message-bubble: 48rem;
 
   /* Canonical page width + padding. Top-level page bodies use these
      (via the `.page-container` utility in globals.css) so every screen

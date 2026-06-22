@@ -1,0 +1,89 @@
+{
+  "totalEdgeCases": 8,
+  "passed": 8,
+  "failed": 0,
+  "cases": [
+    {
+      "id": "EC-001",
+      "name": "Missing attendance",
+      "expectedStatus": "BLOCKED",
+      "actualStatus": "BLOCKED",
+      "passed": true,
+      "evidenceItems": [
+        "MISSING_ATTENDANCE"
+      ]
+    },
+    {
+      "id": "EC-002",
+      "name": "Missing assessment",
+      "expectedStatus": "BLOCKED",
+      "actualStatus": "BLOCKED",
+      "passed": true,
+      "evidenceItems": [
+        "MISSING_ASSESSMENT"
+      ]
+    },
+    {
+      "id": "EC-003",
+      "name": "In-progress course",
+      "expectedStatus": "BLOCKED",
+      "actualStatus": "BLOCKED",
+      "passed": true,
+      "evidenceItems": [
+        "IN_PROGRESS_COURSE",
+        "MISSING_ATTENDANCE"
+      ]
+    },
+    {
+      "id": "EC-004",
+      "name": "Insufficient feedback",
+      "expectedStatus": "PARTIAL_PASS",
+      "actualStatus": "PARTIAL_PASS",
+      "passed": true,
+      "evidenceItems": [
+        "INSUFFICIENT_FEEDBACK"
+      ]
+    },
+    {
+      "id": "EC-005",
+      "name": "Unknown course ID",
+      "expectedStatus": "BLOCKED",
+      "actualStatus": "BLOCKED",
+      "passed": true,
+      "evidenceItems": [
+        "NO_COURSES_IN_SCOPE"
+      ]
+    },
+    {
+      "id": "EC-006",
+      "name": "Duplicate attendance",
+      "expectedStatus": "BLOCKED",
+      "actualStatus": "BLOCKED",
+      "passed": true,
+      "evidenceItems": [
+        "DUPLICATE_ATTENDANCE"
+      ]
+    },
+    {
+      "id": "EC-007",
+      "name": "Invalid score and rating",
+      "expectedStatus": "BLOCKED",
+      "actualStatus": "BLOCKED",
+      "passed": true,
+      "evidenceItems": [
+        "INVALID_SCORE_RANGE",
+        "INVALID_RATING_RANGE"
+      ]
+    },
+    {
+      "id": "EC-008",
+      "name": "LLM unavailable / deterministic fallback",
+      "expectedStatus": "FALLBACK",
+      "actualStatus": "FALLBACK",
+      "passed": true,
+      "evidenceItems": [
+        "OPENAI_API_KEY is not configured or LD_REPORTING_USE_LLM=false."
+      ]
+    }
+  ]
+}

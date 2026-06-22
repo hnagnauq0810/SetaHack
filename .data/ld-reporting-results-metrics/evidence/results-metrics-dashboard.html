@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>L&D Reporting Results & Metrics</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Inter, Segoe UI, Arial, sans-serif; background: #f3f6f9; color: #0f172a; }
+  .page { width: 1440px; min-height: 1080px; padding: 48px 56px; }
+  .header { display: flex; justify-content: space-between; align-items: end; border-bottom: 2px solid #c7d3e0; padding-bottom: 22px; }
+  h1 { font-size: 46px; margin: 0; letter-spacing: 0; }
+  .subtitle { font-size: 19px; color: #475569; margin-top: 10px; }
+  .badge { padding: 10px 16px; border-radius: 8px; background: #e8fff4; border: 1px solid #8be0b6; color: #075b3f; font-weight: 700; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 28px; }
+  .card { background: white; border: 1px solid #cbd8e6; border-radius: 8px; padding: 20px; min-height: 150px; }
+  .card h2 { margin: 0; font-size: 17px; color: #334155; text-transform: uppercase; letter-spacing: .04em; }
+  .value { margin-top: 14px; font-size: 42px; font-weight: 800; }
+  .note { margin-top: 8px; color: #475569; font-size: 17px; line-height: 1.35; }
+  .wide { grid-column: span 2; }
+  .section { margin-top: 24px; display: grid; grid-template-columns: 1.08fr .92fr; gap: 22px; }
+  .panel { background: white; border: 1px solid #cbd8e6; border-radius: 8px; padding: 24px; }
+  .panel h3 { font-size: 27px; margin: 0 0 16px; }
+  table { width: 100%; border-collapse: collapse; font-size: 16px; }
+  th, td { padding: 10px 8px; border-bottom: 1px solid #e2e8f0; text-align: left; vertical-align: top; }
+  th { color: #475569; font-weight: 700; }
+  .ok { color: #047857; font-weight: 800; }
+  .warn { color: #b45309; font-weight: 800; }
+  .metric-row { display: grid; grid-template-columns: 220px 1fr 96px; gap: 14px; align-items: center; margin: 14px 0; }
+  .bar { height: 18px; background: #e2e8f0; border-radius: 3px; overflow: hidden; }
+  .fill { height: 100%; background: #0b7f5a; }
+  .footer { margin-top: 24px; font-size: 15px; color: #475569; display: flex; justify-content: space-between; }
+  code { background: #f1f5f9; border: 1px solid #d8e1ec; border-radius: 4px; padding: 2px 5px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <div>
+      <h1>Results & Metrics</h1>
+      <div class="subtitle">L&D Training Effectiveness Agent | measured 2026-06-22T15:30:47.359Z | deterministic fallback benchmark</div>
+    </div>
+    <div class="badge">Evidence-backed metrics</div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Output Quality</h2>
+      <div class="value">100%</div>
+      <div class="note">9/9 headline KPI formulas independently matched report output.</div>
+    </div>
+    <div class="card">
+      <h2>Processing Speed</h2>
+      <div class="value">2.04s</div>
+      <div class="note">Q1 draft report with DOCX/PPTX artifacts generated locally.</div>
+    </div>
+    <div class="card">
+      <h2>Test Coverage</h2>
+      <div class="value">24/24</div>
+      <div class="note">Focused automated L&D tests passed: 21 backend + 3 UI.</div>
+    </div>
+    <div class="card">
+      <h2>Edge Handling</h2>
+      <div class="value">19</div>
+      <div class="note">Data, RBAC, edit/finalize, and export error categories covered.</div>
+    </div>
+
+    <div class="card wide">
+      <h2>Final Report Artifact Quality</h2>
+      <div class="value">13 slides</div>
+      <div class="note">PPTX has 1 native chart XML, 0 SVG images; DOCX has 4 PNG chart images, 0 SVG images.</div>
+    </div>
+    <div class="card wide">
+      <h2>Human Review + BOD Delivery</h2>
+      <div class="value">PASS</div>
+      <div class="note">Draft finalized to FINAL; BOD DOCX/PPTX downloads available only after finalize; BOD Q&A grounded in finalized reports.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="panel">
+      <h3>Validated KPI Output</h3>
+      <div class="metric-row"><div>Attendance</div><div class="bar"><div class="fill" style="width:92.88%"></div></div><strong>92.9%</strong></div>
+      <div class="metric-row"><div>Completion</div><div class="bar"><div class="fill" style="width:98.31%"></div></div><strong>98.3%</strong></div>
+      <div class="metric-row"><div>Pass rate</div><div class="bar"><div class="fill" style="width:89.83%"></div></div><strong>89.8%</strong></div>
+      <div class="metric-row"><div>Effectiveness</div><div class="bar"><div class="fill" style="width:88.23%"></div></div><strong>88.23/100</strong></div>
+      <table style="margin-top: 18px">
+        <tr><th>Report scope</th><td>3 completed courses, 59 trainee-course records</td></tr>
+        <tr><th>Evidence status</th><td class="ok">PASS</td></tr>
+        <tr><th>Quality status</th><td class="ok">PASS</td></tr>
+        <tr><th>Governance</th><td>Risk; 7 high-priority NORM flags</td></tr>
+      </table>
+    </div>
+
+    <div class="panel">
+      <h3>Scenario Evidence</h3>
+      <table>
+        <tr><th>Scenario</th><th>Expected</th><th>Actual</th><th>Result</th></tr>
+        <tr><td>completed_q1_default_workbook</td><td>PASS</td><td>PASS</td><td class="ok">PASS</td></tr><tr><td>in_progress_leadership_course</td><td>BLOCKED</td><td>BLOCKED</td><td class="ok">PASS</td></tr><tr><td>natural_course_name_ai_agent</td><td>PASS</td><td>PASS</td><td class="ok">PASS</td></tr><tr><td>conflicting_period_course_scope</td><td>BLOCKED</td><td>BLOCKED</td><td class="ok">PASS</td></tr>
+      </table>
+      <h3 style="margin-top: 24px">Speed Evidence</h3>
+      <table>
+        <tr><th>Step</th><th>Measured time</th></tr>
+        <tr><td>Evidence Gate readiness</td><td>153.06 ms</td></tr>
+        <tr><td>Generate report + artifacts</td><td>2043.97 ms</td></tr>
+        <tr><td>BOD DOCX export after finalize</td><td>1126.35 ms</td></tr>
+        <tr><td>BOD PPTX export after finalize</td><td>33.96 ms</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:24px">
+    <h3>Evidence Files</h3>
+    <table>
+      <tr><th>Evidence</th><th>File</th></tr>
+      <tr><td>Backend/domain automated tests</td><td><code>backend-vitest.log</code>: 21/21 passed</td></tr>
+      <tr><td>BOD download UI automated tests</td><td><code>web-download-actions-vitest.log</code>: 3/3 passed</td></tr>
+      <tr><td>Workspace type safety</td><td><code>workspace-typecheck.log</code>: 26/26 packages successful</td></tr>
+      <tr><td>Benchmark raw data</td><td><code>benchmark-results.json</code></td></tr>
+      <tr><td>KPI formula validation raw data</td><td><code>kpi-formula-validation.json</code></td></tr>
+      <tr><td>Generated report artifacts</td><td><code>sample-final-report.pptx</code>, <code>sample-final-report.docx</code></td></tr>
+    </table>
+  </div>
+
+  <div class="footer">
+    <span>Measured on local dev: Node v22.18.0 on win32. Repository target runtime remains Node 24 LTS.</span>
+    <span>SETA L&D Reporting</span>
+  </div>
+</div>
+</body>
+</html>

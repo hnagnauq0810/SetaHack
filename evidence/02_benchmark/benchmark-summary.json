@@ -1,0 +1,150 @@
+{
+  "measuredAt": "2026-06-22T18:44:29.204Z",
+  "runsPerOperation": 5,
+  "environment": {
+    "node": "v22.18.0",
+    "platform": "win32/x64",
+    "llmEnabled": false,
+    "llmMode": "deterministic fallback (LD_REPORTING_USE_LLM=false)",
+    "dataset": "packages/ld-reporting/mock-data/LnD_07_Training_Effectiveness.xlsx"
+  },
+  "operations": {
+    "load_normalize_dataset": {
+      "runs": 5,
+      "success": 5,
+      "avgMs": 38.79,
+      "p95Ms": 56.03
+    },
+    "evidence_gate": {
+      "runs": 5,
+      "success": 5,
+      "avgMs": 4,
+      "p95Ms": 5.9
+    },
+    "metrics_calculation": {
+      "runs": 5,
+      "success": 5,
+      "avgMs": 2.28,
+      "p95Ms": 2.98
+    },
+    "build_report_json": {
+      "runs": 5,
+      "success": 5,
+      "avgMs": 7.82,
+      "p95Ms": 27.3
+    },
+    "readiness": {
+      "runs": 5,
+      "success": 5,
+      "avgMs": 48.51,
+      "p95Ms": 63.26
+    },
+    "generate_report_with_artifacts": {
+      "runs": 5,
+      "success": 5,
+      "avgMs": 1374.94,
+      "p95Ms": 1596.87
+    },
+    "finalize": {
+      "runs": 5,
+      "success": 5,
+      "avgMs": 1.5,
+      "p95Ms": 1.65
+    },
+    "qna_finalized": {
+      "runs": 5,
+      "success": 5,
+      "avgMs": 9.91,
+      "p95Ms": 17.68
+    },
+    "generate_artifact_bod_docx": {
+      "runs": 5,
+      "success": 5,
+      "avgMs": 1168.08,
+      "p95Ms": 1234.13
+    }
+  },
+  "metricAssertions": [
+    {
+      "metric": "totalCourses",
+      "expected": 3,
+      "actual": 3,
+      "delta": 0,
+      "tolerance": 0,
+      "exactMatch": true,
+      "passed": true
+    },
+    {
+      "metric": "traineeCount",
+      "expected": 59,
+      "actual": 59,
+      "delta": 0,
+      "tolerance": 0,
+      "exactMatch": true,
+      "passed": true
+    },
+    {
+      "metric": "attendanceRate",
+      "expected": 0.9288,
+      "actual": 0.9288,
+      "delta": 0,
+      "tolerance": 0.0001,
+      "exactMatch": true,
+      "passed": true
+    },
+    {
+      "metric": "completionRate",
+      "expected": 0.9831,
+      "actual": 0.9831,
+      "delta": 0,
+      "tolerance": 0.0001,
+      "exactMatch": true,
+      "passed": true
+    },
+    {
+      "metric": "passRate",
+      "expected": 0.8983,
+      "actual": 0.8983,
+      "delta": 0,
+      "tolerance": 0.0001,
+      "exactMatch": true,
+      "passed": true
+    },
+    {
+      "metric": "averageScore",
+      "expected": 7.59,
+      "actual": 7.59,
+      "delta": 0,
+      "tolerance": 0.01,
+      "exactMatch": true,
+      "passed": true
+    },
+    {
+      "metric": "feedbackRating",
+      "expected": 4.47,
+      "actual": 4.48,
+      "delta": 0.01,
+      "tolerance": 0.01,
+      "exactMatch": false,
+      "passed": true
+    },
+    {
+      "metric": "trainingHours",
+      "expected": 848,
+      "actual": 848,
+      "delta": 0,
+      "tolerance": 0,
+      "exactMatch": true,
+      "passed": true
+    },
+    {
+      "metric": "effectivenessScore",
+      "expected": 88.23,
+      "actual": 88.23,
+      "delta": 0,
+      "tolerance": 0.01,
+      "exactMatch": true,
+      "passed": true
+    }
+  ]
+}

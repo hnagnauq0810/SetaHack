@@ -8,6 +8,7 @@ describe('<ChatMessage>', () => {
     expect(screen.getByText('hi there')).toBeInTheDocument();
     const root = screen.getByText('hi there').closest('[data-variant]');
     expect(root?.getAttribute('data-variant')).toBe('user');
+    expect(screen.getByText('hi there').className).toMatch(/text-sm/);
   });
 
   it('renders the agent name + avatar slot for agent variant', () => {
@@ -18,6 +19,7 @@ describe('<ChatMessage>', () => {
     );
     expect(screen.getByText('Supervisor')).toBeInTheDocument();
     expect(screen.getByText('body')).toBeInTheDocument();
+    expect(screen.getByText('body').className).toMatch(/text-sm/);
   });
 
   it('applies dim class when dim=true', () => {

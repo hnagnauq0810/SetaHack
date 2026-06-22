@@ -1,0 +1,14 @@
+{
+  "answerId": "qa_4cf13c48-66a7-4d36-92ef-5d67ab4d2c0e",
+  "generatedAt": "2026-06-22T16:23:42.270Z",
+  "reportId": "rpt_1426465f-ac06-47a8-939b-4b058d242aed",
+  "answer": "7.88",
+  "confidence": 0.94,
+  "citations": [
+    "metrics.overall.averageScore",
+    "metrics.courses.averageScore"
+  ],
+  "limitations": [
+    "RBAC masking applied: individual trainee details are hidden or aggregated."
+  ]
+}

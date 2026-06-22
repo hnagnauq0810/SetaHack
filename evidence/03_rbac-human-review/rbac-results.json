@@ -1,0 +1,42 @@
+{
+  "measuredAt": "2026-06-22T18:44:29.205Z",
+  "passed": 7,
+  "total": 7,
+  "checks": [
+    {
+      "name": "Manager sees draft",
+      "passed": true,
+      "actual": "true"
+    },
+    {
+      "name": "BOD cannot see draft",
+      "passed": true,
+      "actual": "false"
+    },
+    {
+      "name": "Manager finalizes valid report",
+      "passed": true,
+      "actual": "FINAL"
+    },
+    {
+      "name": "BOD sees finalized report",
+      "passed": true,
+      "actual": "5"
+    },
+    {
+      "name": "BOD view masks raw employee IDs",
+      "passed": true,
+      "actual": "15 raw IDs checked"
+    },
+    {
+      "name": "BOD view omits internal artifact paths",
+      "passed": true,
+      "actual": "false"
+    },
+    {
+      "name": "BOD Q&A rejects draft",
+      "passed": true,
+      "actual": "Report nay chua duoc finalized nen khong kha dung cho BOD Q&A. BOD chi duoc hoi tren finalized reports da duoc L&D Manager approve."
+    }
+  ]
+}

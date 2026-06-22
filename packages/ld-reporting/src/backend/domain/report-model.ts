@@ -494,8 +494,12 @@ function buildRecommendations(report: ReportJson): ReportRecommendation[] {
       .map((flag) => cleanText(flag.action)),
   );
   const out: ReportRecommendation[] = [];
+  const seenIntents = new Set<string>();
   for (const action of [...highFlagActions, ...report.recommendations.map(cleanText)]) {
     if (!action) continue;
+    const intent = recommendationIntent(action);
+    if (seenIntents.has(intent)) continue;
+    seenIntents.add(intent);
     out.push({
       action,
       owner: /manager|attendance|direct/i.test(action) ? 'Team Manager + L&D' : 'L&D Manager',
@@ -504,11 +508,7 @@ function buildRecommendations(report: ReportJson): ReportRecommendation[] {
         : out.length < 3
           ? 'Medium'
           : 'Low',
-      expectedOutcome: /coaching|support|buddy/i.test(action)
-        ? 'Improve learner recovery and reduce support-needed cases.'
-        : /attendance/i.test(action)
-          ? 'Reduce attendance risk in the next cohort.'
-          : 'Improve training effectiveness and repeatability.',
+      expectedOutcome: measurableExpectedOutcome(action, report),
     });
     if (out.length >= 6) break;
   }
@@ -517,10 +517,148 @@ function buildRecommendations(report: ReportJson): ReportRecommendation[] {
       action: 'Maintain current delivery model and reuse top-performing materials.',
       owner: 'L&D Manager',
       priority: 'Low',
-      expectedOutcome: 'Preserve current performance level while monitoring future cohorts.',
+      expectedOutcome: measurableExpectedOutcome('maintain current delivery model', report),
     });
   }
   return out;
+}
+
+function recommendationIntent(action: string): string {
+  const normalized = action.toLowerCase();
+  if (/trainer|facilitat/.test(normalized)) return 'trainer-quality';
+  if (/coaching|support|buddy|practice/.test(normalized)) return 'learner-support';
+  if (/incomplete|re-enrollment/.test(normalized)) return 're-enrollment';
+  if (/content review|content.*review|review.*content|delivery method|pass rate/.test(normalized))
+    return 'content-review';
+  if (/redesign|re-delivery/.test(normalized)) return 'course-redesign';
+  if (/attendance|absentee|reminder/.test(normalized)) return 'attendance';
+  if (/feedback|survey|response/.test(normalized)) return 'feedback';
+  if (/block|evidence|data incomplete|verify|inconsisten|publish/.test(normalized))
+    return 'evidence-readiness';
+  if (/maintain|reuse|preserve/.test(normalized)) return 'maintain-performance';
+  return normalized
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim()
+    .slice(0, 80);
+}
+
+function measurableExpectedOutcome(action: string, report: ReportJson): string {
+  const normalized = action.toLowerCase();
+  const overall = report.metrics.overall;
+  const blockerCount = report.evidence.missingEvidence.filter(
+    (item) => item.severity === 'blocker',
+  ).length;
+
+  if (/block|evidence|data incomplete|verify|inconsisten|publish/.test(normalized)) {
+    return blockerCount > 0
+      ? `Reduce Evidence Gate blockers from ${blockerCount} to 0 and move report readiness from ${report.evidence.status} to PASS before publication.`
+      : 'Maintain 0 Evidence Gate blockers and PASS readiness at the next reporting checkpoint.';
+  }
+
+  if (/trainer|facilitat/.test(normalized)) {
+    const course = lowestCourseBy(report, (item) => item.trainerRatingAvg);
+    return scoreTargetOutcome('trainer rating', course?.trainerRatingAvg, 4, 5, course?.courseName);
+  }
+
+  if (/attendance|absentee|reminder/.test(normalized)) {
+    const course = lowestCourseBy(report, (item) => item.attendanceRate);
+    return rateTargetOutcome('attendance', course?.attendanceRate, 0.85, course?.courseName);
+  }
+
+  if (/feedback|survey|response/.test(normalized)) {
+    const course = lowestCourseBy(report, (item) => item.feedbackResponseRate);
+    return rateTargetOutcome(
+      'feedback response rate',
+      course?.feedbackResponseRate,
+      0.6,
+      course?.courseName,
+    );
+  }
+
+  if (/incomplete|re-enrollment/.test(normalized)) {
+    const current = report.governance.normFlags.filter((flag) => flag.ruleId === 'NORM-05').length;
+    return current > 0
+      ? `Reduce incomplete or missing-assessment learner records from ${current} to 0 before the next cohort closes.`
+      : 'Maintain 0 incomplete or missing-assessment learner records at the next cohort close.';
+  }
+
+  if (/coaching|support|buddy|practice/.test(normalized)) {
+    const current = report.governance.supportNeededTrainees.length;
+    if (current > 0) {
+      return `Reduce support-needed learner cases from ${current} to 0 (100% resolution against pass-score and attendance policy) by the next cohort review.`;
+    }
+    return 'Maintain 0 support-needed learner cases in the next cohort.';
+  }
+
+  if (/redesign|average score|assessment/.test(normalized)) {
+    const course = lowestCourseBy(report, (item) => item.averageScore);
+    return scoreTargetOutcome('average score', course?.averageScore, 6.5, 10, course?.courseName);
+  }
+
+  if (
+    /content review|content.*review|review.*content|delivery method|pass rate|re-delivery/.test(
+      normalized,
+    )
+  ) {
+    const course = lowestCourseBy(report, (item) => item.passRate);
+    return rateTargetOutcome('pass rate', course?.passRate, 0.8, course?.courseName);
+  }
+
+  if (/maintain|reuse|preserve/.test(normalized)) {
+    return `Maintain attendance at or above 85% (current ${formatPct(overall.attendanceRate)}), completion at or above 90% (current ${formatPct(overall.completionRate)}), and pass rate at or above 80% (current ${formatPct(overall.passRate)}) in the next cohort.`;
+  }
+
+  return scoreTargetOutcome('overall effectiveness score', overall.effectivenessScore, 85, 100);
+}
+
+function lowestCourseBy(
+  report: ReportJson,
+  select: (course: ReportJson['metrics']['courses'][number]) => number | null,
+): ReportJson['metrics']['courses'][number] | undefined {
+  return report.metrics.courses.reduce<ReportJson['metrics']['courses'][number] | undefined>(
+    (lowest, course) => {
+      const value = select(course);
+      if (value === null) return lowest;
+      if (!lowest) return course;
+      const lowestValue = select(lowest);
+      return lowestValue === null || value < lowestValue ? course : lowest;
+    },
+    undefined,
+  );
+}
+
+function rateTargetOutcome(
+  label: string,
+  current: number | null | undefined,
+  target: number,
+  courseName?: string,
+): string {
+  const scope = courseName ? `${courseName} ${label}` : label;
+  if (current === null || current === undefined) {
+    return `Reach the ${formatPct(target)} target for ${scope} once a validated baseline is available.`;
+  }
+  if (current >= target) {
+    return `Maintain ${scope} at or above the ${formatPct(target)} target (current ${formatPct(current)}) in the next cohort.`;
+  }
+  const deltaPoints = (target - current) * 100;
+  return `Increase ${scope} from ${formatPct(current)} to at least ${formatPct(target)} (+${formatNumber(deltaPoints, 1)} percentage points) in the next cohort.`;
+}
+
+function scoreTargetOutcome(
+  label: string,
+  current: number | null | undefined,
+  target: number,
+  scale: number,
+  courseName?: string,
+): string {
+  const scope = courseName ? `${courseName} ${label}` : label;
+  if (current === null || current === undefined) {
+    return `Reach the ${formatNumber(target, 1)}/${scale} target for ${scope} once a validated baseline is available.`;
+  }
+  if (current >= target) {
+    return `Maintain ${scope} at or above the ${formatNumber(target, 1)}/${scale} target (current ${formatNumber(current, 2)}/${scale}) in the next cohort.`;
+  }
+  return `Increase ${scope} from ${formatNumber(current, 2)}/${scale} to at least ${formatNumber(target, 1)}/${scale} (+${formatNumber(target - current, 2)} points) in the next cohort.`;
 }
 
 function headlineFor(report: ReportJson): string {

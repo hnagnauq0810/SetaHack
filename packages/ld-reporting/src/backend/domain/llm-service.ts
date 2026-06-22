@@ -145,6 +145,8 @@ export async function answerQuestionWithLlm(input: {
             'Do not use outside knowledge. Do not invent numbers.',
             'If the artifact does not support the answer, say the report does not contain enough evidence.',
             'Respect RBAC strictly: for every non-LND_MANAGER role, do not reveal employee IDs, individual scores, or personal comments.',
+            'For metric or comparison questions, write a business-ready answer with: (1) a direct conclusion, (2) the key validated values and both absolute and relative differences when calculable, (3) a short section labelled "Ý nghĩa:" that interprets the result without claiming an unsupported cause, and (4) a short section labelled "Khuyến nghị:" with one evidence-grounded next step.',
+            'Keep simple answers compact, normally 80 to 180 words, and omit a section only when the artifact cannot support it.',
             'Return strict JSON only with keys: answer, confidence, citations, limitations.',
           ].join(' '),
         },

@@ -338,6 +338,7 @@ export function mountChatRoute(app: Hono<AgentRouteEnv>, deps: AgentRouteDeps): 
     const uiStream = createUIMessageStream({
       originalMessages: effectiveMessages,
       execute: async ({ writer }) => {
+        const thinkingStartedAtMs = Date.now();
         const pageContextKind =
           (parsed.data.pageContext?.kind ?? getPageContextKind(effectiveMessages)) || undefined;
         const run = await orchestrate(
@@ -367,7 +368,11 @@ export function mountChatRoute(app: Hono<AgentRouteEnv>, deps: AgentRouteDeps): 
         const { assistantParts } = await pumpOrchestrationStream(
           writer as unknown as import('../orchestration-ui-stream.ts').UiStreamWriter,
           aiParts as AsyncIterable<{ type: string; delta?: string; data?: unknown }>,
-          { finalize: run.finalize, onApproval },
+          {
+            finalize: run.finalize,
+            onApproval,
+            timing: { startedAtMs: thinkingStartedAtMs },
+          },
         );
         // Persist the user turn + assistant trace timeline so the conversation
         // survives reload (GET /threads/:id rebuilds the cards + final answer).

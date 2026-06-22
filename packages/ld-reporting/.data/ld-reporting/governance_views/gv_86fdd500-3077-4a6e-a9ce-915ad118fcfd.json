@@ -1,0 +1,171 @@
+{
+  "governanceId": "gv_86fdd500-3077-4a6e-a9ce-915ad118fcfd",
+  "role": "LND_MANAGER",
+  "classification": "Not reportable",
+  "generatedAt": "2026-06-22T16:35:59.000Z",
+  "normFlags": [
+    {
+      "ruleId": "NORM-01",
+      "priority": "High",
+      "category": "Effectiveness",
+      "courseId": "Leadership_06_2026",
+      "message": "Pass rate is below 70%.",
+      "action": "Flag course for content review; notify L&D manager"
+    },
+    {
+      "ruleId": "NORM-03",
+      "priority": "Medium",
+      "category": "Attendance",
+      "courseId": "Leadership_06_2026",
+      "message": "Attendance rate is below 75%.",
+      "action": "Send reminder to absentees; flag to direct manager"
+    },
+    {
+      "ruleId": "NORM-05",
+      "priority": "High",
+      "category": "Individual",
+      "courseId": "Leadership_06_2026",
+      "employeeId": "EMP-019",
+      "message": "Trainee has zero score or missing assessment.",
+      "action": "Mark as Incomplete; recommend re-enrollment in next cohort"
+    },
+    {
+      "ruleId": "NORM-05",
+      "priority": "High",
+      "category": "Individual",
+      "courseId": "Leadership_06_2026",
+      "employeeId": "EMP-029",
+      "message": "Trainee has zero score or missing assessment.",
+      "action": "Mark as Incomplete; recommend re-enrollment in next cohort"
+    },
+    {
+      "ruleId": "NORM-05",
+      "priority": "High",
+      "category": "Individual",
+      "courseId": "Leadership_06_2026",
+      "employeeId": "EMP-047",
+      "message": "Trainee has zero score or missing assessment.",
+      "action": "Mark as Incomplete; recommend re-enrollment in next cohort"
+    },
+    {
+      "ruleId": "NORM-05",
+      "priority": "High",
+      "category": "Individual",
+      "courseId": "Leadership_06_2026",
+      "employeeId": "EMP-060",
+      "message": "Trainee has zero score or missing assessment.",
+      "action": "Mark as Incomplete; recommend re-enrollment in next cohort"
+    },
+    {
+      "ruleId": "NORM-05",
+      "priority": "High",
+      "category": "Individual",
+      "courseId": "Leadership_06_2026",
+      "employeeId": "EMP-093",
+      "message": "Trainee has zero score or missing assessment.",
+      "action": "Mark as Incomplete; recommend re-enrollment in next cohort"
+    },
+    {
+      "ruleId": "NORM-05",
+      "priority": "High",
+      "category": "Individual",
+      "courseId": "Leadership_06_2026",
+      "employeeId": "EMP-124",
+      "message": "Trainee has zero score or missing assessment.",
+      "action": "Mark as Incomplete; recommend re-enrollment in next cohort"
+    },
+    {
+      "ruleId": "NORM-05",
+      "priority": "High",
+      "category": "Individual",
+      "courseId": "Leadership_06_2026",
+      "employeeId": "EMP-131",
+      "message": "Trainee has zero score or missing assessment.",
+      "action": "Mark as Incomplete; recommend re-enrollment in next cohort"
+    },
+    {
+      "ruleId": "NORM-05",
+      "priority": "High",
+      "category": "Individual",
+      "courseId": "Leadership_06_2026",
+      "employeeId": "EMP-135",
+      "message": "Trainee has zero score or missing assessment.",
+      "action": "Mark as Incomplete; recommend re-enrollment in next cohort"
+    },
+    {
+      "ruleId": "NORM-11",
+      "priority": "High",
+      "category": "Reporting",
+      "courseId": "Leadership_06_2026",
+      "message": "Course Leadership_06_2026 is In Progress; final effectiveness conclusion is blocked until completion.",
+      "action": "Block final conclusion; flag data incomplete"
+    }
+  ],
+  "outstandingTrainees": [],
+  "supportNeededTrainees": [
+    {
+      "courseId": "Leadership_06_2026",
+      "employeeId": "EMP-019",
+      "score": null,
+      "attendanceRate": 0.5,
+      "reason": "Below pass threshold or attendance below 70%"
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "employeeId": "EMP-029",
+      "score": null,
+      "attendanceRate": 0.5,
+      "reason": "Below pass threshold or attendance below 70%"
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "employeeId": "EMP-047",
+      "score": null,
+      "attendanceRate": 0.5,
+      "reason": "Below pass threshold or attendance below 70%"
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "employeeId": "EMP-060",
+      "score": null,
+      "attendanceRate": 0.5,
+      "reason": "Below pass threshold or attendance below 70%"
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "employeeId": "EMP-093",
+      "score": null,
+      "attendanceRate": 0.5,
+      "reason": "Below pass threshold or attendance below 70%"
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "employeeId": "EMP-124",
+      "score": null,
+      "attendanceRate": 0.5,
+      "reason": "Below pass threshold or attendance below 70%"
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "employeeId": "EMP-131",
+      "score": null,
+      "attendanceRate": 0.3333333333333333,
+      "reason": "Below pass threshold or attendance below 70%"
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "employeeId": "EMP-135",
+      "score": null,
+      "attendanceRate": 0.5,
+      "reason": "Below pass threshold or attendance below 70%"
+    }
+  ],
+  "supportNeededGroups": [
+    {
+      "courseId": "Leadership_06_2026",
+      "count": 8,
+      "reason": "At least one learner is below pass threshold or attendance policy."
+    }
+  ],
+  "masked": false
+}

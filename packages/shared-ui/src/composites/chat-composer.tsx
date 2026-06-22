@@ -127,7 +127,7 @@ export function ChatComposer({
           )}
           <textarea
             ref={textareaRef}
-            className="block w-full resize-none overflow-y-auto bg-transparent text-body-sm leading-[1.45] placeholder:text-ink-subtle focus:outline-none focus-visible:outline-none"
+            className="block w-full resize-none overflow-y-auto bg-transparent text-sm leading-[1.5] placeholder:text-ink-subtle focus:outline-none focus-visible:outline-none"
             rows={1}
             value={value}
             onChange={(e) => onChange(e.target.value)}

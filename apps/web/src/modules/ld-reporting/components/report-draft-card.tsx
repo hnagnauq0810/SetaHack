@@ -86,7 +86,7 @@ export function ReportDraftCard({ report }: ReportDraftCardProps) {
               className="h-8 border-slate-200 text-xs hover:bg-slate-50"
             >
               <PlusCircle className="mr-1 size-3.5" />
-              Approve & Add to Reports
+              Save Draft to Reports
             </Button>
           )}
           {report && localSaved && report.saved === false && (
@@ -298,7 +298,7 @@ export function ReportDraftApprovalBar({ report }: ReportDraftApprovalBarProps) 
           className="h-8 shrink-0 border-blue-200 bg-white text-xs hover:bg-blue-50"
         >
           <PlusCircle className="mr-1 size-3.5" />
-          {saveMutation.isPending ? 'Adding...' : 'Approve & Add to Reports'}
+          {saveMutation.isPending ? 'Saving...' : 'Save Draft to Reports'}
         </Button>
       </div>
 

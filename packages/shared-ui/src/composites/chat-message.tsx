@@ -25,7 +25,7 @@ export function ChatMessage({
   if (variant === 'user') {
     return (
       <div data-variant="user" className={cn('flex justify-end', className)}>
-        <div className="max-w-message-bubble rounded-2xl rounded-tr-md bg-surface-2 px-3.5 py-2 text-body-sm text-ink">
+        <div className="max-w-message-bubble rounded-2xl rounded-tr-md bg-surface-2 px-3.5 py-2 text-sm leading-relaxed text-ink">
           {children}
         </div>
       </div>
@@ -48,7 +48,7 @@ export function ChatMessage({
           {clock && <span>{clock}</span>}
         </div>
       )}
-      <div className="text-body-sm text-ink [&_p]:my-0">{children}</div>
+      <div className="text-sm leading-relaxed text-ink [&_p]:my-0">{children}</div>
     </div>
   );
 }

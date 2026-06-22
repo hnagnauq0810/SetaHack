@@ -23,6 +23,16 @@ export interface LdReportingAgentDeps {
   store?: LdReportingStore;
 }
 
+export class LdReportingDomainError extends Error {
+  constructor(
+    readonly code: 'FINALIZE_BLOCKED_BY_EVIDENCE' | 'FINALIZE_BLOCKED_BY_QUALITY',
+    message: string,
+  ) {
+    super(message);
+    this.name = 'LdReportingDomainError';
+  }
+}
+
 export class LdReportingSpecialistAgent {
   private readonly store: LdReportingStore;
 
@@ -208,6 +218,20 @@ export class LdReportingSpecialistAgent {
   }): Promise<ReportJson> {
     const report = await this.store.getReport(input.reportId);
     if (!report) throw new Error(`Report not found: ${input.reportId}`);
+    if (input.body.decision === 'approve') {
+      if (report.evidence.status === 'BLOCKED' || !report.evidence.canGenerateFinalConclusion) {
+        throw new LdReportingDomainError(
+          'FINALIZE_BLOCKED_BY_EVIDENCE',
+          'Finalization is blocked because the evidence gate does not allow a final conclusion.',
+        );
+      }
+      if (report.quality?.status !== 'PASS') {
+        throw new LdReportingDomainError(
+          'FINALIZE_BLOCKED_BY_QUALITY',
+          'Finalization is blocked until report quality passes validation.',
+        );
+      }
+    }
     const approval = {
       decision: input.body.decision,
       note: input.body.note,
@@ -219,8 +243,10 @@ export class LdReportingSpecialistAgent {
       report.finalizedAt = approval.at;
     } else if (input.body.decision === 'revise') {
       report.status = 'REVISION_REQUESTED';
+      report.finalizedAt = undefined;
     } else {
       report.status = 'DRAFT';
+      report.finalizedAt = undefined;
     }
     report.approval = approval;
     await this.store.saveReport(report);
@@ -408,8 +434,31 @@ function groundedAnswer(
         citations: ['governance.role', 'metrics.overall.averageScore'],
       };
     }
+    const overallScore = report.metrics.overall.averageScore;
+    const comparedCourse =
+      findCourseInQuestion(report, question) ?? lowestCourseMetric(report, 'averageScore');
+    const scoreDelta =
+      typeof overallScore === 'number' && comparedCourse
+        ? Number(comparedCourse.averageScore) - overallScore
+        : null;
+    const relativeGap =
+      scoreDelta !== null && typeof overallScore === 'number' && overallScore !== 0
+        ? (Math.abs(scoreDelta) / overallScore) * 100
+        : null;
+    const direction =
+      scoreDelta === null || scoreDelta === 0 ? 'bằng' : scoreDelta < 0 ? 'thấp hơn' : 'cao hơn';
+    const comparison = comparedCourse
+      ? `${comparedCourse.courseName} đạt ${formatNumber(Number(comparedCourse.averageScore), 2)}/10, ${direction} ${formatNumber(Math.abs(scoreDelta ?? 0), 2)} điểm (${formatNumber(relativeGap, 1)}%) so với mức trung bình ${formatNumber(overallScore, 2)}/10.`
+      : `Điểm trung bình của báo cáo là ${formatNumber(overallScore, 2)}/10; không có dữ liệu theo khóa để so sánh.`;
+    const interpretation =
+      scoreDelta === null || scoreDelta === 0
+        ? 'Kết quả đang ngang với mặt bằng điểm của phạm vi báo cáo'
+        : `Kết quả ${direction} mặt bằng điểm của phạm vi báo cáo`;
     return {
-      answer: `Average score tổng là ${formatNumber(report.metrics.overall.averageScore, 2)}/10. Course thấp nhất theo điểm trung bình là ${lowestCourse(report, 'averageScore')}.`,
+      answer:
+        `${comparison} ` +
+        `Ý nghĩa: ${interpretation}, nhưng chỉ riêng điểm trung bình chưa đủ để kết luận nguyên nhân. ` +
+        'Khuyến nghị: Đối chiếu thêm attendance, completion, pass rate và feedback đã validate trước khi điều chỉnh nội dung hoặc phương pháp đào tạo.',
       confidence: 0.94,
       limitations,
       citations: ['metrics.overall.averageScore', 'metrics.courses.averageScore'],
@@ -507,4 +556,27 @@ function lowestCourse(
     ? formatPct(value as number)
     : formatNumber(value as number, 2);
   return `${lowest.courseName} (${rendered})`;
+}
+
+function lowestCourseMetric(
+  report: ReportJson,
+  key: keyof ReportJson['metrics']['courses'][number],
+): ReportJson['metrics']['courses'][number] | undefined {
+  const courses = report.metrics.courses.filter((course) => typeof course[key] === 'number');
+  return courses.reduce<ReportJson['metrics']['courses'][number] | undefined>(
+    (best, current) => (!best || Number(current[key]) < Number(best[key]) ? current : best),
+    undefined,
+  );
+}
+
+function findCourseInQuestion(
+  report: ReportJson,
+  question: string,
+): ReportJson['metrics']['courses'][number] | undefined {
+  const normalizedQuestion = question.toLowerCase();
+  return report.metrics.courses.find(
+    (course) =>
+      normalizedQuestion.includes(course.courseId.toLowerCase()) ||
+      normalizedQuestion.includes(course.courseName.toLowerCase()),
+  );
 }

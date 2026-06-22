@@ -23,7 +23,12 @@ export type OrchestrationAssistantPart =
       };
     }
   | { type: 'data-result'; id: 'result'; data: unknown }
-  | { type: 'data-trust'; id: 'trust'; data: unknown };
+  | { type: 'data-trust'; id: 'trust'; data: unknown }
+  | {
+      type: 'data-thinking-timing';
+      id: 'thinking-timing';
+      data: { durationMs: number };
+    };
 
 /** The suspend signal as it survives `@mastra/ai-sdk` conversion: a data part
  *  carrying the run id, tool-call id, and the tool's suspend payload (our card). */
@@ -57,6 +62,7 @@ export async function pumpOrchestrationStream(
   opts: {
     finalize: ChatStreamRun['finalize'];
     onApproval: (e: ApprovalEvent) => Promise<void>;
+    timing?: { startedAtMs: number; now?: () => number };
   },
 ): Promise<{ assistantParts: OrchestrationAssistantPart[] }> {
   const assistantParts: OrchestrationAssistantPart[] = [];
@@ -87,6 +93,20 @@ export async function pumpOrchestrationStream(
 
   assistantParts.push(...timelineParts);
   if (answer) assistantParts.push({ type: 'text', text: answer });
+
+  if (opts.timing) {
+    const durationMs = Math.max(
+      0,
+      Math.round((opts.timing.now ?? Date.now)() - opts.timing.startedAtMs),
+    );
+    const timingPart = {
+      type: 'data-thinking-timing' as const,
+      id: 'thinking-timing' as const,
+      data: { durationMs },
+    };
+    writer.write(timingPart);
+    assistantParts.push(timingPart);
+  }
 
   if (suspend) {
     await opts.onApproval(suspend);

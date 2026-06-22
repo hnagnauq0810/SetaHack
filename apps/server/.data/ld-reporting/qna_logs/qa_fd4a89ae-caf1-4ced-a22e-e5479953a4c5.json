@@ -1,0 +1,14 @@
+{
+  "answerId": "qa_fd4a89ae-caf1-4ced-a22e-e5479953a4c5",
+  "generatedAt": "2026-06-22T16:44:41.708Z",
+  "reportId": "rpt_1426465f-ac06-47a8-939b-4b058d242aed",
+  "answer": "Báo cáo chỉ ra rằng có một học viên trong khóa học AI Agent & LLM Application Development cần hỗ trợ 1:1. Để hỗ trợ học viên này, khuyến nghị bao gồm việc chỉ định một người hướng dẫn, cung cấp hỗ trợ từ bạn đồng hành, và tài nguyên thực hành cụ thể. Ngoài ra, việc xem xét lại nội dung khóa học có thể hữu ích để đảm bảo đáp ứng nhu cầu đa dạng của tất cả học viên.",
+  "confidence": 0.95,
+  "citations": [
+    "governance.normFlags",
+    "report.recommendations"
+  ],
+  "limitations": [
+    "RBAC masking applied: individual trainee details are hidden or aggregated."
+  ]
+}

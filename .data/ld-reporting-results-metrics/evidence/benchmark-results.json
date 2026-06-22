@@ -1,0 +1,119 @@
+{
+  "measuredAt": "2026-06-22T15:30:47.359Z",
+  "environment": {
+    "node": "v22.18.0",
+    "platform": "win32",
+    "llm": "LD_REPORTING_USE_LLM=false deterministic fallback for stable benchmark"
+  },
+  "timingsMs": {
+    "readinessEvidenceGateQ1": 153.06,
+    "generateReportQ1WithArtifacts": 2043.97,
+    "manualReviewFinalize": 2.19,
+    "bodDocxExportFinalized": 1126.35,
+    "bodPptxExportFinalized": 33.96,
+    "bodQnaFinalizedPortfolio": 3.97
+  },
+  "report": {
+    "reportId": "rpt_8225c113-cc1c-45d8-86d8-fa8d53891b45",
+    "title": "L&D Training Effectiveness Report - 2026-Q1",
+    "statusBeforeFinalize": "DRAFT",
+    "statusAfterFinalize": "FINAL",
+    "evidenceStatus": "PASS",
+    "qualityStatus": "PASS",
+    "classification": "Risk",
+    "totalCourses": 3,
+    "traineeCount": 59,
+    "attendanceRate": 0.9288,
+    "completionRate": 0.9831,
+    "passRate": 0.8983,
+    "effectivenessScore": 88.23,
+    "feedbackRating": 4.48,
+    "trainingHours": 848,
+    "normHighPriorityFlags": 7,
+    "normTotalFlags": 8,
+    "pptxPath": "C:\\Users\\FPT\\AppData\\Local\\Temp\\ld-reporting-metrics-a1GfcX\\artifacts\\rpt_8225c113-cc1c-45d8-86d8-fa8d53891b45\\rpt_8225c113-cc1c-45d8-86d8-fa8d53891b45.pptx",
+    "docxPath": "C:\\Users\\FPT\\AppData\\Local\\Temp\\ld-reporting-metrics-a1GfcX\\artifacts\\rpt_8225c113-cc1c-45d8-86d8-fa8d53891b45\\rpt_8225c113-cc1c-45d8-86d8-fa8d53891b45.docx",
+    "pptxBytes": 437105,
+    "docxBytes": 179258,
+    "pptxSlides": 13,
+    "pptxNativeCharts": 1,
+    "pptxMediaSvg": 0,
+    "docxMediaPng": 4,
+    "docxMediaSvg": 0
+  },
+  "bodAccess": {
+    "docxAvailableAfterFinalize": true,
+    "pptxAvailableAfterFinalize": true,
+    "qnaConfidence": 0.82,
+    "qnaCitations": [
+      "report.executiveSummary"
+    ],
+    "qnaLimitations": [
+      "RBAC masking applied: individual trainee details are hidden or aggregated.",
+      "Question did not match a specialized Q&A template; answered from executive summary only."
+    ]
+  },
+  "evidenceScenarios": [
+    {
+      "name": "completed_q1_default_workbook",
+      "scope": {
+        "period": "2026-Q1"
+      },
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true,
+      "canGenerateFinalConclusion": true,
+      "missingEvidenceCount": 0,
+      "firstIssue": null,
+      "courseCount": 3,
+      "attendanceRows": 492,
+      "assessmentRows": 59
+    },
+    {
+      "name": "in_progress_leadership_course",
+      "scope": {
+        "courseId": "Leadership_06_2026"
+      },
+      "expected": "BLOCKED",
+      "actual": "BLOCKED",
+      "pass": true,
+      "canGenerateFinalConclusion": false,
+      "missingEvidenceCount": 2,
+      "firstIssue": "IN_PROGRESS_COURSE",
+      "courseCount": 1,
+      "attendanceRows": 24,
+      "assessmentRows": 0
+    },
+    {
+      "name": "natural_course_name_ai_agent",
+      "scope": {
+        "courseId": "AI Agent & LLM Application Development"
+      },
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true,
+      "canGenerateFinalConclusion": true,
+      "missingEvidenceCount": 0,
+      "firstIssue": null,
+      "courseCount": 1,
+      "attendanceRows": 104,
+      "assessmentRows": 13
+    },
+    {
+      "name": "conflicting_period_course_scope",
+      "scope": {
+        "period": "2026-Q1",
+        "courseId": "Leadership_06_2026"
+      },
+      "expected": "BLOCKED",
+      "actual": "BLOCKED",
+      "pass": true,
+      "canGenerateFinalConclusion": false,
+      "missingEvidenceCount": 1,
+      "firstIssue": "NO_COURSES_IN_SCOPE",
+      "courseCount": 0,
+      "attendanceRows": 0,
+      "assessmentRows": 0
+    }
+  ]
+}

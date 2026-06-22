@@ -10,7 +10,7 @@ import {
   type LdRole,
 } from '../../models.ts';
 import type { LdReportAccessContext } from '../domain/access-control.ts';
-import { LdReportingSpecialistAgent } from '../domain/orchestrator.ts';
+import { LdReportingDomainError, LdReportingSpecialistAgent } from '../domain/orchestrator.ts';
 
 const reportIdParamSchema = z.object({ id: z.string().min(1) });
 
@@ -232,6 +232,9 @@ class LdHttpError extends Error {
 }
 
 function handleLdError(c: Context<SessionEnv>, err: unknown): Response {
+  if (err instanceof LdReportingDomainError) {
+    return c.json({ error: err.code, message: err.message }, 409);
+  }
   if (err instanceof LdHttpError) {
     return c.json(
       { error: err.code, message: err.message },

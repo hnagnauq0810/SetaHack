@@ -47,13 +47,52 @@ describe('ld-reporting pipeline', () => {
   });
 
   it('blocks final conclusion for in-progress courses', async () => {
-    const agent = new LdReportingSpecialistAgent();
+    const agent = await isolatedAgent();
     const report = await agent.ld_generateReport({
       scope: { courseId: 'Leadership_06_2026' },
     });
     expect(report.evidence.status).toBe('BLOCKED');
     expect(report.evidence.canGenerateFinalConclusion).toBe(false);
     expect(report.governance.classification).toBe('Not reportable');
+
+    await expect(
+      agent.ld_finalizeReport({
+        reportId: report.reportId,
+        body: { decision: 'approve' },
+        actorUserId: 'ldm001',
+      }),
+    ).rejects.toMatchObject({ code: 'FINALIZE_BLOCKED_BY_EVIDENCE' });
+
+    const unchanged = await agent.getReport(report.reportId);
+    expect(unchanged).toMatchObject({ status: 'DRAFT' });
+    expect(unchanged).not.toHaveProperty('finalizedAt');
+    expect(unchanged).not.toHaveProperty('approval');
+  });
+
+  it('blocks finalization when report quality is not PASS', async () => {
+    const root = await mkdtemp(join(tmpdir(), 'ld-reporting-test-'));
+    const store = new LdReportingStore(root);
+    const agent = new LdReportingSpecialistAgent({ store });
+    const report = await agent.ld_generateReport({ scope: { period: '2026-Q1' } });
+    expect(report.evidence.canGenerateFinalConclusion).toBe(true);
+
+    report.quality = {
+      qualityId: 'quality-failed-for-test',
+      status: 'REVISION_REQUIRED',
+      generatedAt: new Date().toISOString(),
+      issues: ['Executive summary must be revised.'],
+    };
+    await store.saveReport(report);
+
+    await expect(
+      agent.ld_finalizeReport({
+        reportId: report.reportId,
+        body: { decision: 'approve' },
+        actorUserId: 'ldm001',
+      }),
+    ).rejects.toMatchObject({ code: 'FINALIZE_BLOCKED_BY_QUALITY' });
+
+    await expect(agent.getReport(report.reportId)).resolves.toMatchObject({ status: 'DRAFT' });
   });
 
   it('accepts natural course names as course scope in chat-style requests', async () => {
@@ -80,6 +119,25 @@ describe('ld-reporting pipeline', () => {
     expect(report.governance.masked).toBe(false);
     expect(view.governance.masked).toBe(true);
     expect(view.artifacts).toBeUndefined();
+  });
+
+  it('turns a score comparison into a business interpretation and recommendation', async () => {
+    const agent = await isolatedAgent();
+    const report = await agent.ld_generateReport({ scope: { period: '2026-Q1' } });
+
+    const answer = await agent.ld_answerQuestion({
+      reportId: report.reportId,
+      role: 'LND_MANAGER',
+      question:
+        'So sánh điểm trung bình của AWS Cloud Architecture & Services với báo cáo hiện tại',
+    });
+
+    expect(answer.answer).toContain('Ý nghĩa:');
+    expect(answer.answer).toContain('Khuyến nghị:');
+    expect(answer.answer).toContain('AWS Cloud Architecture & Services');
+    expect(answer.answer).toMatch(/\d+(?:[.,]\d+)?%/);
+    expect(answer.citations).toContain('metrics.overall.averageScore');
+    expect(answer.citations).toContain('metrics.courses.averageScore');
   });
 
   it('keeps BOD on finalized reports while L&D Manager can review drafts', async () => {

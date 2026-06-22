@@ -1,0 +1,1383 @@
+{
+  "datasetId": "ds_10ba125b2e6872a8",
+  "scope": {
+    "courseId": "ai agent",
+    "reportType": "full"
+  },
+  "importedAt": "2026-06-22T18:31:10.650Z",
+  "sources": [
+    {
+      "source": "OneDrive",
+      "sheetName": "DS06_Course_Catalog",
+      "rowCount": 6,
+      "required": true,
+      "present": true,
+      "missingColumns": [],
+      "loadedAt": "2026-06-22T18:31:10.650Z"
+    },
+    {
+      "source": "Teams",
+      "sheetName": "DS07_Attendance_Log",
+      "rowCount": 722,
+      "required": true,
+      "present": true,
+      "missingColumns": [],
+      "loadedAt": "2026-06-22T18:31:10.650Z"
+    },
+    {
+      "source": "OneDrive",
+      "sheetName": "DS08_Assessment_Score",
+      "rowCount": 89,
+      "required": true,
+      "present": true,
+      "missingColumns": [],
+      "loadedAt": "2026-06-22T18:31:10.650Z"
+    },
+    {
+      "source": "Forms",
+      "sheetName": "DS09_Feedback_Survey",
+      "rowCount": 94,
+      "required": true,
+      "present": true,
+      "missingColumns": [],
+      "loadedAt": "2026-06-22T18:31:10.650Z"
+    },
+    {
+      "source": "KPI",
+      "sheetName": "DS10_Training_Cost_ROI",
+      "rowCount": 6,
+      "required": true,
+      "present": true,
+      "missingColumns": [],
+      "loadedAt": "2026-06-22T18:31:10.650Z"
+    },
+    {
+      "source": "Rules",
+      "sheetName": "DS11_LnD_Training_NORM",
+      "rowCount": 15,
+      "required": true,
+      "present": true,
+      "missingColumns": [],
+      "loadedAt": "2026-06-22T18:31:10.650Z"
+    },
+    {
+      "source": "Template",
+      "sheetName": "DS12_Report_Template_Structure",
+      "rowCount": 10,
+      "required": true,
+      "present": true,
+      "missingColumns": [],
+      "loadedAt": "2026-06-22T18:31:10.650Z"
+    }
+  ],
+  "courses": [
+    {
+      "courseId": "AIAgent_05_2026",
+      "courseName": "AI Agent & LLM Application Development",
+      "topicCategory": "AI/ML",
+      "trainerId": "TRN-007",
+      "totalSessions": 8,
+      "hoursPerSession": 2,
+      "totalHours": 16,
+      "passThresholdScore": 6.5,
+      "startDate": "2026-05-05",
+      "endDate": "2026-05-30",
+      "status": "Completed"
+    }
+  ],
+  "attendance": [
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S1",
+      "employeeId": "EMP-041",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S2",
+      "employeeId": "EMP-041",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S3",
+      "employeeId": "EMP-041",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S4",
+      "employeeId": "EMP-041",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S5",
+      "employeeId": "EMP-041",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S6",
+      "employeeId": "EMP-041",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S7",
+      "employeeId": "EMP-041",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S8",
+      "employeeId": "EMP-041",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S1",
+      "employeeId": "EMP-044",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S2",
+      "employeeId": "EMP-044",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S3",
+      "employeeId": "EMP-044",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S4",
+      "employeeId": "EMP-044",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S5",
+      "employeeId": "EMP-044",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S6",
+      "employeeId": "EMP-044",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S7",
+      "employeeId": "EMP-044",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S8",
+      "employeeId": "EMP-044",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S1",
+      "employeeId": "EMP-062",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S2",
+      "employeeId": "EMP-062",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S3",
+      "employeeId": "EMP-062",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S4",
+      "employeeId": "EMP-062",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S5",
+      "employeeId": "EMP-062",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S6",
+      "employeeId": "EMP-062",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S7",
+      "employeeId": "EMP-062",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S8",
+      "employeeId": "EMP-062",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S1",
+      "employeeId": "EMP-127",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S2",
+      "employeeId": "EMP-127",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S3",
+      "employeeId": "EMP-127",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S4",
+      "employeeId": "EMP-127",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S5",
+      "employeeId": "EMP-127",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S6",
+      "employeeId": "EMP-127",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S7",
+      "employeeId": "EMP-127",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S8",
+      "employeeId": "EMP-127",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S1",
+      "employeeId": "EMP-022",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S2",
+      "employeeId": "EMP-022",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S3",
+      "employeeId": "EMP-022",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S4",
+      "employeeId": "EMP-022",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S5",
+      "employeeId": "EMP-022",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S6",
+      "employeeId": "EMP-022",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S7",
+      "employeeId": "EMP-022",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S8",
+      "employeeId": "EMP-022",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S1",
+      "employeeId": "EMP-162",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S2",
+      "employeeId": "EMP-162",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S3",
+      "employeeId": "EMP-162",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S4",
+      "employeeId": "EMP-162",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S5",
+      "employeeId": "EMP-162",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S6",
+      "employeeId": "EMP-162",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S7",
+      "employeeId": "EMP-162",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S8",
+      "employeeId": "EMP-162",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S1",
+      "employeeId": "EMP-098",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S2",
+      "employeeId": "EMP-098",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S3",
+      "employeeId": "EMP-098",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S4",
+      "employeeId": "EMP-098",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S5",
+      "employeeId": "EMP-098",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S6",
+      "employeeId": "EMP-098",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S7",
+      "employeeId": "EMP-098",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S8",
+      "employeeId": "EMP-098",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S1",
+      "employeeId": "EMP-005",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S2",
+      "employeeId": "EMP-005",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S3",
+      "employeeId": "EMP-005",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S4",
+      "employeeId": "EMP-005",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S5",
+      "employeeId": "EMP-005",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S6",
+      "employeeId": "EMP-005",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S7",
+      "employeeId": "EMP-005",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S8",
+      "employeeId": "EMP-005",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S1",
+      "employeeId": "EMP-035",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S2",
+      "employeeId": "EMP-035",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S3",
+      "employeeId": "EMP-035",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S4",
+      "employeeId": "EMP-035",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S5",
+      "employeeId": "EMP-035",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S6",
+      "employeeId": "EMP-035",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S7",
+      "employeeId": "EMP-035",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S8",
+      "employeeId": "EMP-035",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S1",
+      "employeeId": "EMP-076",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S2",
+      "employeeId": "EMP-076",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S3",
+      "employeeId": "EMP-076",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S4",
+      "employeeId": "EMP-076",
+      "attendanceStatus": "Absent",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S5",
+      "employeeId": "EMP-076",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S6",
+      "employeeId": "EMP-076",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S7",
+      "employeeId": "EMP-076",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S8",
+      "employeeId": "EMP-076",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S1",
+      "employeeId": "EMP-077",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S2",
+      "employeeId": "EMP-077",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S3",
+      "employeeId": "EMP-077",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S4",
+      "employeeId": "EMP-077",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S5",
+      "employeeId": "EMP-077",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S6",
+      "employeeId": "EMP-077",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S7",
+      "employeeId": "EMP-077",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S8",
+      "employeeId": "EMP-077",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S1",
+      "employeeId": "EMP-090",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S2",
+      "employeeId": "EMP-090",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S3",
+      "employeeId": "EMP-090",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S4",
+      "employeeId": "EMP-090",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S5",
+      "employeeId": "EMP-090",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S6",
+      "employeeId": "EMP-090",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S7",
+      "employeeId": "EMP-090",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S8",
+      "employeeId": "EMP-090",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S1",
+      "employeeId": "EMP-119",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S2",
+      "employeeId": "EMP-119",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S3",
+      "employeeId": "EMP-119",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S4",
+      "employeeId": "EMP-119",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S5",
+      "employeeId": "EMP-119",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S6",
+      "employeeId": "EMP-119",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S7",
+      "employeeId": "EMP-119",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "sessionId": "AIAgent_05_2026_S8",
+      "employeeId": "EMP-119",
+      "attendanceStatus": "Present",
+      "trainingHours": 2
+    }
+  ],
+  "assessments": [
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-041",
+      "score": 6.9,
+      "passStatus": true,
+      "generalizedFeedback": "Completed all assignments; needs more hands-on project practice."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-044",
+      "score": 7.6,
+      "passStatus": true,
+      "generalizedFeedback": "Completed all assignments; needs more hands-on project practice."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-062",
+      "score": 8,
+      "passStatus": true,
+      "generalizedFeedback": "Completed all assignments; needs more hands-on project practice."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-127",
+      "score": 9,
+      "passStatus": true,
+      "generalizedFeedback": "Good theoretical knowledge; practical application skills need strengthening."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-022",
+      "score": 7.5,
+      "passStatus": true,
+      "generalizedFeedback": "Shows good progress; code quality and testing discipline need improvement."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-162",
+      "score": 9,
+      "passStatus": true,
+      "generalizedFeedback": "Strong overall performance; needs to improve error handling and edge case coverage."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-098",
+      "score": 8.1,
+      "passStatus": true,
+      "generalizedFeedback": "Good theoretical knowledge; practical application skills need strengthening."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-005",
+      "score": 9.4,
+      "passStatus": true,
+      "generalizedFeedback": "Completed all assignments; needs more hands-on project practice."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-035",
+      "score": 7.3,
+      "passStatus": true,
+      "generalizedFeedback": "Good theoretical knowledge; practical application skills need strengthening."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-076",
+      "score": 3.9,
+      "passStatus": false,
+      "generalizedFeedback": "Did not complete required assignments and final assessment."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-077",
+      "score": 8.3,
+      "passStatus": true,
+      "generalizedFeedback": "Demonstrates solid foundational understanding; should reduce over-reliance on AI tools."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-090",
+      "score": 8.1,
+      "passStatus": true,
+      "generalizedFeedback": "Demonstrates solid foundational understanding; should reduce over-reliance on AI tools."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-119",
+      "score": 9.4,
+      "passStatus": true,
+      "generalizedFeedback": "Steady performance; should improve debugging and troubleshooting skills."
+    }
+  ],
+  "feedback": [
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-041",
+      "trainerRating": 4,
+      "contentRating": 5,
+      "comment": "Solid course; material can be applied immediately to current work."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-044",
+      "trainerRating": 5,
+      "contentRating": 4,
+      "comment": "High-quality training; hope company continues this series."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-062",
+      "trainerRating": 4,
+      "contentRating": 4,
+      "comment": "Trainer was supportive and knowledgeable; good learning environment."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-127",
+      "trainerRating": 5,
+      "contentRating": 4,
+      "comment": "Useful content; recommend more advanced courses in this area."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-022",
+      "trainerRating": 5,
+      "contentRating": 4,
+      "comment": "Would like more practice mini-projects in future sessions."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-162",
+      "trainerRating": 5,
+      "contentRating": 5,
+      "comment": "Useful content; recommend more advanced courses in this area."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-098",
+      "trainerRating": 5,
+      "contentRating": 5,
+      "comment": "Content well-structured; would appreciate more advanced follow-up topics."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-005",
+      "trainerRating": 5,
+      "contentRating": 5,
+      "comment": "Practical focus was appreciated; theory-practice balance was good."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-035",
+      "trainerRating": 5,
+      "contentRating": 5,
+      "comment": "Practical focus was appreciated; theory-practice balance was good."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-076",
+      "trainerRating": 4,
+      "contentRating": 5,
+      "comment": "Would like more practice mini-projects in future sessions."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-077",
+      "trainerRating": 5,
+      "contentRating": 5,
+      "comment": "Useful content; recommend more advanced courses in this area."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-090",
+      "trainerRating": 5,
+      "contentRating": 5,
+      "comment": "Content was relevant and immediately applicable to work."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-119",
+      "trainerRating": 5,
+      "contentRating": 5,
+      "comment": "Trainer shared valuable real-world experience throughout."
+    }
+  ],
+  "costs": [
+    {
+      "courseId": "AIAgent_05_2026",
+      "costPerSessionScaled": 1.2,
+      "totalSessions": 8,
+      "totalCostScaled": 9.6,
+      "traineeCount": 13,
+      "completionRate": 1,
+      "avgScore": 7.88,
+      "passRate": 0.92,
+      "postTrainingPerfDelta": 0.031,
+      "notes": null
+    }
+  ],
+  "normRules": [
+    {
+      "ruleId": "NORM-01",
+      "category": "Effectiveness",
+      "ruleDescription": "Pass rate per course below threshold",
+      "threshold": "Pass_Rate < 0.70",
+      "actionIfTriggered": "Flag course for content review; notify L&D manager",
+      "priority": "High"
+    },
+    {
+      "ruleId": "NORM-02",
+      "category": "Effectiveness",
+      "ruleDescription": "Average score below minimum acceptable level",
+      "threshold": "Avg_Score < 6.5",
+      "actionIfTriggered": "Trigger course redesign review; consider re-delivery",
+      "priority": "High"
+    },
+    {
+      "ruleId": "NORM-03",
+      "category": "Attendance",
+      "ruleDescription": "Attendance rate per course below target",
+      "threshold": "Attendance_Rate < 0.75",
+      "actionIfTriggered": "Send reminder to absentees; flag to direct manager",
+      "priority": "Medium"
+    },
+    {
+      "ruleId": "NORM-04",
+      "category": "Individual",
+      "ruleDescription": "Trainee passes with low attendance (possible policy violation)",
+      "threshold": "Score >= Pass_Threshold AND Attendance_Rate < 0.70",
+      "actionIfTriggered": "Flag for L&D review; verify with manager",
+      "priority": "Medium"
+    },
+    {
+      "ruleId": "NORM-05",
+      "category": "Individual",
+      "ruleDescription": "Trainee score = 0 or did not submit assessment",
+      "threshold": "Score = 0 OR assessment not submitted",
+      "actionIfTriggered": "Mark as Incomplete; recommend re-enrollment in next cohort",
+      "priority": "High"
+    },
+    {
+      "ruleId": "NORM-06",
+      "category": "Individual",
+      "ruleDescription": "Outstanding trainee highlight",
+      "threshold": "Score >= 9.0 AND Attendance_Rate = 1.0",
+      "actionIfTriggered": "Add to \"Star Learner\" report section; recommend for mentorship role",
+      "priority": "Low"
+    },
+    {
+      "ruleId": "NORM-07",
+      "category": "Individual",
+      "ruleDescription": "At-risk trainee — needs support",
+      "threshold": "Score < Pass_Threshold AND Attendance_Rate >= 0.70",
+      "actionIfTriggered": "Flag for 1:1 coaching; assign buddy or additional practice resource",
+      "priority": "High"
+    },
+    {
+      "ruleId": "NORM-08",
+      "category": "Trainer",
+      "ruleDescription": "Trainer rating below acceptable standard",
+      "threshold": "Trainer_Rating_Avg < 3.5",
+      "actionIfTriggered": "Escalate to L&D Manager; schedule trainer coaching session",
+      "priority": "High"
+    },
+    {
+      "ruleId": "NORM-09",
+      "category": "ROI",
+      "ruleDescription": "Low completion rate despite high cost",
+      "threshold": "Completion_Rate < 0.80 AND Total_Cost_Scaled > 8.0",
+      "actionIfTriggered": "Review course necessity; consider split delivery or self-paced format",
+      "priority": "Medium"
+    },
+    {
+      "ruleId": "NORM-10",
+      "category": "ROI",
+      "ruleDescription": "Negative or zero post-training performance delta",
+      "threshold": "Post_Training_Perf_Delta <= 0",
+      "actionIfTriggered": "Audit course design and on-the-job application support",
+      "priority": "High"
+    },
+    {
+      "ruleId": "NORM-11",
+      "category": "Reporting",
+      "ruleDescription": "Course with missing data cannot be reported",
+      "threshold": "Any required field is NULL for Completed course status",
+      "actionIfTriggered": "Block course from effectiveness report; flag as data incomplete",
+      "priority": "High"
+    },
+    {
+      "ruleId": "NORM-12",
+      "category": "Attendance",
+      "ruleDescription": "Trainee marked Late treated as partial attendance",
+      "threshold": "Attendance_Status = Late",
+      "actionIfTriggered": "Count as 0.5 session for attendance rate calculation",
+      "priority": "Low"
+    },
+    {
+      "ruleId": "NORM-13",
+      "category": "Effectiveness",
+      "ruleDescription": "Course completion rate calculation basis",
+      "threshold": "Completion defined as >= 70% sessions attended",
+      "actionIfTriggered": "Apply consistently across all courses; document in report footnote",
+      "priority": "Medium"
+    },
+    {
+      "ruleId": "NORM-14",
+      "category": "Feedback",
+      "ruleDescription": "Minimum feedback response rate for valid analysis",
+      "threshold": "Feedback_Response_Rate < 0.60",
+      "actionIfTriggered": "Mark feedback analysis as statistically insufficient; note in report",
+      "priority": "Medium"
+    },
+    {
+      "ruleId": "NORM-15",
+      "category": "Individual",
+      "ruleDescription": "Score inconsistency detection",
+      "threshold": "Pass_Status = True AND Score < Pass_Threshold, OR Pass_Status = False AND Score >= Pass_Threshold",
+      "actionIfTriggered": "Flag as data integrity issue; verify with trainer before report generation",
+      "priority": "High"
+    }
+  ],
+  "templateSections": [
+    {
+      "sectionId": "SEC-01",
+      "sectionName": "Executive Summary",
+      "contentDescription": "Total courses, total trainees, overall pass rate, overall completion rate, total training hours, total cost (scaled)",
+      "dataSource": "DS07+DS08+DS10",
+      "required": true
+    },
+    {
+      "sectionId": "SEC-02",
+      "sectionName": "Course-Level Metrics",
+      "contentDescription": "Per-course: trainee count, attendance rate, avg score, pass rate, completion rate, cost, perf delta",
+      "dataSource": "DS07+DS08+DS10",
+      "required": true
+    },
+    {
+      "sectionId": "SEC-03",
+      "sectionName": "Trainee Highlights",
+      "contentDescription": "Outstanding trainees (score ≥ 9.0, full attendance); At-risk trainees (score < pass threshold); Trainees who passed with low attendance",
+      "dataSource": "DS08",
+      "required": true
+    },
+    {
+      "sectionId": "SEC-04",
+      "sectionName": "Trainer Evaluation",
+      "contentDescription": "Avg trainer rating per course; avg content rating per course; notable feedback themes",
+      "dataSource": "DS09",
+      "required": true
+    },
+    {
+      "sectionId": "SEC-05",
+      "sectionName": "Attendance Analysis",
+      "contentDescription": "Per-course attendance heatmap by session; full-absent cases; late patterns",
+      "dataSource": "DS07",
+      "required": true
+    },
+    {
+      "sectionId": "SEC-06",
+      "sectionName": "Effectiveness Analysis",
+      "contentDescription": "Comparison of avg score vs pass threshold; courses below NORM-01/NORM-02; ROI analysis",
+      "dataSource": "DS08+DS10+DS11",
+      "required": true
+    },
+    {
+      "sectionId": "SEC-07",
+      "sectionName": "Trend Comparison",
+      "contentDescription": "Quarter-over-quarter comparison (if prior quarter data available)",
+      "dataSource": "DS07+DS08 historical",
+      "required": false
+    },
+    {
+      "sectionId": "SEC-08",
+      "sectionName": "Data Quality Flags",
+      "contentDescription": "List of NORM violations: score inconsistencies, missing data, incomplete courses",
+      "dataSource": "DS11",
+      "required": true
+    },
+    {
+      "sectionId": "SEC-09",
+      "sectionName": "Recommendations",
+      "contentDescription": "L&D-generated recommendations based on effectiveness analysis and NORM triggers",
+      "dataSource": "All",
+      "required": true
+    },
+    {
+      "sectionId": "SEC-10",
+      "sectionName": "Appendix — Raw Data",
+      "contentDescription": "Full attendance log, score list, feedback list (anonymized, for L&D internal use only)",
+      "dataSource": "All",
+      "required": false
+    }
+  ],
+  "trainees": [
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-041",
+      "attendedUnits": 7,
+      "expectedUnits": 8,
+      "attendanceRate": 0.875,
+      "score": 6.9,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 4,
+      "contentRating": 5,
+      "feedbackComment": "Solid course; material can be applied immediately to current work."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-044",
+      "attendedUnits": 8,
+      "expectedUnits": 8,
+      "attendanceRate": 1,
+      "score": 7.6,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 4,
+      "feedbackComment": "High-quality training; hope company continues this series."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-062",
+      "attendedUnits": 7,
+      "expectedUnits": 8,
+      "attendanceRate": 0.875,
+      "score": 8,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 4,
+      "contentRating": 4,
+      "feedbackComment": "Trainer was supportive and knowledgeable; good learning environment."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-127",
+      "attendedUnits": 6,
+      "expectedUnits": 8,
+      "attendanceRate": 0.75,
+      "score": 9,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 4,
+      "feedbackComment": "Useful content; recommend more advanced courses in this area."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-022",
+      "attendedUnits": 7,
+      "expectedUnits": 8,
+      "attendanceRate": 0.875,
+      "score": 7.5,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 4,
+      "feedbackComment": "Would like more practice mini-projects in future sessions."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-162",
+      "attendedUnits": 6,
+      "expectedUnits": 8,
+      "attendanceRate": 0.75,
+      "score": 9,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 5,
+      "feedbackComment": "Useful content; recommend more advanced courses in this area."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-098",
+      "attendedUnits": 7,
+      "expectedUnits": 8,
+      "attendanceRate": 0.875,
+      "score": 8.1,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 5,
+      "feedbackComment": "Content well-structured; would appreciate more advanced follow-up topics."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-005",
+      "attendedUnits": 8,
+      "expectedUnits": 8,
+      "attendanceRate": 1,
+      "score": 9.4,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 5,
+      "feedbackComment": "Practical focus was appreciated; theory-practice balance was good."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-035",
+      "attendedUnits": 7,
+      "expectedUnits": 8,
+      "attendanceRate": 0.875,
+      "score": 7.3,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 5,
+      "feedbackComment": "Practical focus was appreciated; theory-practice balance was good."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-076",
+      "attendedUnits": 7,
+      "expectedUnits": 8,
+      "attendanceRate": 0.875,
+      "score": 3.9,
+      "passStatus": false,
+      "completed": true,
+      "trainerRating": 4,
+      "contentRating": 5,
+      "feedbackComment": "Would like more practice mini-projects in future sessions."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-077",
+      "attendedUnits": 8,
+      "expectedUnits": 8,
+      "attendanceRate": 1,
+      "score": 8.3,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 5,
+      "feedbackComment": "Useful content; recommend more advanced courses in this area."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-090",
+      "attendedUnits": 8,
+      "expectedUnits": 8,
+      "attendanceRate": 1,
+      "score": 8.1,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 5,
+      "feedbackComment": "Content was relevant and immediately applicable to work."
+    },
+    {
+      "courseId": "AIAgent_05_2026",
+      "employeeId": "EMP-119",
+      "attendedUnits": 8,
+      "expectedUnits": 8,
+      "attendanceRate": 1,
+      "score": 9.4,
+      "passStatus": true,
+      "completed": true,
+      "trainerRating": 5,
+      "contentRating": 5,
+      "feedbackComment": "Trainer shared valuable real-world experience throughout."
+    }
+  ]
+}

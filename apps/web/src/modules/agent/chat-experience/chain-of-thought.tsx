@@ -1,6 +1,6 @@
 import { useAuiState } from '@assistant-ui/react';
 import { ChatToolCall } from '@seta/shared-ui';
-import { type ReactNode, useMemo, useState } from 'react';
+import { type ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import { extractLeafToolCalls, humanizeToolName } from './leaf-tool-calls';
 import { useDensity } from './use-density';
 
@@ -9,6 +9,27 @@ export interface ChainOfThoughtProps {
   count: number;
   indices: readonly number[];
   children: ReactNode;
+}
+
+function thinkingDurationFromContent(content: ReadonlyArray<unknown>): number | null {
+  for (const part of content) {
+    if (!part || typeof part !== 'object') continue;
+    const candidate = part as { type?: unknown; name?: unknown; data?: unknown };
+    if (candidate.type !== 'data' || candidate.name !== 'thinking-timing') continue;
+    const durationMs = (candidate.data as { durationMs?: unknown } | undefined)?.durationMs;
+    if (typeof durationMs === 'number' && Number.isFinite(durationMs) && durationMs >= 0) {
+      return durationMs;
+    }
+  }
+  return null;
+}
+
+function formatThinkingDuration(durationMs: number): string {
+  const totalSeconds = durationMs / 1000;
+  if (totalSeconds < 60) return `${totalSeconds.toFixed(1)}s`;
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = Math.floor(totalSeconds - minutes * 60);
+  return `${minutes}m ${seconds}s`;
 }
 
 export function ChainOfThought({ running, count, indices, children }: ChainOfThoughtProps) {
@@ -30,6 +51,21 @@ export function ChainOfThought({ running, count, indices, children }: ChainOfTho
   // which assistant-ui reads as a perpetual change → "Maximum update depth exceeded".
   const content = useAuiState((s) => s.message.content as ReadonlyArray<unknown>);
   const leafRows = useMemo(() => extractLeafToolCalls(content), [content]);
+  const persistedDurationMs = useMemo(() => thinkingDurationFromContent(content), [content]);
+  const startedAtMs = useRef(Date.now());
+  const observedRunning = useRef(running);
+  const [liveDurationMs, setLiveDurationMs] = useState(0);
+  if (running) observedRunning.current = true;
+  useEffect(() => {
+    if (!running || persistedDurationMs !== null) return;
+    const update = () => setLiveDurationMs(Math.max(0, Date.now() - startedAtMs.current));
+    update();
+    const intervalId = window.setInterval(update, 100);
+    return () => window.clearInterval(intervalId);
+  }, [running, persistedDurationMs]);
+  const durationMs =
+    persistedDurationMs ?? (running || observedRunning.current ? liveDurationMs : null);
+  const durationLabel = durationMs === null ? null : formatThinkingDuration(durationMs);
   const stepCount = count + leafRows.length;
   const forcedOpen = running || hasPendingAction;
   const defaultOpen = density === 'detailed';
@@ -46,12 +82,13 @@ export function ChainOfThought({ running, count, indices, children }: ChainOfTho
           {running ? (
             <>
               <span className="inline-block size-1.5 animate-pulse rounded-full bg-primary" />
-              Thinking…
+              Thinking… {durationLabel}
             </>
           ) : (
             <>
               <span className="inline-block size-1.5 rounded-full bg-semantic-success" />
               Thought {stepCount > 0 ? `· ${stepCount} step${stepCount > 1 ? 's' : ''}` : ''}
+              {durationLabel ? ` · ${durationLabel}` : ''}
             </>
           )}
           <span

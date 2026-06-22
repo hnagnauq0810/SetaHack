@@ -87,6 +87,19 @@ const SHAPES = {
   roundRect: 'roundRect',
 } as const;
 
+export const DOCX_REPORT_STYLE = {
+  font: 'Arial',
+  bodySizeHalfPoints: 23,
+  tableSizeHalfPoints: 20,
+  titleSizeHalfPoints: 54,
+  heading1SizeHalfPoints: 32,
+  lineTwips: 276,
+  paragraphAfterTwips: 160,
+  bulletAfterTwips: 120,
+  tableCellVerticalMarginTwips: 80,
+  tableCellHorizontalMarginTwips: 100,
+} as const;
+
 export async function writeReportArtifacts(
   report: ReportJson,
   storageDir: string,
@@ -140,6 +153,51 @@ async function writeDocx(model: ReportModel, path: string): Promise<void> {
     creator: 'SETA L&D Reporting Agent',
     title: model.title,
     description: model.executiveHeadline,
+    styles: {
+      default: {
+        document: {
+          run: {
+            font: DOCX_REPORT_STYLE.font,
+            size: DOCX_REPORT_STYLE.bodySizeHalfPoints,
+            color: COLORS.ink,
+          },
+          paragraph: {
+            spacing: { line: DOCX_REPORT_STYLE.lineTwips },
+          },
+        },
+        title: {
+          run: {
+            font: DOCX_REPORT_STYLE.font,
+            size: DOCX_REPORT_STYLE.titleSizeHalfPoints,
+            bold: true,
+            color: COLORS.ink,
+          },
+          paragraph: { keepNext: true, spacing: { before: 0, after: 180 } },
+        },
+        heading1: {
+          run: {
+            font: DOCX_REPORT_STYLE.font,
+            size: DOCX_REPORT_STYLE.heading1SizeHalfPoints,
+            bold: true,
+            color: COLORS.ink,
+          },
+          paragraph: { keepNext: true, spacing: { before: 320, after: 140 } },
+        },
+        listParagraph: {
+          run: {
+            font: DOCX_REPORT_STYLE.font,
+            size: DOCX_REPORT_STYLE.bodySizeHalfPoints,
+            color: COLORS.ink,
+          },
+          paragraph: {
+            spacing: {
+              line: DOCX_REPORT_STYLE.lineTwips,
+              after: DOCX_REPORT_STYLE.bulletAfterTwips,
+            },
+          },
+        },
+      },
+    },
     sections: [
       {
         properties: {},
@@ -162,8 +220,8 @@ async function writeDocx(model: ReportModel, path: string): Promise<void> {
           heading('Key findings', HeadingLevel.HEADING_1),
           ...model.findings.flatMap((finding) => [
             bullet(`${finding.headline} (${TONE[finding.severity].label})`, true),
-            paragraph(`Evidence: ${finding.evidence}`),
-            paragraph(`Implication: ${finding.implication}`),
+            paragraph(`Evidence: ${finding.evidence}`, { indentLeft: 360, muted: true }),
+            paragraph(`Implication: ${finding.implication}`, { indentLeft: 360 }),
           ]),
           heading('Recommendations and owners', HeadingLevel.HEADING_1),
           recommendationTable(model),
@@ -192,25 +250,47 @@ async function writeDocx(model: ReportModel, path: string): Promise<void> {
 }
 
 function heading(text: string, level: (typeof HeadingLevel)[keyof typeof HeadingLevel]): Paragraph {
+  const title = level === HeadingLevel.TITLE;
   return new Paragraph({
     heading: level,
     keepNext: true,
     keepLines: true,
-    spacing: { before: 280, after: 120 },
-    children: [new TextRun({ text, bold: true, color: COLORS.ink })],
+    spacing: title ? { before: 0, after: 180 } : { before: 320, after: 140 },
+    children: [
+      new TextRun({
+        text,
+        bold: true,
+        color: COLORS.ink,
+        font: DOCX_REPORT_STYLE.font,
+        size: title
+          ? DOCX_REPORT_STYLE.titleSizeHalfPoints
+          : DOCX_REPORT_STYLE.heading1SizeHalfPoints,
+      }),
+    ],
   });
 }
 
 function paragraph(
   text: string,
-  opts: { muted?: boolean; bold?: boolean; keepNext?: boolean } = {},
+  opts: { muted?: boolean; bold?: boolean; keepNext?: boolean; indentLeft?: number } = {},
 ): Paragraph {
   return new Paragraph({
     keepNext: opts.keepNext,
     keepLines: true,
-    spacing: { after: 120 },
+    widowControl: true,
+    indent: opts.indentLeft ? { left: opts.indentLeft } : undefined,
+    spacing: {
+      line: DOCX_REPORT_STYLE.lineTwips,
+      after: DOCX_REPORT_STYLE.paragraphAfterTwips,
+    },
     children: [
-      new TextRun({ text, color: opts.muted ? COLORS.muted : COLORS.ink, bold: opts.bold }),
+      new TextRun({
+        text,
+        color: opts.muted ? COLORS.muted : COLORS.ink,
+        bold: opts.bold,
+        font: DOCX_REPORT_STYLE.font,
+        size: DOCX_REPORT_STYLE.bodySizeHalfPoints,
+      }),
     ],
   });
 }
@@ -218,8 +298,22 @@ function paragraph(
 function bullet(text: string, bold = false): Paragraph {
   return new Paragraph({
     bullet: { level: 0 },
-    spacing: { after: 80 },
-    children: [new TextRun({ text, bold, color: COLORS.ink })],
+    keepLines: true,
+    widowControl: true,
+    indent: { left: 360, hanging: 180 },
+    spacing: {
+      line: DOCX_REPORT_STYLE.lineTwips,
+      after: DOCX_REPORT_STYLE.bulletAfterTwips,
+    },
+    children: [
+      new TextRun({
+        text,
+        bold,
+        color: COLORS.ink,
+        font: DOCX_REPORT_STYLE.font,
+        size: DOCX_REPORT_STYLE.bodySizeHalfPoints,
+      }),
+    ],
   });
 }
 
@@ -232,6 +326,7 @@ function callout(title: string, body: string): Table {
           new TableCell({
             shading: { fill: COLORS.light },
             borders: cellBorders(COLORS.border),
+            margins: { top: 120, bottom: 120, left: 160, right: 160 },
             children: [paragraph(title, { bold: true }), paragraph(body)],
           }),
         ],
@@ -352,19 +447,30 @@ function table(rows: TableRow[]): Table {
 function row(values: string[], header = false): TableRow {
   return new TableRow({
     tableHeader: header,
+    cantSplit: true,
     children: values.map(
       (value) =>
         new TableCell({
           shading: header ? { fill: COLORS.navy } : undefined,
           borders: cellBorders(COLORS.border),
+          margins: {
+            top: DOCX_REPORT_STYLE.tableCellVerticalMarginTwips,
+            bottom: DOCX_REPORT_STYLE.tableCellVerticalMarginTwips,
+            left: DOCX_REPORT_STYLE.tableCellHorizontalMarginTwips,
+            right: DOCX_REPORT_STYLE.tableCellHorizontalMarginTwips,
+          },
           children: [
             new Paragraph({
+              keepLines: true,
+              widowControl: true,
+              spacing: { line: 252, after: 0 },
               children: [
                 new TextRun({
                   text: value,
                   bold: header,
                   color: header ? COLORS.white : COLORS.ink,
-                  size: 18,
+                  font: DOCX_REPORT_STYLE.font,
+                  size: DOCX_REPORT_STYLE.tableSizeHalfPoints,
                 }),
               ],
             }),
@@ -1262,9 +1368,9 @@ function addDeliveryRoadmapSlide(pptx: PptxInstance, model: ReportModel): void {
     });
     slide.addText(rec.action, {
       x: x + 0.2,
-      y: 3.38,
+      y: 3.32,
       w: cardW - 0.4,
-      h: 0.92,
+      h: 1.02,
       fontSize: 10.5,
       color: COLORS.ink,
       fit: 'shrink',
@@ -1273,7 +1379,7 @@ function addDeliveryRoadmapSlide(pptx: PptxInstance, model: ReportModel): void {
     });
     slide.addText('Expected outcome', {
       x: x + 0.2,
-      y: 4.72,
+      y: 4.58,
       w: cardW - 0.4,
       h: 0.18,
       fontSize: 8,
@@ -1283,9 +1389,9 @@ function addDeliveryRoadmapSlide(pptx: PptxInstance, model: ReportModel): void {
     });
     slide.addText(rec.expectedOutcome, {
       x: x + 0.2,
-      y: 5.02,
+      y: 4.86,
       w: cardW - 0.4,
-      h: 0.65,
+      h: 0.82,
       fontSize: 9.2,
       color: COLORS.muted,
       fit: 'shrink',
@@ -2026,7 +2132,7 @@ function addRecommendationRow(
     x: 0.65,
     y,
     w: 12.0,
-    h: 0.82,
+    h: 0.94,
     rectRadius: 0.06,
     fill: { color: COLORS.white },
     line: { color: COLORS.border, pt: 0.8 },
@@ -2054,21 +2160,22 @@ function addRecommendationRow(
   });
   slide.addText(action, {
     x: 4.15,
-    y: y + 0.12,
+    y: y + 0.13,
     w: 4.2,
-    h: 0.28,
+    h: 0.56,
     fontSize: 9.3,
     color: COLORS.ink,
     fit: 'shrink',
   });
   slide.addText(outcome, {
     x: 8.6,
-    y: y + 0.12,
+    y: y + 0.13,
     w: 3.6,
-    h: 0.28,
-    fontSize: 8.5,
+    h: 0.56,
+    fontSize: 9,
     color: COLORS.muted,
     fit: 'shrink',
+    valign: 'mid',
   });
 }
 

@@ -233,7 +233,7 @@ function makeLdChatTools(input: {
       id: 'ld_generateReport',
       name: 'Generate L&D Report Draft',
       description:
-        'Generate a validated L&D report draft only after ld_checkReadiness returned PASS for the same scope in this turn.',
+        'Generate a validated draft after ld_checkReadiness ran for the same scope. BLOCKED evidence produces a preliminary/readiness draft that cannot be finalized.',
       input: LdRequestSchema,
       output: z.unknown(),
       rbac: 'ld-reporting.report.generate',
@@ -247,15 +247,6 @@ function makeLdChatTools(input: {
             message:
               'Evidence Gate must be checked before generating this L&D report. Call ld_checkReadiness for the same scope first.',
             scope: request.scope,
-          };
-        }
-        if (gate.status !== 'PASS' || !gate.canGenerateFinalConclusion) {
-          return {
-            status: 'EVIDENCE_GATE_BLOCKED',
-            message:
-              'Report generation is blocked because Evidence Gate did not pass for this scope.',
-            scope: request.scope,
-            evidence: gate,
           };
         }
         const report = await agent.ld_generateReport({ ...request, saveToWorkspace: false });
@@ -385,6 +376,23 @@ function makeLdChatTools(input: {
         const actor = actorFromContext(ctx);
         const view = agent.viewReport(report, access);
         if (view.status === 'FINAL') return view;
+        if (view.evidence.status === 'BLOCKED' || !view.evidence.canGenerateFinalConclusion) {
+          return {
+            reportId: view.reportId,
+            status: 'FINALIZE_BLOCKED_BY_EVIDENCE',
+            message:
+              'Final approval is unavailable because Evidence Gate blocks the final conclusion.',
+            evidence: view.evidence,
+          };
+        }
+        if (view.quality?.status !== 'PASS') {
+          return {
+            reportId: view.reportId,
+            status: 'FINALIZE_BLOCKED_BY_QUALITY',
+            message: 'Final approval is unavailable until report quality is PASS.',
+            quality: view.quality ?? null,
+          };
+        }
         const card = buildFinalizeApprovalCard(view, access.tenantId, actor.user_id, payload.note);
         if (typeof ctx.agent?.suspend !== 'function') {
           throw new Error('ld_reviewFinalizeReport: ctx.agent.suspend unavailable');
@@ -405,8 +413,8 @@ function instructionsText(defaultScope: LdRequest['scope']): string {
     'An L&D course name or ID can look like a technical topic (e.g. "CloudAWS_03_2026", "AWS Cloud Architecture & Services", "DevOps Fundamentals", "DevOps_04_2026"). Never assume these are technical infrastructure, cloud operations, or server maintenance tasks. They are training courses! If the user asks to create, check, or generate a report for any such name, it is a course ID/scope. You MUST call the L&D tools (ld_checkReadiness first, then ld_generateReport) for it.',
     'BOD users are read-only. For BOD report reading, Q&A, history, or exports, call ld_listReports and ld_answerQuestion against finalized reports only. Never generate a draft for BOD.',
     'Evidence Gate is mandatory. For any generate, draft, export-from-scope, approval, or final conclusion request, call ld_checkReadiness first for the exact same scope.',
-    'Only call ld_generateReport after ld_checkReadiness returned PASS and canGenerateFinalConclusion=true for that exact scope in the same turn.',
-    'Generated drafts are previews and are not added to the Reports workspace automatically. After generating a draft, tell the user to review it and use Approve & Add to Reports if they want to save it.',
+    'Call ld_generateReport only after ld_checkReadiness completed for the exact same scope in the same turn. PASS or PARTIAL_PASS may produce a finalizable draft; BLOCKED produces a clearly preliminary/readiness draft and must never be finalized.',
+    'Generated drafts are previews and are not added to the Reports workspace automatically. After generating a draft, tell the user to review it and use Save Draft to Reports if they want to save it. Saving a draft is not final approval.',
     'If the user asks to export PPTX/DOCX but provides only a course, period, or team instead of a reportId, run ld_checkReadiness first, then generate the draft, then call ld_prepareExport.',
     'Never finalize or publish a report directly. When finalization is requested, call ld_reviewFinalizeReport so the human approval card can pause the run.',
     'When the user asks for PPTX, DOCX, PowerPoint, Word, slide deck, or export, call ld_prepareExport and return the download links.',
@@ -415,7 +423,8 @@ function instructionsText(defaultScope: LdRequest['scope']): string {
     'Report Q&A must be grounded only in report artifacts. If reportId is missing, use finalized reports via ld_listReports or ld_answerQuestion without reportId; generate a new draft only when an L&D Manager explicitly asks for a draft.',
     'RBAC is server-enforced. Do not ask the user to choose a role and do not reveal masked learner details.',
     `When a scope is omitted, use this default scope: ${JSON.stringify(defaultScope)}.`,
-    'Keep answers concise and business-readable.',
+    'For metric or comparison questions, give a direct conclusion, the key validated values with absolute and relative differences when calculable, a short "Ý nghĩa:" interpretation without unsupported causal claims, and one "Khuyến nghị:" grounded next step.',
+    'Keep simple answers business-readable and moderately detailed, normally 80 to 180 words; do not expand them into a full report unless the user asks.',
   ].join('\n');
 }
 
@@ -501,6 +510,7 @@ function buildFinalizeApprovalCard(
         rows: [
           { k: 'Report ID', v: report.reportId },
           { k: 'Evidence', v: report.evidence.status },
+          { k: 'Quality', v: report.quality?.status ?? 'NOT_CHECKED' },
           {
             k: 'Final conclusion',
             v: report.evidence.canGenerateFinalConclusion ? 'Allowed' : 'Blocked',

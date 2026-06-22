@@ -1,0 +1,344 @@
+{
+  "generatedAt": "2026-06-22T18:46:27.913Z",
+  "totalAssertions": 36,
+  "passedAssertions": 36,
+  "failedAssertions": 0,
+  "accuracy": 1,
+  "testCases": 27,
+  "metricChecks": 9,
+  "scenarios": [
+    {
+      "id": "TC-001",
+      "name": "DOCX report typography uses a readable professional scale and spacing",
+      "status": "PASS",
+      "durationMs": 4.321199999999976,
+      "evidence": "tests/artifact-writer.test.ts",
+      "failureMessages": []
+    },
+    {
+      "id": "TC-002",
+      "name": "ld-reporting evidence gate passes completed Q1 data from the default workbook",
+      "status": "PASS",
+      "durationMs": 211.79589999999985,
+      "evidence": "tests/evidence-gate.test.ts",
+      "failureMessages": []
+    },
+    {
+      "id": "TC-003",
+      "name": "ld-reporting evidence gate blocks when a required source sheet is missing",
+      "status": "PASS",
+      "durationMs": 64.22350000000006,
+      "evidence": "tests/evidence-gate.test.ts",
+      "failureMessages": []
+    },
+    {
+      "id": "TC-004",
+      "name": "ld-reporting evidence gate blocks when a required column is missing",
+      "status": "PASS",
+      "durationMs": 48.43360000000007,
+      "evidence": "tests/evidence-gate.test.ts",
+      "failureMessages": []
+    },
+    {
+      "id": "TC-005",
+      "name": "ld-reporting evidence gate blocks final conclusion for an in-progress course",
+      "status": "PASS",
+      "durationMs": 67.29759999999987,
+      "evidence": "tests/evidence-gate.test.ts",
+      "failureMessages": []
+    },
+    {
+      "id": "TC-006",
+      "name": "ld-reporting evidence gate blocks conflicting scope filters that match no courses",
+      "status": "PASS",
+      "durationMs": 71.40779999999995,
+      "evidence": "tests/evidence-gate.test.ts",
+      "failureMessages": []
+    },
+    {
+      "id": "TC-007",
+      "name": "ld-reporting evidence gate blocks completed courses with missing attendance rows",
+      "status": "PASS",
+      "durationMs": 73.81320000000005,
+      "evidence": "tests/evidence-gate.test.ts",
+      "failureMessages": []
+    },
+    {
+      "id": "TC-008",
+      "name": "ld-reporting evidence gate blocks completed courses with missing assessment rows",
+      "status": "PASS",
+      "durationMs": 58.70420000000013,
+      "evidence": "tests/evidence-gate.test.ts",
+      "failureMessages": []
+    },
+    {
+      "id": "TC-009",
+      "name": "ld-reporting evidence gate warns but still allows final conclusion when feedback response is below threshold",
+      "status": "PASS",
+      "durationMs": 45.261600000000044,
+      "evidence": "tests/evidence-gate.test.ts",
+      "failureMessages": []
+    },
+    {
+      "id": "TC-010",
+      "name": "ld-reporting evidence gate blocks pass status values that conflict with score threshold",
+      "status": "PASS",
+      "durationMs": 47.775100000000066,
+      "evidence": "tests/evidence-gate.test.ts",
+      "failureMessages": []
+    },
+    {
+      "id": "TC-011",
+      "name": "ld-reporting evidence gate blocks cross-source rows that reference an unknown course id",
+      "status": "PASS",
+      "durationMs": 59.92690000000016,
+      "evidence": "tests/evidence-gate.test.ts",
+      "failureMessages": []
+    },
+    {
+      "id": "TC-012",
+      "name": "ld-reporting evidence gate blocks duplicate attendance rows",
+      "status": "PASS",
+      "durationMs": 56.757499999999936,
+      "evidence": "tests/evidence-gate.test.ts",
+      "failureMessages": []
+    },
+    {
+      "id": "TC-013",
+      "name": "ld-reporting evidence gate blocks duplicate assessment rows",
+      "status": "PASS",
+      "durationMs": 41.6259,
+      "evidence": "tests/evidence-gate.test.ts",
+      "failureMessages": []
+    },
+    {
+      "id": "TC-014",
+      "name": "ld-reporting evidence gate blocks null assessment values in completed courses",
+      "status": "PASS",
+      "durationMs": 49.71580000000017,
+      "evidence": "tests/evidence-gate.test.ts",
+      "failureMessages": []
+    },
+    {
+      "id": "TC-015",
+      "name": "ld-reporting evidence gate blocks score values outside the 0-10 range",
+      "status": "PASS",
+      "durationMs": 54.60709999999972,
+      "evidence": "tests/evidence-gate.test.ts",
+      "failureMessages": []
+    },
+    {
+      "id": "TC-016",
+      "name": "ld-reporting evidence gate warns for feedback ratings outside the 1-5 range",
+      "status": "PASS",
+      "durationMs": 53.23120000000017,
+      "evidence": "tests/evidence-gate.test.ts",
+      "failureMessages": []
+    },
+    {
+      "id": "TC-017",
+      "name": "ld-reporting evidence gate blocks negative cost values",
+      "status": "PASS",
+      "durationMs": 39.708900000000085,
+      "evidence": "tests/evidence-gate.test.ts",
+      "failureMessages": []
+    },
+    {
+      "id": "TC-018",
+      "name": "L&D report finalization HTTP contract returns 409 when blocked evidence is approved",
+      "status": "PASS",
+      "durationMs": 1576.6744999999999,
+      "evidence": "tests/http.test.ts",
+      "failureMessages": []
+    },
+    {
+      "id": "TC-019",
+      "name": "ld-reporting pipeline generates a report for completed Q1 courses",
+      "status": "PASS",
+      "durationMs": 2101.9476000000004,
+      "evidence": "tests/ld-reporting.test.ts",
+      "failureMessages": []
+    },
+    {
+      "id": "TC-020",
+      "name": "ld-reporting pipeline blocks final conclusion for in-progress courses",
+      "status": "PASS",
+      "durationMs": 733.1152999999999,
+      "evidence": "tests/ld-reporting.test.ts",
+      "failureMessages": []
+    },
+    {
+      "id": "TC-021",
+      "name": "ld-reporting pipeline blocks finalization when report quality is not PASS",
+      "status": "PASS",
+      "durationMs": 1204.3799,
+      "evidence": "tests/ld-reporting.test.ts",
+      "failureMessages": []
+    },
+    {
+      "id": "TC-022",
+      "name": "ld-reporting pipeline accepts natural course names as course scope in chat-style requests",
+      "status": "PASS",
+      "durationMs": 693.7836000000007,
+      "evidence": "tests/ld-reporting.test.ts",
+      "failureMessages": []
+    },
+    {
+      "id": "TC-023",
+      "name": "ld-reporting pipeline masks learner-level view for BOD",
+      "status": "PASS",
+      "durationMs": 1186.3831999999993,
+      "evidence": "tests/ld-reporting.test.ts",
+      "failureMessages": []
+    },
+    {
+      "id": "TC-024",
+      "name": "ld-reporting pipeline turns a score comparison into a business interpretation and recommendation",
+      "status": "PASS",
+      "durationMs": 1222.4368000000004,
+      "evidence": "tests/ld-reporting.test.ts",
+      "failureMessages": []
+    },
+    {
+      "id": "TC-025",
+      "name": "ld-reporting pipeline keeps BOD on finalized reports while L&D Manager can review drafts",
+      "status": "PASS",
+      "durationMs": 2277.7842999999993,
+      "evidence": "tests/ld-reporting.test.ts",
+      "failureMessages": []
+    },
+    {
+      "id": "TC-026",
+      "name": "ld-reporting pipeline supports unsaved preview drafts and saving drafts",
+      "status": "PASS",
+      "durationMs": 1422.2405000000017,
+      "evidence": "tests/ld-reporting.test.ts",
+      "failureMessages": []
+    },
+    {
+      "id": "TC-027",
+      "name": "report recommendations gives every expected outcome a measurable baseline and target",
+      "status": "PASS",
+      "durationMs": 2119.8656,
+      "evidence": "tests/report-model.test.ts",
+      "failureMessages": []
+    },
+    {
+      "id": "TC-028",
+      "name": "Independent KPI validation: totalCourses",
+      "status": "PASS",
+      "evidence": "expected=3, actual=3, delta=0, tolerance=0",
+      "metric": "totalCourses",
+      "expected": 3,
+      "actual": 3,
+      "delta": 0,
+      "tolerance": 0,
+      "exactMatch": true,
+      "passed": true
+    },
+    {
+      "id": "TC-029",
+      "name": "Independent KPI validation: traineeCount",
+      "status": "PASS",
+      "evidence": "expected=59, actual=59, delta=0, tolerance=0",
+      "metric": "traineeCount",
+      "expected": 59,
+      "actual": 59,
+      "delta": 0,
+      "tolerance": 0,
+      "exactMatch": true,
+      "passed": true
+    },
+    {
+      "id": "TC-030",
+      "name": "Independent KPI validation: attendanceRate",
+      "status": "PASS",
+      "evidence": "expected=0.9288, actual=0.9288, delta=0, tolerance=0.0001",
+      "metric": "attendanceRate",
+      "expected": 0.9288,
+      "actual": 0.9288,
+      "delta": 0,
+      "tolerance": 0.0001,
+      "exactMatch": true,
+      "passed": true
+    },
+    {
+      "id": "TC-031",
+      "name": "Independent KPI validation: completionRate",
+      "status": "PASS",
+      "evidence": "expected=0.9831, actual=0.9831, delta=0, tolerance=0.0001",
+      "metric": "completionRate",
+      "expected": 0.9831,
+      "actual": 0.9831,
+      "delta": 0,
+      "tolerance": 0.0001,
+      "exactMatch": true,
+      "passed": true
+    },
+    {
+      "id": "TC-032",
+      "name": "Independent KPI validation: passRate",
+      "status": "PASS",
+      "evidence": "expected=0.8983, actual=0.8983, delta=0, tolerance=0.0001",
+      "metric": "passRate",
+      "expected": 0.8983,
+      "actual": 0.8983,
+      "delta": 0,
+      "tolerance": 0.0001,
+      "exactMatch": true,
+      "passed": true
+    },
+    {
+      "id": "TC-033",
+      "name": "Independent KPI validation: averageScore",
+      "status": "PASS",
+      "evidence": "expected=7.59, actual=7.59, delta=0, tolerance=0.01",
+      "metric": "averageScore",
+      "expected": 7.59,
+      "actual": 7.59,
+      "delta": 0,
+      "tolerance": 0.01,
+      "exactMatch": true,
+      "passed": true
+    },
+    {
+      "id": "TC-034",
+      "name": "Independent KPI validation: feedbackRating",
+      "status": "PASS",
+      "evidence": "expected=4.47, actual=4.48, delta=0.01, tolerance=0.01",
+      "metric": "feedbackRating",
+      "expected": 4.47,
+      "actual": 4.48,
+      "delta": 0.01,
+      "tolerance": 0.01,
+      "exactMatch": false,
+      "passed": true
+    },
+    {
+      "id": "TC-035",
+      "name": "Independent KPI validation: trainingHours",
+      "status": "PASS",
+      "evidence": "expected=848, actual=848, delta=0, tolerance=0",
+      "metric": "trainingHours",
+      "expected": 848,
+      "actual": 848,
+      "delta": 0,
+      "tolerance": 0,
+      "exactMatch": true,
+      "passed": true
+    },
+    {
+      "id": "TC-036",
+      "name": "Independent KPI validation: effectivenessScore",
+      "status": "PASS",
+      "evidence": "expected=88.23, actual=88.23, delta=0, tolerance=0.01",
+      "metric": "effectivenessScore",
+      "expected": 88.23,
+      "actual": 88.23,
+      "delta": 0,
+      "tolerance": 0.01,
+      "exactMatch": true,
+      "passed": true
+    }
+  ]
+}

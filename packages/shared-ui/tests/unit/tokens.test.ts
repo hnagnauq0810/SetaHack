@@ -101,6 +101,11 @@ describe('tokens.css', () => {
     expect(tokens).toMatch(/--font-mono:\s*['"]Geist Mono['"]/);
   });
 
+  it('uses the wide responsive conversation measure for full-screen chat', () => {
+    expect(tokens).toMatch(/--max-width-conversation:\s*72rem/);
+    expect(tokens).toMatch(/--max-width-message-bubble:\s*48rem/);
+  });
+
   it('declares a `.theme-light` swap', () => {
     expect(tokens).toMatch(/\.theme-light\s*\{/);
   });

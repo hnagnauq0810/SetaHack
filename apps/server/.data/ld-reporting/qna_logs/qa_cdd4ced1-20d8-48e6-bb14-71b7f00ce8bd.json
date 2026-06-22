@@ -1,0 +1,16 @@
+{
+  "answerId": "qa_cdd4ced1-20d8-48e6-bb14-71b7f00ce8bd",
+  "generatedAt": "2026-06-22T16:42:42.985Z",
+  "reportId": "rpt_1426465f-ac06-47a8-939b-4b058d242aed",
+  "answer": "Báo cáo về ai agent cho thấy điểm trung bình là 7.88, tỷ lệ hoàn thành 100%, và tỷ lệ vượt qua 92.3%. Tuy nhiên, báo cáo AWS Cloud Architecture & Services (reportId rpt_6b88eb81-539e-4f83-9a4b-b897ae0710c4) không có thông tin để so sánh trực tiếp với báo cáo này. Do đó, không thể cung cấp chênh lệch điểm tuyệt đối và tương đối giữa hai báo cáo.",
+  "confidence": 0.85,
+  "citations": [
+    "metrics.overall.completionRate",
+    "NORM-13"
+  ],
+  "limitations": [
+    "RBAC masking applied: individual trainee details are hidden or aggregated.",
+    "Báo cáo AWS Cloud Architecture & Services không có trong dữ liệu được cung cấp.",
+    "Không có thông tin để so sánh trực tiếp các chỉ số giữa hai báo cáo."
+  ]
+}

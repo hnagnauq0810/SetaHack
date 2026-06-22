@@ -36,6 +36,7 @@ describe('pumpOrchestrationStream', () => {
       {
         finalize: async () => ({ result: { skills: ['aws'] }, trust: TRUST }),
         onApproval: async () => {},
+        timing: { startedAtMs: 1_000, now: () => 2_500 },
       },
     );
     expect(w.chunks.some((c) => c.type === 'text-delta' && c.delta === 'Hello ')).toBe(true);
@@ -48,6 +49,16 @@ describe('pumpOrchestrationStream', () => {
     expect(assistantParts).toContainEqual({ type: 'data-trust', id: 'trust', data: TRUST });
     expect(w.chunks.some((c) => c.type === 'data-result')).toBe(true);
     expect(w.chunks.some((c) => c.type === 'data-trust')).toBe(true);
+    expect(assistantParts).toContainEqual({
+      type: 'data-thinking-timing',
+      id: 'thinking-timing',
+      data: { durationMs: 1_500 },
+    });
+    expect(w.chunks).toContainEqual({
+      type: 'data-thinking-timing',
+      id: 'thinking-timing',
+      data: { durationMs: 1_500 },
+    });
   });
 
   it('persists reasoning and tool invocations for thread reload', async () => {

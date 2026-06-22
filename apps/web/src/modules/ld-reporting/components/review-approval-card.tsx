@@ -1,5 +1,5 @@
 import { Button, Card, CardContent, cn } from '@seta/shared-ui';
-import { Check, CheckCircle2, Clock3, RotateCcw } from 'lucide-react';
+import { AlertTriangle, Check, CheckCircle2, Clock3, RotateCcw } from 'lucide-react';
 import type { LdReport } from '../api-client';
 import { reportStatusLabel, reportTone } from './display-utils';
 import { StatusBadge } from './status-badge';
@@ -7,12 +7,24 @@ import { StatusBadge } from './status-badge';
 interface ReviewApprovalCardProps {
   report: LdReport | null;
   loading: string | null;
+  error?: string | null;
   onFinalize: (decision: 'approve' | 'revise' | 'regenerate') => void;
 }
 
-export function ReviewApprovalCard({ report, loading, onFinalize }: ReviewApprovalCardProps) {
+export function ReviewApprovalCard({ report, loading, error, onFinalize }: ReviewApprovalCardProps) {
   const finalized = report?.status === 'FINAL';
   const revision = report?.status === 'REVISION_REQUESTED';
+  const evidenceReady =
+    report?.evidence.status !== 'BLOCKED' && report?.evidence.canGenerateFinalConclusion === true;
+  const qualityReady = report?.quality?.status === 'PASS';
+  const approvalReady = Boolean(report && evidenceReady && qualityReady);
+  const blockedReason = !report
+    ? null
+    : !evidenceReady
+      ? 'Evidence Gate is blocking the final conclusion. Resolve blocker evidence before approval.'
+      : !qualityReady
+        ? `Quality Gate must be PASS before approval (current: ${report.quality?.status ?? 'NOT_CHECKED'}).`
+        : null;
 
   return (
     <Card className="rounded-2xl border-slate-200 bg-white p-5 shadow-sm">
@@ -50,11 +62,23 @@ export function ReviewApprovalCard({ report, loading, onFinalize }: ReviewApprov
 
           <Timeline report={report} />
 
+          {blockedReason ? (
+            <div className="flex gap-2 rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900">
+              <AlertTriangle className="mt-0.5 size-4 shrink-0" />
+              <span>{blockedReason}</span>
+            </div>
+          ) : null}
+          {error ? (
+            <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+              {error}
+            </div>
+          ) : null}
+
           <div className="grid gap-2">
             <Button
               type="button"
               onClick={() => onFinalize('approve')}
-              disabled={!report || finalized || loading !== null}
+              disabled={!approvalReady || finalized || loading !== null}
               className="h-10 bg-emerald-700 text-white hover:bg-emerald-800"
             >
               <Check className="size-4" />
@@ -77,7 +101,7 @@ export function ReviewApprovalCard({ report, loading, onFinalize }: ReviewApprov
               className="h-10"
             >
               <RotateCcw className="size-4" />
-              {finalized ? 'Report finalized' : loading === 'regenerate' ? 'Updating...' : 'Regenerate draft'}
+              {finalized ? 'Report finalized' : loading === 'regenerate' ? 'Updating...' : 'Return to draft'}
             </Button>
           </div>
         </div>
