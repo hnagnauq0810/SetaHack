@@ -88,6 +88,32 @@ export function buildLdReportingRoutes(_deps: RouteBuildDeps): Hono<SessionEnv> 
     }
   });
 
+  app.delete('/api/ld-reporting/reports/:id', async (c) => {
+    try {
+      requirePermission(c.get('user'), 'ld-reporting.report.generate');
+      const { id } = reportIdParamSchema.parse(c.req.param());
+      const deleted = await agent.ld_deleteReport(id);
+      if (!deleted) {
+        return c.json({ error: 'NOT_FOUND', message: `Report not found: ${id}` }, 404);
+      }
+      return c.json({ success: true });
+    } catch (err) {
+      return handleLdError(c, err);
+    }
+  });
+
+  app.post('/api/ld-reporting/reports/:id/save', async (c) => {
+    try {
+      requirePermission(c.get('user'), 'ld-reporting.report.generate');
+      const access = resolveAccess(c.get('user'));
+      const { id } = reportIdParamSchema.parse(c.req.param());
+      const report = await agent.ld_saveReport(id);
+      return c.json(agent.viewReport(report, access));
+    } catch (err) {
+      return handleLdError(c, err);
+    }
+  });
+
   app.patch('/api/ld-reporting/reports/:id/draft', async (c) => {
     try {
       requirePermission(c.get('user'), 'ld-reporting.report.generate');

@@ -148,6 +148,24 @@ describe('ld-reporting pipeline', () => {
       }),
     ).rejects.toThrow('Finalized reports cannot be edited.');
   });
+
+  it('supports unsaved preview drafts and saving drafts', async () => {
+    const agent = await isolatedAgent();
+    const draft = await agent.ld_generateReport({
+      scope: { period: '2026-Q1' },
+      saveToWorkspace: false,
+    });
+    expect(draft.saved).toBe(false);
+
+    const listBefore = await agent.listReports({ role: 'LND_MANAGER' });
+    expect(listBefore.map((r) => r.reportId)).not.toContain(draft.reportId);
+
+    const saved = await agent.ld_saveReport(draft.reportId);
+    expect(saved.saved).toBe(true);
+
+    const listAfter = await agent.listReports({ role: 'LND_MANAGER' });
+    expect(listAfter.map((r) => r.reportId)).toContain(draft.reportId);
+  });
 });
 
 async function isolatedAgent(): Promise<LdReportingSpecialistAgent> {

@@ -5,7 +5,7 @@
   "type": "module",
   "description": "Seta API server — Hono HTTP entry point, dispatcher, and graphile-worker host. Composes every domain module.",
   "scripts": {
-    "dev": "tsx watch --env-file=../../.env src/index.ts",
+    "dev": "node --import tsx --watch --env-file=../../.env src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
     "test": "vitest run",

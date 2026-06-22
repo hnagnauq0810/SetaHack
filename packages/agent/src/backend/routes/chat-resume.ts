@@ -155,6 +155,7 @@ export function mountChatResumeRoute(app: Hono<AgentRouteEnv>, deps: AgentRouteD
         const run = await resumeOrchestration(resume, {
           tenantId: session.tenant_id,
           actorUserId: session.user_id,
+          effectivePermissions: session.effective_permissions,
           threadId,
           roleSummary: session.role_summary,
           mastraRunId,

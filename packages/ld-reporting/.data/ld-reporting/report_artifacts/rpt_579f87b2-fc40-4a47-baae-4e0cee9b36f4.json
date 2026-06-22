@@ -1,0 +1,333 @@
+{
+  "reportId": "rpt_579f87b2-fc40-4a47-baae-4e0cee9b36f4",
+  "datasetId": "ds_70f8af77c831a6b0",
+  "metricsId": "mx_5bc0b240-6f3f-456c-a29e-30ff7ede6513",
+  "evidenceId": "ev_4ea74dbc-820c-433c-959d-32dcacb2ef71",
+  "governanceId": "gv_1dfb224a-59e9-40b6-81c2-3f8141e511f5",
+  "title": "L&D Training Effectiveness Report - Technical Leadership & Communication",
+  "scope": {
+    "courseId": "Leadership_06_2026"
+  },
+  "status": "DRAFT",
+  "generatedAt": "2026-06-22T14:59:57.514Z",
+  "executiveSummary": "The selected scope contains 1 course(s), 0 completed course(s), and 8 trainee-course records. Overall attendance is 47.9%, completion is 0%, pass rate is 0%, and average score is N/A/10. Total training hours are 34.5 and scaled cost is 4.8. Final effectiveness conclusion is blocked because required evidence is incomplete or course status is not completed.",
+  "insights": [
+    "Technical Leadership & Communication has an effectiveness score of 25.58 in the selected scope.",
+    "1 course group contained learners who need support based on score or attendance policy.",
+    "10 high-priority L&D NORM flags were triggered.",
+    "Evidence status is BLOCKED; conclusions must be limited to validated metrics."
+  ],
+  "recommendations": [
+    "Do not publish a final effectiveness conclusion until blocked evidence items are resolved.",
+    "Use this output as a preliminary readiness report and assign owners to missing evidence items.",
+    "Open a course content review with the L&D manager and confirm the improvement owner.",
+    "Mark incomplete learner records for review and schedule re-enrollment in the next suitable cohort.",
+    "Assign a coaching owner for support-needed learners and review attendance issues with direct managers."
+  ],
+  "warnings": [
+    "[BLOCKER] Course Leadership_06_2026 is In Progress; final effectiveness conclusion is blocked until completion.",
+    "[WARNING] Attendance has 24/48 expected rows for Leadership_06_2026."
+  ],
+  "evidence": {
+    "evidenceId": "ev_4ea74dbc-820c-433c-959d-32dcacb2ef71",
+    "datasetId": "ds_70f8af77c831a6b0",
+    "status": "BLOCKED",
+    "generatedAt": "2026-06-22T14:59:57.513Z",
+    "missingEvidence": [
+      {
+        "type": "IN_PROGRESS_COURSE",
+        "severity": "blocker",
+        "source": "OneDrive",
+        "sheetName": "DS06_Course_Catalog",
+        "field": "Status",
+        "courseId": "Leadership_06_2026",
+        "message": "Course Leadership_06_2026 is In Progress; final effectiveness conclusion is blocked until completion.",
+        "expected": "Completed",
+        "actual": "In Progress",
+        "recommendedFix": "Generate a readiness report only, or wait until the course status is Completed.",
+        "ownerRole": "LND_MANAGER"
+      },
+      {
+        "type": "MISSING_ATTENDANCE",
+        "severity": "warning",
+        "source": "Teams",
+        "sheetName": "DS07_Attendance_Log",
+        "courseId": "Leadership_06_2026",
+        "affectedCount": 24,
+        "message": "Attendance has 24/48 expected rows for Leadership_06_2026.",
+        "expected": "48 attendance rows",
+        "actual": "24 attendance rows",
+        "recommendedFix": "Backfill missing session attendance rows from Teams before final reporting.",
+        "ownerRole": "DATA_OWNER"
+      }
+    ],
+    "checklist": [
+      {
+        "check": "Source availability and required columns",
+        "status": "PASS",
+        "detail": "Required sheets and columns were mapped from Teams, OneDrive, Forms, KPI, Rules and Template sources."
+      },
+      {
+        "check": "Course status",
+        "status": "FAIL",
+        "detail": "1 selected course(s) are not completed."
+      },
+      {
+        "check": "Attendance completeness",
+        "status": "WARN",
+        "detail": "Expected attendance rows are trainee count x total sessions. Late is retained for metrics as partial attendance."
+      },
+      {
+        "check": "Assessment completeness",
+        "status": "PASS",
+        "detail": "Completed courses require one valid assessment and pass-status row per trainee."
+      },
+      {
+        "check": "Feedback completeness",
+        "status": "PASS",
+        "detail": "NORM-14 requires at least 60% feedback response rate for valid analysis."
+      },
+      {
+        "check": "Row-level data quality",
+        "status": "PASS",
+        "detail": "Duplicate rows and numeric ranges were checked before metric generation."
+      },
+      {
+        "check": "Consistency: course ID and pass-status logic",
+        "status": "PASS",
+        "detail": "Cross-source course IDs and pass-status logic were checked against the selected course catalog."
+      }
+    ],
+    "canGenerateFinalConclusion": false
+  },
+  "metrics": {
+    "metricsId": "mx_5bc0b240-6f3f-456c-a29e-30ff7ede6513",
+    "datasetId": "ds_70f8af77c831a6b0",
+    "generatedAt": "2026-06-22T14:59:57.513Z",
+    "overall": {
+      "totalCourses": 1,
+      "completedCourses": 0,
+      "traineeCount": 8,
+      "attendanceRate": 0.4792,
+      "completionRate": 0,
+      "passRate": 0,
+      "averageScore": null,
+      "feedbackRating": 4.8,
+      "trainingHours": 34.5,
+      "totalCostScaled": 4.8,
+      "roiProxy": null,
+      "effectivenessScore": 25.58
+    },
+    "courses": [
+      {
+        "courseId": "Leadership_06_2026",
+        "courseName": "Technical Leadership & Communication",
+        "trainerId": "TRN-005",
+        "status": "In Progress",
+        "traineeCount": 8,
+        "attendanceRate": 0.4792,
+        "completionRate": 0,
+        "passRate": 0,
+        "averageScore": null,
+        "feedbackRating": 4.8,
+        "trainerRatingAvg": 4.8,
+        "contentRatingAvg": 4.8,
+        "feedbackResponseRate": 0.625,
+        "trainingHours": 34.5,
+        "totalCostScaled": 4.8,
+        "costPerCompletedTrainee": null,
+        "postTrainingPerfDelta": null,
+        "roiProxy": null,
+        "effectivenessScore": 25.58
+      }
+    ]
+  },
+  "governance": {
+    "governanceId": "gv_1dfb224a-59e9-40b6-81c2-3f8141e511f5",
+    "role": "LND_MANAGER",
+    "classification": "Not reportable",
+    "generatedAt": "2026-06-22T14:59:57.514Z",
+    "normFlags": [
+      {
+        "ruleId": "NORM-01",
+        "priority": "High",
+        "category": "Effectiveness",
+        "courseId": "Leadership_06_2026",
+        "message": "Pass rate is below 70%.",
+        "action": "Flag course for content review; notify L&D manager"
+      },
+      {
+        "ruleId": "NORM-03",
+        "priority": "Medium",
+        "category": "Attendance",
+        "courseId": "Leadership_06_2026",
+        "message": "Attendance rate is below 75%.",
+        "action": "Send reminder to absentees; flag to direct manager"
+      },
+      {
+        "ruleId": "NORM-05",
+        "priority": "High",
+        "category": "Individual",
+        "courseId": "Leadership_06_2026",
+        "employeeId": "EMP-019",
+        "message": "Trainee has zero score or missing assessment.",
+        "action": "Mark as Incomplete; recommend re-enrollment in next cohort"
+      },
+      {
+        "ruleId": "NORM-05",
+        "priority": "High",
+        "category": "Individual",
+        "courseId": "Leadership_06_2026",
+        "employeeId": "EMP-029",
+        "message": "Trainee has zero score or missing assessment.",
+        "action": "Mark as Incomplete; recommend re-enrollment in next cohort"
+      },
+      {
+        "ruleId": "NORM-05",
+        "priority": "High",
+        "category": "Individual",
+        "courseId": "Leadership_06_2026",
+        "employeeId": "EMP-047",
+        "message": "Trainee has zero score or missing assessment.",
+        "action": "Mark as Incomplete; recommend re-enrollment in next cohort"
+      },
+      {
+        "ruleId": "NORM-05",
+        "priority": "High",
+        "category": "Individual",
+        "courseId": "Leadership_06_2026",
+        "employeeId": "EMP-060",
+        "message": "Trainee has zero score or missing assessment.",
+        "action": "Mark as Incomplete; recommend re-enrollment in next cohort"
+      },
+      {
+        "ruleId": "NORM-05",
+        "priority": "High",
+        "category": "Individual",
+        "courseId": "Leadership_06_2026",
+        "employeeId": "EMP-093",
+        "message": "Trainee has zero score or missing assessment.",
+        "action": "Mark as Incomplete; recommend re-enrollment in next cohort"
+      },
+      {
+        "ruleId": "NORM-05",
+        "priority": "High",
+        "category": "Individual",
+        "courseId": "Leadership_06_2026",
+        "employeeId": "EMP-124",
+        "message": "Trainee has zero score or missing assessment.",
+        "action": "Mark as Incomplete; recommend re-enrollment in next cohort"
+      },
+      {
+        "ruleId": "NORM-05",
+        "priority": "High",
+        "category": "Individual",
+        "courseId": "Leadership_06_2026",
+        "employeeId": "EMP-131",
+        "message": "Trainee has zero score or missing assessment.",
+        "action": "Mark as Incomplete; recommend re-enrollment in next cohort"
+      },
+      {
+        "ruleId": "NORM-05",
+        "priority": "High",
+        "category": "Individual",
+        "courseId": "Leadership_06_2026",
+        "employeeId": "EMP-135",
+        "message": "Trainee has zero score or missing assessment.",
+        "action": "Mark as Incomplete; recommend re-enrollment in next cohort"
+      },
+      {
+        "ruleId": "NORM-11",
+        "priority": "High",
+        "category": "Reporting",
+        "courseId": "Leadership_06_2026",
+        "message": "Course Leadership_06_2026 is In Progress; final effectiveness conclusion is blocked until completion.",
+        "action": "Block final conclusion; flag data incomplete"
+      }
+    ],
+    "outstandingTrainees": [],
+    "supportNeededTrainees": [
+      {
+        "courseId": "Leadership_06_2026",
+        "employeeId": "EMP-019",
+        "score": null,
+        "attendanceRate": 0.5,
+        "reason": "Below pass threshold or attendance below 70%"
+      },
+      {
+        "courseId": "Leadership_06_2026",
+        "employeeId": "EMP-029",
+        "score": null,
+        "attendanceRate": 0.5,
+        "reason": "Below pass threshold or attendance below 70%"
+      },
+      {
+        "courseId": "Leadership_06_2026",
+        "employeeId": "EMP-047",
+        "score": null,
+        "attendanceRate": 0.5,
+        "reason": "Below pass threshold or attendance below 70%"
+      },
+      {
+        "courseId": "Leadership_06_2026",
+        "employeeId": "EMP-060",
+        "score": null,
+        "attendanceRate": 0.5,
+        "reason": "Below pass threshold or attendance below 70%"
+      },
+      {
+        "courseId": "Leadership_06_2026",
+        "employeeId": "EMP-093",
+        "score": null,
+        "attendanceRate": 0.5,
+        "reason": "Below pass threshold or attendance below 70%"
+      },
+      {
+        "courseId": "Leadership_06_2026",
+        "employeeId": "EMP-124",
+        "score": null,
+        "attendanceRate": 0.5,
+        "reason": "Below pass threshold or attendance below 70%"
+      },
+      {
+        "courseId": "Leadership_06_2026",
+        "employeeId": "EMP-131",
+        "score": null,
+        "attendanceRate": 0.3333333333333333,
+        "reason": "Below pass threshold or attendance below 70%"
+      },
+      {
+        "courseId": "Leadership_06_2026",
+        "employeeId": "EMP-135",
+        "score": null,
+        "attendanceRate": 0.5,
+        "reason": "Below pass threshold or attendance below 70%"
+      }
+    ],
+    "supportNeededGroups": [
+      {
+        "courseId": "Leadership_06_2026",
+        "count": 8,
+        "reason": "At least one learner is below pass threshold or attendance policy."
+      }
+    ],
+    "masked": false
+  },
+  "llm": {
+    "enabled": false,
+    "model": "gpt-4o-mini",
+    "usedFor": [],
+    "fallbackReason": "OPENAI_API_KEY is not configured or LD_REPORTING_USE_LLM=false."
+  },
+  "quality": {
+    "qualityId": "qc_9045c56d-b7b3-49b6-80c6-aa76ba268783",
+    "status": "PASS",
+    "generatedAt": "2026-06-22T14:59:57.515Z",
+    "issues": []
+  },
+  "artifacts": {
+    "pptxPath": "C:\\Users\\Admin\\Desktop\\SetaHack\\packages\\ld-reporting\\.data\\ld-reporting\\artifacts\\rpt_579f87b2-fc40-4a47-baae-4e0cee9b36f4\\rpt_579f87b2-fc40-4a47-baae-4e0cee9b36f4.pptx",
+    "docxPath": "C:\\Users\\Admin\\Desktop\\SetaHack\\packages\\ld-reporting\\.data\\ld-reporting\\artifacts\\rpt_579f87b2-fc40-4a47-baae-4e0cee9b36f4\\rpt_579f87b2-fc40-4a47-baae-4e0cee9b36f4.docx"
+  },
+  "saved": true
+}

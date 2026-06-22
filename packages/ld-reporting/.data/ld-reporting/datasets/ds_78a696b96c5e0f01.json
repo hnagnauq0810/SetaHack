@@ -1,0 +1,609 @@
+{
+  "datasetId": "ds_78a696b96c5e0f01",
+  "scope": {
+    "courseId": "Leadership_06_2026"
+  },
+  "importedAt": "2026-06-22T08:33:50.892Z",
+  "sources": [
+    {
+      "source": "OneDrive",
+      "sheetName": "DS06_Course_Catalog",
+      "rowCount": 6,
+      "required": true,
+      "present": true,
+      "missingColumns": [],
+      "loadedAt": "2026-06-22T08:33:50.892Z"
+    },
+    {
+      "source": "Teams",
+      "sheetName": "DS07_Attendance_Log",
+      "rowCount": 722,
+      "required": true,
+      "present": true,
+      "missingColumns": [],
+      "loadedAt": "2026-06-22T08:33:50.892Z"
+    },
+    {
+      "source": "OneDrive",
+      "sheetName": "DS08_Assessment_Score",
+      "rowCount": 89,
+      "required": true,
+      "present": true,
+      "missingColumns": [],
+      "loadedAt": "2026-06-22T08:33:50.892Z"
+    },
+    {
+      "source": "Forms",
+      "sheetName": "DS09_Feedback_Survey",
+      "rowCount": 94,
+      "required": true,
+      "present": true,
+      "missingColumns": [],
+      "loadedAt": "2026-06-22T08:33:50.892Z"
+    },
+    {
+      "source": "KPI",
+      "sheetName": "DS10_Training_Cost_ROI",
+      "rowCount": 6,
+      "required": true,
+      "present": true,
+      "missingColumns": [],
+      "loadedAt": "2026-06-22T08:33:50.892Z"
+    },
+    {
+      "source": "Rules",
+      "sheetName": "DS11_LnD_Training_NORM",
+      "rowCount": 15,
+      "required": true,
+      "present": true,
+      "missingColumns": [],
+      "loadedAt": "2026-06-22T08:33:50.892Z"
+    },
+    {
+      "source": "Template",
+      "sheetName": "DS12_Report_Template_Structure",
+      "rowCount": 10,
+      "required": true,
+      "present": true,
+      "missingColumns": [],
+      "loadedAt": "2026-06-22T08:33:50.892Z"
+    }
+  ],
+  "courses": [
+    {
+      "courseId": "Leadership_06_2026",
+      "courseName": "Technical Leadership & Communication",
+      "topicCategory": "Soft Skills / Leadership",
+      "trainerId": "TRN-005",
+      "totalSessions": 6,
+      "hoursPerSession": 1.5,
+      "totalHours": 9,
+      "passThresholdScore": 7,
+      "startDate": "2026-06-02",
+      "endDate": "2026-06-27",
+      "status": "In Progress"
+    }
+  ],
+  "attendance": [
+    {
+      "courseId": "Leadership_06_2026",
+      "sessionId": "Leadership_06_2026_S1",
+      "employeeId": "EMP-019",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "sessionId": "Leadership_06_2026_S2",
+      "employeeId": "EMP-019",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "sessionId": "Leadership_06_2026_S3",
+      "employeeId": "EMP-019",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "sessionId": "Leadership_06_2026_S1",
+      "employeeId": "EMP-029",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "sessionId": "Leadership_06_2026_S2",
+      "employeeId": "EMP-029",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "sessionId": "Leadership_06_2026_S3",
+      "employeeId": "EMP-029",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "sessionId": "Leadership_06_2026_S1",
+      "employeeId": "EMP-047",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "sessionId": "Leadership_06_2026_S2",
+      "employeeId": "EMP-047",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "sessionId": "Leadership_06_2026_S3",
+      "employeeId": "EMP-047",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "sessionId": "Leadership_06_2026_S1",
+      "employeeId": "EMP-060",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "sessionId": "Leadership_06_2026_S2",
+      "employeeId": "EMP-060",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "sessionId": "Leadership_06_2026_S3",
+      "employeeId": "EMP-060",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "sessionId": "Leadership_06_2026_S1",
+      "employeeId": "EMP-093",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "sessionId": "Leadership_06_2026_S2",
+      "employeeId": "EMP-093",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "sessionId": "Leadership_06_2026_S3",
+      "employeeId": "EMP-093",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "sessionId": "Leadership_06_2026_S1",
+      "employeeId": "EMP-124",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "sessionId": "Leadership_06_2026_S2",
+      "employeeId": "EMP-124",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "sessionId": "Leadership_06_2026_S3",
+      "employeeId": "EMP-124",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "sessionId": "Leadership_06_2026_S1",
+      "employeeId": "EMP-131",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "sessionId": "Leadership_06_2026_S2",
+      "employeeId": "EMP-131",
+      "attendanceStatus": "Absent",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "sessionId": "Leadership_06_2026_S3",
+      "employeeId": "EMP-131",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "sessionId": "Leadership_06_2026_S1",
+      "employeeId": "EMP-135",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "sessionId": "Leadership_06_2026_S2",
+      "employeeId": "EMP-135",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "sessionId": "Leadership_06_2026_S3",
+      "employeeId": "EMP-135",
+      "attendanceStatus": "Present",
+      "trainingHours": 1.5
+    }
+  ],
+  "assessments": [],
+  "feedback": [
+    {
+      "courseId": "Leadership_06_2026",
+      "employeeId": "EMP-019",
+      "trainerRating": 5,
+      "contentRating": 5,
+      "comment": "Content well-structured; would appreciate more advanced follow-up topics."
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "employeeId": "EMP-029",
+      "trainerRating": 5,
+      "contentRating": 5,
+      "comment": "Very practical course; content aligned well with real project needs."
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "employeeId": "EMP-047",
+      "trainerRating": 5,
+      "contentRating": 5,
+      "comment": "Excellent trainer support; Q&A sessions were particularly helpful."
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "employeeId": "EMP-060",
+      "trainerRating": 4,
+      "contentRating": 5,
+      "comment": "Content well-structured; would appreciate more advanced follow-up topics."
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "employeeId": "EMP-093",
+      "trainerRating": 5,
+      "contentRating": 4,
+      "comment": "Excellent trainer support; Q&A sessions were particularly helpful."
+    }
+  ],
+  "costs": [
+    {
+      "courseId": "Leadership_06_2026",
+      "costPerSessionScaled": 0.8,
+      "totalSessions": 6,
+      "totalCostScaled": 4.8,
+      "traineeCount": 8,
+      "completionRate": null,
+      "avgScore": null,
+      "passRate": null,
+      "postTrainingPerfDelta": null,
+      "notes": "In progress — 3/6 sessions completed; metrics not yet available"
+    }
+  ],
+  "normRules": [
+    {
+      "ruleId": "NORM-01",
+      "category": "Effectiveness",
+      "ruleDescription": "Pass rate per course below threshold",
+      "threshold": "Pass_Rate < 0.70",
+      "actionIfTriggered": "Flag course for content review; notify L&D manager",
+      "priority": "High"
+    },
+    {
+      "ruleId": "NORM-02",
+      "category": "Effectiveness",
+      "ruleDescription": "Average score below minimum acceptable level",
+      "threshold": "Avg_Score < 6.5",
+      "actionIfTriggered": "Trigger course redesign review; consider re-delivery",
+      "priority": "High"
+    },
+    {
+      "ruleId": "NORM-03",
+      "category": "Attendance",
+      "ruleDescription": "Attendance rate per course below target",
+      "threshold": "Attendance_Rate < 0.75",
+      "actionIfTriggered": "Send reminder to absentees; flag to direct manager",
+      "priority": "Medium"
+    },
+    {
+      "ruleId": "NORM-04",
+      "category": "Individual",
+      "ruleDescription": "Trainee passes with low attendance (possible policy violation)",
+      "threshold": "Score >= Pass_Threshold AND Attendance_Rate < 0.70",
+      "actionIfTriggered": "Flag for L&D review; verify with manager",
+      "priority": "Medium"
+    },
+    {
+      "ruleId": "NORM-05",
+      "category": "Individual",
+      "ruleDescription": "Trainee score = 0 or did not submit assessment",
+      "threshold": "Score = 0 OR assessment not submitted",
+      "actionIfTriggered": "Mark as Incomplete; recommend re-enrollment in next cohort",
+      "priority": "High"
+    },
+    {
+      "ruleId": "NORM-06",
+      "category": "Individual",
+      "ruleDescription": "Outstanding trainee highlight",
+      "threshold": "Score >= 9.0 AND Attendance_Rate = 1.0",
+      "actionIfTriggered": "Add to \"Star Learner\" report section; recommend for mentorship role",
+      "priority": "Low"
+    },
+    {
+      "ruleId": "NORM-07",
+      "category": "Individual",
+      "ruleDescription": "At-risk trainee — needs support",
+      "threshold": "Score < Pass_Threshold AND Attendance_Rate >= 0.70",
+      "actionIfTriggered": "Flag for 1:1 coaching; assign buddy or additional practice resource",
+      "priority": "High"
+    },
+    {
+      "ruleId": "NORM-08",
+      "category": "Trainer",
+      "ruleDescription": "Trainer rating below acceptable standard",
+      "threshold": "Trainer_Rating_Avg < 3.5",
+      "actionIfTriggered": "Escalate to L&D Manager; schedule trainer coaching session",
+      "priority": "High"
+    },
+    {
+      "ruleId": "NORM-09",
+      "category": "ROI",
+      "ruleDescription": "Low completion rate despite high cost",
+      "threshold": "Completion_Rate < 0.80 AND Total_Cost_Scaled > 8.0",
+      "actionIfTriggered": "Review course necessity; consider split delivery or self-paced format",
+      "priority": "Medium"
+    },
+    {
+      "ruleId": "NORM-10",
+      "category": "ROI",
+      "ruleDescription": "Negative or zero post-training performance delta",
+      "threshold": "Post_Training_Perf_Delta <= 0",
+      "actionIfTriggered": "Audit course design and on-the-job application support",
+      "priority": "High"
+    },
+    {
+      "ruleId": "NORM-11",
+      "category": "Reporting",
+      "ruleDescription": "Course with missing data cannot be reported",
+      "threshold": "Any required field is NULL for Completed course status",
+      "actionIfTriggered": "Block course from effectiveness report; flag as data incomplete",
+      "priority": "High"
+    },
+    {
+      "ruleId": "NORM-12",
+      "category": "Attendance",
+      "ruleDescription": "Trainee marked Late treated as partial attendance",
+      "threshold": "Attendance_Status = Late",
+      "actionIfTriggered": "Count as 0.5 session for attendance rate calculation",
+      "priority": "Low"
+    },
+    {
+      "ruleId": "NORM-13",
+      "category": "Effectiveness",
+      "ruleDescription": "Course completion rate calculation basis",
+      "threshold": "Completion defined as >= 70% sessions attended",
+      "actionIfTriggered": "Apply consistently across all courses; document in report footnote",
+      "priority": "Medium"
+    },
+    {
+      "ruleId": "NORM-14",
+      "category": "Feedback",
+      "ruleDescription": "Minimum feedback response rate for valid analysis",
+      "threshold": "Feedback_Response_Rate < 0.60",
+      "actionIfTriggered": "Mark feedback analysis as statistically insufficient; note in report",
+      "priority": "Medium"
+    },
+    {
+      "ruleId": "NORM-15",
+      "category": "Individual",
+      "ruleDescription": "Score inconsistency detection",
+      "threshold": "Pass_Status = True AND Score < Pass_Threshold, OR Pass_Status = False AND Score >= Pass_Threshold",
+      "actionIfTriggered": "Flag as data integrity issue; verify with trainer before report generation",
+      "priority": "High"
+    }
+  ],
+  "templateSections": [
+    {
+      "sectionId": "SEC-01",
+      "sectionName": "Executive Summary",
+      "contentDescription": "Total courses, total trainees, overall pass rate, overall completion rate, total training hours, total cost (scaled)",
+      "dataSource": "DS07+DS08+DS10",
+      "required": true
+    },
+    {
+      "sectionId": "SEC-02",
+      "sectionName": "Course-Level Metrics",
+      "contentDescription": "Per-course: trainee count, attendance rate, avg score, pass rate, completion rate, cost, perf delta",
+      "dataSource": "DS07+DS08+DS10",
+      "required": true
+    },
+    {
+      "sectionId": "SEC-03",
+      "sectionName": "Trainee Highlights",
+      "contentDescription": "Outstanding trainees (score ≥ 9.0, full attendance); At-risk trainees (score < pass threshold); Trainees who passed with low attendance",
+      "dataSource": "DS08",
+      "required": true
+    },
+    {
+      "sectionId": "SEC-04",
+      "sectionName": "Trainer Evaluation",
+      "contentDescription": "Avg trainer rating per course; avg content rating per course; notable feedback themes",
+      "dataSource": "DS09",
+      "required": true
+    },
+    {
+      "sectionId": "SEC-05",
+      "sectionName": "Attendance Analysis",
+      "contentDescription": "Per-course attendance heatmap by session; full-absent cases; late patterns",
+      "dataSource": "DS07",
+      "required": true
+    },
+    {
+      "sectionId": "SEC-06",
+      "sectionName": "Effectiveness Analysis",
+      "contentDescription": "Comparison of avg score vs pass threshold; courses below NORM-01/NORM-02; ROI analysis",
+      "dataSource": "DS08+DS10+DS11",
+      "required": true
+    },
+    {
+      "sectionId": "SEC-07",
+      "sectionName": "Trend Comparison",
+      "contentDescription": "Quarter-over-quarter comparison (if prior quarter data available)",
+      "dataSource": "DS07+DS08 historical",
+      "required": false
+    },
+    {
+      "sectionId": "SEC-08",
+      "sectionName": "Data Quality Flags",
+      "contentDescription": "List of NORM violations: score inconsistencies, missing data, incomplete courses",
+      "dataSource": "DS11",
+      "required": true
+    },
+    {
+      "sectionId": "SEC-09",
+      "sectionName": "Recommendations",
+      "contentDescription": "L&D-generated recommendations based on effectiveness analysis and NORM triggers",
+      "dataSource": "All",
+      "required": true
+    },
+    {
+      "sectionId": "SEC-10",
+      "sectionName": "Appendix — Raw Data",
+      "contentDescription": "Full attendance log, score list, feedback list (anonymized, for L&D internal use only)",
+      "dataSource": "All",
+      "required": false
+    }
+  ],
+  "trainees": [
+    {
+      "courseId": "Leadership_06_2026",
+      "employeeId": "EMP-019",
+      "attendedUnits": 3,
+      "expectedUnits": 6,
+      "attendanceRate": 0.5,
+      "score": null,
+      "passStatus": null,
+      "completed": false,
+      "trainerRating": 5,
+      "contentRating": 5,
+      "feedbackComment": "Content well-structured; would appreciate more advanced follow-up topics."
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "employeeId": "EMP-029",
+      "attendedUnits": 3,
+      "expectedUnits": 6,
+      "attendanceRate": 0.5,
+      "score": null,
+      "passStatus": null,
+      "completed": false,
+      "trainerRating": 5,
+      "contentRating": 5,
+      "feedbackComment": "Very practical course; content aligned well with real project needs."
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "employeeId": "EMP-047",
+      "attendedUnits": 3,
+      "expectedUnits": 6,
+      "attendanceRate": 0.5,
+      "score": null,
+      "passStatus": null,
+      "completed": false,
+      "trainerRating": 5,
+      "contentRating": 5,
+      "feedbackComment": "Excellent trainer support; Q&A sessions were particularly helpful."
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "employeeId": "EMP-060",
+      "attendedUnits": 3,
+      "expectedUnits": 6,
+      "attendanceRate": 0.5,
+      "score": null,
+      "passStatus": null,
+      "completed": false,
+      "trainerRating": 4,
+      "contentRating": 5,
+      "feedbackComment": "Content well-structured; would appreciate more advanced follow-up topics."
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "employeeId": "EMP-093",
+      "attendedUnits": 3,
+      "expectedUnits": 6,
+      "attendanceRate": 0.5,
+      "score": null,
+      "passStatus": null,
+      "completed": false,
+      "trainerRating": 5,
+      "contentRating": 4,
+      "feedbackComment": "Excellent trainer support; Q&A sessions were particularly helpful."
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "employeeId": "EMP-124",
+      "attendedUnits": 3,
+      "expectedUnits": 6,
+      "attendanceRate": 0.5,
+      "score": null,
+      "passStatus": null,
+      "completed": false,
+      "trainerRating": null,
+      "contentRating": null,
+      "feedbackComment": null
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "employeeId": "EMP-131",
+      "attendedUnits": 2,
+      "expectedUnits": 6,
+      "attendanceRate": 0.3333333333333333,
+      "score": null,
+      "passStatus": null,
+      "completed": false,
+      "trainerRating": null,
+      "contentRating": null,
+      "feedbackComment": null
+    },
+    {
+      "courseId": "Leadership_06_2026",
+      "employeeId": "EMP-135",
+      "attendedUnits": 3,
+      "expectedUnits": 6,
+      "attendanceRate": 0.5,
+      "score": null,
+      "passStatus": null,
+      "completed": false,
+      "trainerRating": null,
+      "contentRating": null,
+      "feedbackComment": null
+    }
+  ]
+}

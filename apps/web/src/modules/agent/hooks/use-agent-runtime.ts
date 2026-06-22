@@ -48,11 +48,35 @@ export function useAgentRuntime({
 
   const readBody = useCallback(() => {
     const m = modelRef.current;
-    return m ? { model: m } : {};
-  }, []);
+    const snap = pageContextRef?.current;
+    console.log('[client.readBody] snap:', JSON.stringify(snap));
+    let pageContext = snap?.ctx && snap.suppressedFor !== snap.ctx.id ? snap.ctx : null;
+    if (
+      !pageContext &&
+      typeof window !== 'undefined' &&
+      window.location.pathname.startsWith('/ld-reporting')
+    ) {
+      pageContext = {
+        kind: 'ld-reporting',
+        id: 'workspace',
+        label: 'Training Effectiveness Agent',
+        summary:
+          'Chat-first L&D Manager workspace. Use chat to check evidence, generate draft reports, request exports, and finalize through human review. Draft edits made in the report panel update the report artifact before finalization.',
+      };
+      console.log(
+        '[client.readBody] fallback to default ld-reporting pageContext:',
+        JSON.stringify(pageContext),
+      );
+    }
+    console.log('[client.readBody] sending pageContext:', JSON.stringify(pageContext));
+    return {
+      ...(m ? { model: m } : {}),
+      ...(pageContext ? { pageContext } : {}),
+    };
+  }, [pageContextRef]);
 
   const transport = useMemo(() => {
-    // eslint-disable-next-line react-hooks/refs -- readBody captures modelRef and is only invoked when the transport sends; safe.
+    // eslint-disable-next-line react-hooks/refs -- readBody captures modelRef and pageContextRef and is only invoked when the transport sends; safe.
     return new AssistantChatTransport({
       api: '/api/agent/v1/chat',
       credentials: 'include',
@@ -88,9 +112,33 @@ export function useAgentRuntime({
       }
 
       const snap = pageContextRef?.current;
-      if (message.role === 'user' && snap?.ctx && snap.suppressedFor !== snap.ctx.id) {
+      console.log('[client.toCreateMessage] role:', message.role, 'snap:', JSON.stringify(snap));
+      let pageContext = snap?.ctx && snap.suppressedFor !== snap.ctx.id ? snap.ctx : null;
+      if (
+        !pageContext &&
+        typeof window !== 'undefined' &&
+        window.location.pathname.startsWith('/ld-reporting')
+      ) {
+        pageContext = {
+          kind: 'ld-reporting',
+          id: 'workspace',
+          label: 'Training Effectiveness Agent',
+          summary:
+            'Chat-first L&D Manager workspace. Use chat to check evidence, generate draft reports, request exports, and finalize through human review. Draft edits made in the report panel update the report artifact before finalization.',
+        };
+        console.log(
+          '[client.toCreateMessage] fallback to default ld-reporting pageContext:',
+          JSON.stringify(pageContext),
+        );
+      }
+
+      if (message.role === 'user' && pageContext) {
+        console.log(
+          '[client.toCreateMessage] appending page context part:',
+          JSON.stringify(pageContext),
+        );
         parts.push(
-          buildPageContextPart(snap.ctx) as unknown as { type: string; [k: string]: unknown },
+          buildPageContextPart(pageContext) as unknown as { type: string; [k: string]: unknown },
         );
       }
 

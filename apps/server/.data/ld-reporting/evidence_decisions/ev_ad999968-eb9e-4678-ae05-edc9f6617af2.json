@@ -1,0 +1,100 @@
+{
+  "evidenceId": "ev_ad999968-eb9e-4678-ae05-edc9f6617af2",
+  "datasetId": "ds_9125b65535d97139",
+  "status": "BLOCKED",
+  "generatedAt": "2026-06-22T03:43:27.911Z",
+  "missingEvidence": [
+    {
+      "type": "IN_PROGRESS_COURSE",
+      "severity": "blocker",
+      "source": "OneDrive",
+      "sheetName": "DS06_Course_Catalog",
+      "field": "Status",
+      "courseId": "Leadership_06_2026",
+      "message": "Course Leadership_06_2026 is In Progress; final effectiveness conclusion is blocked until completion.",
+      "expected": "Completed",
+      "actual": "In Progress",
+      "recommendedFix": "Generate a readiness report only, or wait until the course status is Completed.",
+      "ownerRole": "LND_MANAGER"
+    },
+    {
+      "type": "MISSING_ATTENDANCE",
+      "severity": "warning",
+      "source": "Teams",
+      "sheetName": "DS07_Attendance_Log",
+      "courseId": "Leadership_06_2026",
+      "affectedCount": 24,
+      "message": "Attendance has 24/48 expected rows for Leadership_06_2026.",
+      "expected": "48 attendance rows",
+      "actual": "24 attendance rows",
+      "recommendedFix": "Backfill missing session attendance rows from Teams before final reporting.",
+      "ownerRole": "DATA_OWNER"
+    },
+    {
+      "type": "SCORE_INCONSISTENCY",
+      "severity": "blocker",
+      "source": "OneDrive",
+      "sheetName": "DS08_Assessment_Score",
+      "field": "Pass_Status",
+      "courseId": "Golang_04_2026",
+      "employeeId": "EMP-171",
+      "message": "Pass_Status conflicts with score/threshold for EMP-171 in Golang_04_2026.",
+      "expected": "Pass_Status=false",
+      "actual": true,
+      "recommendedFix": "Verify pass status with the trainer before report generation.",
+      "ownerRole": "TRAINER"
+    },
+    {
+      "type": "SCORE_INCONSISTENCY",
+      "severity": "blocker",
+      "source": "OneDrive",
+      "sheetName": "DS08_Assessment_Score",
+      "field": "Pass_Status",
+      "courseId": "Golang_04_2026",
+      "employeeId": "EMP-174",
+      "message": "Pass_Status conflicts with score/threshold for EMP-174 in Golang_04_2026.",
+      "expected": "Pass_Status=true",
+      "actual": false,
+      "recommendedFix": "Verify pass status with the trainer before report generation.",
+      "ownerRole": "TRAINER"
+    }
+  ],
+  "checklist": [
+    {
+      "check": "Source availability and required columns",
+      "status": "PASS",
+      "detail": "Required sheets and columns were mapped from Teams, OneDrive, Forms, KPI, Rules and Template sources."
+    },
+    {
+      "check": "Course status",
+      "status": "FAIL",
+      "detail": "1 selected course(s) are not completed."
+    },
+    {
+      "check": "Attendance completeness",
+      "status": "WARN",
+      "detail": "Expected attendance rows are trainee count x total sessions. Late is retained for metrics as partial attendance."
+    },
+    {
+      "check": "Assessment completeness",
+      "status": "FAIL",
+      "detail": "Completed courses require one valid assessment and pass-status row per trainee."
+    },
+    {
+      "check": "Feedback completeness",
+      "status": "PASS",
+      "detail": "NORM-14 requires at least 60% feedback response rate for valid analysis."
+    },
+    {
+      "check": "Row-level data quality",
+      "status": "PASS",
+      "detail": "Duplicate rows and numeric ranges were checked before metric generation."
+    },
+    {
+      "check": "Consistency: course ID and pass-status logic",
+      "status": "FAIL",
+      "detail": "Cross-source course IDs and pass-status logic were checked against the selected course catalog."
+    }
+  ],
+  "canGenerateFinalConclusion": false
+}

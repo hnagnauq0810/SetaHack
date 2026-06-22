@@ -1,0 +1,202 @@
+{
+  "governanceId": "gv_4ef991a5-0b96-4372-b818-f0599ab5a29e",
+  "role": "LND_MANAGER",
+  "classification": "Risk",
+  "generatedAt": "2026-06-21T15:15:47.189Z",
+  "normFlags": [
+    {
+      "ruleId": "NORM-07",
+      "priority": "High",
+      "category": "Individual",
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-018",
+      "message": "Trainee needs 1:1 support.",
+      "action": "Flag for coaching; assign buddy or practice resources"
+    },
+    {
+      "ruleId": "NORM-07",
+      "priority": "High",
+      "category": "Individual",
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-190",
+      "message": "Trainee needs 1:1 support.",
+      "action": "Flag for coaching; assign buddy or practice resources"
+    },
+    {
+      "ruleId": "NORM-05",
+      "priority": "High",
+      "category": "Individual",
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-006",
+      "message": "Trainee has zero score or missing assessment.",
+      "action": "Mark as Incomplete; recommend re-enrollment in next cohort"
+    },
+    {
+      "ruleId": "NORM-07",
+      "priority": "High",
+      "category": "Individual",
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-006",
+      "message": "Trainee needs 1:1 support.",
+      "action": "Flag for coaching; assign buddy or practice resources"
+    },
+    {
+      "ruleId": "NORM-04",
+      "priority": "Medium",
+      "category": "Individual",
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-192",
+      "message": "Trainee passed with low attendance.",
+      "action": "Flag for L&D review; verify with manager"
+    },
+    {
+      "ruleId": "NORM-07",
+      "priority": "High",
+      "category": "Individual",
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-196",
+      "message": "Trainee needs 1:1 support.",
+      "action": "Flag for coaching; assign buddy or practice resources"
+    },
+    {
+      "ruleId": "NORM-07",
+      "priority": "High",
+      "category": "Individual",
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-140",
+      "message": "Trainee needs 1:1 support.",
+      "action": "Flag for coaching; assign buddy or practice resources"
+    },
+    {
+      "ruleId": "NORM-07",
+      "priority": "High",
+      "category": "Individual",
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-061",
+      "message": "Trainee needs 1:1 support.",
+      "action": "Flag for coaching; assign buddy or practice resources"
+    }
+  ],
+  "outstandingTrainees": [
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-198",
+      "score": 9.8,
+      "attendanceRate": 1,
+      "reason": "Score >= 9.0 and full attendance"
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-067",
+      "score": 9.7,
+      "attendanceRate": 1,
+      "reason": "Score >= 9.0 and full attendance"
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-048",
+      "score": 9.6,
+      "attendanceRate": 1,
+      "reason": "Score >= 9.0 and full attendance"
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-101",
+      "score": 9.5,
+      "attendanceRate": 1,
+      "reason": "Score >= 9.0 and full attendance"
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-183",
+      "score": 9.4,
+      "attendanceRate": 1,
+      "reason": "Score >= 9.0 and full attendance"
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-204",
+      "score": 9.3,
+      "attendanceRate": 1,
+      "reason": "Score >= 9.0 and full attendance"
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-186",
+      "score": 9.2,
+      "attendanceRate": 1,
+      "reason": "Score >= 9.0 and full attendance"
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-013",
+      "score": 9,
+      "attendanceRate": 1,
+      "reason": "Score >= 9.0 and full attendance"
+    }
+  ],
+  "supportNeededTrainees": [
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-018",
+      "score": 2.7,
+      "attendanceRate": 1,
+      "reason": "Below pass threshold or attendance below 70%"
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-190",
+      "score": 2.1,
+      "attendanceRate": 1,
+      "reason": "Below pass threshold or attendance below 70%"
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-006",
+      "score": 0,
+      "attendanceRate": 1,
+      "reason": "Below pass threshold or attendance below 70%"
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-192",
+      "score": 7,
+      "attendanceRate": 0.6666666666666666,
+      "reason": "Below pass threshold or attendance below 70%"
+    },
+    {
+      "courseId": "Automation_testing_01_2026",
+      "employeeId": "EMP-196",
+      "score": 3.1,
+      "attendanceRate": 0.8333333333333334,
+      "reason": "Below pass threshold or attendance below 70%"
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-140",
+      "score": 4.8,
+      "attendanceRate": 0.9,
+      "reason": "Below pass threshold or attendance below 70%"
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "employeeId": "EMP-061",
+      "score": 2.9,
+      "attendanceRate": 0.8,
+      "reason": "Below pass threshold or attendance below 70%"
+    }
+  ],
+  "supportNeededGroups": [
+    {
+      "courseId": "Automation_testing_01_2026",
+      "count": 5,
+      "reason": "At least one learner is below pass threshold or attendance policy."
+    },
+    {
+      "courseId": "CloudAWS_03_2026",
+      "count": 2,
+      "reason": "At least one learner is below pass threshold or attendance policy."
+    }
+  ],
+  "masked": false
+}

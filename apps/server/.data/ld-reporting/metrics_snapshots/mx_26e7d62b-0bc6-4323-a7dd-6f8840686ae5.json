@@ -1,0 +1,42 @@
+{
+  "metricsId": "mx_26e7d62b-0bc6-4323-a7dd-6f8840686ae5",
+  "datasetId": "ds_be99286c3b38e3be",
+  "generatedAt": "2026-06-22T14:42:32.126Z",
+  "overall": {
+    "totalCourses": 1,
+    "completedCourses": 1,
+    "traineeCount": 10,
+    "attendanceRate": 0.96,
+    "completionRate": 1,
+    "passRate": 1,
+    "averageScore": 7.89,
+    "feedbackRating": 4.6,
+    "trainingHours": 216,
+    "totalCostScaled": 15,
+    "roiProxy": 0.0207,
+    "effectivenessScore": 92.28
+  },
+  "courses": [
+    {
+      "courseId": "DevOps_02_2026",
+      "courseName": "DevOps Fundamentals: CI/CD, K8s, Monitoring",
+      "trainerId": "TRN-004",
+      "status": "Completed",
+      "traineeCount": 10,
+      "attendanceRate": 0.96,
+      "completionRate": 1,
+      "passRate": 1,
+      "averageScore": 7.89,
+      "feedbackRating": 4.6,
+      "trainerRatingAvg": 4.6,
+      "contentRatingAvg": 4.6,
+      "feedbackResponseRate": 1,
+      "trainingHours": 216,
+      "totalCostScaled": 15,
+      "costPerCompletedTrainee": 1.5,
+      "postTrainingPerfDelta": 0.031,
+      "roiProxy": 0.0207,
+      "effectivenessScore": 92.28
+    }
+  ]
+}

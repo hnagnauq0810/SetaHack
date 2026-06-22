@@ -1,0 +1,57 @@
+{
+  "evidenceId": "ev_651b07a9-e6e3-46be-8e03-1b3561adf17e",
+  "datasetId": "ds_6c6aa5d2cba406bb",
+  "status": "BLOCKED",
+  "generatedAt": "2026-06-22T10:16:29.467Z",
+  "missingEvidence": [
+    {
+      "type": "NO_COURSES_IN_SCOPE",
+      "severity": "blocker",
+      "source": "OneDrive",
+      "sheetName": "DS06_Course_Catalog",
+      "message": "No course matched the selected scope (courseId=Cloud AWS).",
+      "expected": "At least one course in scope.",
+      "actual": "0 courses",
+      "recommendedFix": "Clear conflicting filters or select the period that contains this course before generating the report.",
+      "ownerRole": "LND_MANAGER"
+    }
+  ],
+  "checklist": [
+    {
+      "check": "Source availability and required columns",
+      "status": "PASS",
+      "detail": "Required sheets and columns were mapped from Teams, OneDrive, Forms, KPI, Rules and Template sources."
+    },
+    {
+      "check": "Course status",
+      "status": "FAIL",
+      "detail": "No course matched the selected report scope."
+    },
+    {
+      "check": "Attendance completeness",
+      "status": "PASS",
+      "detail": "Expected attendance rows are trainee count x total sessions. Late is retained for metrics as partial attendance."
+    },
+    {
+      "check": "Assessment completeness",
+      "status": "PASS",
+      "detail": "Completed courses require one valid assessment and pass-status row per trainee."
+    },
+    {
+      "check": "Feedback completeness",
+      "status": "PASS",
+      "detail": "NORM-14 requires at least 60% feedback response rate for valid analysis."
+    },
+    {
+      "check": "Row-level data quality",
+      "status": "PASS",
+      "detail": "Duplicate rows and numeric ranges were checked before metric generation."
+    },
+    {
+      "check": "Consistency: course ID and pass-status logic",
+      "status": "PASS",
+      "detail": "Cross-source course IDs and pass-status logic were checked against the selected course catalog."
+    }
+  ],
+  "canGenerateFinalConclusion": false
+}

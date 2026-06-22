@@ -1,0 +1,72 @@
+{
+  "evidenceId": "ev_dbea0a89-1d3d-47dd-806e-edc9c0e3d4b8",
+  "datasetId": "ds_3eddd84de9898434",
+  "status": "BLOCKED",
+  "generatedAt": "2026-06-22T09:04:23.413Z",
+  "missingEvidence": [
+    {
+      "type": "IN_PROGRESS_COURSE",
+      "severity": "blocker",
+      "source": "OneDrive",
+      "sheetName": "DS06_Course_Catalog",
+      "field": "Status",
+      "courseId": "Leadership_06_2026",
+      "message": "Course Leadership_06_2026 is In Progress; final effectiveness conclusion is blocked until completion.",
+      "expected": "Completed",
+      "actual": "In Progress",
+      "recommendedFix": "Generate a readiness report only, or wait until the course status is Completed.",
+      "ownerRole": "LND_MANAGER"
+    },
+    {
+      "type": "MISSING_ATTENDANCE",
+      "severity": "warning",
+      "source": "Teams",
+      "sheetName": "DS07_Attendance_Log",
+      "courseId": "Leadership_06_2026",
+      "affectedCount": 24,
+      "message": "Attendance has 24/48 expected rows for Leadership_06_2026.",
+      "expected": "48 attendance rows",
+      "actual": "24 attendance rows",
+      "recommendedFix": "Backfill missing session attendance rows from Teams before final reporting.",
+      "ownerRole": "DATA_OWNER"
+    }
+  ],
+  "checklist": [
+    {
+      "check": "Source availability and required columns",
+      "status": "PASS",
+      "detail": "Required sheets and columns were mapped from Teams, OneDrive, Forms, KPI, Rules and Template sources."
+    },
+    {
+      "check": "Course status",
+      "status": "FAIL",
+      "detail": "1 selected course(s) are not completed."
+    },
+    {
+      "check": "Attendance completeness",
+      "status": "WARN",
+      "detail": "Expected attendance rows are trainee count x total sessions. Late is retained for metrics as partial attendance."
+    },
+    {
+      "check": "Assessment completeness",
+      "status": "PASS",
+      "detail": "Completed courses require one valid assessment and pass-status row per trainee."
+    },
+    {
+      "check": "Feedback completeness",
+      "status": "PASS",
+      "detail": "NORM-14 requires at least 60% feedback response rate for valid analysis."
+    },
+    {
+      "check": "Row-level data quality",
+      "status": "PASS",
+      "detail": "Duplicate rows and numeric ranges were checked before metric generation."
+    },
+    {
+      "check": "Consistency: course ID and pass-status logic",
+      "status": "PASS",
+      "detail": "Cross-source course IDs and pass-status logic were checked against the selected course catalog."
+    }
+  ],
+  "canGenerateFinalConclusion": false
+}

@@ -24,6 +24,14 @@ const ChatBody = z.object({
   messages: z.array(z.unknown()).min(1),
   trigger: z.enum(['submit-message', 'regenerate-message']).optional(),
   model: z.string().optional(),
+  pageContext: z
+    .object({
+      kind: z.string(),
+      id: z.string(),
+      label: z.string(),
+      summary: z.string().optional(),
+    })
+    .nullish(),
 });
 
 type PageContextPart = {
@@ -42,6 +50,15 @@ function isPageContextPart(p: unknown): p is PageContextPart {
   );
 }
 
+function getPageContextKind(messages: UIMessage[]): string | null {
+  for (const m of messages) {
+    if (!m?.parts) continue;
+    const ctx = m.parts.find(isPageContextPart);
+    if (ctx) return (ctx as PageContextPart).data.kind;
+  }
+  return null;
+}
+
 function lastUserText(messages: UIMessage[]): string {
   for (let i = messages.length - 1; i >= 0; i--) {
     const m = messages[i];
@@ -58,11 +75,19 @@ function lastUserText(messages: UIMessage[]): string {
   return '';
 }
 
-function injectContextPrefix(messages: UIMessage[]): UIMessage[] {
+function injectContextPrefix(
+  messages: UIMessage[],
+  pageContextFromReq?: { kind: string; id: string; label: string; summary?: string } | null,
+): UIMessage[] {
+  console.log('[injectContextPrefix] message count:', messages.length);
   for (let i = messages.length - 1; i >= 0; i--) {
     const m = messages[i];
     if (m?.role !== 'user') continue;
-    const ctx = (m.parts ?? []).find(isPageContextPart) ?? latestPriorPageContext(messages, i);
+    let ctx = (m.parts ?? []).find(isPageContextPart) ?? latestPriorPageContext(messages, i);
+    if (!ctx && pageContextFromReq) {
+      ctx = { type: 'data-page-context', data: pageContextFromReq };
+    }
+    console.log('[injectContextPrefix] found ctx:', JSON.stringify(ctx));
     if (!ctx) return messages;
 
     // Disambiguation: check if a different entity was discussed in recent
@@ -154,7 +179,7 @@ export function mountChatRoute(app: Hono<AgentRouteEnv>, deps: AgentRouteDeps): 
     }
 
     const messages = parsed.data.messages as UIMessage[];
-    const effectiveMessages = injectContextPrefix(messages);
+    const effectiveMessages = injectContextPrefix(messages, parsed.data.pageContext);
     const userText = lastUserText(effectiveMessages);
     const estimatedTokensIn = Math.min(2_000, Math.max(50, userText.length * 4));
 
@@ -163,6 +188,7 @@ export function mountChatRoute(app: Hono<AgentRouteEnv>, deps: AgentRouteDeps): 
       threadId: parsed.data.id ?? '(new)',
       userText: userText.slice(0, 120),
       messageCount: messages.length,
+      hasPageContextBody: !!parsed.data.pageContext,
     });
 
     let modelOverride: ReturnType<typeof resolveModel>['model'] | undefined;
@@ -253,6 +279,8 @@ export function mountChatRoute(app: Hono<AgentRouteEnv>, deps: AgentRouteDeps): 
         return c.json({ error: 'not_found', message: 'thread not found' }, 404);
       }
       if (!existing) {
+        const pageContextKind =
+          (parsed.data.pageContext?.kind ?? getPageContextKind(effectiveMessages)) || undefined;
         createdNewThread = true;
         await orchStore.saveThread({
           thread: {
@@ -265,7 +293,7 @@ export function mountChatRoute(app: Hono<AgentRouteEnv>, deps: AgentRouteDeps): 
             title: deps.userMemory ? '' : orchThreadTitle,
             createdAt: userCreatedAt,
             updatedAt: userCreatedAt,
-            metadata: {},
+            metadata: pageContextKind ? { pageContextKind } : {},
           },
         });
       }
@@ -310,6 +338,8 @@ export function mountChatRoute(app: Hono<AgentRouteEnv>, deps: AgentRouteDeps): 
     const uiStream = createUIMessageStream({
       originalMessages: effectiveMessages,
       execute: async ({ writer }) => {
+        const pageContextKind =
+          (parsed.data.pageContext?.kind ?? getPageContextKind(effectiveMessages)) || undefined;
         const run = await orchestrate(
           { userText: effectiveUserText, taskId },
           {
@@ -323,6 +353,7 @@ export function mountChatRoute(app: Hono<AgentRouteEnv>, deps: AgentRouteDeps): 
                 ? { memory: deps.userMemory, memoryConfig: deps.userMemoryConfig }
                 : undefined,
             model: modelOverride,
+            pageContextKind,
           },
         );
         const aiParts = toAISdkStream(run.output, {
@@ -343,6 +374,17 @@ export function mountChatRoute(app: Hono<AgentRouteEnv>, deps: AgentRouteDeps): 
         if (!orchThreadId || !orchStore) return;
         try {
           const assistantCreatedAt = new Date(Math.max(Date.now(), userCreatedAt.getTime() + 1));
+          const userMsgParts = [
+            ...(lastUserMessage?.parts ?? [{ type: 'text', text: userText }]),
+            ...contextParts,
+          ];
+          if (parsed.data.pageContext && !userMsgParts.some(isPageContextPart)) {
+            userMsgParts.push({
+              type: 'data-page-context',
+              id: crypto.randomUUID(),
+              data: parsed.data.pageContext,
+            } satisfies PageContextPart);
+          }
           const userMsg = {
             id: lastUserMessage?.id ?? crypto.randomUUID(),
             threadId: orchThreadId,
@@ -351,10 +393,7 @@ export function mountChatRoute(app: Hono<AgentRouteEnv>, deps: AgentRouteDeps): 
             createdAt: userCreatedAt,
             content: {
               format: 2 as const,
-              parts: [
-                ...(lastUserMessage?.parts ?? [{ type: 'text', text: userText }]),
-                ...contextParts,
-              ],
+              parts: userMsgParts,
             },
           };
           const assistantMsg = {

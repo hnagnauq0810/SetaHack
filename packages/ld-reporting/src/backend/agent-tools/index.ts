@@ -29,13 +29,13 @@ export const ldGenerateReportTool = defineAgentTool({
   id: 'ld_generateReport',
   name: 'Generate L&D Effectiveness Report',
   description:
-    'Run the full L&D reporting pipeline: load Excel, normalize, evidence gate, metrics, NORM/RBAC, quality check and PPTX/DOCX artifact generation.',
+    'Run the full L&D reporting pipeline as an unsaved preview draft: load Excel, normalize, evidence gate, metrics, NORM/RBAC, quality check and PPTX/DOCX artifact generation.',
   input: LdRequestSchema,
   output: z.unknown(),
   rbac: 'ld-reporting.report.generate',
   execute: async (input, ctx) => {
     const access = await resolveToolAccess(ctx, 'ld-reporting.report.generate');
-    const report = await agent.ld_generateReport(input);
+    const report = await agent.ld_generateReport({ ...input, saveToWorkspace: false });
     return agent.viewReport(report, access);
   },
 });

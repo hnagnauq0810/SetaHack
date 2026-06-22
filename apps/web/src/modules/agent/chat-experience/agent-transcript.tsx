@@ -2,6 +2,7 @@ import { MessagePrimitive, ThreadPrimitive, useAui, useAuiState } from '@assista
 import { ChatMarkdown, ChatMessage, ChatTranscript } from '@seta/shared-ui';
 import { Paperclip, Sparkles } from 'lucide-react';
 import { type ReactNode, useCallback } from 'react';
+import { ReportDraftApprovalById } from '../../ld-reporting/components/report-draft-card';
 import { ThreadListRefresher } from '../components/thread-list-refresher';
 import { ToolUIRegistry } from '../components/tool-renderers';
 import { ToolFallback } from '../components/tool-renderers/tool-fallback';
@@ -20,14 +21,23 @@ interface PartProps {
   status: { type: string };
 }
 
+function reportIdFromText(text: string): string | null {
+  const match = text.match(/Report ID:(?:\*\*)?\s*`?(rpt_[A-Za-z0-9-]+)/i);
+  return match?.[1] ?? null;
+}
+
 function TextPart({ text, status }: PartProps) {
   // While the assistant is still queueing the first token, the part exists with
   // empty text; rendering anything here would stack a stray cursor above the
   // ThinkingIndicator that the transcript shows for empty turns.
   if (text.length === 0) return null;
+  const reportId = reportIdFromText(text);
   return (
     <div className="relative">
       <ChatMarkdown text={text} />
+      {status.type !== 'running' && reportId ? (
+        <ReportDraftApprovalById reportId={reportId} />
+      ) : null}
       {status.type === 'running' && (
         <span
           aria-hidden

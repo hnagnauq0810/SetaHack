@@ -19,6 +19,8 @@ export interface RunCtx {
   roleSummary?: { roles: string[]; cross_tenant_read: boolean };
   /** The real chat thread id (chat inline runs only). */
   threadId?: string;
+  /** The page context kind of the chat turn. */
+  pageContextKind?: string;
   /** Resource-scoped userContext memory handle (chat inline runs only). */
   userMemory?: AgentMemoryHandle;
   /** Per-turn model override (chat inline runs only) — forwarded into each

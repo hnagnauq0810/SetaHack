@@ -50,6 +50,51 @@ describe('pumpOrchestrationStream', () => {
     expect(w.chunks.some((c) => c.type === 'data-trust')).toBe(true);
   });
 
+  it('persists reasoning and tool invocations for thread reload', async () => {
+    const w = new FakeWriter();
+    const toolResult = { reportId: 'rpt_123', title: 'Draft report' };
+    const { assistantParts } = await pumpOrchestrationStream(
+      w,
+      parts(
+        { type: 'reasoning-start', id: 'r1' },
+        { type: 'reasoning-delta', id: 'r1', delta: 'Checking evidence. ' },
+        { type: 'reasoning-delta', id: 'r1', delta: 'Generating draft.' },
+        { type: 'reasoning-end', id: 'r1' },
+        {
+          type: 'tool-input-available',
+          toolCallId: 'tc-1',
+          toolName: 'ld_generateReport',
+          input: { scope: { courseId: 'DevOps_02_2026' } },
+        },
+        {
+          type: 'tool-output-available',
+          toolCallId: 'tc-1',
+          toolName: 'ld_generateReport',
+          output: toolResult,
+        },
+        { type: 'text-delta', id: 't', delta: 'Done' },
+      ),
+      {
+        finalize: async () => ({ result: { message: 'ok' }, trust: TRUST }),
+        onApproval: async () => {},
+      },
+    );
+
+    expect(assistantParts).toContainEqual({
+      type: 'reasoning',
+      text: 'Checking evidence. Generating draft.',
+    });
+    expect(assistantParts).toContainEqual({
+      type: 'tool-invocation',
+      toolInvocation: {
+        toolCallId: 'tc-1',
+        toolName: 'ld_generateReport',
+        state: 'output-available',
+        args: { scope: { courseId: 'DevOps_02_2026' } },
+        result: toolResult,
+      },
+    });
+  });
   it('fires onApproval and skips finalize when the run suspends', async () => {
     const w = new FakeWriter();
     const card = {

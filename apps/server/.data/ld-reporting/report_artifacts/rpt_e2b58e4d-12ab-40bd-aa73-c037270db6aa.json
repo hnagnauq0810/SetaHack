@@ -1,0 +1,141 @@
+{
+  "reportId": "rpt_e2b58e4d-12ab-40bd-aa73-c037270db6aa",
+  "datasetId": "ds_3719f86a6eb855df",
+  "metricsId": "mx_87f05e0c-42d9-41f2-9e78-f37a69652f06",
+  "evidenceId": "ev_8a9f13d1-6aa1-40cc-bdaa-9d3e6482f31e",
+  "governanceId": "gv_b5a6872d-72ea-40b6-8c20-60a966612bdb",
+  "title": "L&D Training Effectiveness Report - DevOps Fundamentals: CI/CD, K8s, Monitoring",
+  "scope": {
+    "courseId": "DevOps_02_2026",
+    "reportType": "full"
+  },
+  "status": "DRAFT",
+  "generatedAt": "2026-06-22T14:50:25.457Z",
+  "executiveSummary": "The selected scope contains 1 course(s), 1 completed course(s), and 10 trainee-course records. Overall attendance is 96%, completion is 100%, pass rate is 100%, and average score is 7.89/10. Total training hours are 216 and scaled cost is 15. Overall effectiveness classification is Effective. Management interpretation: The training course 'DevOps Fundamentals: CI/CD, K8s, Monitoring' has demonstrated high effectiveness, achieving a 100% completion and pass rate among the 10 trainees. The overall attendance rate stands at 96%, with an average score of 7.89 out of 10 and a feedback rating of 4.6 out of 5, indicating strong engagement and satisfaction.",
+  "insights": [
+    "DevOps Fundamentals: CI/CD, K8s, Monitoring has an effectiveness score of 92.28 in the selected scope.",
+    "The course has successfully met all key performance indicators, including a total of 216 training hours and a scaled cost of 15.",
+    "The effectiveness score of 92.28 reflects a well-received training experience, suggesting that the content and delivery methods are resonating well with participants."
+  ],
+  "recommendations": [
+    "Maintain the current delivery model and reuse top-performing materials for future cohorts.",
+    "To maintain and enhance the effectiveness of future training sessions, it is recommended to continue monitoring trainee feedback closely and consider implementing advanced topics or follow-up sessions to further engage participants.",
+    "Additionally, exploring opportunities for mentorship roles for high-performing trainees could foster a culture of continuous learning."
+  ],
+  "warnings": [],
+  "evidence": {
+    "evidenceId": "ev_8a9f13d1-6aa1-40cc-bdaa-9d3e6482f31e",
+    "datasetId": "ds_3719f86a6eb855df",
+    "status": "PASS",
+    "generatedAt": "2026-06-22T14:50:25.456Z",
+    "missingEvidence": [],
+    "checklist": [
+      {
+        "check": "Source availability and required columns",
+        "status": "PASS",
+        "detail": "Required sheets and columns were mapped from Teams, OneDrive, Forms, KPI, Rules and Template sources."
+      },
+      {
+        "check": "Course status",
+        "status": "PASS",
+        "detail": "All selected courses are completed."
+      },
+      {
+        "check": "Attendance completeness",
+        "status": "PASS",
+        "detail": "Expected attendance rows are trainee count x total sessions. Late is retained for metrics as partial attendance."
+      },
+      {
+        "check": "Assessment completeness",
+        "status": "PASS",
+        "detail": "Completed courses require one valid assessment and pass-status row per trainee."
+      },
+      {
+        "check": "Feedback completeness",
+        "status": "PASS",
+        "detail": "NORM-14 requires at least 60% feedback response rate for valid analysis."
+      },
+      {
+        "check": "Row-level data quality",
+        "status": "PASS",
+        "detail": "Duplicate rows and numeric ranges were checked before metric generation."
+      },
+      {
+        "check": "Consistency: course ID and pass-status logic",
+        "status": "PASS",
+        "detail": "Cross-source course IDs and pass-status logic were checked against the selected course catalog."
+      }
+    ],
+    "canGenerateFinalConclusion": true
+  },
+  "metrics": {
+    "metricsId": "mx_87f05e0c-42d9-41f2-9e78-f37a69652f06",
+    "datasetId": "ds_3719f86a6eb855df",
+    "generatedAt": "2026-06-22T14:50:25.456Z",
+    "overall": {
+      "totalCourses": 1,
+      "completedCourses": 1,
+      "traineeCount": 10,
+      "attendanceRate": 0.96,
+      "completionRate": 1,
+      "passRate": 1,
+      "averageScore": 7.89,
+      "feedbackRating": 4.6,
+      "trainingHours": 216,
+      "totalCostScaled": 15,
+      "roiProxy": 0.0207,
+      "effectivenessScore": 92.28
+    },
+    "courses": [
+      {
+        "courseId": "DevOps_02_2026",
+        "courseName": "DevOps Fundamentals: CI/CD, K8s, Monitoring",
+        "trainerId": "TRN-004",
+        "status": "Completed",
+        "traineeCount": 10,
+        "attendanceRate": 0.96,
+        "completionRate": 1,
+        "passRate": 1,
+        "averageScore": 7.89,
+        "feedbackRating": 4.6,
+        "trainerRatingAvg": 4.6,
+        "contentRatingAvg": 4.6,
+        "feedbackResponseRate": 1,
+        "trainingHours": 216,
+        "totalCostScaled": 15,
+        "costPerCompletedTrainee": 1.5,
+        "postTrainingPerfDelta": 0.031,
+        "roiProxy": 0.0207,
+        "effectivenessScore": 92.28
+      }
+    ]
+  },
+  "governance": {
+    "governanceId": "gv_b5a6872d-72ea-40b6-8c20-60a966612bdb",
+    "role": "LND_MANAGER",
+    "classification": "Effective",
+    "generatedAt": "2026-06-22T14:50:25.456Z",
+    "normFlags": [],
+    "outstandingTrainees": [],
+    "supportNeededTrainees": [],
+    "supportNeededGroups": [],
+    "masked": false
+  },
+  "llm": {
+    "enabled": true,
+    "model": "gpt-4o-mini",
+    "usedFor": ["report_narrative", "pptx_content"],
+    "generatedAt": "2026-06-22T14:50:29.528Z"
+  },
+  "quality": {
+    "qualityId": "qc_1fc97ab3-ced2-4433-98a8-a092ec6276aa",
+    "status": "PASS",
+    "generatedAt": "2026-06-22T14:50:29.528Z",
+    "issues": []
+  },
+  "artifacts": {
+    "pptxPath": "C:\\Users\\Admin\\Desktop\\SetaHack\\apps\\server\\.data\\ld-reporting\\artifacts\\rpt_e2b58e4d-12ab-40bd-aa73-c037270db6aa\\rpt_e2b58e4d-12ab-40bd-aa73-c037270db6aa.pptx",
+    "docxPath": "C:\\Users\\Admin\\Desktop\\SetaHack\\apps\\server\\.data\\ld-reporting\\artifacts\\rpt_e2b58e4d-12ab-40bd-aa73-c037270db6aa\\rpt_e2b58e4d-12ab-40bd-aa73-c037270db6aa.docx"
+  },
+  "saved": true
+}

@@ -1,0 +1,42 @@
+{
+  "metricsId": "mx_a2c62eae-1121-4e68-ba67-b3db52c8ab53",
+  "datasetId": "ds_ca6c1cb29f16f1c4",
+  "generatedAt": "2026-06-22T15:00:00.422Z",
+  "overall": {
+    "totalCourses": 1,
+    "completedCourses": 1,
+    "traineeCount": 13,
+    "attendanceRate": 0.9038,
+    "completionRate": 1,
+    "passRate": 0.9231,
+    "averageScore": 7.88,
+    "feedbackRating": 4.73,
+    "trainingHours": 188,
+    "totalCostScaled": 9.6,
+    "roiProxy": 0.042,
+    "effectivenessScore": 89.47
+  },
+  "courses": [
+    {
+      "courseId": "AIAgent_05_2026",
+      "courseName": "AI Agent & LLM Application Development",
+      "trainerId": "TRN-007",
+      "status": "Completed",
+      "traineeCount": 13,
+      "attendanceRate": 0.9038,
+      "completionRate": 1,
+      "passRate": 0.9231,
+      "averageScore": 7.88,
+      "feedbackRating": 4.73,
+      "trainerRatingAvg": 4.77,
+      "contentRatingAvg": 4.69,
+      "feedbackResponseRate": 1,
+      "trainingHours": 188,
+      "totalCostScaled": 9.6,
+      "costPerCompletedTrainee": 0.74,
+      "postTrainingPerfDelta": 0.031,
+      "roiProxy": 0.042,
+      "effectivenessScore": 89.47
+    }
+  ]
+}

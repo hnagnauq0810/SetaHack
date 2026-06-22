@@ -1,0 +1,42 @@
+{
+  "metricsId": "mx_b2b5968e-1c6d-4b6d-bd7f-160921ddb2df",
+  "datasetId": "ds_a4ba001e1628064e",
+  "generatedAt": "2026-06-22T14:58:56.280Z",
+  "overall": {
+    "totalCourses": 1,
+    "completedCourses": 0,
+    "traineeCount": 8,
+    "attendanceRate": 0.4792,
+    "completionRate": 0,
+    "passRate": 0,
+    "averageScore": null,
+    "feedbackRating": 4.8,
+    "trainingHours": 34.5,
+    "totalCostScaled": 4.8,
+    "roiProxy": null,
+    "effectivenessScore": 25.58
+  },
+  "courses": [
+    {
+      "courseId": "Leadership_06_2026",
+      "courseName": "Technical Leadership & Communication",
+      "trainerId": "TRN-005",
+      "status": "In Progress",
+      "traineeCount": 8,
+      "attendanceRate": 0.4792,
+      "completionRate": 0,
+      "passRate": 0,
+      "averageScore": null,
+      "feedbackRating": 4.8,
+      "trainerRatingAvg": 4.8,
+      "contentRatingAvg": 4.8,
+      "feedbackResponseRate": 0.625,
+      "trainingHours": 34.5,
+      "totalCostScaled": 4.8,
+      "costPerCompletedTrainee": null,
+      "postTrainingPerfDelta": null,
+      "roiProxy": null,
+      "effectivenessScore": 25.58
+    }
+  ]
+}

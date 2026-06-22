@@ -262,7 +262,7 @@ describe('POST /api/agent/v1/chat/resume', () => {
       );
       expect(row.rows[0]!.status).toBe('rejected');
       expect(await outboxCount(pool, runId)).toBe(1);
-      expect(captured[0]!.resume).toEqual({ decision: 'reject' });
+      expect(captured[0]!.resume).toEqual({ decision: 'reject', action: 'leave-unassigned' });
     });
   });
 

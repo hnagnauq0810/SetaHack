@@ -1,0 +1,42 @@
+{
+  "metricsId": "mx_973777b7-54d2-4d11-8138-a964bfcda864",
+  "datasetId": "ds_9f77b1d9c924eb0c",
+  "generatedAt": "2026-06-22T15:35:33.369Z",
+  "overall": {
+    "totalCourses": 1,
+    "completedCourses": 1,
+    "traineeCount": 12,
+    "attendanceRate": 0.9333,
+    "completionRate": 1,
+    "passRate": 0.8333,
+    "averageScore": 7.32,
+    "feedbackRating": 4.71,
+    "trainingHours": 224,
+    "totalCostScaled": 11,
+    "roiProxy": 0.024,
+    "effectivenessScore": 85.76
+  },
+  "courses": [
+    {
+      "courseId": "CloudAWS_03_2026",
+      "courseName": "AWS Cloud Architecture & Services",
+      "trainerId": "TRN-004",
+      "status": "Completed",
+      "traineeCount": 12,
+      "attendanceRate": 0.9333,
+      "completionRate": 1,
+      "passRate": 0.8333,
+      "averageScore": 7.32,
+      "feedbackRating": 4.71,
+      "trainerRatingAvg": 4.83,
+      "contentRatingAvg": 4.58,
+      "feedbackResponseRate": 1,
+      "trainingHours": 224,
+      "totalCostScaled": 11,
+      "costPerCompletedTrainee": 0.92,
+      "postTrainingPerfDelta": 0.022,
+      "roiProxy": 0.024,
+      "effectivenessScore": 85.76
+    }
+  ]
+}

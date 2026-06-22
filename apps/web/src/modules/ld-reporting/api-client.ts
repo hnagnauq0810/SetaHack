@@ -20,6 +20,7 @@ export interface LdReport {
   title: string;
   scope: LdScope;
   status: 'DRAFT' | 'FINAL' | 'REVISION_REQUESTED';
+  saved?: boolean;
   generatedAt: string;
   lastEditedAt?: string;
   finalizedAt?: string;
@@ -155,6 +156,9 @@ export const ldReportingClient = {
   listReports(): Promise<{ reports: LdReport[] }> {
     return request('/api/ld-reporting/reports');
   },
+  getReport(reportId: string): Promise<LdReport> {
+    return request(`/api/ld-reporting/reports/${encodeURIComponent(reportId)}`);
+  },
   checkReadiness(payload: LdRequestPayload): Promise<ReadinessResult> {
     return request('/api/ld-reporting/readiness', {
       method: 'POST',
@@ -178,6 +182,16 @@ export const ldReportingClient = {
     return request(`/api/ld-reporting/reports/${reportId}/draft`, {
       method: 'PATCH',
       body: JSON.stringify(patch),
+    });
+  },
+  delete(reportId: string): Promise<{ success: boolean }> {
+    return request(`/api/ld-reporting/reports/${reportId}`, {
+      method: 'DELETE',
+    });
+  },
+  save(reportId: string): Promise<LdReport> {
+    return request(`/api/ld-reporting/reports/${reportId}/save`, {
+      method: 'POST',
     });
   },
   ask(reportId: string | undefined, question: string): Promise<QnaAnswer> {

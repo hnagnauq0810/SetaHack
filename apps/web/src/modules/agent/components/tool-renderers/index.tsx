@@ -1,6 +1,7 @@
 import type { ToolCallMessagePartProps } from '@assistant-ui/react';
 import { useAssistantDataUI, useAssistantToolUI } from '@assistant-ui/react';
 import { ChatToolCall } from '@seta/shared-ui';
+import { ReadinessEvidenceCard } from '../../../ld-reporting/components/readiness-evidence-card';
 import { AgentStreamPart } from '../../chat-experience/agent-stream-part';
 import { DataResultPart } from '../../chat-experience/data-result-part';
 import { DataTrustPart } from '../../chat-experience/data-trust-part';
@@ -18,7 +19,13 @@ function toReadState(
   return 'input-streaming';
 }
 
-const DEDICATED_TOOL_IDS = new Set(['core_serverTime', 'identity_whoAmI', 'identity_listMyRoles']);
+const DEDICATED_TOOL_IDS = new Set([
+  'core_serverTime',
+  'identity_whoAmI',
+  'identity_listMyRoles',
+  'ld_checkReadiness',
+  'ld_generateReport',
+]);
 
 function ServerTimeRegistration({ name }: { name: string }) {
   useAssistantToolUI({
@@ -61,6 +68,48 @@ function ListMyRolesRegistration({ name }: { name: string }) {
         output={(props.result ?? undefined) as Parameters<typeof ListMyRolesRenderer>[0]['output']}
       />
     ),
+  });
+  return null;
+}
+
+function LdCheckReadinessRegistration({ name }: { name: string }) {
+  useAssistantToolUI({
+    toolName: 'ld_checkReadiness',
+    render: (props) => {
+      const state = toReadState(props);
+      if (state === 'output-available') {
+        return (
+          <ReadinessEvidenceCard
+            readiness={props.result as Parameters<typeof ReadinessEvidenceCard>[0]['readiness']}
+            report={null}
+          />
+        );
+      }
+      if (state === 'output-error') {
+        return <ChatToolCall name={name} status="error" summary="failed" />;
+      }
+      return <ChatToolCall name={name} status="running" summary={summarizeArgs(props.args)} />;
+    },
+  });
+  return null;
+}
+
+function LdGenerateReportRegistration({ name }: { name: string }) {
+  useAssistantToolUI({
+    toolName: 'ld_generateReport',
+    render: (props) => {
+      const state = toReadState(props);
+      if (state === 'output-available') {
+        const result = props.result as { title?: string } | null | undefined;
+        return (
+          <ChatToolCall name={name} status="ok" summary={result?.title ?? 'draft generated'} />
+        );
+      }
+      if (state === 'output-error') {
+        return <ChatToolCall name={name} status="error" summary="failed" />;
+      }
+      return <ChatToolCall name={name} status="running" summary={summarizeArgs(props.args)} />;
+    },
   });
   return null;
 }
@@ -115,6 +164,8 @@ export function ToolUIRegistry() {
       <ServerTimeRegistration name={nameFor('core_serverTime')} />
       <WhoAmIRegistration name={nameFor('identity_whoAmI')} />
       <ListMyRolesRegistration name={nameFor('identity_listMyRoles')} />
+      <LdCheckReadinessRegistration name={nameFor('ld_checkReadiness')} />
+      <LdGenerateReportRegistration name={nameFor('ld_generateReport')} />
       {tools
         .filter((t) => !DEDICATED_TOOL_IDS.has(t.id))
         .map((t) => (

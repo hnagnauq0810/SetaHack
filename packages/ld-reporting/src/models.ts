@@ -29,6 +29,7 @@ export type LdScopeInput = z.infer<typeof ScopeInputSchema>;
 export const LdRequestSchema = z.object({
   scope: ScopeInputSchema.default({}),
   dataFilePath: z.string().optional(),
+  saveToWorkspace: z.boolean().default(true).optional(),
 });
 export type LdRequest = z.infer<typeof LdRequestSchema>;
 export type LdPipelineRequest = LdRequest & { role?: LdRole };
@@ -293,6 +294,7 @@ export interface ReportJson {
   title: string;
   scope: LdScopeInput;
   status: 'DRAFT' | 'FINAL' | 'REVISION_REQUESTED';
+  saved?: boolean;
   generatedAt: string;
   lastEditedAt?: string;
   finalizedAt?: string;

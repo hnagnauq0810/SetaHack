@@ -166,10 +166,39 @@ const ldReportingChat = buildLdReportingChatRuntime({
 });
 SpecializedAgentRegistry.freeze();
 OrchestrationRegistry.freeze();
+type MastraMemoryStoreLike = {
+  getThreadById(input: { threadId: string }): Promise<{
+    metadata?: { pageContextKind?: unknown } | null;
+  } | null>;
+  listMessages(input: { threadId: string; page: number; perPage: number }): Promise<{
+    messages?: Array<{ content?: unknown }>;
+  } | null>;
+};
 
-function isLdReportingChatTurn(input: { userText: string }): boolean {
+type MastraStorageLike = {
+  stores?: { memory?: MastraMemoryStoreLike };
+};
+
+type MastraWithStorageLike = {
+  getStorage?: () => MastraStorageLike | null;
+};
+async function isLdReportingChatTurn(
+  input: { userText: string },
+  ctx?: import('@seta/shared-orchestration').RunCtx,
+): Promise<boolean> {
+  console.log(
+    '[isLdReportingChatTurn] check input.userText:',
+    JSON.stringify(input.userText),
+    'threadId:',
+    ctx?.threadId,
+    'pageContextKind:',
+    ctx?.pageContextKind,
+  );
+  if (ctx?.pageContextKind === 'ld-reporting') {
+    return true;
+  }
   const normalized = input.userText.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-  return (
+  if (
     /\[Context:\s*ld-reporting#/i.test(input.userText) ||
     /\b(l&d|ld reporting|training effectiveness|evidence gate|readiness|ds12|completion rate|pass rate|attendance|trainee|learner|training hours|norm|pptx|docx|powerpoint|slide deck|slide export)\b/i.test(
       input.userText,
@@ -179,15 +208,63 @@ function isLdReportingChatTurn(input: { userText: string }): boolean {
         input.userText,
       )) ||
     /(bao cao dao tao|khoa hoc|hoc vien|dao tao|hieu qua dao tao)/i.test(normalized)
-  );
+  ) {
+    return true;
+  }
+
+  if (ctx?.threadId) {
+    try {
+      const m = agent.mastra as unknown as MastraWithStorageLike | null;
+      const storage = m?.getStorage ? m.getStorage() : null;
+      const memoryStore = storage?.stores?.memory;
+      if (memoryStore) {
+        const thread = await memoryStore.getThreadById({ threadId: ctx.threadId });
+        if (thread?.metadata?.pageContextKind === 'ld-reporting') {
+          return true;
+        }
+        const result = await memoryStore.listMessages({
+          threadId: ctx.threadId,
+          page: 0,
+          perPage: 20,
+        });
+        if (result?.messages) {
+          for (const msg of result.messages) {
+            const content = msg.content;
+            if (content && typeof content === 'object') {
+              const stored = content as { parts?: unknown[] };
+              if (Array.isArray(stored.parts)) {
+                for (const part of stored.parts) {
+                  if (part && typeof part === 'object') {
+                    const p = part as { type?: unknown; text?: unknown; data?: { kind?: unknown } };
+                    if (
+                      (p.type === 'text' &&
+                        typeof p.text === 'string' &&
+                        /\[Context:\s*ld-reporting#/i.test(p.text)) ||
+                      (p.type === 'data-page-context' && p.data?.kind === 'ld-reporting')
+                    ) {
+                      return true;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    } catch (err) {
+      console.error('[isLdReportingChatTurn] failed to fetch thread metadata/history:', err);
+    }
+  }
+
+  return false;
 }
 
 const chatOrchestration = {
-  runStream: (
+  runStream: async (
     input: { userText: string; taskId: string | null },
     ctx: import('@seta/shared-orchestration').RunCtx,
   ) =>
-    isLdReportingChatTurn(input)
+    (await isLdReportingChatTurn(input, ctx))
       ? ldReportingChat.runStream(input, ctx)
       : staffingOrchestration.runStream(input, ctx),
   runResume: (

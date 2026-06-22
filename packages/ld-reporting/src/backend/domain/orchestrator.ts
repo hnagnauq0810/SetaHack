@@ -86,10 +86,20 @@ export class LdReportingSpecialistAgent {
     const artifacts = await writeReportArtifacts(report, this.store.rootDir);
     report.artifacts = artifacts;
 
+    report.saved = input.saveToWorkspace !== false;
+
     await this.store.saveDataset(dataset);
     await this.store.saveEvidence(evidence);
     await this.store.saveMetrics(metrics);
     await this.store.saveGovernance(governance);
+    await this.store.saveReport(report);
+    return report;
+  }
+
+  async ld_saveReport(reportId: string): Promise<ReportJson> {
+    const report = await this.store.getReport(reportId);
+    if (!report) throw new Error(`Report not found: ${reportId}`);
+    report.saved = true;
     await this.store.saveReport(report);
     return report;
   }
@@ -215,6 +225,10 @@ export class LdReportingSpecialistAgent {
     report.approval = approval;
     await this.store.saveReport(report);
     return report;
+  }
+
+  async ld_deleteReport(reportId: string): Promise<boolean> {
+    return this.store.deleteReport(reportId);
   }
 
   async updateDraftReport(input: {

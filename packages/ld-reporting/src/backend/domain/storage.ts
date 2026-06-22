@@ -1,4 +1,4 @@
-import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readdir, readFile, rm, unlink, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import type {
   EvidenceDecision,
@@ -37,6 +37,24 @@ export class LdReportingStore {
     await this.writeJson('report_artifacts', report.reportId, report);
   }
 
+  async deleteReport(reportId: string): Promise<boolean> {
+    const reportPath = join(this.rootDir, 'report_artifacts', `${reportId}.json`);
+    const artifactDir = join(this.rootDir, 'artifacts', reportId);
+    let deleted = false;
+    try {
+      await unlink(reportPath);
+      deleted = true;
+    } catch (err) {
+      if ((err as { code?: string }).code !== 'ENOENT') throw err;
+    }
+    try {
+      await rm(artifactDir, { recursive: true, force: true });
+    } catch {
+      // Ignore directory deletion error
+    }
+    return deleted;
+  }
+
   async getReport(reportId: string): Promise<ReportJson | null> {
     return this.readJson<ReportJson>('report_artifacts', reportId);
   }
@@ -56,7 +74,7 @@ export class LdReportingStore {
         .map((file) => this.readJson<ReportJson>('report_artifacts', file.slice(0, -5))),
     );
     return reports
-      .filter((report): report is ReportJson => report !== null)
+      .filter((report): report is ReportJson => report !== null && report.saved !== false)
       .sort((a, b) => reportTimestamp(b).localeCompare(reportTimestamp(a)));
   }
 

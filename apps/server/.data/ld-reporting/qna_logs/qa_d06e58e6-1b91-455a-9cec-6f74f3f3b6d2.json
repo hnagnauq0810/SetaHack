@@ -1,0 +1,15 @@
+{
+  "answerId": "qa_d06e58e6-1b91-455a-9cec-6f74f3f3b6d2",
+  "generatedAt": "2026-06-22T14:15:25.389Z",
+  "answer": "Across 4 finalized L&D report(s), latest report is L&D Training Effectiveness Report - 2026-Q1 (rpt_0c0cd3b6-db1d-4897-8604-659f10d17ab0). Average effectiveness score is 88.85, completion is 99.2%, and pass rate is 91.1%. 0 report(s) are Effective and 4 report(s) are Risk. Draft reports and revision-requested reports are excluded from this BOD knowledge base.",
+  "confidence": 0.9,
+  "limitations": [
+    "Portfolio answer uses finalized reports only unless a specific draft reportId is provided."
+  ],
+  "citations": [
+    "rpt_0c0cd3b6-db1d-4897-8604-659f10d17ab0",
+    "rpt_7fb93e37-57ea-4494-af11-8472b0a93a80",
+    "rpt_983ad830-ae1e-4fd2-8cbe-bfcf91511dbf",
+    "rpt_82182149-4d52-4931-ac16-394fb27a595b"
+  ]
+}

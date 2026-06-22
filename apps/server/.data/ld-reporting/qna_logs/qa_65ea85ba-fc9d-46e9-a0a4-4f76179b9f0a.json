@@ -1,0 +1,13 @@
+{
+  "answerId": "qa_65ea85ba-fc9d-46e9-a0a4-4f76179b9f0a",
+  "generatedAt": "2026-06-22T03:12:55.509Z",
+  "reportId": "rpt_0c0cd3b6-db1d-4897-8604-659f10d17ab0",
+  "answer": "The report does not contain enough evidence.",
+  "confidence": 0,
+  "citations": ["report.executiveSummary"],
+  "limitations": [
+    "RBAC masking applied: individual trainee details are hidden or aggregated.",
+    "Question did not match a specialized Q&A template; answered from executive summary only.",
+    "No specific assignments or responsibilities for owners/assignees are detailed in the report."
+  ]
+}

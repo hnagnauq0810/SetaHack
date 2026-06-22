@@ -1,0 +1,142 @@
+{
+  "reportId": "rpt_393cf96f-cf13-4059-afb3-3f12fdd225fc",
+  "datasetId": "ds_bb94525a36feae37",
+  "metricsId": "mx_abff9840-c53e-428b-9302-6210c619196c",
+  "evidenceId": "ev_4855b204-d6a3-4c7c-b955-1a98c2cf89b0",
+  "governanceId": "gv_f94bb6ad-fadd-4312-80ac-3ee9c963a945",
+  "title": "L&D Training Effectiveness Report - Devops",
+  "scope": {
+    "courseId": "Devops",
+    "reportType": "full"
+  },
+  "status": "DRAFT",
+  "generatedAt": "2026-06-22T09:05:18.370Z",
+  "executiveSummary": "The selected scope contains 1 course(s), 1 completed course(s), and 10 trainee-course records. Overall attendance is 96%, completion is 100%, pass rate is 100%, and average score is 7.89/10. Total training hours are 216 and scaled cost is 15. Overall effectiveness classification is Effective. Management interpretation: The training program for the DevOps Fundamentals course has demonstrated high levels of effectiveness, with all trainees completing the course successfully and achieving a perfect pass rate. The overall attendance rate is commendable at 96%, and the average score of 7.89 out of 10 indicates strong understanding of the material. The feedback rating of 4.6 out of 5 further supports the positive reception of the course content and delivery.",
+  "insights": [
+    "DevOps Fundamentals: CI/CD, K8s, Monitoring has an effectiveness score of 92.28 in the selected scope.",
+    "The course has successfully engaged all 10 trainees, resulting in a completion rate of 100% and a pass rate of 100%.",
+    "The average score of 7.89 suggests that while trainees performed well, there may be room for improvement to reach higher scores.",
+    "The total training hours of 216 and a scaled cost of 15 indicate a reasonable investment relative to the outcomes achieved, with an effectiveness score of 92.28 reflecting the course's overall success."
+  ],
+  "recommendations": [
+    "Maintain the current delivery model and reuse top-performing materials for future cohorts.",
+    "To further enhance the training effectiveness, consider implementing additional advanced modules or supplementary resources that could challenge trainees and potentially raise the average score.",
+    "Additionally, maintaining high engagement levels and exploring opportunities for mentorship roles for high-performing trainees could foster a culture of continuous learning and improvement."
+  ],
+  "warnings": [],
+  "evidence": {
+    "evidenceId": "ev_4855b204-d6a3-4c7c-b955-1a98c2cf89b0",
+    "datasetId": "ds_bb94525a36feae37",
+    "status": "PASS",
+    "generatedAt": "2026-06-22T09:05:18.356Z",
+    "missingEvidence": [],
+    "checklist": [
+      {
+        "check": "Source availability and required columns",
+        "status": "PASS",
+        "detail": "Required sheets and columns were mapped from Teams, OneDrive, Forms, KPI, Rules and Template sources."
+      },
+      {
+        "check": "Course status",
+        "status": "PASS",
+        "detail": "All selected courses are completed."
+      },
+      {
+        "check": "Attendance completeness",
+        "status": "PASS",
+        "detail": "Expected attendance rows are trainee count x total sessions. Late is retained for metrics as partial attendance."
+      },
+      {
+        "check": "Assessment completeness",
+        "status": "PASS",
+        "detail": "Completed courses require one valid assessment and pass-status row per trainee."
+      },
+      {
+        "check": "Feedback completeness",
+        "status": "PASS",
+        "detail": "NORM-14 requires at least 60% feedback response rate for valid analysis."
+      },
+      {
+        "check": "Row-level data quality",
+        "status": "PASS",
+        "detail": "Duplicate rows and numeric ranges were checked before metric generation."
+      },
+      {
+        "check": "Consistency: course ID and pass-status logic",
+        "status": "PASS",
+        "detail": "Cross-source course IDs and pass-status logic were checked against the selected course catalog."
+      }
+    ],
+    "canGenerateFinalConclusion": true
+  },
+  "metrics": {
+    "metricsId": "mx_abff9840-c53e-428b-9302-6210c619196c",
+    "datasetId": "ds_bb94525a36feae37",
+    "generatedAt": "2026-06-22T09:05:18.358Z",
+    "overall": {
+      "totalCourses": 1,
+      "completedCourses": 1,
+      "traineeCount": 10,
+      "attendanceRate": 0.96,
+      "completionRate": 1,
+      "passRate": 1,
+      "averageScore": 7.89,
+      "feedbackRating": 4.6,
+      "trainingHours": 216,
+      "totalCostScaled": 15,
+      "roiProxy": 0.0207,
+      "effectivenessScore": 92.28
+    },
+    "courses": [
+      {
+        "courseId": "DevOps_02_2026",
+        "courseName": "DevOps Fundamentals: CI/CD, K8s, Monitoring",
+        "trainerId": "TRN-004",
+        "status": "Completed",
+        "traineeCount": 10,
+        "attendanceRate": 0.96,
+        "completionRate": 1,
+        "passRate": 1,
+        "averageScore": 7.89,
+        "feedbackRating": 4.6,
+        "trainerRatingAvg": 4.6,
+        "contentRatingAvg": 4.6,
+        "feedbackResponseRate": 1,
+        "trainingHours": 216,
+        "totalCostScaled": 15,
+        "costPerCompletedTrainee": 1.5,
+        "postTrainingPerfDelta": 0.031,
+        "roiProxy": 0.0207,
+        "effectivenessScore": 92.28
+      }
+    ]
+  },
+  "governance": {
+    "governanceId": "gv_f94bb6ad-fadd-4312-80ac-3ee9c963a945",
+    "role": "LND_MANAGER",
+    "classification": "Effective",
+    "generatedAt": "2026-06-22T09:05:18.358Z",
+    "normFlags": [],
+    "outstandingTrainees": [],
+    "supportNeededTrainees": [],
+    "supportNeededGroups": [],
+    "masked": false
+  },
+  "llm": {
+    "enabled": true,
+    "model": "gpt-4o-mini",
+    "usedFor": ["report_narrative", "pptx_content"],
+    "generatedAt": "2026-06-22T09:05:22.442Z"
+  },
+  "quality": {
+    "qualityId": "qc_1d4af0e4-ac0e-42a9-98ea-1e5bdc06eb02",
+    "status": "PASS",
+    "generatedAt": "2026-06-22T09:05:22.442Z",
+    "issues": []
+  },
+  "artifacts": {
+    "pptxPath": "C:\\Users\\Admin\\Desktop\\SetaHack\\apps\\server\\.data\\ld-reporting\\artifacts\\rpt_393cf96f-cf13-4059-afb3-3f12fdd225fc\\rpt_393cf96f-cf13-4059-afb3-3f12fdd225fc.pptx",
+    "docxPath": "C:\\Users\\Admin\\Desktop\\SetaHack\\apps\\server\\.data\\ld-reporting\\artifacts\\rpt_393cf96f-cf13-4059-afb3-3f12fdd225fc\\rpt_393cf96f-cf13-4059-afb3-3f12fdd225fc.docx"
+  },
+  "saved": false
+}
