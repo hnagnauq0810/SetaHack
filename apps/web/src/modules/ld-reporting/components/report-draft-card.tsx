@@ -242,6 +242,8 @@ export function ReportDraftApprovalBar({ report }: ReportDraftApprovalBarProps) 
     },
   });
 
+  if (report.status === 'FINAL') return null;
+
   if (localSaved) {
     return (
       <div className="mt-3 flex w-full max-w-3xl items-center justify-between gap-3 rounded-md border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm text-emerald-800">

@@ -162,6 +162,11 @@ export type DataToolAgentPart = {
 // persists, so they survive a thread reload.
 export type DataResultPart = { type: 'data-result'; id: 'result'; data: unknown };
 export type DataTrustPart = { type: 'data-trust'; id: 'trust'; data: unknown };
+export type DataThinkingTimingPart = {
+  type: 'data-thinking-timing';
+  id: 'thinking-timing';
+  data: { durationMs: number };
+};
 export type UIMessagePart =
   | TextUIPart
   | ReasoningUIPart
@@ -169,7 +174,8 @@ export type UIMessagePart =
   | DataPageContextPart
   | DataToolAgentPart
   | DataResultPart
-  | DataTrustPart;
+  | DataTrustPart
+  | DataThinkingTimingPart;
 export type UIMessageLike = { id: string; role: 'user' | 'assistant'; parts: UIMessagePart[] };
 
 // Mastra stores tool calls as `{ type:'tool-invocation', toolInvocation }`;
@@ -182,6 +188,8 @@ export type MastraToolInvocation = {
   result?: unknown;
   errorText?: unknown;
 };
+
+type TrustTraceLike = { reasoningTrace?: unknown };
 
 // ---------------------------------------------------------------------------
 // Auth/perm helpers
@@ -286,7 +294,11 @@ export function mastraPartToUIPart(raw: unknown): UIMessagePart | UIMessagePart[
     const i = (raw as { toolInvocation?: MastraToolInvocation }).toolInvocation;
     if (!i || typeof i.toolCallId !== 'string' || typeof i.toolName !== 'string') return null;
     const hasError = typeof i.errorText === 'string';
-    const hasResult = i.result !== undefined;
+    const persistedState = typeof i.state === 'string' ? i.state : undefined;
+    const hasResult =
+      i.result !== undefined ||
+      persistedState === 'output-available' ||
+      persistedState === 'result';
     const state: ToolUIPart['state'] = hasError
       ? 'output-error'
       : hasResult
@@ -298,7 +310,7 @@ export function mastraPartToUIPart(raw: unknown): UIMessagePart | UIMessagePart[
       state,
       input: i.args,
     };
-    if (state === 'output-available') part.output = i.result;
+    if (state === 'output-available') part.output = i.result ?? null;
     if (state === 'output-error') part.errorText = (i.errorText as string) ?? 'tool failed';
     const leaves = leafDataPart(i.toolCallId, i.toolName, i.result);
     return leaves ? [part, leaves] : part;
@@ -331,9 +343,79 @@ export function mastraPartToUIPart(raw: unknown): UIMessagePart | UIMessagePart[
       ? { type: 'data-result', id: 'result', data: r.data }
       : { type: 'data-trust', id: 'trust', data: r.data };
   }
+  if (type === 'data-thinking-timing') {
+    const durationMs = ((raw as { data?: unknown }).data as { durationMs?: unknown } | undefined)
+      ?.durationMs;
+    if (typeof durationMs !== 'number' || !Number.isFinite(durationMs) || durationMs < 0) {
+      return null;
+    }
+    return {
+      type: 'data-thinking-timing',
+      id: 'thinking-timing',
+      data: { durationMs },
+    };
+  }
   return null;
 }
 
+function backfillToolPartsFromTrust(parts: UIMessagePart[], rawParts: unknown[]): void {
+  const trace = latestTrustTrace(rawParts);
+  if (!trace) return;
+
+  const existingByTool = new Map<string, number>();
+  for (const part of parts) {
+    if (!part.type.startsWith('tool-')) continue;
+    const toolName = part.type.slice('tool-'.length);
+    existingByTool.set(toolName, (existingByTool.get(toolName) ?? 0) + 1);
+  }
+
+  const seenByTool = new Map<string, number>();
+  const synthetic: ToolUIPart[] = [];
+  for (let i = 0; i < trace.length; i++) {
+    const item = trace[i];
+    if (!item || typeof item !== 'object') continue;
+    const step = (item as { step?: unknown }).step;
+    if (typeof step !== 'string' || step.length === 0) continue;
+
+    const seen = seenByTool.get(step) ?? 0;
+    seenByTool.set(step, seen + 1);
+    if (seen < (existingByTool.get(step) ?? 0)) continue;
+
+    synthetic.push({
+      type: `tool-${step}`,
+      toolCallId: `trust-${i}-${step.replace(/[^A-Za-z0-9_-]+/g, '-')}`,
+      state: 'output-available',
+      input: argsFromTraceDetail((item as { detail?: unknown }).detail),
+      output: null,
+    });
+  }
+  if (synthetic.length === 0) return;
+
+  const firstTextIndex = parts.findIndex((part) => part.type === 'text');
+  const insertAt = firstTextIndex < 0 ? parts.length : firstTextIndex;
+  parts.splice(insertAt, 0, ...synthetic);
+}
+
+function latestTrustTrace(rawParts: unknown[]): unknown[] | null {
+  for (let i = rawParts.length - 1; i >= 0; i--) {
+    const part = rawParts[i];
+    if (!part || typeof part !== 'object') continue;
+    const candidate = part as { type?: unknown; data?: TrustTraceLike };
+    if (candidate.type !== 'data-trust') continue;
+    const trace = candidate.data?.reasoningTrace;
+    return Array.isArray(trace) ? trace : null;
+  }
+  return null;
+}
+
+function argsFromTraceDetail(detail: unknown): unknown {
+  if (typeof detail !== 'string' || !detail.startsWith('args=')) return undefined;
+  try {
+    return JSON.parse(detail.slice('args='.length));
+  } catch {
+    return undefined;
+  }
+}
 export function toUIMessage(m: MastraStoredMessage, idx: number): UIMessageLike | null {
   const role = m.role === 'user' || m.role === 'assistant' ? m.role : null;
   if (!role) return null;
@@ -348,6 +430,7 @@ export function toUIMessage(m: MastraStoredMessage, idx: number): UIMessageLike 
     if (Array.isArray(p)) parts.push(...p);
     else parts.push(p);
   }
+  backfillToolPartsFromTrust(parts, stored.parts);
   if (parts.length === 0) return null;
   return { id: m.id ?? `msg-${idx}`, role, parts };
 }

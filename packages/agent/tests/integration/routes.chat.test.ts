@@ -602,6 +602,208 @@ describe('GET /api/agent/v1/threads/:id (data-page-context round-trip)', () => {
   });
 });
 
+describe('GET /api/agent/v1/threads/:id (thinking timing round-trip)', () => {
+  it('returns persisted data-thinking-timing parts for Thought duration after reload', async () => {
+    await withAgentTestDb(async ({ pool, databaseUrl }) => {
+      const { admin_user_id, tenant_id } = await createTestTenantWithAdmin({ pool });
+      const { buildMastra } = await import('../../src/backend/runtime.ts');
+      const mastra = buildMastra({ pool, databaseUrl });
+      const storage = mastra.getStorage() as unknown as {
+        init: () => Promise<void>;
+        stores: {
+          memory: {
+            saveThread: (args: {
+              thread: {
+                id: string;
+                resourceId: string;
+                title?: string;
+                createdAt: Date;
+                updatedAt: Date;
+                metadata?: Record<string, unknown>;
+              };
+            }) => Promise<unknown>;
+            saveMessages: (args: { messages: unknown[] }) => Promise<unknown>;
+          };
+        };
+      };
+      await storage.init();
+
+      const threadId = 'thread-thinking-timing-1';
+      const now = new Date();
+      await storage.stores.memory.saveThread({
+        thread: {
+          id: threadId,
+          resourceId: `${tenant_id}:${admin_user_id}`,
+          title: 'with timing',
+          createdAt: now,
+          updatedAt: now,
+          metadata: {},
+        },
+      });
+      await storage.stores.memory.saveMessages({
+        messages: [
+          {
+            id: 'msg-thinking-timing-1',
+            threadId,
+            resourceId: `${tenant_id}:${admin_user_id}`,
+            role: 'assistant',
+            createdAt: now,
+            content: {
+              format: 2,
+              parts: [
+                { type: 'reasoning', text: 'Checking reports.' },
+                {
+                  type: 'data-thinking-timing',
+                  id: 'thinking-timing',
+                  data: { durationMs: 15_400 },
+                },
+              ],
+            },
+          },
+        ],
+      });
+
+      const app = new Hono<{ Variables: { session: TestSession } }>();
+      app.use('*', async (c, next) => {
+        c.set('session', {
+          tenant_id,
+          user_id: admin_user_id,
+          effective_permissions: new Set(['agent.chat.use', 'agent.thread.read.self']),
+          role_summary: { roles: ['org.admin'], cross_tenant_read: false },
+        });
+        await next();
+      });
+      registerAgentRoutes(app, {
+        mastra: mastra as never,
+        pool,
+        chatOrchestration: async () => fakeChatRun(),
+      });
+
+      const res = await app.request(`/api/agent/v1/threads/${threadId}`);
+      expect(res.status).toBe(200);
+      const body = (await res.json()) as {
+        messages: Array<{ parts: Array<{ type: string; data?: { durationMs?: number } }> }>;
+      };
+      const timing = body.messages[0]?.parts.find((p) => p.type === 'data-thinking-timing');
+      expect(timing?.data?.durationMs).toBe(15_400);
+    });
+  });
+});
+
+it('returns persisted updateWorkingMemory tool calls after reload', async () => {
+  await withAgentTestDb(async ({ pool, databaseUrl }) => {
+    const { admin_user_id, tenant_id } = await createTestTenantWithAdmin({ pool });
+    const { buildMastra } = await import('../../src/backend/runtime.ts');
+    const mastra = buildMastra({ pool, databaseUrl });
+    const storage = mastra.getStorage() as unknown as {
+      init: () => Promise<void>;
+      stores: {
+        memory: {
+          saveThread: (args: {
+            thread: {
+              id: string;
+              resourceId: string;
+              title?: string;
+              createdAt: Date;
+              updatedAt: Date;
+              metadata?: Record<string, unknown>;
+            };
+          }) => Promise<unknown>;
+          saveMessages: (args: { messages: unknown[] }) => Promise<unknown>;
+        };
+      };
+    };
+    await storage.init();
+
+    const threadId = 'thread-memory-tool-1';
+    const now = new Date();
+    await storage.stores.memory.saveThread({
+      thread: {
+        id: threadId,
+        resourceId: `${tenant_id}:${admin_user_id}`,
+        title: 'with memory tool',
+        createdAt: now,
+        updatedAt: now,
+        metadata: {},
+      },
+    });
+    await storage.stores.memory.saveMessages({
+      messages: [
+        {
+          id: 'msg-memory-tool-1',
+          threadId,
+          resourceId: `${tenant_id}:${admin_user_id}`,
+          role: 'assistant',
+          createdAt: now,
+          content: {
+            format: 2,
+            parts: [
+              { type: 'reasoning', text: 'I will update my memory toward the end.' },
+              {
+                type: 'tool-invocation',
+                toolInvocation: {
+                  toolCallId: 'tc-list',
+                  toolName: 'ld_listReports',
+                  state: 'output-available',
+                  args: { status: 'all' },
+                  result: { reports: [] },
+                },
+              },
+              { type: 'text', text: 'Done.' },
+              {
+                type: 'data-trust',
+                id: 'trust',
+                data: {
+                  reasoningTrace: [
+                    { step: 'ld_listReports', detail: 'args={"status":"all"}', at: 'now' },
+                    {
+                      step: 'updateWorkingMemory',
+                      detail:
+                        'args={"memory":"{\\"userContext\\":{\\"currentFocus\\":\\"L&D reporting\\"}}"}',
+                      at: 'now',
+                    },
+                  ],
+                  evidenceCitations: [],
+                  confidenceScore: 0.8,
+                },
+              },
+            ],
+          },
+        },
+      ],
+    });
+
+    const app = new Hono<{ Variables: { session: TestSession } }>();
+    app.use('*', async (c, next) => {
+      c.set('session', {
+        tenant_id,
+        user_id: admin_user_id,
+        effective_permissions: new Set(['agent.chat.use', 'agent.thread.read.self']),
+        role_summary: { roles: ['org.admin'], cross_tenant_read: false },
+      });
+      await next();
+    });
+    registerAgentRoutes(app, {
+      mastra: mastra as never,
+      pool,
+      chatOrchestration: async () => fakeChatRun(),
+    });
+
+    const res = await app.request(`/api/agent/v1/threads/${threadId}`);
+    expect(res.status).toBe(200);
+    const body = (await res.json()) as {
+      messages: Array<{
+        parts: Array<{ type: string; state?: string; output?: unknown; toolCallId?: string }>;
+      }>;
+    };
+    const tool = body.messages[0]?.parts.find((p) => p.type === 'tool-updateWorkingMemory');
+    expect(tool).toMatchObject({
+      toolCallId: 'trust-1-updateWorkingMemory',
+      state: 'output-available',
+      output: null,
+    });
+  });
+});
 describe('GET /api/agent/v1/memory', () => {
   it('returns active context, short-term turns, working memory, and thread entities', async () => {
     await withAgentTestDb(async ({ pool, databaseUrl }) => {

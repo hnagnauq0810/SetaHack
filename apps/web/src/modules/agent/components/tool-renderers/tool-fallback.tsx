@@ -5,7 +5,9 @@ import { summarizeArgs } from './summarize-args';
 interface ToolCallPart {
   toolName?: string;
   args?: unknown;
+  input?: unknown;
   result?: unknown;
+  output?: unknown;
   isError?: boolean;
   status?: { type?: string };
 }
@@ -21,8 +23,12 @@ export function ToolFallback({ part }: { part: ToolCallPart }) {
   const type = part.status?.type;
   if (type === 'complete' || type === undefined) {
     if (part.isError) return <ChatToolCall name={name} status="error" summary="failed" />;
-    return <ChatToolCall name={name} status="ok" payload={part.result ?? undefined} />;
+    return (
+      <ChatToolCall name={name} status="ok" payload={part.result ?? part.output ?? undefined} />
+    );
   }
   if (type === 'incomplete') return <ChatToolCall name={name} status="error" summary="failed" />;
-  return <ChatToolCall name={name} status="running" summary={summarizeArgs(part.args)} />;
+  return (
+    <ChatToolCall name={name} status="running" summary={summarizeArgs(part.args ?? part.input)} />
+  );
 }

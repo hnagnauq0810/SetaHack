@@ -91,29 +91,35 @@ export async function pumpOrchestrationStream(
       answer += stringField(part, 'delta') ?? stringField(part, 'text') ?? '';
   }
 
-  assistantParts.push(...timelineParts);
-  if (answer) assistantParts.push({ type: 'text', text: answer });
+  let timingPart: Extract<OrchestrationAssistantPart, { type: 'data-thinking-timing' }> | undefined;
 
   if (opts.timing) {
     const durationMs = Math.max(
       0,
       Math.round((opts.timing.now ?? Date.now)() - opts.timing.startedAtMs),
     );
-    const timingPart = {
+    timingPart = {
       type: 'data-thinking-timing' as const,
       id: 'thinking-timing' as const,
       data: { durationMs },
     };
     writer.write(timingPart);
-    assistantParts.push(timingPart);
   }
 
   if (suspend) {
+    assistantParts.push(...timelineParts);
+    if (answer) assistantParts.push({ type: 'text', text: answer });
+    if (timingPart) assistantParts.push(timingPart);
     await opts.onApproval(suspend);
     return { assistantParts };
   }
 
   const { result, trust } = await opts.finalize();
+  markInputOnlyToolsComplete(timelineParts);
+  backfillToolPartsFromTrust(trust, toolById, timelineParts);
+  assistantParts.push(...timelineParts);
+  if (answer) assistantParts.push({ type: 'text', text: answer });
+  if (timingPart) assistantParts.push(timingPart);
   writer.write({ type: 'data-result', id: 'result', data: result });
   writer.write({ type: 'data-trust', id: 'trust', data: trust });
   assistantParts.push({ type: 'data-result', id: 'result', data: result });
@@ -153,11 +159,13 @@ function captureToolPart(
   const data = recordField(part, 'data');
   const toolCallId =
     stringField(part, 'toolCallId') ?? stringField(data, 'toolCallId') ?? stringField(part, 'id');
-  const toolName = stringField(part, 'toolName') ?? stringField(data, 'toolName');
-  if (!toolCallId || !toolName) return;
+  if (!toolCallId) return;
 
   let persisted = toolById.get(toolCallId);
   if (!persisted) {
+    const toolName =
+      stringField(part, 'toolName') ?? stringField(data, 'toolName') ?? toolNameFromPartType(part);
+    if (!toolName) return;
     persisted = {
       type: 'tool-invocation',
       toolInvocation: { toolCallId, toolName, state: 'input-available' },
@@ -204,4 +212,81 @@ function stringField(value: unknown, key: string): string | undefined {
 
 function unknownField(value: unknown, key: string): unknown {
   return value && typeof value === 'object' ? (value as Record<string, unknown>)[key] : undefined;
+}
+type TrustTraceLike = { reasoningTrace?: unknown };
+
+function markInputOnlyToolsComplete(timelineParts: OrchestrationAssistantPart[]): void {
+  for (const part of timelineParts) {
+    if (part.type !== 'tool-invocation') continue;
+    const invocation = part.toolInvocation;
+    if (invocation.errorText || invocation.result !== undefined) continue;
+    invocation.state = 'output-available';
+    invocation.result = null;
+  }
+}
+
+function backfillToolPartsFromTrust(
+  trust: unknown,
+  toolById: Map<string, ToolInvocationPart>,
+  timelineParts: OrchestrationAssistantPart[],
+): void {
+  const trace = (trust as TrustTraceLike | null)?.reasoningTrace;
+  if (!Array.isArray(trace)) return;
+
+  const existingByTool = new Map<string, number>();
+  for (const part of timelineParts) {
+    if (part.type !== 'tool-invocation') continue;
+    const toolName = part.toolInvocation.toolName;
+    existingByTool.set(toolName, (existingByTool.get(toolName) ?? 0) + 1);
+  }
+  const seenByTool = new Map<string, number>();
+
+  for (let i = 0; i < trace.length; i++) {
+    const item = trace[i];
+    if (!item || typeof item !== 'object') continue;
+    const step = (item as { step?: unknown }).step;
+    if (typeof step !== 'string' || step.length === 0) continue;
+
+    const seen = seenByTool.get(step) ?? 0;
+    seenByTool.set(step, seen + 1);
+    if (seen < (existingByTool.get(step) ?? 0)) continue;
+
+    const toolCallId = `trust-${i}-${step.replace(/[^A-Za-z0-9_-]+/g, '-')}`;
+    if (toolById.has(toolCallId)) continue;
+    const invocation: ToolInvocationPart = {
+      type: 'tool-invocation',
+      toolInvocation: {
+        toolCallId,
+        toolName: step,
+        state: 'output-available',
+        args: argsFromTraceDetail((item as { detail?: unknown }).detail),
+        result: null,
+      },
+    };
+    toolById.set(toolCallId, invocation);
+    timelineParts.push(invocation);
+  }
+}
+
+function argsFromTraceDetail(detail: unknown): unknown {
+  if (typeof detail !== 'string' || !detail.startsWith('args=')) return undefined;
+  try {
+    return JSON.parse(detail.slice('args='.length));
+  } catch {
+    return undefined;
+  }
+}
+function toolNameFromPartType(part: StreamPart): string | undefined {
+  const type = part.type;
+  if (!type.startsWith('tool-')) return undefined;
+  if (
+    type === 'tool-input-available' ||
+    type === 'tool-output-available' ||
+    type === 'tool-input-start' ||
+    type === 'tool-input-delta' ||
+    type === 'tool-error'
+  ) {
+    return undefined;
+  }
+  return type.slice('tool-'.length) || undefined;
 }

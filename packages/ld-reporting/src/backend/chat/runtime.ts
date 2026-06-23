@@ -14,8 +14,10 @@ import {
   defineAgentTool,
   loadUserContextSection,
   makeUpdateWorkingMemoryTool,
+  parseWorkingMemory,
   RC_THREAD_ID,
   type SpecializedAgentRunCtx,
+  serializeWorkingMemory,
   sessionFromRequestContext,
   type TrustEnvelope,
 } from '@seta/agent-sdk';
@@ -175,7 +177,10 @@ export function buildLdReportingChatRuntime(deps: LdReportingChatRuntimeDeps): {
       )) as unknown as ChatStreamRun['output'];
       return {
         output,
-        finalize: async () => finalizeLdResult(await drain(output)),
+        finalize: async () =>
+          finalizeLdResult(
+            await ensureLdWorkingMemory(await drain(output), ctx, runInput.userText),
+          ),
       };
     },
     runResume: async (resume, ctx) => {
@@ -194,7 +199,16 @@ export function buildLdReportingChatRuntime(deps: LdReportingChatRuntimeDeps): {
       })) as ChatStreamRun['output'];
       return {
         output,
-        finalize: async () => finalizeLdResult(await drain(output)),
+        finalize: async () =>
+          finalizeLdResult(
+            await ensureLdWorkingMemory(
+              await drain(output),
+              ctx,
+              resume.note
+                ? `resume: ${resume.decision}; note: ${resume.note}`
+                : `resume: ${resume.decision}`,
+            ),
+          ),
       };
     },
   };
@@ -408,6 +422,7 @@ function instructionsText(defaultScope: LdRequest['scope']): string {
   return [
     'You are the L&D Training Effectiveness Agent.',
     'Use tools for every operational action: readiness checks, draft generation, report Q&A, and final review.',
+    "When updateWorkingMemory is available, call it once near the end of every successful L&D turn to preserve the current workspace/report focus and the user's latest intent. Pass the full working-memory JSON object, not a partial patch.",
     'Never answer L&D course questions from general knowledge. If the user asks about a course, learner, metric, report, PPTX, DOCX, or "it" in this L&D thread, ground the answer in L&D tools and validated artifacts.',
     'If the user requests to generate a new report, or specifies a scope/course/period/team, always run ld_checkReadiness and ld_generateReport for that new scope. Do not restrict the user from creating new reports.',
     'An L&D course name or ID can look like a technical topic (e.g. "CloudAWS_03_2026", "AWS Cloud Architecture & Services", "DevOps Fundamentals", "DevOps_04_2026"). Never assume these are technical infrastructure, cloud operations, or server maintenance tasks. They are training courses! If the user asks to create, check, or generate a report for any such name, it is a course ID/scope. You MUST call the L&D tools (ld_checkReadiness first, then ld_generateReport) for it.',
@@ -580,6 +595,77 @@ async function drain(output: ChatStreamRun['output']): Promise<ToolSignals> {
   };
 }
 
+async function ensureLdWorkingMemory(
+  res: ToolSignals,
+  ctx: SpecializedAgentRunCtx,
+  userIntent: string,
+): Promise<ToolSignals> {
+  if (res.toolCalls.some((call) => call.payload.toolName === 'updateWorkingMemory')) return res;
+  if (!ctx.userMemory || !ctx.threadId) return res;
+
+  const focus = summarizeLdFocus(userIntent, res);
+  try {
+    const raw = await ctx.userMemory.memory.getWorkingMemory({
+      threadId: ctx.threadId,
+      resourceId: ctx.actorUserId,
+      memoryConfig: ctx.userMemory.memoryConfig,
+    });
+    const current = parseWorkingMemory(raw);
+    const next = {
+      userContext: {
+        ...current.userContext,
+        currentFocus: focus,
+        notes: mergeLdNote(current.userContext.notes, focus),
+      },
+    };
+    const memory = serializeWorkingMemory(next);
+    await ctx.userMemory.memory.updateWorkingMemory({
+      threadId: ctx.threadId,
+      resourceId: ctx.actorUserId,
+      workingMemory: memory,
+      memoryConfig: ctx.userMemory.memoryConfig,
+    });
+    return {
+      ...res,
+      toolCalls: [
+        ...res.toolCalls,
+        { payload: { toolName: 'updateWorkingMemory', args: { memory } } },
+      ],
+      toolResults: [
+        ...res.toolResults,
+        { payload: { toolName: 'updateWorkingMemory', result: { success: true } } },
+      ],
+    };
+  } catch {
+    return res;
+  }
+}
+
+function summarizeLdFocus(userIntent: string, res: ToolSignals): string {
+  const reports = lastNamedResult(res, 'ld_listReports');
+  if (isReportListResult(reports)) {
+    return `L&D reporting workspace; latest request listed ${reports.reports.length} visible report(s).`;
+  }
+  const report = lastResult<ReportJson>(res, isReport);
+  if (report) return `L&D report ${report.reportId}: ${report.title}.`;
+  const cleanIntent = userIntent.replace(/\s+/g, ' ').trim();
+  return cleanIntent
+    ? `L&D reporting workspace; latest request: ${cleanIntent.slice(0, 160)}`
+    : 'L&D reporting workspace.';
+}
+
+function mergeLdNote(existing: string | null, focus: string): string {
+  const note = `Current L&D focus: ${focus}`;
+  if (!existing || existing.trim().length === 0) return note;
+  if (existing.includes(note)) return existing;
+  return `${existing.trim()}\n${note}`.slice(-1200);
+}
+
+function isReportListResult(value: unknown): value is { reports: unknown[] } {
+  return Boolean(
+    value && typeof value === 'object' && Array.isArray((value as { reports?: unknown }).reports),
+  );
+}
 function finalizeLdResult(res: ToolSignals): { result: unknown; trust: TrustEnvelope } {
   return {
     result: assembleLdResult(res),

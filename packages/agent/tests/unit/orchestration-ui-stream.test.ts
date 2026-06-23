@@ -80,7 +80,6 @@ describe('pumpOrchestrationStream', () => {
         {
           type: 'tool-output-available',
           toolCallId: 'tc-1',
-          toolName: 'ld_generateReport',
           output: toolResult,
         },
         { type: 'text-delta', id: 't', delta: 'Done' },
@@ -103,6 +102,116 @@ describe('pumpOrchestrationStream', () => {
         state: 'output-available',
         args: { scope: { courseId: 'DevOps_02_2026' } },
         result: toolResult,
+      },
+    });
+  });
+  it('persists named tool parts when the tool name is encoded in the part type', async () => {
+    const w = new FakeWriter();
+    const { assistantParts } = await pumpOrchestrationStream(
+      w,
+      parts(
+        {
+          type: 'tool-updateWorkingMemory',
+          toolCallId: 'tc-memory',
+          input: { update: 'remember current report comparison' },
+        },
+        {
+          type: 'tool-updateWorkingMemory',
+          toolCallId: 'tc-memory',
+          output: { ok: true },
+        },
+      ),
+      {
+        finalize: async () => ({ result: { message: 'ok' }, trust: TRUST }),
+        onApproval: async () => {},
+      },
+    );
+
+    expect(assistantParts).toContainEqual({
+      type: 'tool-invocation',
+      toolInvocation: {
+        toolCallId: 'tc-memory',
+        toolName: 'updateWorkingMemory',
+        state: 'output-available',
+        args: { update: 'remember current report comparison' },
+        result: { ok: true },
+      },
+    });
+  });
+  it('backfills tool calls from trust trace when the live stream omits them', async () => {
+    const w = new FakeWriter();
+    const { assistantParts } = await pumpOrchestrationStream(
+      w,
+      parts({
+        type: 'tool-input-available',
+        toolCallId: 'tc-list',
+        toolName: 'ld_listReports',
+        input: { status: 'FINAL' },
+      }),
+      {
+        finalize: async () => ({
+          result: { reports: [] },
+          trust: {
+            ...TRUST,
+            reasoningTrace: [
+              { step: 'ld_listReports', detail: 'args={"status":"FINAL"}', at: 'now' },
+              {
+                step: 'updateWorkingMemory',
+                detail: 'args={"memory":"workspace has reports"}',
+                at: 'now',
+              },
+              {
+                step: 'updateWorkingMemory',
+                detail: 'args={"memory":"user asked in Vietnamese"}',
+                at: 'now',
+              },
+            ],
+          },
+        }),
+        onApproval: async () => {},
+      },
+    );
+
+    const tools = assistantParts.filter((part) => part.type === 'tool-invocation');
+    expect(tools.map((part) => part.toolInvocation.toolName)).toEqual([
+      'ld_listReports',
+      'updateWorkingMemory',
+      'updateWorkingMemory',
+    ]);
+  });
+
+  it('updates a known tool invocation from output chunks that omit toolName', async () => {
+    const w = new FakeWriter();
+    const reports = { reports: [{ reportId: 'rpt_1', status: 'FINAL' }] };
+    const { assistantParts } = await pumpOrchestrationStream(
+      w,
+      parts(
+        {
+          type: 'tool-input-available',
+          toolCallId: 'tc-list',
+          toolName: 'ld_listReports',
+          input: { status: 'FINAL' },
+        },
+        {
+          type: 'tool-output-available',
+          toolCallId: 'tc-list',
+          output: reports,
+        },
+      ),
+      {
+        finalize: async () => ({ result: reports, trust: TRUST }),
+        onApproval: async () => {},
+      },
+    );
+
+    expect(assistantParts).toContainEqual({
+      type: 'tool-invocation',
+      toolInvocation: {
+        toolCallId: 'tc-list',
+        toolName: 'ld_listReports',
+        state: 'output-available',
+        args: { status: 'FINAL' },
+        result: reports,
       },
     });
   });

@@ -21,7 +21,14 @@ interface PartProps {
   status: { type: string };
 }
 
-function reportIdFromText(text: string): string | null {
+export function draftApprovalReportIdFromText(text: string): string | null {
+  const normalized = text
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase();
+  const draftCue =
+    /\b(save draft|review draft|draft report|generated draft|draft generated|ban nhap|nhap)\b/;
+  if (!draftCue.test(normalized)) return null;
   const match = text.match(/Report ID:(?:\*\*)?\s*`?(rpt_[A-Za-z0-9-]+)/i);
   return match?.[1] ?? null;
 }
@@ -31,7 +38,7 @@ function TextPart({ text, status }: PartProps) {
   // empty text; rendering anything here would stack a stray cursor above the
   // ThinkingIndicator that the transcript shows for empty turns.
   if (text.length === 0) return null;
-  const reportId = reportIdFromText(text);
+  const reportId = draftApprovalReportIdFromText(text);
   return (
     <div className="relative">
       <ChatMarkdown text={text} />

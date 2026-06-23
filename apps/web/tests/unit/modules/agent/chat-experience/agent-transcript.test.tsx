@@ -54,7 +54,10 @@ vi.mock('@/modules/agent/components/thread-list-refresher', () => ({
   ThreadListRefresher: () => null,
 }));
 
-import { AgentTranscript } from '@/modules/agent/chat-experience/agent-transcript';
+import {
+  AgentTranscript,
+  draftApprovalReportIdFromText,
+} from '@/modules/agent/chat-experience/agent-transcript';
 import { DensityProvider } from '@/modules/agent/chat-experience/use-density';
 
 describe('AgentTranscript thought group', () => {
@@ -116,5 +119,23 @@ describe('AgentTranscript thought group', () => {
       'true',
     );
     expect(screen.getByText('Collected reasoning')).toBeVisible();
+  });
+});
+
+describe('draftApprovalReportIdFromText', () => {
+  it('does not infer draft approval from export/download answers', () => {
+    expect(
+      draftApprovalReportIdFromText(
+        'Da chuan bi file PPTX cho bao cao:\nReport ID: rpt_997f2409-a8e8-4a61-ae10-80a6ba548ef1\nDownload PPTX',
+      ),
+    ).toBeNull();
+  });
+
+  it('returns the report id only for draft review/save answers', () => {
+    expect(
+      draftApprovalReportIdFromText(
+        'Generated draft report. Review draft before adding to Reports. Report ID: rpt_997f2409-a8e8-4a61-ae10-80a6ba548ef1',
+      ),
+    ).toBe('rpt_997f2409-a8e8-4a61-ae10-80a6ba548ef1');
   });
 });

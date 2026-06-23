@@ -72,3 +72,6 @@ docs/design/
 
 # App NDJSON logs (dev log persistence)
 logs/
+
+# Runtime artifact storage; use LD_REPORTING_STORAGE_DIR outside watched app dirs.
+apps/server/.data/

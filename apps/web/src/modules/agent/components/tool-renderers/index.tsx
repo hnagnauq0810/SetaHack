@@ -1,7 +1,6 @@
 import type { ToolCallMessagePartProps } from '@assistant-ui/react';
 import { useAssistantDataUI, useAssistantToolUI } from '@assistant-ui/react';
 import { ChatToolCall } from '@seta/shared-ui';
-import { ReadinessEvidenceCard } from '../../../ld-reporting/components/readiness-evidence-card';
 import { AgentStreamPart } from '../../chat-experience/agent-stream-part';
 import { DataResultPart } from '../../chat-experience/data-result-part';
 import { DataTrustPart } from '../../chat-experience/data-trust-part';
@@ -79,9 +78,11 @@ function LdCheckReadinessRegistration({ name }: { name: string }) {
       const state = toReadState(props);
       if (state === 'output-available') {
         return (
-          <ReadinessEvidenceCard
-            readiness={props.result as Parameters<typeof ReadinessEvidenceCard>[0]['readiness']}
-            report={null}
+          <ChatToolCall
+            name={name}
+            status="ok"
+            summary={summarizeReadiness(props.result)}
+            payload={props.result ?? undefined}
           />
         );
       }
@@ -94,6 +95,24 @@ function LdCheckReadinessRegistration({ name }: { name: string }) {
   return null;
 }
 
+function summarizeReadiness(result: unknown): string {
+  const evidence =
+    result && typeof result === 'object'
+      ? (
+          result as {
+            evidence?: {
+              status?: unknown;
+              canGenerateFinalConclusion?: unknown;
+              missingEvidence?: unknown[];
+            };
+          }
+        ).evidence
+      : undefined;
+  const status = typeof evidence?.status === 'string' ? evidence.status : 'checked';
+  const missing = Array.isArray(evidence?.missingEvidence) ? evidence.missingEvidence.length : 0;
+  const final = evidence?.canGenerateFinalConclusion === false ? 'final blocked' : 'final allowed';
+  return `${status.toLowerCase()} Ã‚Â· ${final} Ã‚Â· ${missing} issue${missing === 1 ? '' : 's'}`;
+}
 function LdGenerateReportRegistration({ name }: { name: string }) {
   useAssistantToolUI({
     toolName: 'ld_generateReport',
