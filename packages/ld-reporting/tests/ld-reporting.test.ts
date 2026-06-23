@@ -224,6 +224,29 @@ describe('ld-reporting pipeline', () => {
     const listAfter = await agent.listReports({ role: 'LND_MANAGER' });
     expect(listAfter.map((r) => r.reportId)).toContain(draft.reportId);
   });
+
+  it('publishes an unsaved preview draft when approved', async () => {
+    const agent = await isolatedAgent();
+    const draft = await agent.ld_generateReport({
+      scope: { period: '2026-Q1' },
+      saveToWorkspace: false,
+    });
+    expect(draft.saved).toBe(false);
+    await expect(agent.listReports({ role: 'LND_MANAGER' })).resolves.toHaveLength(0);
+    await expect(agent.listReports({ role: 'BOD' })).resolves.toHaveLength(0);
+
+    const final = await agent.ld_finalizeReport({
+      reportId: draft.reportId,
+      body: { decision: 'approve', note: 'Approve directly from chat preview' },
+      actorUserId: 'ldm001',
+    });
+
+    expect(final.status).toBe('FINAL');
+    expect(final.saved).toBe(true);
+    await expect(agent.listReports({ role: 'LND_MANAGER' })).resolves.toHaveLength(1);
+    const bodReports = await agent.listReports({ role: 'BOD' });
+    expect(bodReports.map((r) => r.reportId)).toContain(draft.reportId);
+  });
 });
 
 async function isolatedAgent(): Promise<LdReportingSpecialistAgent> {

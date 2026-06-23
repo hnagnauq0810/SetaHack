@@ -248,7 +248,7 @@ export function ReportDraftApprovalBar({ report }: ReportDraftApprovalBarProps) 
     return (
       <div className="mt-3 flex w-full max-w-3xl items-center justify-between gap-3 rounded-md border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm text-emerald-800">
         <div className="min-w-0">
-          <div className="font-semibold">Approved and added to Reports</div>
+          <div className="font-semibold">Saved to Reports</div>
           <div className="truncate text-xs text-emerald-700">{report.title}</div>
         </div>
         <Check className="size-4 shrink-0" />

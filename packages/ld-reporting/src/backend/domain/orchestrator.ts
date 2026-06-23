@@ -241,6 +241,7 @@ export class LdReportingSpecialistAgent {
     if (input.body.decision === 'approve') {
       report.status = 'FINAL';
       report.finalizedAt = approval.at;
+      report.saved = true;
     } else if (input.body.decision === 'revise') {
       report.status = 'REVISION_REQUESTED';
       report.finalizedAt = undefined;
