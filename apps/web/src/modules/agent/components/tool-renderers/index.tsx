@@ -111,7 +111,7 @@ function summarizeReadiness(result: unknown): string {
   const status = typeof evidence?.status === 'string' ? evidence.status : 'checked';
   const missing = Array.isArray(evidence?.missingEvidence) ? evidence.missingEvidence.length : 0;
   const final = evidence?.canGenerateFinalConclusion === false ? 'final blocked' : 'final allowed';
-  return `${status.toLowerCase()} Ã‚Â· ${final} Ã‚Â· ${missing} issue${missing === 1 ? '' : 's'}`;
+  return `${status.toLowerCase()} - ${final} - ${missing} issue${missing === 1 ? '' : 's'}`;
 }
 function LdGenerateReportRegistration({ name }: { name: string }) {
   useAssistantToolUI({
