@@ -94,7 +94,9 @@ FROM node:24-alpine AS runtime
 
 RUN apk add --no-cache tini \
  && addgroup -g 10001 seta \
- && adduser -D -u 10001 -G seta seta
+ && adduser -D -u 10001 -G seta seta \
+ && mkdir -p /data/ld-reporting \
+ && chown -R 10001:10001 /data
 
 ENV NODE_ENV=production \
     APP_HOME=/app \

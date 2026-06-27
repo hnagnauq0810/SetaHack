@@ -32,6 +32,7 @@ networks:
 volumes:
   postgres-data:
   traefik-acme:
+  ld-reporting-data:
   # jaeger-data:
   # prometheus-data:
   # grafana-data:
@@ -136,8 +137,11 @@ services:
       CRYPTO_LOCAL_PRIMARY_KID: ${CRYPTO_LOCAL_PRIMARY_KID:-}
       AWS_REGION: ${AWS_REGION:-}
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      LD_REPORTING_STORAGE_DIR: ${LD_REPORTING_STORAGE_DIR:-/data/ld-reporting}
     expose:
       - "9464"  # Prometheus metrics scrape port
+    volumes:
+      - ld-reporting-data:/data/ld-reporting
     networks:
       - seta-edge
       - seta-internal

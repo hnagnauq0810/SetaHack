@@ -6,6 +6,29 @@ import { LdReportingSpecialistAgent } from '../src/backend/domain/orchestrator.t
 import { LdReportingStore } from '../src/backend/domain/storage.ts';
 
 describe('ld-reporting pipeline', () => {
+  it('rejects missing and multiply-matched report scopes', async () => {
+    const agent = await isolatedAgent();
+
+    await expect(agent.ld_generateReport({ scope: {} })).rejects.toMatchObject({
+      code: 'SCOPE_REQUIRED',
+      reason: 'MISSING_SCOPE',
+    });
+    await expect(agent.ld_checkReadiness({ scope: { period: 'latest' } })).rejects.toMatchObject({
+      code: 'SCOPE_REQUIRED',
+      reason: 'AMBIGUOUS_SCOPE',
+    });
+    await expect(agent.ld_generateReport({ scope: { courseId: '2026' } })).rejects.toMatchObject({
+      code: 'SCOPE_REQUIRED',
+      reason: 'MULTIPLE_COURSES',
+    });
+  });
+
+  it('allows an explicitly requested all-course report', async () => {
+    const agent = await isolatedAgent();
+    const report = await agent.ld_generateReport({ scope: { allCourses: true } });
+    expect(report.metrics.overall.totalCourses).toBeGreaterThan(1);
+  });
+
   it('generates a report for completed Q1 courses', async () => {
     const agent = new LdReportingSpecialistAgent();
     const report = await agent.ld_generateReport({ scope: { period: '2026-Q1' } });
@@ -139,6 +162,38 @@ describe('ld-reporting pipeline', () => {
     expect(answer.citations).toContain('metrics.overall.averageScore');
     expect(answer.citations).toContain('metrics.courses.averageScore');
   });
+
+  it('answers NORM coaching questions with grounded learner details for managers', async () => {
+    const agent = await isolatedAgent();
+    const report = await agent.ld_generateReport({ scope: { courseId: 'AIAgent_05_2026' } });
+
+    const managerAnswer = await agent.ld_answerQuestion({
+      reportId: report.reportId,
+      role: 'LND_MANAGER',
+      question: 'Thông tin chi tiết về NORM-07 và ai cần coaching 1:1',
+    });
+
+    expect(managerAnswer.answer).toContain('NORM-07');
+    expect(managerAnswer.answer).toContain('EMP-076');
+    expect(managerAnswer.answer).toContain('3.9/10');
+    expect(managerAnswer.answer).toContain('87.5%');
+    expect(managerAnswer.citations).toContain('governance.normFlags');
+    expect(managerAnswer.citations).toContain('governance.supportNeededTrainees');
+
+    await agent.ld_finalizeReport({
+      reportId: report.reportId,
+      body: { decision: 'approve' },
+      actorUserId: 'ldm001',
+    });
+    const bodAnswer = await agent.ld_answerQuestion({
+      reportId: report.reportId,
+      role: 'BOD',
+      question: 'Thông tin chi tiết về NORM-07 và ai cần coaching 1:1',
+    });
+    expect(bodAnswer.answer).toContain('NORM-07');
+    expect(bodAnswer.answer).not.toContain('EMP-076');
+    expect(bodAnswer.answer).toContain('1 learner');
+  }, 15_000);
 
   it('keeps BOD on finalized reports while L&D Manager can review drafts', async () => {
     const agent = await isolatedAgent();

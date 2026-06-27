@@ -7,6 +7,7 @@ export interface LdScope {
   period?: string;
   team?: string;
   trainerId?: string;
+  allCourses?: boolean;
   reportType?: 'executive' | 'course' | 'readiness' | 'full';
 }
 

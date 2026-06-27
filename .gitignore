@@ -19,6 +19,8 @@ node_modules
 .env.development.local
 .env.test.local
 .env.production.local
+AWS-CREDENTIALS.txt
+team-7
 
 # Testing
 coverage

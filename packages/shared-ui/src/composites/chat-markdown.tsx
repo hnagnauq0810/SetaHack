@@ -68,11 +68,22 @@ const COMPONENTS: Components = {
   ),
 };
 
+const LD_DOWNLOAD_URL_RE =
+  /`?(\/api\/ld-reporting\/reports\/[A-Za-z0-9_-]+\/download\/(pptx|docx))`?/gi;
+
+export function linkifyDownloadUrls(text: string): string {
+  return text.replace(LD_DOWNLOAD_URL_RE, (raw, url: string, format: string, offset: number) => {
+    const previous = text.slice(Math.max(0, offset - 2), offset);
+    if (previous.endsWith('](') || previous.endsWith('(')) return raw;
+    return `[Download ${format.toUpperCase()}](${url})`;
+  });
+}
+
 export function ChatMarkdown({ text, className }: ChatMarkdownProps) {
   return (
     <div className={cn('text-sm leading-[1.6] text-ink', className)}>
       <ReactMarkdown remarkPlugins={[remarkGfm]} components={COMPONENTS}>
-        {text}
+        {linkifyDownloadUrls(text)}
       </ReactMarkdown>
     </div>
   );

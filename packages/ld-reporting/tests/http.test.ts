@@ -1,6 +1,9 @@
+import { mkdtemp } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import type { RouteBuildDeps, SessionEnv, SessionScope } from '@seta/core';
 import { Hono } from 'hono';
-import { describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { buildLdReportingRoutes } from '../src/backend/http/index.ts';
 
 function buildApp(): Hono<SessionEnv> {
@@ -17,6 +20,7 @@ function buildApp(): Hono<SessionEnv> {
       'ld-reporting.report.read',
       'ld-reporting.report.generate',
       'ld-reporting.report.finalize',
+      'ld-reporting.readiness.run',
     ]),
     accessible_group_ids: [],
     cross_tenant_read: false,
@@ -33,6 +37,53 @@ function buildApp(): Hono<SessionEnv> {
 }
 
 describe('L&D report finalization HTTP contract', () => {
+  beforeEach(async () => {
+    process.env.LD_REPORTING_STORAGE_DIR = await mkdtemp(join(tmpdir(), 'ld-reporting-http-test-'));
+  });
+
+  afterEach(() => {
+    delete process.env.LD_REPORTING_STORAGE_DIR;
+  });
+
+  it('returns 400 when report generation scope is ambiguous', async () => {
+    const app = buildApp();
+    const response = await app.request('/api/ld-reporting/reports', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ scope: {} }),
+    });
+
+    expect(response.status).toBe(400);
+    await expect(response.json()).resolves.toMatchObject({
+      error: 'SCOPE_REQUIRED',
+      reason: 'MISSING_SCOPE',
+      message: 'Which period or course should I use for the report?',
+    });
+
+    const readiness = await app.request('/api/ld-reporting/readiness', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ scope: { period: 'latest' } }),
+    });
+    expect(readiness.status).toBe(400);
+    await expect(readiness.json()).resolves.toMatchObject({
+      error: 'SCOPE_REQUIRED',
+      reason: 'AMBIGUOUS_SCOPE',
+    });
+
+    const unsupportedTeam = await app.request('/api/ld-reporting/reports', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ scope: { team: 'Platform Engineering' } }),
+    });
+    expect(unsupportedTeam.status).toBe(400);
+    await expect(unsupportedTeam.json()).resolves.toMatchObject({
+      error: 'SCOPE_REQUIRED',
+      reason: 'UNSUPPORTED_SCOPE',
+      message: 'Which period or course should I use for the report?',
+    });
+  });
+
   it('returns 409 when blocked evidence is approved', async () => {
     const app = buildApp();
     const generated = await app.request('/api/ld-reporting/reports', {

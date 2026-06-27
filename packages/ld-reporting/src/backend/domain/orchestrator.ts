@@ -16,6 +16,7 @@ import { answerQuestionWithLlm, enrichReportWithLlm } from './llm-service.ts';
 import { calculateMetrics } from './metrics-service.ts';
 import { validateReportQuality } from './quality-check.ts';
 import { buildReportJson } from './report-builder.ts';
+import { assertSingleCourseMatch, assertUnambiguousReportScope } from './scope-validation.ts';
 import { LdReportingStore } from './storage.ts';
 import { formatNumber, formatPct, id } from './utils.ts';
 
@@ -51,10 +52,12 @@ export class LdReportingSpecialistAgent {
       missingColumns: string[];
     }>;
   }> {
+    assertUnambiguousReportScope(input.scope);
     const dataset = await loadAndNormalizeDataset({
       sourcePath: input.dataFilePath,
       scope: input.scope,
     });
+    assertSingleCourseMatch(input.scope, dataset.courses);
     const evidence = evaluateEvidence(dataset);
     await this.store.saveDataset(dataset);
     await this.store.saveEvidence(evidence);
@@ -72,10 +75,12 @@ export class LdReportingSpecialistAgent {
   }
 
   async ld_generateReport(input: LdPipelineRequest): Promise<ReportJson> {
+    assertUnambiguousReportScope(input.scope);
     const dataset = await loadAndNormalizeDataset({
       sourcePath: input.dataFilePath,
       scope: input.scope,
     });
+    assertSingleCourseMatch(input.scope, dataset.courses);
     const evidence = evaluateEvidence(dataset);
     const metrics = calculateMetrics(dataset);
     const governance = applyGovernanceAndRbac(dataset, metrics, evidence, 'LND_MANAGER');
@@ -397,6 +402,18 @@ function groundedAnswer(
     limitations.push('RBAC masking applied: individual trainee details are hidden or aggregated.');
   }
 
+  const requestedNormRuleIds = extractNormRuleIds(question);
+  const asksForCoaching = /\bcoach(?:ing)?\b|1\s*:\s*1|one[ -]on[ -]one/i.test(question);
+  if (requestedNormRuleIds.length > 0 || asksForCoaching) {
+    const matchingFlags = report.governance.normFlags.filter((flag) => {
+      if (requestedNormRuleIds.length > 0) return requestedNormRuleIds.includes(flag.ruleId);
+      return /coach|1\s*:\s*1|buddy|practice resource/i.test(`${flag.message} ${flag.action}`);
+    });
+    if (matchingFlags.length > 0) {
+      return groundedNormCoachingAnswer(report, matchingFlags, role, limitations);
+    }
+  }
+
   if (
     question.includes('attendance') ||
     question.includes('tham gia') ||
@@ -540,6 +557,50 @@ function groundedAnswer(
       'Question did not match a specialized Q&A template; answered from executive summary only.',
     ],
     citations: ['report.executiveSummary'],
+  };
+}
+
+function extractNormRuleIds(question: string): string[] {
+  return Array.from(question.matchAll(/\bnorm[\s_-]?(\d{1,2})\b/gi), (match) => {
+    return `NORM-${String(Number(match[1])).padStart(2, '0')}`;
+  });
+}
+
+function groundedNormCoachingAnswer(
+  report: ReportJson,
+  flags: ReportJson['governance']['normFlags'],
+  role: LdRole,
+  limitations: string[],
+): Omit<QnaAnswer, 'answerId' | 'generatedAt' | 'reportId'> {
+  if (role !== 'LND_MANAGER') {
+    const affectedLearners = new Set(flags.map((flag) => flag.employeeId).filter(Boolean)).size;
+    const flagSummary = flags
+      .map(
+        (flag) => `${flag.ruleId} (${flag.priority}) for ${flag.courseId ?? 'the selected scope'}`,
+      )
+      .join('; ');
+    return {
+      answer: `${flagSummary} affects ${affectedLearners} learner${affectedLearners === 1 ? '' : 's'}. Individual identities and scores are hidden for the ${role} role. Recommended action: ${Array.from(new Set(flags.map((flag) => flag.action))).join('; ')}.`,
+      confidence: 0.96,
+      limitations,
+      citations: ['governance.normFlags', 'governance.supportNeededGroups'],
+    };
+  }
+
+  const details = flags.map((flag) => {
+    const trainee = report.governance.supportNeededTrainees.find(
+      (item) => item.employeeId === flag.employeeId && item.courseId === flag.courseId,
+    );
+    const metrics = trainee
+      ? ` Score ${formatNumber(trainee.score, 1)}/10; attendance ${formatPct(trainee.attendanceRate)}.`
+      : '';
+    return `${flag.ruleId} (${flag.priority}) identifies ${flag.employeeId ?? 'the affected learner'} in ${flag.courseId ?? 'the selected scope'}: ${flag.message}${metrics} Action: ${flag.action}.`;
+  });
+  return {
+    answer: details.join(' '),
+    confidence: 0.96,
+    limitations,
+    citations: ['governance.normFlags', 'governance.supportNeededTrainees'],
   };
 }
 

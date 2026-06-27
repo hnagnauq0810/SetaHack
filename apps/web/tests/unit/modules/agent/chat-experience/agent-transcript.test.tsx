@@ -138,4 +138,20 @@ describe('draftApprovalReportIdFromText', () => {
       ),
     ).toBe('rpt_997f2409-a8e8-4a61-ae10-80a6ba548ef1');
   });
+
+  it('returns the report id when markdown bolds the report label', () => {
+    expect(
+      draftApprovalReportIdFromText(
+        'Đã tạo draft report.\n**Report ID:** rpt_198a0ecb-1ca9-4a82-836b-b7abadc98292',
+      ),
+    ).toBe('rpt_198a0ecb-1ca9-4a82-836b-b7abadc98292');
+  });
+
+  it('returns the report id when the draft answer puts the id after the scope', () => {
+    expect(
+      draftApprovalReportIdFromText(
+        'Đã tạo DRAFT report cho AWS: rpt_203c1dd4-3c34-4f98-bf19-c406106c72e4\nLưu ý: đây là draft preview.',
+      ),
+    ).toBe('rpt_203c1dd4-3c34-4f98-bf19-c406106c72e4');
+  });
 });

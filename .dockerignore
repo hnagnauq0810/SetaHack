@@ -23,6 +23,8 @@
 .env
 .env.*
 !.env.example
+AWS-CREDENTIALS.txt
+team-7
 
 # Editor / OS
 .vscode

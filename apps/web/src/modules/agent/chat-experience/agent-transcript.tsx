@@ -29,8 +29,12 @@ export function draftApprovalReportIdFromText(text: string): string | null {
   const draftCue =
     /\b(save draft|review draft|draft report|generated draft|draft generated|ban nhap|nhap)\b/;
   if (!draftCue.test(normalized)) return null;
-  const match = text.match(/Report ID:(?:\*\*)?\s*`?(rpt_[A-Za-z0-9-]+)/i);
-  return match?.[1] ?? null;
+  const labelledMatch = text.match(
+    /\*{0,2}Report ID\*{0,2}\s*:\*{0,2}\s*`?(rpt_[A-Za-z0-9-]+)/i,
+  );
+  if (labelledMatch?.[1]) return labelledMatch[1];
+  const fallbackMatch = text.match(/`?(rpt_[A-Za-z0-9-]+)/i);
+  return fallbackMatch?.[1] ?? null;
 }
 
 function TextPart({ text, status }: PartProps) {

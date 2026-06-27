@@ -31,6 +31,11 @@ import {
   type ReportJson,
 } from '../../models.ts';
 import { LdReportingSpecialistAgent } from '../domain/orchestrator.ts';
+import {
+  LdReportingScopeError,
+  REPORT_SCOPE_CLARIFICATION,
+  validateReportScope,
+} from '../domain/scope-validation.ts';
 
 type ToolSignals = {
   toolCalls: { payload: { toolName: string; args?: unknown } }[];
@@ -232,7 +237,15 @@ function makeLdChatTools(input: {
       execute: async (payload, ctx) => {
         await requireToolPermission(ctx, 'ld-reporting.readiness.run');
         const request = withDefaultScope(payload, defaultScope);
-        const readiness = await agent.ld_checkReadiness(request);
+        const scopeIssue = scopeClarificationResult(request.scope);
+        if (scopeIssue) return scopeIssue;
+        let readiness: Awaited<ReturnType<LdReportingSpecialistAgent['ld_checkReadiness']>>;
+        try {
+          readiness = await agent.ld_checkReadiness(request);
+        } catch (error) {
+          if (error instanceof LdReportingScopeError) return scopeErrorResult(error);
+          throw error;
+        }
         evidenceGateByScope.set(scopeKey(request.scope), {
           evidenceId: readiness.evidence.evidenceId,
           status: readiness.evidence.status,
@@ -254,6 +267,8 @@ function makeLdChatTools(input: {
       execute: async (payload, ctx) => {
         const access = await resolveToolAccess(ctx, 'ld-reporting.report.generate');
         const request = withDefaultScope(payload, defaultScope);
+        const scopeIssue = scopeClarificationResult(request.scope);
+        if (scopeIssue) return scopeIssue;
         const gate = evidenceGateByScope.get(scopeKey(request.scope));
         if (!gate) {
           return {
@@ -263,7 +278,13 @@ function makeLdChatTools(input: {
             scope: request.scope,
           };
         }
-        const report = await agent.ld_generateReport({ ...request, saveToWorkspace: false });
+        let report: ReportJson;
+        try {
+          report = await agent.ld_generateReport({ ...request, saveToWorkspace: false });
+        } catch (error) {
+          if (error instanceof LdReportingScopeError) return scopeErrorResult(error);
+          throw error;
+        }
         return agent.viewReport(report, access);
       },
     }),
@@ -424,20 +445,23 @@ function instructionsText(defaultScope: LdRequest['scope']): string {
     'Use tools for every operational action: readiness checks, draft generation, report Q&A, and final review.',
     "When updateWorkingMemory is available, call it once near the end of every successful L&D turn to preserve the current workspace/report focus and the user's latest intent. Pass the full working-memory JSON object, not a partial patch.",
     'Never answer L&D course questions from general knowledge. If the user asks about a course, learner, metric, report, PPTX, DOCX, or "it" in this L&D thread, ground the answer in L&D tools and validated artifacts.',
-    'If the user requests to generate a new report, or specifies a scope/course/period/team, always run ld_checkReadiness and ld_generateReport for that new scope. Do not restrict the user from creating new reports.',
+    'If the user requests to generate a new report, or specifies a scope/course/period/trainer, always run ld_checkReadiness and ld_generateReport for that new scope. Do not restrict the user from creating new reports.',
+    `A new report requires an explicit period, course, trainer, or an explicit all-courses request. If the request is missing a concrete scope or uses vague references such as "latest", "current", "this course", "it", or a quarter without a year, ask exactly: "${REPORT_SCOPE_CLARIFICATION}" Do not call readiness or generation tools until the user clarifies.`,
+    `The workbook has no team-to-course mapping. If a user requests a team-scoped report, ask exactly: "${REPORT_SCOPE_CLARIFICATION}" Never generate an all-course report for a team request.`,
+    'If the user explicitly requests every course or all courses, set scope.allCourses=true. Never represent an all-course request as an empty scope.',
     'An L&D course name or ID can look like a technical topic (e.g. "CloudAWS_03_2026", "AWS Cloud Architecture & Services", "DevOps Fundamentals", "DevOps_04_2026"). Never assume these are technical infrastructure, cloud operations, or server maintenance tasks. They are training courses! If the user asks to create, check, or generate a report for any such name, it is a course ID/scope. You MUST call the L&D tools (ld_checkReadiness first, then ld_generateReport) for it.',
     'BOD users are read-only. For BOD report reading, Q&A, history, or exports, call ld_listReports and ld_answerQuestion against finalized reports only. Never generate a draft for BOD.',
     'Evidence Gate is mandatory. For any generate, draft, export-from-scope, approval, or final conclusion request, call ld_checkReadiness first for the exact same scope.',
     'Call ld_generateReport only after ld_checkReadiness completed for the exact same scope in the same turn. PASS or PARTIAL_PASS may produce a finalizable draft; BLOCKED produces a clearly preliminary/readiness draft and must never be finalized.',
     'Generated drafts are previews and are not added to the Reports workspace automatically. After generating a draft, tell the user to review it and use Save Draft to Reports if they want to save it. Saving a draft is not final approval.',
-    'If the user asks to export PPTX/DOCX but provides only a course, period, or team instead of a reportId, run ld_checkReadiness first, then generate the draft, then call ld_prepareExport.',
+    'If the user asks to export PPTX/DOCX but provides only a course or period instead of a reportId, run ld_checkReadiness first, then generate the draft, then call ld_prepareExport.',
     'Never finalize or publish a report directly. When finalization is requested, call ld_reviewFinalizeReport so the human approval card can pause the run.',
     'When the user asks for PPTX, DOCX, PowerPoint, Word, slide deck, or export, call ld_prepareExport and return the download links.',
     'Never invent metrics, course names, learner identities, NORM flags, or evidence status.',
     'If the Evidence Gate is BLOCKED, describe the blocker and avoid final effectiveness conclusions.',
     'Report Q&A must be grounded only in report artifacts. If reportId is missing, use finalized reports via ld_listReports or ld_answerQuestion without reportId; generate a new draft only when an L&D Manager explicitly asks for a draft.',
     'RBAC is server-enforced. Do not ask the user to choose a role and do not reveal masked learner details.',
-    `When a scope is omitted, use this default scope: ${JSON.stringify(defaultScope)}.`,
+    `Use this default scope only when it contains an explicit period, course, trainer, or allCourses=true: ${JSON.stringify(defaultScope)}. Otherwise ask for clarification.`,
     'For metric or comparison questions, give a direct conclusion, the key validated values with absolute and relative differences when calculable, a short "Ý nghĩa:" interpretation without unsupported causal claims, and one "Khuyến nghị:" grounded next step.',
     'Keep simple answers business-readable and moderately detailed, normally 80 to 180 words; do not expand them into a full report unless the user asks.',
   ].join('\n');
@@ -445,8 +469,30 @@ function instructionsText(defaultScope: LdRequest['scope']): string {
 
 function withDefaultScope(payload: LdRequest, defaultScope: LdRequest['scope']): LdRequest {
   const scope = payload.scope ?? {};
-  const hasScope = Boolean(scope.courseId || scope.period || scope.team || scope.trainerId);
+  const hasScope = Boolean(
+    scope.courseId || scope.period || scope.team || scope.trainerId || scope.allCourses,
+  );
   return hasScope ? payload : { ...payload, scope: defaultScope };
+}
+
+function scopeClarificationResult(scope: LdRequest['scope']): Record<string, unknown> | null {
+  const validation = validateReportScope(scope);
+  if (validation.ok) return null;
+  return {
+    status: 'SCOPE_REQUIRED',
+    reason: validation.code,
+    message: validation.message,
+    ambiguousFields: validation.fields,
+  };
+}
+
+function scopeErrorResult(error: LdReportingScopeError): Record<string, unknown> {
+  return {
+    status: error.code,
+    reason: error.reason,
+    message: error.message,
+    candidates: error.candidates,
+  };
 }
 
 function scopeKey(scope: LdRequest['scope'] | undefined): string {
@@ -455,6 +501,7 @@ function scopeKey(scope: LdRequest['scope'] | undefined): string {
     courseId: scope?.courseId ?? null,
     team: scope?.team ?? null,
     trainerId: scope?.trainerId ?? null,
+    allCourses: scope?.allCourses ?? false,
     reportType: scope?.reportType ?? 'full',
   });
 }
@@ -465,9 +512,11 @@ function extractScopeFromText(text: string): LdRequest['scope'] {
   const period = summary.match(/\bperiod=([^\s,;]+)/i)?.[1];
   const courseId = summary.match(/\bcourseId=([^\s,;]+)/i)?.[1];
   const team = summary.match(/\bteam=([^\s,;]+)/i)?.[1];
+  const allCourses = /\ball courses\b/i.test(summary) || /\ballCourses=true\b/i.test(summary);
   if (period && period !== 'none') scope.period = period;
   if (courseId && courseId !== 'none') scope.courseId = courseId;
   if (team && team !== 'none') scope.team = team;
+  if (allCourses) scope.allCourses = true;
   return scope;
 }
 
@@ -580,6 +629,7 @@ function scopeLabel(report: ReportJson): string {
       report.scope.courseId ? `courseId=${report.scope.courseId}` : undefined,
       report.scope.team ? `team=${report.scope.team}` : undefined,
       report.scope.trainerId ? `trainerId=${report.scope.trainerId}` : undefined,
+      report.scope.allCourses ? 'allCourses=true' : undefined,
     ]
       .filter(Boolean)
       .join(', ') || 'all available training data'

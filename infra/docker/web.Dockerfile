@@ -23,6 +23,12 @@ COPY sdks/                            sdks/
 ENV LEFTHOOK=0
 
 RUN --mount=type=cache,id=pnpm-store,target=/root/.local/share/pnpm/store \
+    printf '%s\n' \
+      'supportedArchitectures.os[]=linux' \
+      'supportedArchitectures.cpu[]=x64' \
+      'supportedArchitectures.libc[]=musl' \
+      > .npmrc \
+ && \
     pnpm install --frozen-lockfile
 
 COPY apps/web/  apps/web/

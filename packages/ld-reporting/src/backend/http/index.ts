@@ -11,6 +11,7 @@ import {
 } from '../../models.ts';
 import type { LdReportAccessContext } from '../domain/access-control.ts';
 import { LdReportingDomainError, LdReportingSpecialistAgent } from '../domain/orchestrator.ts';
+import { LdReportingScopeError } from '../domain/scope-validation.ts';
 
 const reportIdParamSchema = z.object({ id: z.string().min(1) });
 
@@ -232,6 +233,17 @@ class LdHttpError extends Error {
 }
 
 function handleLdError(c: Context<SessionEnv>, err: unknown): Response {
+  if (err instanceof LdReportingScopeError) {
+    return c.json(
+      {
+        error: err.code,
+        reason: err.reason,
+        message: err.message,
+        candidates: err.candidates,
+      },
+      400,
+    );
+  }
   if (err instanceof LdReportingDomainError) {
     return c.json({ error: err.code, message: err.message }, 409);
   }

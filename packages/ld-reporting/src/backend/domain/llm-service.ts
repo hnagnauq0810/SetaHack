@@ -24,7 +24,7 @@ const ReportNarrativeSchema = z.object({
 });
 
 const QnaLlmSchema = z.object({
-  answer: z.string().min(1).max(1200),
+  answer: z.preprocess((value) => coerceQnaAnswer(value, 1200), z.string().min(1).max(1200)),
   confidence: z.number().min(0).max(1).default(0.85),
   citations: z.array(z.string().min(1)).max(8).default([]),
   limitations: z.array(z.string().min(1)).max(6).default([]),
@@ -147,7 +147,7 @@ export async function answerQuestionWithLlm(input: {
             'Respect RBAC strictly: for every non-LND_MANAGER role, do not reveal employee IDs, individual scores, or personal comments.',
             'For metric or comparison questions, write a business-ready answer with: (1) a direct conclusion, (2) the key validated values and both absolute and relative differences when calculable, (3) a short section labelled "Ý nghĩa:" that interprets the result without claiming an unsupported cause, and (4) a short section labelled "Khuyến nghị:" with one evidence-grounded next step.',
             'Keep simple answers compact, normally 80 to 180 words, and omit a section only when the artifact cannot support it.',
-            'Return strict JSON only with keys: answer, confidence, citations, limitations.',
+            'Return strict JSON only with keys: answer, confidence, citations, limitations. The answer value must be one plain-text string, never an object or array.',
           ].join(' '),
         },
         {
@@ -169,12 +169,12 @@ export async function answerQuestionWithLlm(input: {
         parsed.citations.length > 0 ? parsed.citations : input.deterministicAnswer.citations,
       limitations: mergeUnique(input.deterministicAnswer.limitations, parsed.limitations, 8),
     };
-  } catch (_error) {
+  } catch (error) {
     return {
       ...input.deterministicAnswer,
       limitations: mergeUnique(
         input.deterministicAnswer.limitations,
-        ['LLM Q&A fallback was used because the model call failed.'],
+        [`LLM Q&A fallback was used because ${describeQnaLlmFailure(error)}.`],
         8,
       ),
     };
@@ -363,6 +363,7 @@ function buildQnaContext(report: ReportJson, role: LdRole) {
       priority: flag.priority,
       category: flag.category,
       courseId: flag.courseId,
+      employeeId: role === 'LND_MANAGER' ? flag.employeeId : undefined,
       message: stripEmployeeIds(flag.message),
       action: flag.action,
     })),
@@ -370,6 +371,10 @@ function buildQnaContext(report: ReportJson, role: LdRole) {
       role === 'LND_MANAGER'
         ? report.governance.outstandingTrainees
         : [{ count: report.governance.outstandingTrainees.length, note: 'Masked by RBAC.' }],
+    supportNeededTrainees:
+      role === 'LND_MANAGER'
+        ? report.governance.supportNeededTrainees
+        : [{ count: report.governance.supportNeededTrainees.length, note: 'Masked by RBAC.' }],
     supportNeededGroups: report.governance.supportNeededGroups,
   };
   return {
@@ -442,6 +447,45 @@ function coerceText(value: unknown, maxLength: number): string {
     if (text) return text.slice(0, maxLength);
   }
   return '';
+}
+
+function coerceQnaAnswer(value: unknown, maxLength: number): string {
+  if (typeof value === 'string') return value.trim().slice(0, maxLength);
+  return renderQnaAnswerValue(value, 0).replace(/\s+/g, ' ').trim().slice(0, maxLength);
+}
+
+function renderQnaAnswerValue(value: unknown, depth: number): string {
+  if (typeof value === 'string') return value.trim();
+  if (typeof value === 'number' || typeof value === 'boolean') return String(value);
+  if (value === null || value === undefined || depth > 3) return '';
+  if (Array.isArray(value)) {
+    return value
+      .map((item) => renderQnaAnswerValue(item, depth + 1))
+      .filter(Boolean)
+      .join('; ');
+  }
+  if (typeof value !== 'object') return '';
+
+  return Object.entries(value)
+    .map(([key, item]) => {
+      const rendered = renderQnaAnswerValue(item, depth + 1);
+      return rendered ? `${formatQnaAnswerLabel(key)}: ${rendered}` : '';
+    })
+    .filter(Boolean)
+    .join('. ');
+}
+
+function formatQnaAnswerLabel(value: string): string {
+  if (/^[A-Z0-9-]+$/.test(value)) return value;
+  const spaced = value.replace(/([a-z0-9])([A-Z])/g, '$1 $2').replace(/[_-]+/g, ' ');
+  return spaced.charAt(0).toUpperCase() + spaced.slice(1).toLowerCase();
+}
+
+function describeQnaLlmFailure(error: unknown): string {
+  if (error instanceof z.ZodError) return 'the response JSON did not match the Q&A schema';
+  if (error instanceof SyntaxError) return 'the response content was not valid JSON';
+  if (error instanceof Error && error.message.trim()) return error.message.trim().slice(0, 240);
+  return 'the model call failed';
 }
 
 function coerceTextList(value: unknown, limit: number, itemMaxLength: number): string[] {

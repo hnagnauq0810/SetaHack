@@ -22,6 +22,7 @@ export const ScopeInputSchema = z.object({
   period: z.string().trim().min(1).optional(),
   team: z.string().trim().min(1).optional(),
   trainerId: z.string().trim().min(1).optional(),
+  allCourses: z.boolean().optional(),
   reportType: z.enum(['executive', 'course', 'readiness', 'full']).default('full').optional(),
 });
 export type LdScopeInput = z.infer<typeof ScopeInputSchema>;
